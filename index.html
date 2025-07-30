@@ -2,57 +2,86 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <meta name="description" content="Stephen Raj - Third Year Student | Portfolio"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Stephen Raj - Portfolio" />
   <meta name="google-site-verification" content="qo--v1Jv9NrZoN4QVfF12yJ35lewuIjF6WzxF8F_N4c" />
-  <title>Stephen Raj - Portfolio</title>
+  <title>Stephen Raj | Portfolio</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
   <style>
     * {
-      margin: 0; padding: 0; box-sizing: border-box;
-      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Poppins', sans-serif;
     }
     body {
-      background: #f0f8ff;
+      background: #f4f8fb;
       color: #333;
+      line-height: 1.6;
     }
     header {
-      background: #007acc;
-      color: white;
-      padding: 40px;
+      background: #004080;
+      color: #fff;
+      padding: 60px 20px;
       text-align: center;
     }
+    header h1 {
+      font-size: 3rem;
+    }
+    header p {
+      font-size: 1.2rem;
+      margin-top: 10px;
+    }
+    nav {
+      background: #002b5c;
+      padding: 10px;
+      text-align: center;
+    }
+    nav a {
+      color: white;
+      margin: 0 15px;
+      text-decoration: none;
+      font-weight: 600;
+    }
     section {
-      padding: 40px 20px;
-      max-width: 900px;
+      padding: 60px 20px;
+      max-width: 1000px;
       margin: auto;
     }
-    h2 {
-      color: #007acc;
-      margin-bottom: 10px;
+    section h2 {
+      color: #004080;
+      margin-bottom: 20px;
+      font-size: 2rem;
     }
-    .projects div {
+    .project-box {
       background: white;
-      padding: 15px;
-      margin: 10px 0;
-      border-radius: 8px;
-      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+      border-radius: 10px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+      padding: 20px;
+      margin-bottom: 20px;
     }
-    .button {
-      display: inline-block;
-      margin-top: 20px;
-      background: #007acc;
+    .contact-form input,
+    .contact-form textarea {
+      width: 100%;
+      padding: 12px;
+      margin-bottom: 15px;
+      border-radius: 6px;
+      border: 1px solid #ccc;
+    }
+    .contact-form button {
+      background: #004080;
       color: white;
-      padding: 10px 15px;
-      border-radius: 5px;
-      text-decoration: none;
-    }
-    form input, form textarea {
-      width: 100%; padding: 10px;
-      margin: 10px 0; border-radius: 5px; border: 1px solid #ccc;
+      padding: 12px 20px;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      font-size: 1rem;
     }
     footer {
-      text-align: center; padding: 20px;
-      background: #007acc; color: white;
+      text-align: center;
+      padding: 30px;
+      background: #004080;
+      color: white;
     }
   </style>
 </head>
@@ -60,45 +89,44 @@
 
 <header>
   <h1>Stephen Raj</h1>
-  <p>Third Year Student | Aspiring AI Engineer</p>
+  <p>Third Year Student | AI & ML Enthusiast | Developer</p>
 </header>
 
-<section>
+<nav>
+  <a href="#about">About</a>
+  <a href="#projects">Projects</a>
+  <a href="#contact">Contact</a>
+</nav>
+
+<section id="about">
   <h2>About Me</h2>
-  <p>I am a third-year engineering student passionate about Artificial Intelligence, Machine Learning, and building real-time solutions. I enjoy solving problems and creating innovative tech.</p>
+  <p>Hello! I'm Stephen Raj, a passionate third-year engineering student deeply interested in Artificial Intelligence and Machine Learning. I strive to create innovative solutions that can make a real-world impact. Whether it's designing intelligent traffic systems or presenting on global energy cycles, I aim to combine technology with creativity to solve problems and inspire others.</p>
 </section>
 
-<section>
+<section id="projects">
   <h2>Projects</h2>
-  <div class="projects">
-    <div>
-      <h3>🚦 Ambulance Detection Traffic Signal System</h3>
-      <p>Using YOLOv8, OpenCV, and Python to detect emergency vehicles and switch traffic signals accordingly.</p>
-    </div>
-    <div>
-      <h3>💡 Energy Cycle Seminar</h3>
-      <p>A unique and inspiring presentation on global energy cycles using AI visuals and live data charts.</p>
-    </div>
+  <div class="project-box">
+    <h3>🚦 Ambulance Detection Traffic Signal System</h3>
+    <p>A smart traffic management system that uses YOLOv8 and OpenCV to detect ambulances and automatically switch traffic signals to green. Developed with Python and integrated with Tkinter GUI and real-time clock display.</p>
+  </div>
+  <div class="project-box">
+    <h3>💡 Energy Cycle Presentation</h3>
+    <p>An innovative seminar exploring global energy cycles using interactive charts, real-time data, and AI visuals. Designed to educate and inspire awareness of sustainability and energy management.</p>
   </div>
 </section>
 
-<section>
-  <h2>Resume</h2>
-  <a href="Stephen-Raj-Resume.pdf" class="button" download>📄 Download My Resume</a>
-</section>
-
-<section>
+<section id="contact">
   <h2>Contact Me</h2>
-  <form name="contact" method="POST" data-netlify="true">
-    <input type="text" name="name" placeholder="Your Name" required/>
-    <input type="email" name="email" placeholder="Your Email" required/>
-    <textarea name="message" placeholder="Your Message" required></textarea>
-    <button type="submit" class="button">Send Message</button>
+  <form class="contact-form" name="contact" method="POST" data-netlify="true">
+    <input type="text" name="name" placeholder="Your Name" required>
+    <input type="email" name="email" placeholder="Your Email" required>
+    <textarea name="message" rows="6" placeholder="Your Message" required></textarea>
+    <button type="submit">Send Message</button>
   </form>
 </section>
 
 <footer>
-  <p>© 2025 Stephen Raj | All rights reserved.</p>
+  <p>© 2025 Stephen Raj. All Rights Reserved.</p>
 </footer>
 
 </body>
