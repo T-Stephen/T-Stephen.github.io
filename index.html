@@ -1,97 +1,148 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Official portfolio website of T-Stephen - AI Projects, Web Development, and Innovation." />
+  <meta name="keywords" content="T-Stephen, AI Projects, Portfolio, Web Developer, Student, Machine Learning, GitHub, Stephen Bugi" />
+  <meta name="author" content="T-Stephen" />
   <meta name="google-site-verification" content="qo--v1Jv9NrZoN4QVfF12yJ35lewuIjF6WzxF8F_N4c" />
-  <title>Stephen Raj T | Portfolio</title>
-  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet" />
-  <link rel="icon" type="image/png" href="STEVE_GitHub_Logo.png" />
+  <title>T-Stephen | AI Projects & Portfolio</title>
+  <link rel="icon" href="STEVE_GitHub_Logo.png" type="image/png">
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet" />
   <style>
-    html {
-      scroll-behavior: smooth;
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Roboto', sans-serif;
     }
     body {
-      font-family: 'Segoe UI', sans-serif;
-      background-color: #0f0f0f;
+      background: #f5faff;
+      color: #333;
+      line-height: 1.6;
+      padding: 20px;
+    }
+    header {
+      text-align: center;
+      padding: 50px 20px;
+      background: #004aad;
       color: white;
+      animation: fadeInDown 1s ease-in-out;
     }
-    .fade-in {
-      animation: fadeIn 1.5s ease-in;
+    header img {
+      max-width: 100px;
+      margin-bottom: 10px;
     }
-    @keyframes fadeIn {
-      0% { opacity: 0; transform: translateY(10px); }
-      100% { opacity: 1; transform: translateY(0); }
+    h1 {
+      font-size: 2.5rem;
     }
-    .glow {
-      box-shadow: 0 0 20px #ff0000;
+    nav {
+      margin: 20px 0;
+      text-align: center;
+    }
+    nav a {
+      margin: 0 15px;
+      text-decoration: none;
+      color: #004aad;
+      font-weight: bold;
+    }
+    section {
+      padding: 40px 20px;
+      max-width: 900px;
+      margin: auto;
+    }
+    section h2 {
+      color: #004aad;
+      margin-bottom: 15px;
+    }
+    footer {
+      text-align: center;
+      padding: 20px;
+      background: #eee;
+      font-size: 0.9rem;
+      margin-top: 40px;
+    }
+    .rating {
+      text-align: center;
+      margin: 30px 0;
+    }
+    .stars input {
+      display: none;
+    }
+    .stars label {
+      font-size: 2rem;
+      color: #ccc;
+      cursor: pointer;
+      transition: color 0.3s;
+    }
+    .stars input:checked ~ label,
+    .stars label:hover,
+    .stars label:hover ~ label {
+      color: #ffc107;
+    }
+    @keyframes fadeInDown {
+      from {
+        opacity: 0;
+        transform: translateY(-20px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
     }
   </style>
 </head>
-<body class="fade-in">
 
-  <!-- Header -->
-  <header class="flex items-center justify-between px-6 py-4 shadow-md bg-black">
-    <div class="flex items-center space-x-4">
-      <img src="STEVE_GitHub_Logo.png" alt="Stephen Logo" class="h-12 w-12 rounded-full glow transition transform hover:scale-110" />
-      <h1 class="text-2xl font-bold text-red-500 tracking-widest">Stephen Raj T</h1>
-    </div>
-    <nav class="space-x-4 text-white">
-      <a href="#about" class="hover:text-red-400 transition">About</a>
-      <a href="#projects" class="hover:text-red-400 transition">Projects</a>
-      <a href="#contact" class="hover:text-red-400 transition">Contact</a>
-    </nav>
+<body>
+  <header>
+    <img src="STEVE_GitHub_Logo.png" alt="T-Stephen Logo">
+    <h1>Welcome to T-Stephen's Portfolio</h1>
+    <p>Third Year Student | AI Developer | Web Enthusiast</p>
   </header>
 
-  <!-- Hero -->
-  <section class="text-center py-20 px-4">
-    <h2 class="text-4xl md:text-5xl font-bold text-red-500 mb-4">Hi, I'm Stephen</h2>
-    <p class="text-lg md:text-xl max-w-xl mx-auto text-gray-300">An innovative third-year engineering student passionate about AI, traffic management, and making real-world impact through code.</p>
+  <nav>
+    <a href="#about">About</a>
+    <a href="#projects">Projects</a>
+    <a href="#contact">Contact</a>
+  </nav>
+
+  <section id="about">
+    <h2>About Me</h2>
+    <p>Hi, I'm T-Stephen, a third-year student passionate about AI, Machine Learning, and Web Development. My aim is to build meaningful AI-driven applications that make a real-world impact. I have worked on projects ranging from ambulance detection traffic systems to real-time image classification models.</p>
   </section>
 
-  <!-- About -->
-  <section id="about" class="py-16 bg-gray-900 px-6 md:px-20">
-    <h2 class="text-3xl font-bold text-red-400 mb-6">About Me</h2>
-    <p class="text-gray-300 text-lg leading-relaxed">
-      I'm a tech enthusiast currently pursuing my third year of engineering. I build impactful projects like AI-powered traffic signals, ambulance detection systems, and smart infrastructure solutions.
-      <br /><br />
-      My goal is to merge innovation with social responsibility through AI, design, and real-time systems.
-    </p>
+  <section id="projects">
+    <h2>Projects</h2>
+    <ul>
+      <li><strong>Ambulance Detection & Smart Traffic Signal System</strong> - Built using YOLOv8, OpenCV, and Tkinter. Real-time detection, green/red signal control, siren alert, and logging.</li>
+      <li><strong>Portfolio Website</strong> - This very page! Designed with HTML, CSS, animations, and Google SEO in mind.</li>
+    </ul>
   </section>
 
-  <!-- Projects -->
-  <section id="projects" class="py-16 bg-black px-6 md:px-20">
-    <h2 class="text-3xl font-bold text-red-400 mb-8">Projects</h2>
-
-    <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-      <div class="bg-gray-800 p-6 rounded-xl shadow-md hover:shadow-red-500/50 transition duration-300">
-        <h3 class="text-xl font-semibold text-white mb-2">AI-Based Traffic Signal System</h3>
-        <p class="text-gray-300">Real-time ambulance detection using YOLOv8, OpenCV, and Tkinter to switch signals automatically with siren alert and GUI dashboard.</p>
-      </div>
-
-      <div class="bg-gray-800 p-6 rounded-xl shadow-md hover:shadow-red-500/50 transition duration-300">
-        <h3 class="text-xl font-semibold text-white mb-2">Portfolio Website</h3>
-        <p class="text-gray-300">A clean and animated personal site showcasing my profile, projects, and contact links hosted on GitHub Pages.</p>
-      </div>
+  <section class="rating">
+    <h2>Rate My Portfolio</h2>
+    <div class="stars">
+      <input type="radio" id="star5" name="rate" value="5" /><label for="star5">★</label>
+      <input type="radio" id="star4" name="rate" value="4" /><label for="star4">★</label>
+      <input type="radio" id="star3" name="rate" value="3" /><label for="star3">★</label>
+      <input type="radio" id="star2" name="rate" value="2" /><label for="star2">★</label>
+      <input type="radio" id="star1" name="rate" value="1" /><label for="star1">★</label>
     </div>
+    <p>Click a star to give your feedback!</p>
   </section>
 
-  <!-- Contact -->
-  <section id="contact" class="py-16 bg-gray-900 px-6 md:px-20">
-    <h2 class="text-3xl font-bold text-red-400 mb-6">Contact Me</h2>
-    <p class="text-gray-300 mb-6">Feel free to connect with me on social media or drop an email!</p>
-
-    <div class="space-y-4 text-lg text-gray-200">
-      <p>📧 Email: <a href="mailto:stephenbugi01@gmail.com" class="text-red-400 hover:underline">stephenbugi01@gmail.com</a></p>
-      <p>🌐 GitHub: <a href="https://github.com/T-Stephen" target="_blank" class="text-red-400 hover:underline">T-Stephen</a></p>
-      <p>🔗 LinkedIn: <a href="https://www.linkedin.com/in/yourprofile" target="_blank" class="text-red-400 hover:underline">Your LinkedIn</a></p>
-    </div>
+  <section id="contact">
+    <h2>Contact</h2>
+    <p>Email: <a href="mailto:stephenbugiofficial@gmail.com">stephenbugiofficial@gmail.com</a></p>
+    <p>GitHub: <a href="https://github.com/T-Stephen" target="_blank">T-Stephen</a></p>
+    <p>LinkedIn: <a href="https://www.linkedin.com/in/stephenbugi" target="_blank">Stephen Bugi</a></p>
   </section>
 
-  <!-- Footer -->
-  <footer class="text-center py-6 bg-black text-gray-500 text-sm">
-    © 2025 Stephen Raj T. All rights reserved.
+  <footer>
+    &copy; 2025 T-Stephen. All rights reserved.
   </footer>
-
 </body>
+
 </html>
