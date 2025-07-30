@@ -1,151 +1,126 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Official portfolio of Stephen Raj T - AI Innovator, 3rd Year Student passionate about Smart Traffic Solutions and Computer Vision." />
   <meta name="google-site-verification" content="qo--v1Jv9NrZoN4QVfF12yJ35lewuIjF6WzxF8F_N4c" />
   <title>Stephen Raj T - Portfolio</title>
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap" rel="stylesheet">
   <style>
-    * {
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
       margin: 0;
       padding: 0;
-      box-sizing: border-box;
-      font-family: 'Poppins', sans-serif;
-    }
-
-    body {
-      background: linear-gradient(to right, #eef2f3, #8e9eab);
+      background: #f5f8fc;
       color: #333;
-      line-height: 1.6;
       animation: fadeIn 1.2s ease-in;
     }
-
     @keyframes fadeIn {
-      from {
-        opacity: 0;
-        transform: translateY(20px);
-      }
-      to {
-        opacity: 1;
-        transform: translateY(0);
-      }
+      from { opacity: 0; }
+      to { opacity: 1; }
     }
-
     header {
-      background-color: #1e3c72;
+      background: #0b3d91;
       color: white;
-      padding: 20px;
+      padding: 2rem;
       text-align: center;
-      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
     }
-
-    header h1 {
-      font-size: 2.5rem;
+    header img {
+      width: 150px;
+      border-radius: 50%;
+      border: 4px solid white;
+      margin-bottom: 1rem;
     }
-
-    header p {
-      font-size: 1.2rem;
-      margin-top: 10px;
-    }
-
-    .container {
-      padding: 30px;
+    section {
+      padding: 2rem;
       max-width: 1000px;
       margin: auto;
     }
-
-    section {
-      margin-bottom: 40px;
-    }
-
     h2 {
-      font-size: 2rem;
-      color: #1e3c72;
-      margin-bottom: 15px;
-      position: relative;
+      color: #0b3d91;
     }
-
-    h2::after {
-      content: '';
-      display: block;
-      height: 4px;
-      width: 60px;
-      background-color: #f39c12;
-      position: absolute;
-      bottom: -8px;
-      left: 0;
+    .project {
+      background: white;
+      margin-bottom: 1rem;
+      padding: 1rem;
+      border-radius: 10px;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.1);
     }
-
-    .profile-img {
-      width: 150px;
-      height: 150px;
-      border-radius: 50%;
-      object-fit: cover;
-      border: 4px solid #f39c12;
-      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
-      margin: 20px auto;
-      display: block;
-    }
-
-    .social {
+    footer {
+      background: #0b3d91;
+      color: white;
       text-align: center;
-      margin-top: 20px;
+      padding: 1rem;
     }
-
     .social a {
-      margin: 0 10px;
+      color: #0b3d91;
+      margin-right: 15px;
       text-decoration: none;
-      font-size: 1.5rem;
-      color: #1e3c72;
-      transition: 0.3s;
+      font-weight: bold;
     }
-
-    .social a:hover {
-      color: #f39c12;
+    input, textarea {
+      padding: 10px;
+      margin: 5px 0;
+      width: 100%;
+      max-width: 500px;
+    }
+    button {
+      padding: 10px 20px;
+      background: #0b3d91;
+      color: white;
+      border: none;
+      border-radius: 5px;
+    }
+    .contact {
+      background: #eef4fc;
+      border-left: 5px solid #0b3d91;
+      padding: 1rem;
+      margin-top: 2rem;
     }
   </style>
 </head>
-
 <body>
   <header>
+    <img src="https://avatars.githubusercontent.com/u/141345134?v=4" alt="Stephen Raj T">
     <h1>Stephen Raj T</h1>
-    <p>Third Year College Student | Aspiring AI Developer</p>
+    <p>AI Innovator | Smart Traffic Systems | 3rd Year Student</p>
   </header>
 
-  <div class="container">
-    <img src="https://avatars.githubusercontent.com/u/134159099?v=4" alt="Stephen Raj T" class="profile-img" />
+  <section>
+    <h2>About Me</h2>
+    <p>I’m Stephen, an aspiring AI and Computer Vision developer currently in my 3rd year of engineering. I specialize in building real-time smart systems like AI-Based Traffic Signal Management. I love combining tech with real-world impact.</p>
+  </section>
 
-    <section>
-      <h2>About Me</h2>
-      <p>
-        Hello! I'm Stephen, a passionate student currently pursuing my third year in engineering. I specialize in AI and Data Science, and I love creating intelligent systems that solve real-world problems.
-      </p>
-    </section>
-
-    <section>
-      <h2>Projects</h2>
-      <ul>
-        <li>🚦 Advanced Traffic Signal with Ambulance Detection using YOLOv8</li>
-        <li>📊 Data Science Lab Projects (ML, Visualization, Analysis)</li>
-        <li>🌐 Portfolio Website hosted on GitHub Pages</li>
-      </ul>
-    </section>
-
-    <section>
-      <h2>Contact</h2>
-      <p>Email: stephenbugi525@gmail.com</p>
-      <p>LinkedIn: <a href="https://www.linkedin.com/in/stephen-raj-t-3b417528a/" target="_blank">stephen-raj-t</a></p>
-      <p>GitHub: <a href="https://github.com/T-Stephen" target="_blank">T-Stephen</a></p>
-    </section>
-
-    <div class="social">
-      <a href="https://www.linkedin.com/in/stephen-raj-t-3b417528a/" target="_blank">🔗</a>
-      <a href="https://github.com/T-Stephen" target="_blank">🐙</a>
-      <a href="mailto:stephenbugi525@gmail.com">📧</a>
+  <section>
+    <h2>Projects</h2>
+    <div class="project">
+      <h3>AI Smart Traffic Management System</h3>
+      <p>Built an intelligent system using YOLOv8 and OpenCV that detects ambulances and prioritizes signals in real-time. Integrated voice alerts, sirens, and logging using Python, Tkinter, and Pygame.</p>
+      <a href="https://github.com/T-Stephen/Ambulance-Traffic-Signal" target="_blank">View on GitHub</a>
     </div>
-  </div>
-</body>
+  </section>
 
+  <section class="contact">
+    <h2>Contact Me</h2>
+    <form name="contact" method="POST" data-netlify="true">
+      <input type="text" name="name" placeholder="Your Name" required><br>
+      <input type="email" name="email" placeholder="Your Email" required><br>
+      <textarea name="message" rows="5" placeholder="Your Message" required></textarea><br>
+      <button type="submit">Send</button>
+    </form>
+  </section>
+
+  <section>
+    <h2>Social Links</h2>
+    <div class="social">
+      <a href="mailto:stephenbugi525@gmail.com">Email</a>
+      <a href="https://www.linkedin.com/in/stephen-raj-t-3b417528a/" target="_blank">LinkedIn</a>
+      <a href="https://github.com/T-Stephen" target="_blank">GitHub</a>
+    </div>
+  </section>
+
+  <footer>
+    &copy; 2025 Stephen Raj T | All rights reserved
+  </footer>
+</body>
 </html>
