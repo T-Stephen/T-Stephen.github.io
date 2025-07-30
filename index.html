@@ -2,75 +2,104 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Stephen Raj T - AI Traffic Signal Innovator</title>
-  <meta name="description" content="Official portfolio of Stephen Raj T – Third year student and creator of the AI Smart Traffic Signal Project. Visit to know more about his innovation and career.">
-  <meta name="author" content="Stephen Raj T" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="description" content="Stephen Raj - Third Year Student | Portfolio"/>
   <meta name="google-site-verification" content="qo--v1Jv9NrZoN4QVfF12yJ35lewuIjF6WzxF8F_N4c" />
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins&display=swap" />
+  <title>Stephen Raj - Portfolio</title>
   <style>
+    * {
+      margin: 0; padding: 0; box-sizing: border-box;
+      font-family: Arial, sans-serif;
+    }
     body {
-      font-family: 'Poppins', sans-serif;
-      background: #f5f8ff;
-      color: #222;
-      margin: 0;
-      padding: 0;
-      text-align: center;
+      background: #f0f8ff;
+      color: #333;
     }
     header {
-      background: #007bff;
+      background: #007acc;
       color: white;
-      padding: 2rem 1rem;
-      border-bottom: 4px solid #0056b3;
+      padding: 40px;
+      text-align: center;
     }
-    h1 {
-      margin: 0;
-      font-size: 2.5rem;
+    section {
+      padding: 40px 20px;
+      max-width: 900px;
+      margin: auto;
     }
-    p {
-      font-size: 1.1rem;
+    h2 {
+      color: #007acc;
+      margin-bottom: 10px;
     }
-    .content {
-      padding: 2rem;
+    .projects div {
+      background: white;
+      padding: 15px;
+      margin: 10px 0;
+      border-radius: 8px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
     }
     .button {
       display: inline-block;
-      margin-top: 1rem;
-      padding: 0.75rem 1.5rem;
-      background-color: #007bff;
+      margin-top: 20px;
+      background: #007acc;
       color: white;
-      border: none;
-      border-radius: 8px;
+      padding: 10px 15px;
+      border-radius: 5px;
       text-decoration: none;
-      font-size: 1rem;
-      transition: background-color 0.3s;
     }
-    .button:hover {
-      background-color: #0056b3;
+    form input, form textarea {
+      width: 100%; padding: 10px;
+      margin: 10px 0; border-radius: 5px; border: 1px solid #ccc;
     }
     footer {
-      margin-top: 3rem;
-      font-size: 0.9rem;
-      color: #555;
+      text-align: center; padding: 20px;
+      background: #007acc; color: white;
     }
   </style>
 </head>
 <body>
-  <header>
-    <h1>Stephen Raj T</h1>
-    <p>Third Year Student | AI Smart Traffic Signal Developer | Tech Innovator</p>
-  </header>
 
-  <div class="content">
-    <h2>🚦 AI Smart Traffic Signal Project</h2>
-    <p>This project uses YOLOv8 for ambulance detection and real-time signal switching with sound alerts and GUI support.</p>
-    <a class="button" href="https://github.com/T-Stephen" target="_blank">🔗 View GitHub</a>
-    <a class="button" href="https://www.linkedin.com/in/stephen-raj-t-3b417528a/" target="_blank">🔗 LinkedIn</a>
-    <a class="button" href="mailto:stephenbugi525@gmail.com">📧 Contact Me</a>
+<header>
+  <h1>Stephen Raj</h1>
+  <p>Third Year Student | Aspiring AI Engineer</p>
+</header>
+
+<section>
+  <h2>About Me</h2>
+  <p>I am a third-year engineering student passionate about Artificial Intelligence, Machine Learning, and building real-time solutions. I enjoy solving problems and creating innovative tech.</p>
+</section>
+
+<section>
+  <h2>Projects</h2>
+  <div class="projects">
+    <div>
+      <h3>🚦 Ambulance Detection Traffic Signal System</h3>
+      <p>Using YOLOv8, OpenCV, and Python to detect emergency vehicles and switch traffic signals accordingly.</p>
+    </div>
+    <div>
+      <h3>💡 Energy Cycle Seminar</h3>
+      <p>A unique and inspiring presentation on global energy cycles using AI visuals and live data charts.</p>
+    </div>
   </div>
+</section>
 
-  <footer>
-    &copy; 2025 Stephen Raj T. All Rights Reserved.
-  </footer>
+<section>
+  <h2>Resume</h2>
+  <a href="Stephen-Raj-Resume.pdf" class="button" download>📄 Download My Resume</a>
+</section>
+
+<section>
+  <h2>Contact Me</h2>
+  <form name="contact" method="POST" data-netlify="true">
+    <input type="text" name="name" placeholder="Your Name" required/>
+    <input type="email" name="email" placeholder="Your Email" required/>
+    <textarea name="message" placeholder="Your Message" required></textarea>
+    <button type="submit" class="button">Send Message</button>
+  </form>
+</section>
+
+<footer>
+  <p>© 2025 Stephen Raj | All rights reserved.</p>
+</footer>
+
 </body>
 </html>
