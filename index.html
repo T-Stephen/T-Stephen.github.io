@@ -4,144 +4,138 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="description" content="Official portfolio website of T-Stephen - AI Projects, Web Development, and Innovation." />
-  <meta name="keywords" content="T-Stephen, AI Projects, Portfolio, Web Developer, Student, Machine Learning, GitHub, Stephen Bugi" />
-  <meta name="author" content="T-Stephen" />
+  <meta name="description" content="T-Stephen - AI Innovator Portfolio Website. Discover AI projects, skills, and connect with me." />
   <meta name="google-site-verification" content="qo--v1Jv9NrZoN4QVfF12yJ35lewuIjF6WzxF8F_N4c" />
-  <title>T-Stephen | AI Projects & Portfolio</title>
+  <title>T-Stephen | AI Innovator</title>
   <link rel="icon" href="STEVE_GitHub_Logo.png" type="image/png">
-  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet" />
   <style>
     * {
       margin: 0;
       padding: 0;
       box-sizing: border-box;
-      font-family: 'Roboto', sans-serif;
     }
     body {
-      background: #f5faff;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: linear-gradient(to bottom right, #e3f2fd, #ffffff);
       color: #333;
       line-height: 1.6;
-      padding: 20px;
     }
     header {
       text-align: center;
-      padding: 50px 20px;
-      background: #004aad;
+      padding: 2rem;
+      background-color: #1565c0;
       color: white;
-      animation: fadeInDown 1s ease-in-out;
+      position: relative;
     }
     header img {
-      max-width: 100px;
-      margin-bottom: 10px;
+      width: 60px;
+      height: 60px;
+      position: absolute;
+      left: 1rem;
+      top: 1rem;
+      animation: logoPulse 3s infinite;
     }
-    h1 {
-      font-size: 2.5rem;
+    @keyframes logoPulse {
+      0% { transform: scale(1); filter: hue-rotate(0deg); }
+      50% { transform: scale(1.1); filter: hue-rotate(180deg); }
+      100% { transform: scale(1); filter: hue-rotate(360deg); }
     }
-    nav {
-      margin: 20px 0;
-      text-align: center;
-    }
-    nav a {
-      margin: 0 15px;
-      text-decoration: none;
-      color: #004aad;
-      font-weight: bold;
+    main {
+      padding: 2rem;
     }
     section {
-      padding: 40px 20px;
-      max-width: 900px;
-      margin: auto;
+      margin-bottom: 2rem;
+      background-color: #fff;
+      padding: 1.5rem;
+      border-radius: 8px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
     }
-    section h2 {
-      color: #004aad;
-      margin-bottom: 15px;
+    h2 {
+      color: #1565c0;
+      margin-bottom: 1rem;
     }
     footer {
       text-align: center;
-      padding: 20px;
-      background: #eee;
-      font-size: 0.9rem;
-      margin-top: 40px;
+      padding: 1rem;
+      background-color: #e3f2fd;
+    }
+    .social-links a {
+      margin: 0 1rem;
+      text-decoration: none;
+      color: #1565c0;
+      font-weight: bold;
     }
     .rating {
       text-align: center;
-      margin: 30px 0;
+      margin-top: 1rem;
     }
-    .stars input {
+    .rating input {
       display: none;
     }
-    .stars label {
+    .rating label {
       font-size: 2rem;
       color: #ccc;
       cursor: pointer;
-      transition: color 0.3s;
     }
-    .stars input:checked ~ label,
-    .stars label:hover,
-    .stars label:hover ~ label {
-      color: #ffc107;
-    }
-    @keyframes fadeInDown {
-      from {
-        opacity: 0;
-        transform: translateY(-20px);
-      }
-      to {
-        opacity: 1;
-        transform: translateY(0);
-      }
+    .rating input:checked ~ label,
+    .rating label:hover,
+    .rating label:hover ~ label {
+      color: gold;
     }
   </style>
 </head>
 
 <body>
   <header>
-    <img src="STEVE_GitHub_Logo.png" alt="T-Stephen Logo">
-    <h1>Welcome to T-Stephen's Portfolio</h1>
-    <p>Third Year Student | AI Developer | Web Enthusiast</p>
+    <img src="STEVE_GitHub_Logo.png" alt="Logo" />
+    <h1>T-Stephen</h1>
+    <p>AI Innovator | Tech Enthusiast</p>
   </header>
 
-  <nav>
-    <a href="#about">About</a>
-    <a href="#projects">Projects</a>
-    <a href="#contact">Contact</a>
-  </nav>
+  <main>
+    <section>
+      <h2>About Me</h2>
+      <p>I’m T-Stephen, a third-year engineering student passionate about Artificial Intelligence, Machine Learning, and building impactful real-world projects.</p>
+    </section>
 
-  <section id="about">
-    <h2>About Me</h2>
-    <p>Hi, I'm T-Stephen, a third-year student passionate about AI, Machine Learning, and Web Development. My aim is to build meaningful AI-driven applications that make a real-world impact. I have worked on projects ranging from ambulance detection traffic systems to real-time image classification models.</p>
-  </section>
+    <section>
+      <h2>AI Projects</h2>
+      <ul>
+        <li><strong>Ambulance Detection Traffic Signal:</strong> YOLOv8 + OpenCV + Tkinter + Siren Alerts</li>
+        <li><strong>COVID Diagnosis System:</strong> Using Bayesian Networks</li>
+        <li><strong>Image Classifier:</strong> Built using CNN + TensorFlow</li>
+        <li><strong>Real-time Object Detection:</strong> YOLOv8 trained on custom datasets</li>
+      </ul>
+    </section>
 
-  <section id="projects">
-    <h2>Projects</h2>
-    <ul>
-      <li><strong>Ambulance Detection & Smart Traffic Signal System</strong> - Built using YOLOv8, OpenCV, and Tkinter. Real-time detection, green/red signal control, siren alert, and logging.</li>
-      <li><strong>Portfolio Website</strong> - This very page! Designed with HTML, CSS, animations, and Google SEO in mind.</li>
-    </ul>
-  </section>
+    <section>
+      <h2>Skills</h2>
+      <p>Python, OpenCV, YOLOv8, TensorFlow, Keras, Machine Learning, Tkinter, Firebase, GitHub Pages</p>
+    </section>
 
-  <section class="rating">
-    <h2>Rate My Portfolio</h2>
-    <div class="stars">
-      <input type="radio" id="star5" name="rate" value="5" /><label for="star5">★</label>
-      <input type="radio" id="star4" name="rate" value="4" /><label for="star4">★</label>
-      <input type="radio" id="star3" name="rate" value="3" /><label for="star3">★</label>
-      <input type="radio" id="star2" name="rate" value="2" /><label for="star2">★</label>
-      <input type="radio" id="star1" name="rate" value="1" /><label for="star1">★</label>
-    </div>
-    <p>Click a star to give your feedback!</p>
-  </section>
+    <section>
+      <h2>Contact Me</h2>
+      <p>Email: <a href="mailto:stephenbugi@gmail.com">stephenbugi@gmail.com</a></p>
+      <div class="social-links">
+        <a href="https://www.linkedin.com/in/stephen-bugi" target="_blank">LinkedIn</a>
+        <a href="https://github.com/T-Stephen" target="_blank">GitHub</a>
+      </div>
+    </section>
 
-  <section id="contact">
-    <h2>Contact</h2>
-    <p>Email: <a href="mailto:stephenbugiofficial@gmail.com">stephenbugiofficial@gmail.com</a></p>
-    <p>GitHub: <a href="https://github.com/T-Stephen" target="_blank">T-Stephen</a></p>
-    <p>LinkedIn: <a href="https://www.linkedin.com/in/stephenbugi" target="_blank">Stephen Bugi</a></p>
-  </section>
+    <section class="rating">
+      <h2>Rate My Portfolio</h2>
+      <div>
+        <input type="radio" id="star5" name="rating" value="5"><label for="star5">★</label>
+        <input type="radio" id="star4" name="rating" value="4"><label for="star4">★</label>
+        <input type="radio" id="star3" name="rating" value="3"><label for="star3">★</label>
+        <input type="radio" id="star2" name="rating" value="2"><label for="star2">★</label>
+        <input type="radio" id="star1" name="rating" value="1"><label for="star1">★</label>
+      </div>
+    </section>
+  </main>
 
   <footer>
-    &copy; 2025 T-Stephen. All rights reserved.
+    <p>© 2025 T-Stephen. All rights reserved.</p>
   </footer>
 </body>
 
