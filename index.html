@@ -2,140 +2,152 @@
 <html lang="en">
 
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="description" content="T-Stephen - AI Innovator Portfolio Website. Discover AI projects, skills, and connect with me." />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="T-Stephen's official AI Portfolio website">
   <meta name="google-site-verification" content="qo--v1Jv9NrZoN4QVfF12yJ35lewuIjF6WzxF8F_N4c" />
   <title>T-Stephen | AI Innovator</title>
-  <link rel="icon" href="STEVE_GitHub_Logo.png" type="image/png">
+  <link rel="icon" type="image/png" href="STEVE_GitHub_Logo.png">
   <style>
+    :root {
+      --main-color: #b80000; /* Reddish tone from logo */
+      --text-color: #ffffff;
+      --bg-color: #1a1a1a;
+    }
+
     * {
       margin: 0;
       padding: 0;
+      scroll-behavior: smooth;
       box-sizing: border-box;
     }
+
     body {
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      background: linear-gradient(to bottom right, #e3f2fd, #ffffff);
-      color: #333;
+      font-family: 'Segoe UI', sans-serif;
+      background-color: var(--main-color);
+      color: var(--text-color);
       line-height: 1.6;
     }
+
     header {
-      text-align: center;
-      padding: 2rem;
-      background-color: #1565c0;
-      color: white;
-      position: relative;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 20px;
+      background-color: rgba(0, 0, 0, 0.2);
     }
+
     header img {
-      width: 60px;
       height: 60px;
-      position: absolute;
-      left: 1rem;
-      top: 1rem;
-      animation: logoPulse 3s infinite;
     }
-    @keyframes logoPulse {
-      0% { transform: scale(1); filter: hue-rotate(0deg); }
-      50% { transform: scale(1.1); filter: hue-rotate(180deg); }
-      100% { transform: scale(1); filter: hue-rotate(360deg); }
-    }
-    main {
-      padding: 2rem;
-    }
-    section {
-      margin-bottom: 2rem;
-      background-color: #fff;
-      padding: 1.5rem;
-      border-radius: 8px;
-      box-shadow: 0 0 10px rgba(0,0,0,0.1);
-    }
-    h2 {
-      color: #1565c0;
-      margin-bottom: 1rem;
-    }
-    footer {
-      text-align: center;
-      padding: 1rem;
-      background-color: #e3f2fd;
-    }
-    .social-links a {
-      margin: 0 1rem;
+
+    nav a {
+      color: white;
+      margin: 0 15px;
       text-decoration: none;
-      color: #1565c0;
       font-weight: bold;
     }
-    .rating {
-      text-align: center;
-      margin-top: 1rem;
+
+    section {
+      padding: 60px 20px;
+      transition: all 0.5s ease;
     }
-    .rating input {
-      display: none;
+
+    h1, h2 {
+      margin-bottom: 20px;
     }
-    .rating label {
-      font-size: 2rem;
-      color: #ccc;
+
+    .contact-form {
+      background: #fff;
+      padding: 30px;
+      border-radius: 12px;
+      color: #000;
+      max-width: 500px;
+      margin: 0 auto;
+    }
+
+    .contact-form input, .contact-form textarea {
+      width: 100%;
+      padding: 10px;
+      margin-bottom: 15px;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+    }
+
+    .contact-form button {
+      background-color: var(--main-color);
+      color: white;
+      border: none;
+      padding: 10px 20px;
+      border-radius: 6px;
       cursor: pointer;
+      font-weight: bold;
     }
-    .rating input:checked ~ label,
-    .rating label:hover,
-    .rating label:hover ~ label {
-      color: gold;
+
+    footer {
+      text-align: center;
+      padding: 20px;
+      background-color: #000;
+      color: #fff;
+    }
+
+    .social-icons img {
+      height: 30px;
+      margin: 0 10px;
+    }
+
+    /* Section transitions */
+    section:hover {
+      transform: scale(1.01);
     }
   </style>
 </head>
 
 <body>
   <header>
-    <img src="STEVE_GitHub_Logo.png" alt="Logo" />
-    <h1>T-Stephen</h1>
-    <p>AI Innovator | Tech Enthusiast</p>
+    <img src="STEVE_GitHub_Logo.png" alt="T-Stephen Logo">
+    <nav>
+      <a href="#about">About</a>
+      <a href="#projects">Projects</a>
+      <a href="#contact">Contact</a>
+    </nav>
   </header>
 
-  <main>
-    <section>
-      <h2>About Me</h2>
-      <p>I’m T-Stephen, a third-year engineering student passionate about Artificial Intelligence, Machine Learning, and building impactful real-world projects.</p>
-    </section>
+  <section id="about">
+    <h1>Hi, I'm T-Stephen 👋</h1>
+    <p>Third-year college student passionate about Artificial Intelligence. I'm building innovative AI projects like Ambulance Detection, Smart Traffic Systems, and more. This is my personal portfolio where I showcase my work and journey.</p>
+  </section>
 
-    <section>
-      <h2>AI Projects</h2>
-      <ul>
-        <li><strong>Ambulance Detection Traffic Signal:</strong> YOLOv8 + OpenCV + Tkinter + Siren Alerts</li>
-        <li><strong>COVID Diagnosis System:</strong> Using Bayesian Networks</li>
-        <li><strong>Image Classifier:</strong> Built using CNN + TensorFlow</li>
-        <li><strong>Real-time Object Detection:</strong> YOLOv8 trained on custom datasets</li>
-      </ul>
-    </section>
+  <section id="projects">
+    <h2>🔧 Projects</h2>
+    <ul>
+      <li><strong>🚑 AI-based Ambulance Detection System</strong> — Real-time traffic control using YOLOv8 & OpenCV</li>
+      <li><strong>📊 Data Science Lab Projects</strong> — Python, Pandas, Machine Learning models implemented</li>
+      <li><strong>🧠 AI Chatbot</strong> — Built with NLTK and trained intents for simple Q&A</li>
+    </ul>
+  </section>
 
-    <section>
-      <h2>Skills</h2>
-      <p>Python, OpenCV, YOLOv8, TensorFlow, Keras, Machine Learning, Tkinter, Firebase, GitHub Pages</p>
-    </section>
+  <section id="contact">
+    <h2>📬 Contact Me</h2>
+    <form class="contact-form" action="https://formspree.io/f/your-form-id" method="POST">
+      <input type="text" name="name" placeholder="Your Name" required>
+      <input type="email" name="email" placeholder="Your Email" required>
+      <textarea name="message" rows="5" placeholder="Your Message"></textarea>
+      <button type="submit">Send Message</button>
+    </form>
+  </section>
 
-    <section>
-      <h2>Contact Me</h2>
-      <p>Email: <a href="mailto:stephenbugi@gmail.com">stephenbugi@gmail.com</a></p>
-      <div class="social-links">
-        <a href="https://www.linkedin.com/in/stephen-bugi" target="_blank">LinkedIn</a>
-        <a href="https://github.com/T-Stephen" target="_blank">GitHub</a>
-      </div>
-    </section>
-
-    <section class="rating">
-      <h2>Rate My Portfolio</h2>
-      <div>
-        <input type="radio" id="star5" name="rating" value="5"><label for="star5">★</label>
-        <input type="radio" id="star4" name="rating" value="4"><label for="star4">★</label>
-        <input type="radio" id="star3" name="rating" value="3"><label for="star3">★</label>
-        <input type="radio" id="star2" name="rating" value="2"><label for="star2">★</label>
-        <input type="radio" id="star1" name="rating" value="1"><label for="star1">★</label>
-      </div>
-    </section>
-  </main>
+  <section id="ai-bot">
+    <h2>🤖 AI Assistant (Coming Soon)</h2>
+    <p>I'm working on integrating an AI assistant here. Stay tuned for updates!</p>
+  </section>
 
   <footer>
-    <p>© 2025 T-Stephen. All rights reserved.</p>
+    <p>&copy; 2025 T-Stephen. All rights reserved.</p>
+    <div class="social-icons">
+      <a href="https://www.linkedin.com/in/stephenrajt" target="_blank"><img src="https://cdn-icons-png.flaticon.com/512/174/174857.png"></a>
+      <a href="https://github.com/T-Stephen" target="_blank"><img src="https://cdn-icons-png.flaticon.com/512/25/25231.png"></a>
+    </div>
   </footer>
 </body>
 
