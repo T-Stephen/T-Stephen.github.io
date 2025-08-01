@@ -1,154 +1,143 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="T-Stephen's official AI Portfolio website">
-  <meta name="google-site-verification" content="qo--v1Jv9NrZoN4QVfF12yJ35lewuIjF6WzxF8F_N4c" />
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>T-Stephen | AI Innovator</title>
-  <link rel="icon" type="image/png" href="STEVE_GitHub_Logo.png">
+  <link rel="icon" href="STEVE_GitHub_Logo.png" />
+
+  <!-- Tailwind CSS for styling -->
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <!-- Firebase SDKs -->
+  <script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
+    import { getFirestore, collection, addDoc, getDocs } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
+
+    const firebaseConfig = {
+      apiKey: "YOUR_API_KEY",
+      authDomain: "YOUR_PROJECT_ID.firebaseapp.com",
+      projectId: "YOUR_PROJECT_ID",
+      storageBucket: "YOUR_PROJECT_ID.appspot.com",
+      messagingSenderId: "YOUR_SENDER_ID",
+      appId: "YOUR_APP_ID"
+    };
+
+    const app = initializeApp(firebaseConfig);
+    const db = getFirestore(app);
+
+    window.addEventListener("DOMContentLoaded", () => {
+      const form = document.getElementById("ratingForm");
+      const ratingsList = document.getElementById("ratingsList");
+
+      form.addEventListener("submit", async (e) => {
+        e.preventDefault();
+        const name = document.getElementById("name").value;
+        const message = document.getElementById("message").value;
+        const rating = parseInt(document.getElementById("rating").value);
+
+        await addDoc(collection(db, "ratings"), { name, message, rating });
+        alert("Thanks for your feedback!");
+        form.reset();
+        loadRatings();
+      });
+
+      async function loadRatings() {
+        ratingsList.innerHTML = "";
+        const querySnapshot = await getDocs(collection(db, "ratings"));
+        querySnapshot.forEach((doc) => {
+          const data = doc.data();
+          const card = `
+            <div class="bg-white bg-opacity-10 p-4 rounded-md mb-4">
+              <strong class="text-white">${data.name}</strong> rated 
+              <span class="text-yellow-300">${data.rating}⭐</span><br/>
+              <em class="text-white">“${data.message}”</em>
+            </div>`;
+          ratingsList.innerHTML += card;
+        });
+      }
+
+      loadRatings();
+    });
+  </script>
+
   <style>
-    :root {
-      --main-color: #b80000; /* Reddish tone from logo */
-      --text-color: #ffffff;
-      --bg-color: #1a1a1a;
-    }
-
-    * {
-      margin: 0;
-      padding: 0;
-      scroll-behavior: smooth;
-      box-sizing: border-box;
-    }
-
     body {
+      background: linear-gradient(135deg, #8B0000, #FF6347);
       font-family: 'Segoe UI', sans-serif;
-      background-color: var(--main-color);
-      color: var(--text-color);
-      line-height: 1.6;
-    }
-
-    header {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 20px;
-      background-color: rgba(0, 0, 0, 0.2);
-    }
-
-    header img {
-      height: 60px;
-    }
-
-    nav a {
       color: white;
-      margin: 0 15px;
-      text-decoration: none;
-      font-weight: bold;
     }
 
     section {
-      padding: 60px 20px;
-      transition: all 0.5s ease;
-    }
-
-    h1, h2 {
-      margin-bottom: 20px;
-    }
-
-    .contact-form {
-      background: #fff;
+      margin: 50px auto;
       padding: 30px;
-      border-radius: 12px;
-      color: #000;
-      max-width: 500px;
-      margin: 0 auto;
+      max-width: 800px;
+      background: rgba(255, 255, 255, 0.05);
+      border-radius: 16px;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.3);
+      animation: fadeIn 1s ease-out;
     }
 
-    .contact-form input, .contact-form textarea {
-      width: 100%;
-      padding: 10px;
-      margin-bottom: 15px;
-      border: 1px solid #ccc;
-      border-radius: 8px;
+    input, textarea {
+      color: black;
     }
 
-    .contact-form button {
-      background-color: var(--main-color);
-      color: white;
-      border: none;
-      padding: 10px 20px;
-      border-radius: 6px;
-      cursor: pointer;
-      font-weight: bold;
-    }
-
-    footer {
-      text-align: center;
-      padding: 20px;
-      background-color: #000;
-      color: #fff;
-    }
-
-    .social-icons img {
-      height: 30px;
-      margin: 0 10px;
-    }
-
-    /* Section transitions */
-    section:hover {
-      transform: scale(1.01);
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(30px); }
+      to { opacity: 1; transform: translateY(0); }
     }
   </style>
 </head>
-
 <body>
-  <header>
-    <img src="STEVE_GitHub_Logo.png" alt="T-Stephen Logo">
-    <nav>
-      <a href="#about">About</a>
-      <a href="#projects">Projects</a>
-      <a href="#contact">Contact</a>
-    </nav>
+
+  <!-- Header -->
+  <header class="text-center py-10">
+    <img src="STEVE_GitHub_Logo.png" alt="Logo" class="mx-auto w-20 h-20 rounded-full shadow-lg" />
+    <h1 class="text-4xl font-bold mt-4">T-Stephen</h1>
+    <p class="text-lg">AI Innovator | Creative Technologist</p>
   </header>
 
-  <section id="about">
-    <h1>Hi, I'm T-Stephen 👋</h1>
-    <p>Third-year college student passionate about Artificial Intelligence. I'm building innovative AI projects like Ambulance Detection, Smart Traffic Systems, and more. This is my personal portfolio where I showcase my work and journey.</p>
+  <!-- About Section -->
+  <section>
+    <h2 class="text-2xl font-semibold mb-3">🚀 About Me</h2>
+    <p>I'm Stephen, a passionate AI innovator currently in my third year of engineering. I specialize in real-time computer vision projects like ambulance detection and traffic signal optimization using YOLOv8 and OpenCV.</p>
   </section>
 
-  <section id="projects">
-    <h2>🔧 Projects</h2>
-    <ul>
-      <li><strong>🚑 AI-based Ambulance Detection System</strong> — Real-time traffic control using YOLOv8 & OpenCV</li>
-      <li><strong>📊 Data Science Lab Projects</strong> — Python, Pandas, Machine Learning models implemented</li>
-      <li><strong>🧠 AI Chatbot</strong> — Built with NLTK and trained intents for simple Q&A</li>
+  <!-- Projects Section -->
+  <section>
+    <h2 class="text-2xl font-semibold mb-3">💡 Projects</h2>
+    <ul class="list-disc list-inside">
+      <li>Real-Time Ambulance Detection with YOLOv8</li>
+      <li>AI Smart Traffic Signal System</li>
+      <li>Portfolio with Live Feedback System</li>
     </ul>
   </section>
 
-  <section id="contact">
-    <h2>📬 Contact Me</h2>
-    <form class="contact-form" action="https://formspree.io/f/your-form-id" method="POST">
-      <input type="text" name="name" placeholder="Your Name" required>
-      <input type="email" name="email" placeholder="Your Email" required>
-      <textarea name="message" rows="5" placeholder="Your Message"></textarea>
-      <button type="submit">Send Message</button>
+  <!-- Rating Section -->
+  <section>
+    <h2 class="text-2xl font-semibold mb-3">🌟 Leave a Rating</h2>
+    <form id="ratingForm" class="space-y-4">
+      <input type="text" id="name" placeholder="Your Name" class="w-full p-2 rounded" required />
+      <textarea id="message" placeholder="Your feedback" class="w-full p-2 rounded" required></textarea>
+      <input type="number" id="rating" placeholder="Rating (1-5)" min="1" max="5" class="w-full p-2 rounded" required />
+      <button type="submit" class="bg-yellow-400 hover:bg-yellow-500 text-black px-4 py-2 rounded">Submit</button>
     </form>
+    <div id="ratingsList" class="mt-6"></div>
   </section>
 
-  <section id="ai-bot">
-    <h2>🤖 AI Assistant (Coming Soon)</h2>
-    <p>I'm working on integrating an AI assistant here. Stay tuned for updates!</p>
+  <!-- Contact Section -->
+  <section>
+    <h2 class="text-2xl font-semibold mb-3">📬 Contact</h2>
+    <p>Email: <a href="mailto:stephenbugi525@gmail.com" class="underline text-yellow-300">stephenbugi525@gmail.com</a></p>
+    <p>GitHub: <a href="https://github.com/T-Stephen" class="underline text-yellow-300">T-Stephen</a></p>
+    <p>LinkedIn: <a href="https://www.linkedin.com/in/stephen-raj-t-3b417528a/" class="underline text-yellow-300">My LinkedIn</a></p>
   </section>
 
-  <footer>
-    <p>&copy; 2025 T-Stephen. All rights reserved.</p>
-    <div class="social-icons">
-      <a href="https://www.linkedin.com/in/stephenrajt" target="_blank"><img src="https://cdn-icons-png.flaticon.com/512/174/174857.png"></a>
-      <a href="https://github.com/T-Stephen" target="_blank"><img src="https://cdn-icons-png.flaticon.com/512/25/25231.png"></a>
-    </div>
-  </footer>
+  <!-- Chatbot Placeholder -->
+  <section>
+    <h2 class="text-2xl font-semibold mb-3">🤖 AI Chat Assistant</h2>
+    <p class="italic">Coming soon: An AI-powered chatbot that can answer questions about my work and projects.</p>
+  </section>
+
 </body>
-
 </html>
