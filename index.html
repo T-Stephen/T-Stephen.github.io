@@ -1,83 +1,15 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="T-Stephen | AI Innovator Portfolio Website" />
   <title>T-Stephen | AI Innovator</title>
-  <style>
-    body {
-      margin: 0;
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      background-color: #140000;
-      color: white;
-      text-align: center;
-    }
-    header {
-      padding: 40px 20px;
-      background: linear-gradient(90deg, #ff0000, #990000);
-      color: white;
-      font-size: 2rem;
-      font-weight: bold;
-    }
-    .rating-section {
-      padding: 40px 20px;
-      background-color: #1a0000;
-      border-radius: 12px;
-      margin: 40px auto;
-      max-width: 500px;
-      box-shadow: 0 0 10px rgba(255, 0, 0, 0.4);
-    }
-    .rating-section h2 {
-      color: #ff3333;
-      margin-bottom: 20px;
-    }
-    #ratingForm input,
-    #ratingForm textarea {
-      width: 100%;
-      margin: 10px 0;
-      padding: 12px;
-      border: none;
-      border-radius: 8px;
-      font-size: 1rem;
-    }
-    #ratingForm button {
-      padding: 12px 20px;
-      background: #ff1a1a;
-      color: white;
-      border: none;
-      border-radius: 8px;
-      font-size: 1rem;
-      cursor: pointer;
-      transition: background 0.3s ease;
-    }
-    #ratingForm button:hover {
-      background: #e60000;
-    }
-  </style>
-
-  <!-- Firebase SDKs -->
-  <script src="https://www.gstatic.com/firebasejs/12.0.0/firebase-app.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/12.0.0/firebase-analytics.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/12.0.0/firebase-firestore.js"></script>
-</head>
-<body>
-  <header>
-    Welcome to T-Stephen's AI World
-  </header>
-
-  <section id="rating" class="rating-section">
-    <h2>🌟 Rate My Website</h2>
-    <form id="ratingForm">
-      <input type="text" id="name" placeholder="Your name" required />
-      <input type="number" id="rating" min="1" max="5" placeholder="Rating (1-5)" required />
-      <textarea id="message" placeholder="Your feedback" required></textarea>
-      <button type="submit">Submit Feedback</button>
-    </form>
-  </section>
-
+  <link rel="icon" type="image/png" href="STEVE_GitHub_Logo.png" />
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@600&display=swap" rel="stylesheet" />
   <script type="module">
     import { initializeApp } from "https://www.gstatic.com/firebasejs/12.0.0/firebase-app.js";
-    import { getAnalytics } from "https://www.gstatic.com/firebasejs/12.0.0/firebase-analytics.js";
     import { getFirestore, collection, addDoc } from "https://www.gstatic.com/firebasejs/12.0.0/firebase-firestore.js";
 
     const firebaseConfig = {
@@ -91,29 +23,144 @@
     };
 
     const app = initializeApp(firebaseConfig);
-    const analytics = getAnalytics(app);
     const db = getFirestore(app);
 
-    const ratingForm = document.getElementById("ratingForm");
-    ratingForm.addEventListener("submit", async (e) => {
-      e.preventDefault();
+    window.submitFeedback = async () => {
       const name = document.getElementById("name").value;
       const rating = document.getElementById("rating").value;
       const message = document.getElementById("message").value;
-
+      if (!name || !rating || !message) return alert("Please fill all fields");
       try {
-        await addDoc(collection(db, "ratings"), {
-          name: name,
-          rating: parseInt(rating),
-          message: message
-        });
-        alert("✅ Thank you! Your feedback has been submitted.");
-        ratingForm.reset();
-      } catch (error) {
-        console.error("❌ Error adding document: ", error);
-        alert("There was an error submitting your feedback.");
+        await addDoc(collection(db, "ratings"), { name, rating, message });
+        alert("✅ Thanks for your feedback!");
+        document.getElementById("feedbackForm").reset();
+      } catch (e) {
+        console.error("Error adding document: ", e);
+        alert("Something went wrong. Try again later.");
       }
-    });
+    };
   </script>
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Orbitron', sans-serif;
+      background: linear-gradient(135deg, #1a0000, #4d0000);
+      color: white;
+    }
+
+    header {
+      background: #ff0000;
+      padding: 20px;
+      text-align: center;
+      font-size: 2rem;
+      font-weight: bold;
+      color: white;
+      animation: slideDown 1s ease-out;
+    }
+
+    @keyframes slideDown {
+      0% { transform: translateY(-100%); opacity: 0; }
+      100% { transform: translateY(0); opacity: 1; }
+    }
+
+    section {
+      padding: 50px 20px;
+      text-align: center;
+    }
+
+    .card {
+      max-width: 500px;
+      margin: auto;
+      background: #1a0000;
+      padding: 30px;
+      border-radius: 15px;
+      box-shadow: 0 0 15px red;
+      animation: fadeIn 2s ease;
+    }
+
+    @keyframes fadeIn {
+      0% { opacity: 0; transform: scale(0.9); }
+      100% { opacity: 1; transform: scale(1); }
+    }
+
+    input, textarea {
+      width: 100%;
+      padding: 10px;
+      margin: 10px 0;
+      border-radius: 10px;
+      border: none;
+    }
+
+    button {
+      padding: 10px 20px;
+      background-color: red;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+    }
+
+    .about, .projects {
+      max-width: 800px;
+      margin: auto;
+      background: #2e0000;
+      border-radius: 15px;
+      padding: 20px;
+      box-shadow: 0 0 10px rgba(255, 0, 0, 0.5);
+    }
+
+    footer {
+      text-align: center;
+      padding: 20px;
+      background: #100000;
+      color: #aaa;
+    }
+
+    img.logo {
+      height: 60px;
+      margin-bottom: 10px;
+    }
+  </style>
+</head>
+
+<body>
+  <header>
+    <img src="STEVE_GitHub_Logo.png" class="logo" alt="Steve Logo" />
+    Welcome to T-Stephen's AI World
+  </header>
+
+  <section class="about">
+    <h2>About Me</h2>
+    <p>I'm Stephen, a passionate AI innovator and 3rd year Computer Science student. I build cutting-edge projects using Machine Learning, YOLOv8, Python, and more. My goal is to create AI-powered systems that can make a real impact.</p>
+  </section>
+
+  <section class="projects">
+    <h2>AI Projects</h2>
+    <ul>
+      <li>🚑 Ambulance Detection Traffic Signal using YOLOv8</li>
+      <li>📊 Real-Time Vehicle Counting and Signal Automation</li>
+      <li>🧠 AI Chatbot with OpenAI API</li>
+      <li>📸 Image Classification & Object Detection</li>
+    </ul>
+  </section>
+
+  <section>
+    <div class="card">
+      <h2>🌟 Rate My Website</h2>
+      <form id="feedbackForm">
+        <input type="text" id="name" placeholder="Your name" />
+        <input type="number" id="rating" min="1" max="5" placeholder="Rating (1-5)" />
+        <textarea id="message" placeholder="Your feedback"></textarea>
+        <button type="button" onclick="submitFeedback()">Submit Feedback</button>
+      </form>
+    </div>
+  </section>
+
+  <footer>
+    Connect with me: 
+    <a href="https://github.com/T-Stephen" style="color:red;">GitHub</a> | 
+    <a href="mailto:stephenbugi@gmail.com" style="color:red;">Email</a>
+  </footer>
 </body>
+
 </html>
