@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-theme="dark">
 
 <head>
   <meta charset="UTF-8" />
@@ -8,6 +8,215 @@
   <title>T-Stephen | AI Innovator</title>
   <link rel="icon" type="image/png" href="STEVE_GitHub_Logo.png" />
   <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@600&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --red: #ff0000;
+      --bg-dark: #1a0000;
+      --bg-light: #fff5f5;
+      --text-dark: #ffffff;
+      --text-light: #000000;
+    }
+
+    [data-theme="light"] {
+      --bg: var(--bg-light);
+      --text: var(--text-light);
+    }
+
+    [data-theme="dark"] {
+      --bg: var(--bg-dark);
+      --text: var(--text-dark);
+    }
+
+    body {
+      margin: 0;
+      font-family: 'Orbitron', sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      transition: all 0.3s ease;
+    }
+
+    header {
+      background: var(--red);
+      padding: 20px;
+      text-align: center;
+      font-size: 2rem;
+      color: white;
+      position: relative;
+    }
+
+    #themeToggle {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      padding: 6px 12px;
+      background: white;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+    }
+
+    section {
+      padding: 50px 20px;
+      text-align: center;
+    }
+
+    .card, .about, .projects {
+      max-width: 800px;
+      margin: auto;
+      background: rgba(255, 0, 0, 0.1);
+      border-radius: 15px;
+      padding: 30px;
+      box-shadow: 0 0 15px var(--red);
+    }
+
+    input, textarea {
+      width: 100%;
+      padding: 10px;
+      margin: 10px 0;
+      border-radius: 10px;
+      border: 1px solid var(--red);
+    }
+
+    button {
+      padding: 10px 20px;
+      background-color: var(--red);
+      color: white;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+    }
+
+    footer {
+      text-align: center;
+      padding: 20px;
+      background: #100000;
+      color: #aaa;
+    }
+
+    img.logo {
+      height: 60px;
+      margin-bottom: 10px;
+    }
+
+    /* Chatbot */
+    .chat-container {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      width: 300px;
+      background: #2a0000;
+      border-radius: 12px;
+      box-shadow: 0 0 10px red;
+      overflow: hidden;
+    }
+
+    .chat-header {
+      background: red;
+      color: white;
+      padding: 10px;
+      font-weight: bold;
+    }
+
+    .chat-box {
+      height: 200px;
+      overflow-y: auto;
+      padding: 10px;
+      font-size: 14px;
+    }
+
+    .chat-bubble {
+      background: white;
+      color: black;
+      padding: 8px;
+      margin: 5px;
+      border-radius: 10px;
+      display: inline-block;
+      max-width: 85%;
+      animation: fadeIn 0.5s;
+    }
+
+    .chat-bubble.user { background: #ffcccc; }
+    .chat-bubble.bot { background: #ffe6e6; text-align: left; }
+
+    .chat-input {
+      display: flex;
+      padding: 10px;
+      background: #220000;
+    }
+
+    .chat-input input {
+      flex: 1;
+      padding: 8px;
+      border-radius: 6px;
+      border: none;
+    }
+
+    .chat-input button {
+      background: red;
+      color: white;
+      border: none;
+      margin-left: 5px;
+      padding: 8px;
+      border-radius: 6px;
+      cursor: pointer;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: scale(0.95); }
+      to { opacity: 1; transform: scale(1); }
+    }
+  </style>
+</head>
+
+<body>
+  <header>
+    <img src="STEVE_GitHub_Logo.png" class="logo" alt="Steve Logo" />
+    Welcome to T-Stephen's AI World
+    <button id="themeToggle">Light Mode</button>
+  </header>
+
+  <section class="about">
+    <h2>About Me</h2>
+    <p>I'm Stephen, a passionate AI innovator and 3rd year Computer Science student. I build cutting-edge projects using Machine Learning, YOLOv8, Python, and more.</p>
+  </section>
+
+  <section class="projects">
+    <h2>AI Projects</h2>
+    <ul>
+      <li>🚑 Ambulance Detection Traffic Signal using YOLOv8</li>
+      <li>📊 Real-Time Vehicle Counting and Signal Automation</li>
+      <li>🧠 AI Chatbot with OpenAI</li>
+      <li>📸 Image Classification & Object Detection</li>
+    </ul>
+  </section>
+
+  <section>
+    <div class="card">
+      <h2>🌟 Rate My Website</h2>
+      <form id="feedbackForm">
+        <input type="text" id="name" placeholder="Your name" />
+        <input type="number" id="rating" min="1" max="5" placeholder="Rating (1-5)" />
+        <textarea id="message" placeholder="Your feedback"></textarea>
+        <button type="button" onclick="submitFeedback()">Submit Feedback</button>
+      </form>
+    </div>
+  </section>
+
+  <div class="chat-container">
+    <div class="chat-header">💬 Ask StephenBot</div>
+    <div class="chat-box" id="chatBox"></div>
+    <div class="chat-input">
+      <input type="text" id="chatInput" placeholder="Ask me anything...">
+      <button onclick="sendChat()">Send</button>
+    </div>
+  </div>
+
+  <footer>
+    Connect with me:
+    <a href="https://github.com/T-Stephen" style="color:red;">GitHub</a> |
+    <a href="mailto:stephenbugi@gmail.com" style="color:red;">Email</a>
+  </footer>
+
   <script type="module">
     import { initializeApp } from "https://www.gstatic.com/firebasejs/12.0.0/firebase-app.js";
     import { getFirestore, collection, addDoc } from "https://www.gstatic.com/firebasejs/12.0.0/firebase-firestore.js";
@@ -38,213 +247,47 @@
         console.error("Error adding document: ", e);
         alert("Something went wrong. Try again later.");
       }
-    };
+    }
   </script>
-  <style>
-    body {
-      margin: 0;
-      font-family: 'Orbitron', sans-serif;
-      background: linear-gradient(135deg, #1a0000, #4d0000);
-      color: white;
-    }
-
-    header {
-      background: #ff0000;
-      padding: 20px;
-      text-align: center;
-      font-size: 2rem;
-      font-weight: bold;
-      color: white;
-      animation: slideDown 1s ease-out;
-    }
-
-    @keyframes slideDown {
-      0% { transform: translateY(-100%); opacity: 0; }
-      100% { transform: translateY(0); opacity: 1; }
-    }
-
-    section {
-      padding: 50px 20px;
-      text-align: center;
-    }
-
-    .card {
-      max-width: 500px;
-      margin: auto;
-      background: #1a0000;
-      padding: 30px;
-      border-radius: 15px;
-      box-shadow: 0 0 15px red;
-      animation: fadeIn 2s ease;
-    }
-
-    @keyframes fadeIn {
-      0% { opacity: 0; transform: scale(0.9); }
-      100% { opacity: 1; transform: scale(1); }
-    }
-
-    input, textarea {
-      width: 100%;
-      padding: 10px;
-      margin: 10px 0;
-      border-radius: 10px;
-      border: none;
-    }
-
-    button {
-      padding: 10px 20px;
-      background-color: red;
-      color: white;
-      border: none;
-      border-radius: 8px;
-      cursor: pointer;
-    }
-
-    .about, .projects {
-      max-width: 800px;
-      margin: auto;
-      background: #2e0000;
-      border-radius: 15px;
-      padding: 20px;
-      box-shadow: 0 0 10px rgba(255, 0, 0, 0.5);
-    }
-
-    footer {
-      text-align: center;
-      padding: 20px;
-      background: #100000;
-      color: #aaa;
-    }
-
-    img.logo {
-      height: 60px;
-      margin-bottom: 10px;
-    }
-
-    .chat-container {
-      position: fixed;
-      bottom: 20px;
-      right: 20px;
-      width: 300px;
-      background: #2a0000;
-      border-radius: 12px;
-      box-shadow: 0 0 10px red;
-      overflow: hidden;
-    }
-
-    .chat-header {
-      background: red;
-      color: white;
-      padding: 10px;
-      font-weight: bold;
-    }
-
-    .chat-box {
-      height: 200px;
-      overflow-y: auto;
-      padding: 10px;
-      color: white;
-    }
-
-    .chat-input {
-      display: flex;
-      padding: 10px;
-    }
-
-    .chat-input input {
-      flex: 1;
-      padding: 8px;
-      border-radius: 6px;
-      border: none;
-    }
-
-    .chat-input button {
-      background: red;
-      color: white;
-      border: none;
-      margin-left: 5px;
-      padding: 8px;
-      border-radius: 6px;
-      cursor: pointer;
-    }
-  </style>
-</head>
-
-<body>
-  <header>
-    <img src="STEVE_GitHub_Logo.png" class="logo" alt="Steve Logo" />
-    Welcome to T-Stephen's AI World
-  </header>
-
-  <section class="about">
-    <h2>About Me</h2>
-    <p>I'm Stephen, a passionate AI innovator and 3rd year Computer Science student. I build cutting-edge projects using Machine Learning, YOLOv8, Python, and more. My goal is to create AI-powered systems that can make a real impact.</p>
-  </section>
-
-  <section class="projects">
-    <h2>AI Projects</h2>
-    <ul>
-      <li>🚑 Ambulance Detection Traffic Signal using YOLOv8</li>
-      <li>📊 Real-Time Vehicle Counting and Signal Automation</li>
-      <li>🧠 AI Chatbot with OpenAI API</li>
-      <li>📸 Image Classification & Object Detection</li>
-    </ul>
-  </section>
-
-  <section>
-    <div class="card">
-      <h2>🌟 Rate My Website</h2>
-      <form id="feedbackForm">
-        <input type="text" id="name" placeholder="Your name" />
-        <input type="number" id="rating" min="1" max="5" placeholder="Rating (1-5)" />
-        <textarea id="message" placeholder="Your feedback"></textarea>
-        <button type="button" onclick="submitFeedback()">Submit Feedback</button>
-      </form>
-    </div>
-  </section>
-
-  <div class="chat-container">
-    <div class="chat-header">💬 Ask StephenBot</div>
-    <div class="chat-box" id="chatBox"></div>
-    <div class="chat-input">
-      <input type="text" id="chatInput" placeholder="Ask me anything...">
-      <button onclick="sendChat()">Send</button>
-    </div>
-  </div>
-
-  <footer>
-    Connect with me: 
-    <a href="https://github.com/T-Stephen" style="color:red;">GitHub</a> | 
-    <a href="mailto:stephenbugi@gmail.com" style="color:red;">Email</a>
-  </footer>
 
   <script>
+    const htmlTag = document.documentElement;
+    const toggleBtn = document.getElementById('themeToggle');
+
+    toggleBtn.addEventListener('click', () => {
+      const current = htmlTag.getAttribute("data-theme");
+      const next = current === "light" ? "dark" : "light";
+      htmlTag.setAttribute("data-theme", next);
+      toggleBtn.textContent = next === "light" ? "Dark Mode" : "Light Mode";
+    });
+
     const chatBox = document.getElementById("chatBox");
     const chatInput = document.getElementById("chatInput");
 
     function sendChat() {
-      const userMsg = chatInput.value;
-      if (!userMsg) return;
-      appendMessage("You", userMsg);
-      const reply = getBotReply(userMsg);
-      setTimeout(() => appendMessage("StephenBot", reply), 600);
+      const msg = chatInput.value.trim();
+      if (!msg) return;
+      appendMessage("user", msg);
+      const reply = getBotReply(msg);
+      setTimeout(() => appendMessage("bot", reply), 700);
       chatInput.value = "";
     }
 
     function appendMessage(sender, text) {
-      const msg = document.createElement("div");
-      msg.innerHTML = `<strong>${sender}:</strong> ${text}`;
-      chatBox.appendChild(msg);
+      const bubble = document.createElement("div");
+      bubble.className = `chat-bubble ${sender}`;
+      bubble.textContent = text;
+      chatBox.appendChild(bubble);
       chatBox.scrollTop = chatBox.scrollHeight;
     }
 
     function getBotReply(msg) {
       msg = msg.toLowerCase();
-      if (msg.includes("name")) return "I'm T-Stephen, an AI innovator and AI and Data Science student.";
-      if (msg.includes("project")) return "My projects include AI-powered traffic systems, chatbot interfaces, and YOLOv8 solutions.";
-      if (msg.includes("skill") || msg.includes("technology")) return "I work with Python, YOLOv8, OpenCV, Firebase, and Machine Learning.";
-      if (msg.includes("contact")) return "You can reach me at stephenbugi@gmail.com or via LinkedIn.";
-      return "I'm here to help you explore Stephen's work! Try asking about his projects or skills.";
+      if (msg.includes("name")) return "I'm T-Stephen, an AI innovator and student.";
+      if (msg.includes("project")) return "I work on AI traffic control, YOLOv8 models, and chatbot integration.";
+      if (msg.includes("skills")) return "My skills include Python, Firebase, OpenCV, and AI development.";
+      if (msg.includes("contact")) return "Reach me at stephenbugi@gmail.com or GitHub: T-Stephen.";
+      return "I'm here to guide you about Stephen and his projects. Try asking about his skills or work!";
     }
   </script>
 </body>
