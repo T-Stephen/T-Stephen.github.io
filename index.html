@@ -2,142 +2,118 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>T-Stephen | AI Innovator</title>
-  <link rel="icon" href="STEVE_GitHub_Logo.png" />
-
-  <!-- Tailwind CSS for styling -->
-  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background-color: #140000;
+      color: white;
+      text-align: center;
+    }
+    header {
+      padding: 40px 20px;
+      background: linear-gradient(90deg, #ff0000, #990000);
+      color: white;
+      font-size: 2rem;
+      font-weight: bold;
+    }
+    .rating-section {
+      padding: 40px 20px;
+      background-color: #1a0000;
+      border-radius: 12px;
+      margin: 40px auto;
+      max-width: 500px;
+      box-shadow: 0 0 10px rgba(255, 0, 0, 0.4);
+    }
+    .rating-section h2 {
+      color: #ff3333;
+      margin-bottom: 20px;
+    }
+    #ratingForm input,
+    #ratingForm textarea {
+      width: 100%;
+      margin: 10px 0;
+      padding: 12px;
+      border: none;
+      border-radius: 8px;
+      font-size: 1rem;
+    }
+    #ratingForm button {
+      padding: 12px 20px;
+      background: #ff1a1a;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      font-size: 1rem;
+      cursor: pointer;
+      transition: background 0.3s ease;
+    }
+    #ratingForm button:hover {
+      background: #e60000;
+    }
+  </style>
 
   <!-- Firebase SDKs -->
+  <script src="https://www.gstatic.com/firebasejs/12.0.0/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/12.0.0/firebase-analytics.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/12.0.0/firebase-firestore.js"></script>
+</head>
+<body>
+  <header>
+    Welcome to T-Stephen's AI World
+  </header>
+
+  <section id="rating" class="rating-section">
+    <h2>🌟 Rate My Website</h2>
+    <form id="ratingForm">
+      <input type="text" id="name" placeholder="Your name" required />
+      <input type="number" id="rating" min="1" max="5" placeholder="Rating (1-5)" required />
+      <textarea id="message" placeholder="Your feedback" required></textarea>
+      <button type="submit">Submit Feedback</button>
+    </form>
+  </section>
+
   <script type="module">
-    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
-    import { getFirestore, collection, addDoc, getDocs } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/12.0.0/firebase-app.js";
+    import { getAnalytics } from "https://www.gstatic.com/firebasejs/12.0.0/firebase-analytics.js";
+    import { getFirestore, collection, addDoc } from "https://www.gstatic.com/firebasejs/12.0.0/firebase-firestore.js";
 
     const firebaseConfig = {
-      apiKey: "YOUR_API_KEY",
-      authDomain: "YOUR_PROJECT_ID.firebaseapp.com",
-      projectId: "YOUR_PROJECT_ID",
-      storageBucket: "YOUR_PROJECT_ID.appspot.com",
-      messagingSenderId: "YOUR_SENDER_ID",
-      appId: "YOUR_APP_ID"
+      apiKey: "AIzaSyDv2IZjs4dyC4w2Tne4jqFVCyHN-J6oFF0",
+      authDomain: "t-stephen-ai-portfolio.firebaseapp.com",
+      projectId: "t-stephen-ai-portfolio",
+      storageBucket: "t-stephen-ai-portfolio.appspot.com",
+      messagingSenderId: "493827826934",
+      appId: "1:493827826934:web:0f0e3a03fe56c25c5338d7",
+      measurementId: "G-X097JGBRF4"
     };
 
     const app = initializeApp(firebaseConfig);
+    const analytics = getAnalytics(app);
     const db = getFirestore(app);
 
-    window.addEventListener("DOMContentLoaded", () => {
-      const form = document.getElementById("ratingForm");
-      const ratingsList = document.getElementById("ratingsList");
+    const ratingForm = document.getElementById("ratingForm");
+    ratingForm.addEventListener("submit", async (e) => {
+      e.preventDefault();
+      const name = document.getElementById("name").value;
+      const rating = document.getElementById("rating").value;
+      const message = document.getElementById("message").value;
 
-      form.addEventListener("submit", async (e) => {
-        e.preventDefault();
-        const name = document.getElementById("name").value;
-        const message = document.getElementById("message").value;
-        const rating = parseInt(document.getElementById("rating").value);
-
-        await addDoc(collection(db, "ratings"), { name, message, rating });
-        alert("Thanks for your feedback!");
-        form.reset();
-        loadRatings();
-      });
-
-      async function loadRatings() {
-        ratingsList.innerHTML = "";
-        const querySnapshot = await getDocs(collection(db, "ratings"));
-        querySnapshot.forEach((doc) => {
-          const data = doc.data();
-          const card = `
-            <div class="bg-white bg-opacity-10 p-4 rounded-md mb-4">
-              <strong class="text-white">${data.name}</strong> rated 
-              <span class="text-yellow-300">${data.rating}⭐</span><br/>
-              <em class="text-white">“${data.message}”</em>
-            </div>`;
-          ratingsList.innerHTML += card;
+      try {
+        await addDoc(collection(db, "ratings"), {
+          name: name,
+          rating: parseInt(rating),
+          message: message
         });
+        alert("✅ Thank you! Your feedback has been submitted.");
+        ratingForm.reset();
+      } catch (error) {
+        console.error("❌ Error adding document: ", error);
+        alert("There was an error submitting your feedback.");
       }
-
-      loadRatings();
     });
   </script>
-
-  <style>
-    body {
-      background: linear-gradient(135deg, #8B0000, #FF6347);
-      font-family: 'Segoe UI', sans-serif;
-      color: white;
-    }
-
-    section {
-      margin: 50px auto;
-      padding: 30px;
-      max-width: 800px;
-      background: rgba(255, 255, 255, 0.05);
-      border-radius: 16px;
-      box-shadow: 0 8px 20px rgba(0,0,0,0.3);
-      animation: fadeIn 1s ease-out;
-    }
-
-    input, textarea {
-      color: black;
-    }
-
-    @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(30px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
-  </style>
-</head>
-<body>
-
-  <!-- Header -->
-  <header class="text-center py-10">
-    <img src="STEVE_GitHub_Logo.png" alt="Logo" class="mx-auto w-20 h-20 rounded-full shadow-lg" />
-    <h1 class="text-4xl font-bold mt-4">T-Stephen</h1>
-    <p class="text-lg">AI Innovator | Creative Technologist</p>
-  </header>
-
-  <!-- About Section -->
-  <section>
-    <h2 class="text-2xl font-semibold mb-3">🚀 About Me</h2>
-    <p>I'm Stephen, a passionate AI innovator currently in my third year of engineering. I specialize in real-time computer vision projects like ambulance detection and traffic signal optimization using YOLOv8 and OpenCV.</p>
-  </section>
-
-  <!-- Projects Section -->
-  <section>
-    <h2 class="text-2xl font-semibold mb-3">💡 Projects</h2>
-    <ul class="list-disc list-inside">
-      <li>Real-Time Ambulance Detection with YOLOv8</li>
-      <li>AI Smart Traffic Signal System</li>
-      <li>Portfolio with Live Feedback System</li>
-    </ul>
-  </section>
-
-  <!-- Rating Section -->
-  <section>
-    <h2 class="text-2xl font-semibold mb-3">🌟 Leave a Rating</h2>
-    <form id="ratingForm" class="space-y-4">
-      <input type="text" id="name" placeholder="Your Name" class="w-full p-2 rounded" required />
-      <textarea id="message" placeholder="Your feedback" class="w-full p-2 rounded" required></textarea>
-      <input type="number" id="rating" placeholder="Rating (1-5)" min="1" max="5" class="w-full p-2 rounded" required />
-      <button type="submit" class="bg-yellow-400 hover:bg-yellow-500 text-black px-4 py-2 rounded">Submit</button>
-    </form>
-    <div id="ratingsList" class="mt-6"></div>
-  </section>
-
-  <!-- Contact Section -->
-  <section>
-    <h2 class="text-2xl font-semibold mb-3">📬 Contact</h2>
-    <p>Email: <a href="mailto:stephenbugi525@gmail.com" class="underline text-yellow-300">stephenbugi525@gmail.com</a></p>
-    <p>GitHub: <a href="https://github.com/T-Stephen" class="underline text-yellow-300">T-Stephen</a></p>
-    <p>LinkedIn: <a href="https://www.linkedin.com/in/stephen-raj-t-3b417528a/" class="underline text-yellow-300">My LinkedIn</a></p>
-  </section>
-
-  <!-- Chatbot Placeholder -->
-  <section>
-    <h2 class="text-2xl font-semibold mb-3">🤖 AI Chat Assistant</h2>
-    <p class="italic">Coming soon: An AI-powered chatbot that can answer questions about my work and projects.</p>
-  </section>
-
 </body>
 </html>
