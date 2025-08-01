@@ -120,6 +120,53 @@
       height: 60px;
       margin-bottom: 10px;
     }
+
+    .chat-container {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      width: 300px;
+      background: #2a0000;
+      border-radius: 12px;
+      box-shadow: 0 0 10px red;
+      overflow: hidden;
+    }
+
+    .chat-header {
+      background: red;
+      color: white;
+      padding: 10px;
+      font-weight: bold;
+    }
+
+    .chat-box {
+      height: 200px;
+      overflow-y: auto;
+      padding: 10px;
+      color: white;
+    }
+
+    .chat-input {
+      display: flex;
+      padding: 10px;
+    }
+
+    .chat-input input {
+      flex: 1;
+      padding: 8px;
+      border-radius: 6px;
+      border: none;
+    }
+
+    .chat-input button {
+      background: red;
+      color: white;
+      border: none;
+      margin-left: 5px;
+      padding: 8px;
+      border-radius: 6px;
+      cursor: pointer;
+    }
   </style>
 </head>
 
@@ -131,7 +178,7 @@
 
   <section class="about">
     <h2>About Me</h2>
-    <p>I'm Stephen, a passionate AI innovator and 3rd year AI and Data  Science student. I build cutting-edge projects using Machine Learning, YOLOv8, Python, and more. My goal is to create AI-powered systems that can make a real impact.</p>
+    <p>I'm Stephen, a passionate AI innovator and 3rd year Computer Science student. I build cutting-edge projects using Machine Learning, YOLOv8, Python, and more. My goal is to create AI-powered systems that can make a real impact.</p>
   </section>
 
   <section class="projects">
@@ -156,11 +203,50 @@
     </div>
   </section>
 
+  <div class="chat-container">
+    <div class="chat-header">💬 Ask StephenBot</div>
+    <div class="chat-box" id="chatBox"></div>
+    <div class="chat-input">
+      <input type="text" id="chatInput" placeholder="Ask me anything...">
+      <button onclick="sendChat()">Send</button>
+    </div>
+  </div>
+
   <footer>
     Connect with me: 
     <a href="https://github.com/T-Stephen" style="color:red;">GitHub</a> | 
     <a href="mailto:stephenbugi@gmail.com" style="color:red;">Email</a>
   </footer>
+
+  <script>
+    const chatBox = document.getElementById("chatBox");
+    const chatInput = document.getElementById("chatInput");
+
+    function sendChat() {
+      const userMsg = chatInput.value;
+      if (!userMsg) return;
+      appendMessage("You", userMsg);
+      const reply = getBotReply(userMsg);
+      setTimeout(() => appendMessage("StephenBot", reply), 600);
+      chatInput.value = "";
+    }
+
+    function appendMessage(sender, text) {
+      const msg = document.createElement("div");
+      msg.innerHTML = `<strong>${sender}:</strong> ${text}`;
+      chatBox.appendChild(msg);
+      chatBox.scrollTop = chatBox.scrollHeight;
+    }
+
+    function getBotReply(msg) {
+      msg = msg.toLowerCase();
+      if (msg.includes("name")) return "I'm T-Stephen, an AI innovator and AI and Data Science student.";
+      if (msg.includes("project")) return "My projects include AI-powered traffic systems, chatbot interfaces, and YOLOv8 solutions.";
+      if (msg.includes("skill") || msg.includes("technology")) return "I work with Python, YOLOv8, OpenCV, Firebase, and Machine Learning.";
+      if (msg.includes("contact")) return "You can reach me at stephenbugi@gmail.com or via LinkedIn.";
+      return "I'm here to help you explore Stephen's work! Try asking about his projects or skills.";
+    }
+  </script>
 </body>
 
 </html>
