@@ -19,6 +19,12 @@
       background: #1a1a2e;
       animation: fadeIn 2s;
     }
+    header img {
+      width: 100px;
+      height: 100px;
+      border-radius: 50%;
+      margin-bottom: 1rem;
+    }
     header h1 {
       font-size: 2.5rem;
       color: #fddb3a;
@@ -122,8 +128,9 @@
 <body>
   <button class="toggle-mode" onclick="toggleMode()">🌙 Toggle Mode</button>
   <header>
+    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/ab/Logo_TV_2015.png/600px-Logo_TV_2015.png" alt="T-Stephen Logo">
     <h1>Welcome to T-Stephen's AI Portfolio</h1>
-    <p>B.Tech AI & Data Science Student | Aspiring Innovator | AI Projects & Solutions</p>
+    <p>B.Tech AI & Data Science Student | Aspiring Innovator</p>
   </header>
 
   <section class="projects">
@@ -134,7 +141,7 @@
     </div>
     <div class="project-item">
       <h3>Candidate-Elimination Algorithm</h3>
-      <p>Implemented classic ML algorithm for hypothesis space in Python.</p>
+      <p>Classic ML algorithm for hypothesis space in Python.</p>
     </div>
     <div class="project-item">
       <h3>Decision Tree Classifier (ID3)</h3>
@@ -173,6 +180,7 @@
     };
     const app = firebase.initializeApp(firebaseConfig);
     const db = firebase.firestore();
+
     const visitorRef = db.collection("visitors").doc("count");
     visitorRef.get().then(doc=>{
       if(doc.exists){
@@ -215,9 +223,9 @@
       const smartReplies={
         "hi":"Hello! I'm your assistant.",
         "your name":"I'm Stephen's smart chatbot!",
-        "projects":"Stephen's projects include AI models, ML algorithms, and innovative solutions.",
+        "projects":"Stephen's projects: ambulance detection, candidate elimination, decision trees, and more.",
         "skills":"Stephen is skilled in Python, AI/ML, Web Dev, and Data Science.",
-        "ai":"AI is revolutionizing industries and Stephen loves working with it!"
+        "ai":"AI is revolutionizing industries. Stephen loves working on AI-based innovations!"
       };
       for(const key in smartReplies){
         if(msg.toLowerCase().includes(key))response=smartReplies[key];
