@@ -6,23 +6,26 @@
   <title>T-Stephen | AI Innovator</title>
   <style>
     :root {
-      --bg-gradient: linear-gradient(135deg, #1f2937, #4b5563);
-      --card-bg: rgba(255, 255, 255, 0.05);
-      --highlight: #10b981;
+      --bg-light: linear-gradient(135deg, #fdfbfb, #ebedee);
+      --bg-dark: linear-gradient(135deg, #1f1f1f, #3b3b3b);
+      --card-bg-light: rgba(0, 0, 0, 0.05);
+      --card-bg-dark: rgba(255, 255, 255, 0.05);
+      --text-dark: #111;
       --text-light: #f3f4f6;
+      --highlight: #e63946;
       --font-main: 'Segoe UI', sans-serif;
     }
     body {
       margin: 0;
       font-family: var(--font-main);
-      background: var(--bg-gradient);
+      background: var(--bg-dark);
       color: var(--text-light);
       scroll-behavior: smooth;
-      animation: fadeIn 1s ease-in;
+      transition: all 0.3s ease-in-out;
     }
-    @keyframes fadeIn {
-      from { opacity: 0; }
-      to { opacity: 1; }
+    .light-mode {
+      background: var(--bg-light);
+      color: var(--text-dark);
     }
     header, section {
       padding: 60px 20px;
@@ -34,22 +37,23 @@
       text-decoration: none;
       font-weight: bold;
     }
-    .projects, .about {
-      min-height: 300px;
-      animation: fadeIn 2s ease;
-    }
-    #feedbackForm, #statsBox, #adminPanel {
-      background-color: var(--card-bg);
-      padding: 30px;
+    .project-card, #feedbackForm, #statsBox, #adminPanel {
+      background: var(--card-bg-dark);
+      padding: 20px;
       border-radius: 12px;
-      max-width: 500px;
-      margin: 30px auto;
+      margin: 20px auto;
+      max-width: 600px;
+    }
+    .light-mode .project-card,
+    .light-mode #feedbackForm,
+    .light-mode #statsBox,
+    .light-mode #adminPanel {
+      background: var(--card-bg-light);
     }
     input, textarea {
       width: 90%;
       padding: 10px;
       margin: 10px auto;
-      display: block;
       border-radius: 6px;
       border: none;
     }
@@ -58,11 +62,110 @@
       color: white;
       border: none;
       padding: 12px 20px;
-      margin-top: 10px;
       border-radius: 8px;
       cursor: pointer;
     }
+    #chatbot {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      background: white;
+      color: black;
+      padding: 15px;
+      border-radius: 12px;
+      max-width: 300px;
+      z-index: 999;
+      box-shadow: 0 0 10px rgba(0,0,0,0.3);
+    }
+    #chatlog {
+      max-height: 200px;
+      overflow-y: auto;
+      font-size: 14px;
+      margin-bottom: 10px;
+    }
+    #chatbot input {
+      width: 80%;
+    }
+    .theme-toggle {
+      position: fixed;
+      top: 10px;
+      right: 20px;
+      background: var(--highlight);
+      color: white;
+      border: none;
+      padding: 10px 15px;
+      border-radius: 10px;
+      z-index: 1000;
+      cursor: pointer;
+    }
   </style>
+</head>
+<body>
+  <button class="theme-toggle" onclick="toggleTheme()">🌙 Toggle Mode</button>
+  <header>
+    <h1>Welcome to T-Stephen's AI Portfolio</h1>
+    <nav>
+      <a href="#about">About</a>
+      <a href="#projects">Projects</a>
+      <a href="#feedbackForm">Feedback</a>
+      <a href="#adminPanel">Admin</a>
+    </nav>
+  </header>
+
+  <section id="about">
+    <h2>About Me</h2>
+    <p>I’m T-Stephen, a B.Tech AI & Data Science student passionate about building inspiring, real-time AI solutions. 🚀</p>
+  </section>
+
+  <section id="projects">
+    <h2>🚀 Projects</h2>
+    <div class="project-card">
+      <h3>AI Traffic Signal with Ambulance Detection</h3>
+      <p>Real-time YOLOv8-based model to detect ambulances, change lights and activate siren with GUI.</p>
+    </div>
+    <div class="project-card">
+      <h3>Voice-Controlled Smart Portfolio</h3>
+      <p>Built with Firebase, Web Speech API, and JavaScript to create an interactive portfolio site.</p>
+    </div>
+    <div class="project-card">
+      <h3>AI Chatbot with Smart Replies</h3>
+      <p>Free chatbot using HTML/JS answering personal and tech-related queries.</p>
+    </div>
+  </section>
+
+  <section>
+    <h2>📊 Live Stats</h2>
+    <div id="statsBox">
+      <p><strong>Total Feedback:</strong> <span id="totalFeedback">0</span></p>
+      <p><strong>Average Rating:</strong> ⭐ <span id="averageRating">0</span></p>
+    </div>
+  </section>
+
+  <section>
+    <h2>⭐ Rate My Work</h2>
+    <form id="feedbackForm">
+      <input type="text" placeholder="Your Name" required><br>
+      <textarea placeholder="Your Feedback" required></textarea><br>
+      <input type="number" min="1" max="5" placeholder="Rating (1-5)" required><br>
+      <button type="submit">Submit</button>
+    </form>
+  </section>
+
+  <section id="adminPanel">
+    <h2>🔐 Admin Panel</h2>
+    <div id="adminFeedbackList">Loading...</div>
+  </section>
+
+  <button onclick="startVoiceCommand()" style="position: fixed; bottom: 90px; left: 20px; background: var(--highlight); color: white; padding: 12px 20px; border-radius: 12px; cursor: pointer;">
+    🎙️ Speak
+  </button>
+
+  <div id="chatbot">
+    <div id="chatlog"></div>
+    <input type="text" id="userMsg" placeholder="Ask me anything...">
+    <button onclick="replyBot()">Send</button>
+  </div>
+
   <script type="module">
     import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
     import { getDatabase, ref, onValue, remove } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-database.js";
@@ -82,14 +185,12 @@
     const db = getDatabase(app);
     const ratingRef = ref(db, 'ratings');
 
-    // Update stats
     onValue(ratingRef, (snapshot) => {
       let count = 0, total = 0, html = "";
       snapshot.forEach(child => {
         count++;
         total += parseInt(child.val().rating);
-        html += `<div style='margin-bottom:10px'>⭐ ${child.val().rating} by <b>${child.val().name}</b>
-        <button onclick="deleteFeedback('${child.key}')">❌ Delete</button></div>`;
+        html += `<div>⭐ ${child.val().rating} by <b>${child.val().name}</b> <button onclick="deleteFeedback('${child.key}')">❌ Delete</button></div>`;
       });
       document.getElementById("totalFeedback").innerText = count;
       document.getElementById("averageRating").innerText = count ? (total / count).toFixed(1) : '0';
@@ -102,83 +203,41 @@
       }
     }
   </script>
-</head>
-<body>
-  <header>
-    <h1>Welcome to T-Stephen's AI Portfolio</h1>
-    <nav>
-      <a href="#about">About</a>
-      <a href="#projects">Projects</a>
-      <a href="#feedbackForm">Feedback</a>
-      <a href="#adminPanel">Admin</a>
-    </nav>
-  </header>
-
-  <section id="about" class="about">
-    <h2>About Me</h2>
-    <p>I’m T-Stephen, a B.Tech AI & Data Science student building smart, real-time AI solutions for the world.</p>
-  </section>
-
-  <section id="projects" class="projects">
-    <h2>🚀 Projects</h2>
-    <p>Coming soon... Check back later for detailed project demos and case studies.</p>
-  </section>
-
-  <section>
-    <h2>📊 Live Site Stats</h2>
-    <div id="statsBox">
-      <p><strong>Total Feedback:</strong> <span id="totalFeedback">0</span></p>
-      <p><strong>Average Rating:</strong> ⭐ <span id="averageRating">0</span></p>
-    </div>
-  </section>
-
-  <section>
-    <h2>⭐ Rate This Portfolio</h2>
-    <form id="feedbackForm">
-      <input type="text" placeholder="Your Name" required><br>
-      <textarea placeholder="Your Feedback" required></textarea><br>
-      <input type="number" min="1" max="5" placeholder="Rating (1-5)" required><br>
-      <button type="submit">Submit</button>
-    </form>
-  </section>
-
-  <section id="adminPanel">
-    <h2>🔐 Admin Feedback Panel</h2>
-    <div id="adminFeedbackList">Loading...</div>
-  </section>
-
-  <!-- 🎙️ Voice Command Button -->
-  <button onclick="startVoiceCommand()" style="
-    position: fixed;
-    bottom: 90px;
-    left: 20px;
-    background: var(--highlight);
-    color: white;
-    border: none;
-    padding: 12px 20px;
-    border-radius: 12px;
-    z-index: 999;
-    cursor: pointer;">
-    🎙️ Speak
-  </button>
 
   <script>
     function startVoiceCommand() {
       const recognition = new (window.SpeechRecognition || window.webkitSpeechRecognition)();
       recognition.lang = 'en-US';
-      recognition.interimResults = false;
-      recognition.maxAlternatives = 1;
       recognition.start();
       recognition.onresult = function(event) {
         const command = event.results[0][0].transcript.toLowerCase();
-        if (command.includes("project")) document.querySelector(".projects").scrollIntoView({behavior: 'smooth'});
-        else if (command.includes("feedback")) document.getElementById("feedbackForm").scrollIntoView({behavior: 'smooth'});
-        else if (command.includes("admin")) document.getElementById("adminPanel").scrollIntoView({behavior: 'smooth'});
-        else alert("Command not recognized.");
+        if (command.includes("project")) document.getElementById("projects").scrollIntoView({ behavior: 'smooth' });
+        else if (command.includes("feedback")) document.getElementById("feedbackForm").scrollIntoView({ behavior: 'smooth' });
+        else if (command.includes("admin")) document.getElementById("adminPanel").scrollIntoView({ behavior: 'smooth' });
+        else if (command.includes("about")) document.getElementById("about").scrollIntoView({ behavior: 'smooth' });
+        else alert("Sorry, I didn't get that. Try again!");
       };
-      recognition.onerror = function(event) {
-        alert("Voice input failed: " + event.error);
-      };
+    }
+
+    function replyBot() {
+      const input = document.getElementById("userMsg");
+      const msg = input.value.toLowerCase();
+      const log = document.getElementById("chatlog");
+      log.innerHTML += `<div><b>You:</b> ${msg}</div>`;
+
+      let response = "Ask me about my skills or projects!";
+      if (msg.includes("your name")) response = "I’m T-Stephen, passionate about AI and Data Science.";
+      else if (msg.includes("project")) response = "I built a smart traffic system, voice assistant, chatbot, and more.";
+      else if (msg.includes("skills")) response = "Python, ML, YOLOv8, Firebase, OpenCV, React, HTML/CSS, JS.";
+      else if (msg.includes("contact")) response = "Reach me via LinkedIn or use the feedback form!";
+
+      log.innerHTML += `<div><b>Bot:</b> ${response}</div>`;
+      input.value = "";
+      log.scrollTop = log.scrollHeight;
+    }
+
+    function toggleTheme() {
+      document.body.classList.toggle("light-mode");
     }
   </script>
 </body>
