@@ -1,0 +1,81 @@
+<!-- Your current HTML code remains unchanged. You will now add Firebase Hosting and Admin Panel support as external files and Firebase CLI setup. -->
+<!-- IMPORTANT: These instructions are outside the HTML code. Save your HTML as index.html and follow these steps -->
+
+<!-- ✅ STEP 1: SETUP FIREBASE HOSTING -->
+1. Open terminal and navigate to your project folder where index.html is saved.
+2. Run:
+   ```bash
+   npm install -g firebase-tools
+   firebase login
+   firebase init hosting
+   ```
+3. Answer prompts:
+   - Choose: `Use an existing project`
+   - Select your Firebase project: `t-stephen-ai-portfolio`
+   - Set `public` directory to: `.`
+   - Configure as single-page app? `Yes`
+   - Overwrite index.html? `No`
+4. Finally deploy:
+   ```bash
+   firebase deploy
+   ```
+   Your live site will be at: `https://<project-id>.web.app`
+
+<!-- ✅ STEP 2: CREATE admin.html to view feedback -->
+Create a new file in your GitHub repo: `admin.html`
+Paste the following code:
+
+```html
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Admin Feedback Viewer</title>
+  <script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/12.0.0/firebase-app.js";
+    import { getDatabase, ref, onValue } from "https://www.gstatic.com/firebasejs/12.0.0/firebase-database.js";
+
+    const firebaseConfig = {
+      apiKey: "AIzaSyDv2IZjs4dyC4w2Tne4jqFVCyHN-J6oFF0",
+      authDomain: "t-stephen-ai-portfolio.firebaseapp.com",
+      databaseURL: "https://t-stephen-ai-portfolio-default-rtdb.firebaseio.com",
+      projectId: "t-stephen-ai-portfolio",
+      storageBucket: "t-stephen-ai-portfolio.appspot.com",
+      messagingSenderId: "493827826934",
+      appId: "1:493827826934:web:0f0e3a03fe56c25c5338d7"
+    };
+
+    const app = initializeApp(firebaseConfig);
+    const db = getDatabase(app);
+
+    window.onload = () => {
+      const ratingsRef = ref(db, 'ratings');
+      onValue(ratingsRef, (snapshot) => {
+        const data = snapshot.val();
+        const feedbackList = document.getElementById('feedback');
+        feedbackList.innerHTML = '';
+        for (let key in data) {
+          const entry = data[key];
+          const li = document.createElement('li');
+          li.innerHTML = `<strong>${entry.name}</strong> (${entry.rating}⭐): ${entry.message}`;
+          feedbackList.appendChild(li);
+        }
+      });
+    }
+  </script>
+</head>
+<body>
+  <h1>Feedback Dashboard</h1>
+  <ul id="feedback"></ul>
+</body>
+</html>
+```
+
+✅ Now open this page: `https://T-Stephen.github.io/admin.html` to view all feedback in real-time.
+
+Would you like me to also:
+- Add password protection to the admin page?
+- Add delete/edit options for each feedback?
+- Add project category filters for frontend?
+
+Let me know your preference!
