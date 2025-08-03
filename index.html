@@ -32,7 +32,44 @@
       max-width: 500px;
       margin: auto;
     }
+    #statsBox {
+      background-color: rgba(0,0,0,0.2);
+      padding: 20px;
+      border-radius: 10px;
+      margin: 20px auto;
+      max-width: 300px;
+    }
   </style>
+  <!-- Firebase SDK -->
+  <script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
+    import { getDatabase, ref, onValue } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-database.js";
+
+    const firebaseConfig = {
+      apiKey: "AIzaSyDv2IZjs4dyC4w2Tne4jqFVCyHN-J6oFF0",
+      authDomain: "t-stephen-ai-portfolio.firebaseapp.com",
+      databaseURL: "https://t-stephen-ai-portfolio-default-rtdb.firebaseio.com",
+      projectId: "t-stephen-ai-portfolio",
+      storageBucket: "t-stephen-ai-portfolio.appspot.com",
+      messagingSenderId: "493827826934",
+      appId: "1:493827826934:web:0f0e3a03fe56c25c5338d7",
+      measurementId: "G-X097JGBRF4"
+    };
+
+    const app = initializeApp(firebaseConfig);
+    const db = getDatabase(app);
+
+    const ratingRef = ref(db, 'ratings');
+    onValue(ratingRef, (snapshot) => {
+      let count = 0, total = 0;
+      snapshot.forEach(child => {
+        count++;
+        total += parseInt(child.val().rating);
+      });
+      document.getElementById("totalFeedback").innerText = count;
+      document.getElementById("averageRating").innerText = count ? (total / count).toFixed(1) : '0';
+    });
+  </script>
 </head>
 <body>
   <header>
@@ -59,6 +96,14 @@
   </section>
 
   <section>
+    <h2>📊 Live Site Stats</h2>
+    <div id="statsBox">
+      <p><strong>Total Feedback:</strong> <span id="totalFeedback">0</span></p>
+      <p><strong>Average Rating:</strong> ⭐ <span id="averageRating">0</span></p>
+    </div>
+  </section>
+
+  <section>
     <h2>⭐ Rate This Portfolio</h2>
     <form id="feedbackForm">
       <input type="text" placeholder="Your Name" required><br><br>
@@ -68,7 +113,6 @@
     </form>
   </section>
 
-  <!-- 🎙️ Voice Control Button -->
   <button onclick="startVoiceCommand()" style="
     position: fixed;
     bottom: 90px;
