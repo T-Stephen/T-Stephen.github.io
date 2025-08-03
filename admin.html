@@ -1,31 +1,3 @@
-<!-- Your current HTML code remains unchanged. You will now add Firebase Hosting and Admin Panel support as external files and Firebase CLI setup. -->
-<!-- IMPORTANT: These instructions are outside the HTML code. Save your HTML as index.html and follow these steps -->
-
-<!-- ✅ STEP 1: SETUP FIREBASE HOSTING -->
-1. Open terminal and navigate to your project folder where index.html is saved.
-2. Run:
-   ```bash
-   npm install -g firebase-tools
-   firebase login
-   firebase init hosting
-   ```
-3. Answer prompts:
-   - Choose: `Use an existing project`
-   - Select your Firebase project: `t-stephen-ai-portfolio`
-   - Set `public` directory to: `.`
-   - Configure as single-page app? `Yes`
-   - Overwrite index.html? `No`
-4. Finally deploy:
-   ```bash
-   firebase deploy
-   ```
-   Your live site will be at: `https://<project-id>.web.app`
-
-<!-- ✅ STEP 2: CREATE admin.html to view feedback -->
-Create a new file in your GitHub repo: `admin.html`
-Paste the following code:
-
-```html
 <!DOCTYPE html>
 <html>
 <head>
@@ -69,13 +41,3 @@ Paste the following code:
   <ul id="feedback"></ul>
 </body>
 </html>
-```
-
-✅ Now open this page: `https://T-Stephen.github.io/admin.html` to view all feedback in real-time.
-
-Would you like me to also:
-- Add password protection to the admin page?
-- Add delete/edit options for each feedback?
-- Add project category filters for frontend?
-
-Let me know your preference!
