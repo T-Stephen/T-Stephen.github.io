@@ -2,26 +2,27 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>T-Stephen | AI Innovator</title>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap">
   <style>
+    * { box-sizing: border-box; }
     body {
-      font-family: 'Poppins', sans-serif;
-      background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
-      color: #fff;
       margin: 0;
-      padding: 0;
+      font-family: 'Poppins', sans-serif;
+      background: linear-gradient(120deg, #1b1b2f, #162447);
+      color: #fff;
       overflow-x: hidden;
     }
     header {
       text-align: center;
-      padding: 2rem;
-      background: #1a1a2e;
-      animation: fadeIn 2s;
+      padding: 2rem 1rem;
+      background: #0f3460;
+      animation: fadeIn 2s ease-in-out;
     }
     header img {
       width: 100px;
-      height: 100px;
+      height: auto;
       border-radius: 50%;
       margin-bottom: 1rem;
     }
@@ -32,206 +33,187 @@
     }
     header p {
       font-size: 1.2rem;
-      color: #ffffffb0;
+      color: #aaa;
     }
-    .projects, .feedback {
-      max-width: 900px;
-      margin: 2rem auto;
+    nav {
       background: #1f4068;
-      border-radius: 15px;
+      padding: 1rem;
+      display: flex;
+      justify-content: center;
+      gap: 2rem;
+    }
+    nav a {
+      color: #00fff5;
+      text-decoration: none;
+      font-weight: 600;
+    }
+    section {
+      max-width: 1000px;
+      margin: auto;
       padding: 2rem;
-      animation: slideIn 1.5s;
+      animation: slideUp 1.5s ease;
     }
-    .projects h2, .feedback h2 {
-      color: #00ffdd;
-      text-align: center;
-      margin-bottom: 1.5rem;
-    }
-    .project-item {
-      margin: 1rem 0;
+    .project-card {
       background: #162447;
       padding: 1rem;
       border-radius: 10px;
+      margin: 1rem 0;
       transition: transform 0.3s;
     }
-    .project-item:hover { transform: scale(1.05); }
+    .project-card:hover {
+      transform: scale(1.02);
+    }
     footer {
       text-align: center;
       padding: 1rem;
       background: #1a1a2e;
-      color: #aaa;
+      font-size: 0.9rem;
+      color: #bbb;
     }
     .chatbot {
       position: fixed;
-      bottom: 20px;
+      bottom: 80px;
       right: 20px;
-      width: 300px;
-      max-width: 90vw;
-      background: #0f4c75;
+      background: #1a1a2e;
       border-radius: 15px;
       padding: 1rem;
+      width: 300px;
+      max-height: 400px;
+      overflow: hidden;
       display: none;
       flex-direction: column;
+      box-shadow: 0 0 10px #00ffdd;
       z-index: 999;
     }
     .chatbot-header {
       font-weight: bold;
-      margin-bottom: 0.5rem;
+      color: #00ffdd;
       text-align: center;
+      margin-bottom: 0.5rem;
     }
     .chatbot-messages {
       flex: 1;
-      max-height: 300px;
       overflow-y: auto;
-      background: #1b262c;
-      border-radius: 10px;
+      background: #0f3460;
       padding: 0.5rem;
       margin-bottom: 0.5rem;
-      color: #fff;
+      border-radius: 10px;
     }
     .chatbot input {
-      width: 100%;
       padding: 0.5rem;
       border-radius: 10px;
       border: none;
-      outline: none;
     }
-    .chatbot-btn {
+    .chat-btn {
       position: fixed;
       bottom: 20px;
       right: 20px;
-      background: #3282b8;
-      color: white;
-      padding: 0.8rem 1.2rem;
-      border-radius: 50%;
-      border: none;
-      font-size: 1.5rem;
-      cursor: pointer;
-      z-index: 1000;
-    }
-    .toggle-mode {
-      position: fixed;
-      top: 20px;
-      right: 20px;
       background: #00ffdd;
-      color: black;
-      padding: 0.6rem 1rem;
-      border-radius: 30px;
+      color: #000;
       border: none;
+      border-radius: 50%;
+      font-size: 1.5rem;
+      width: 60px;
+      height: 60px;
       cursor: pointer;
       z-index: 1000;
     }
-    @keyframes fadeIn { from {opacity:0;} to {opacity:1;} }
-    @keyframes slideIn { from {transform:translateY(50px);opacity:0;} to {transform:translateY(0);opacity:1;} }
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+    @keyframes slideUp {
+      from { transform: translateY(50px); opacity: 0; }
+      to { transform: translateY(0); opacity: 1; }
+    }
   </style>
 </head>
 <body>
-  <button class="toggle-mode" onclick="toggleMode()">🌙 Toggle Mode</button>
   <header>
-    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/ab/Logo_TV_2015.png/600px-Logo_TV_2015.png" alt="T-Stephen Logo">
-    <h1>Welcome to T-Stephen's AI Portfolio</h1>
-    <p>B.Tech AI & Data Science Student | Aspiring Innovator</p>
+    <img src="assets/STEVE_GitHub_Logo.png" alt="T-Stephen Logo" />
+    <h1>T-Stephen</h1>
+    <p>AI Innovator | B.Tech - AI & Data Science</p>
   </header>
 
-  <section class="projects">
-    <h2>🚀 My Projects</h2>
-    <div class="project-item">
-      <h3>Ambulance Detection Traffic Signal</h3>
-      <p>Smart traffic system using YOLOv8 & OpenCV to prioritize emergency vehicles.</p>
+  <nav>
+    <a href="#projects">Projects</a>
+    <a href="#contact">Contact</a>
+    <a href="#feedback">Feedback</a>
+  </nav>
+
+  <section id="projects">
+    <h2>My Projects</h2>
+    <div class="project-card">
+      <h3>AI Smart Traffic Signal</h3>
+      <p>Real-time ambulance detection using YOLOv8 and OpenCV.</p>
     </div>
-    <div class="project-item">
-      <h3>Candidate-Elimination Algorithm</h3>
-      <p>Classic ML algorithm for hypothesis space in Python.</p>
-    </div>
-    <div class="project-item">
-      <h3>Decision Tree Classifier (ID3)</h3>
-      <p>Interactive decision tree with data visualization.</p>
+    <div class="project-card">
+      <h3>Machine Learning Algorithms</h3>
+      <p>Projects on Candidate Elimination, Decision Tree, and more.</p>
     </div>
   </section>
 
-  <section class="feedback">
-    <h2>⭐ Rate My Website</h2>
-    <form id="feedback-form">
-      <input type="text" id="name" placeholder="Your name" required /><br/><br/>
-      <input type="number" id="rating" placeholder="Rating (1-5)" min="1" max="5" required /><br/><br/>
-      <textarea id="message" placeholder="Your feedback" required></textarea><br/><br/>
-      <button type="submit" style="background:#00ffdd;border:none;padding:0.6rem 1.5rem;border-radius:10px;cursor:pointer;">Submit Feedback</button>
+  <section id="contact">
+    <h2>Contact Me</h2>
+    <form action="https://formsubmit.co/tstephenraj001@gmail.com" method="POST">
+      <input type="text" name="name" placeholder="Your name" required><br><br>
+      <input type="email" name="email" placeholder="Your email" required><br><br>
+      <textarea name="message" placeholder="Your message" required></textarea><br><br>
+      <button type="submit">Send</button>
     </form>
   </section>
 
+  <section id="feedback">
+    <h2>Rate This Website</h2>
+    <form id="feedback-form">
+      <input type="text" id="name" placeholder="Your name" required><br><br>
+      <input type="number" id="rating" min="1" max="5" placeholder="Rating (1-5)" required><br><br>
+      <textarea id="message" placeholder="Your feedback" required></textarea><br><br>
+      <button type="submit">Submit Feedback</button>
+    </form>
+    <p>Total Visitors: <span id="visitor-count">Loading...</span></p>
+  </section>
+
   <footer>
-    Visitors: <span id="visitor-count">Loading...</span> | &copy; 2025 T-Stephen
+    &copy; 2025 T-Stephen | All Rights Reserved
   </footer>
 
   <div class="chatbot" id="chatbot">
-    <div class="chatbot-header">🤖 AI Chatbot</div>
+    <div class="chatbot-header">🤖 Ask Me Anything</div>
     <div class="chatbot-messages" id="chatbot-messages"></div>
-    <input type="text" id="chatbot-input" placeholder="Type your question..." onkeydown="if(event.key==='Enter')sendChat()"/>
+    <input type="text" id="chatbot-input" placeholder="Type your question..." onkeydown="if(event.key==='Enter')sendChat()" />
   </div>
-  <button class="chatbot-btn" onclick="toggleChatbot()">💬</button>
+  <button class="chat-btn" onclick="toggleChatbot()">💬</button>
 
-  <script src="https://www.gstatic.com/firebasejs/12.0.0/firebase-app.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/12.0.0/firebase-firestore.js"></script>
   <script>
-    const firebaseConfig = {
-      apiKey: "AIzaSyDv2IZjs4dyC4w2Tne4jqFVCyHN-J6oFF0",
-      authDomain: "t-stephen-ai-portfolio.firebaseapp.com",
-      projectId: "t-stephen-ai-portfolio",
-    };
-    const app = firebase.initializeApp(firebaseConfig);
-    const db = firebase.firestore();
-
-    const visitorRef = db.collection("visitors").doc("count");
-    visitorRef.get().then(doc=>{
-      if(doc.exists){
-        let count = doc.data().count + 1;
-        document.getElementById('visitor-count').innerText = count;
-        visitorRef.update({count: count});
-      }else{
-        visitorRef.set({count:1});
-        document.getElementById('visitor-count').innerText = 1;
-      }
-    });
-
-    document.getElementById('feedback-form').addEventListener('submit', e=>{
-      e.preventDefault();
-      db.collection("feedbacks").add({
-        name:document.getElementById('name').value,
-        rating:document.getElementById('rating').value,
-        message:document.getElementById('message').value,
-        timestamp: new Date()
-      }).then(()=>alert("Thank you for your feedback!"));
-      e.target.reset();
-    });
-
-    function toggleMode(){
-      document.body.classList.toggle('dark');
+    function toggleChatbot() {
+      const bot = document.getElementById('chatbot');
+      bot.style.display = bot.style.display === 'flex' ? 'none' : 'flex';
     }
-
-    function toggleChatbot(){
-      const bot=document.getElementById('chatbot');
-      bot.style.display=bot.style.display==='flex'?'none':'flex';
-    }
-
-    function sendChat(){
-      const input=document.getElementById('chatbot-input');
-      const msg=input.value.trim();
-      if(!msg)return;
-      const box=document.getElementById('chatbot-messages');
-      box.innerHTML+=`<div style="color:#00ffdd;">You: ${msg}</div>`;
-      let response="🤖 I'm not sure about that.";
-      const smartReplies={
-        "hi":"Hello! I'm your assistant.",
-        "your name":"I'm Stephen's smart chatbot!",
-        "projects":"Stephen's projects: ambulance detection, candidate elimination, decision trees, and more.",
-        "skills":"Stephen is skilled in Python, AI/ML, Web Dev, and Data Science.",
-        "ai":"AI is revolutionizing industries. Stephen loves working on AI-based innovations!"
+    function sendChat() {
+      const input = document.getElementById('chatbot-input');
+      const msg = input.value.trim();
+      if (!msg) return;
+      const messages = document.getElementById('chatbot-messages');
+      messages.innerHTML += `<div><strong>You:</strong> ${msg}</div>`;
+      let response = "I'm not sure, but I’m learning!";
+      const replies = {
+        "hello": "Hi there! I’m Stephen’s AI assistant.",
+        "projects": "Stephen has worked on AI Traffic Systems, ML Algorithms, and more!",
+        "skills": "Python, AI/ML, Web Dev, OpenCV, Firebase, YOLOv8",
+        "ai": "Artificial Intelligence is the future, and Stephen is part of it!",
       };
-      for(const key in smartReplies){
-        if(msg.toLowerCase().includes(key))response=smartReplies[key];
+      for (const key in replies) {
+        if (msg.toLowerCase().includes(key)) {
+          response = replies[key];
+          break;
+        }
       }
-      setTimeout(()=>{box.innerHTML+=`<div style="color:#fff;">${response}</div>`;box.scrollTop=box.scrollHeight;},500);
-      input.value="";
+      setTimeout(() => {
+        messages.innerHTML += `<div><strong>Bot:</strong> ${response}</div>`;
+        messages.scrollTop = messages.scrollHeight;
+      }, 500);
+      input.value = '';
     }
   </script>
 </body>
