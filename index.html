@@ -1,225 +1,229 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>T-Stephen | AI Innovator</title>
-  <meta name="google-site-verification" content="qo--v1Jv9NrZoN4QVfF12yJ35lewuIjF6WzxF8F_N4c" />
-  <script src="https://cdn.jsdelivr.net/npm/typed.js@2.0.12"></script>
-  <script>
-    const chatbotResponses = {
-      "hi": "Hello! I'm T-Stephen's AI assistant. How can I help you today?",
-      "hello": "Hi there! I'm here to guide you about Stephen and his projects.",
-      "who are you": "I'm a chatbot created by T-Stephen using JavaScript and Firebase.",
-      "what is your name": "I'm Stephen's smart chatbot assistant.",
-      "who built this website": "T-Stephen, a B.Tech AI and Data Science student, built this with HTML, Firebase, and AI tools.",
-      "tell me about your projects": "Stephen has built projects like AI Traffic Signal System, ML Salary Predictor, Portfolio Website, and more!",
-      "how to contact": "Use the contact form below to send a message directly to Stephen.",
-      "linkedin": "Visit: https://www.linkedin.com/in/stephen-raj-t-3b417528a/",
-      "github": "Check: https://github.com/T-Stephen",
-      "bye": "Thanks for visiting! Have a great day!",
-      "default": "Sorry, I didn’t understand that. Try asking about projects, LinkedIn, or contact."
-    };
-    function chatbotReply(input) {
-      input = input.toLowerCase();
-      return chatbotResponses[input] || chatbotResponses["default"];
+  <style>
+    body {
+      font-family: 'Poppins', sans-serif;
+      background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
+      color: #fff;
+      margin: 0;
+      padding: 0;
+      overflow-x: hidden;
     }
-  </script>
-  <script type="module">
-    import { initializeApp } from "https://www.gstatic.com/firebasejs/12.0.0/firebase-app.js";
-    import { getDatabase, ref, onValue, set } from "https://www.gstatic.com/firebasejs/12.0.0/firebase-database.js";
+    header {
+      text-align: center;
+      padding: 2rem;
+      background: #1a1a2e;
+      animation: fadeIn 2s;
+    }
+    header h1 {
+      font-size: 2.5rem;
+      color: #fddb3a;
+      margin-bottom: 0.5rem;
+    }
+    header p {
+      font-size: 1.2rem;
+      color: #ffffffb0;
+    }
+    .projects, .feedback {
+      max-width: 900px;
+      margin: 2rem auto;
+      background: #1f4068;
+      border-radius: 15px;
+      padding: 2rem;
+      animation: slideIn 1.5s;
+    }
+    .projects h2, .feedback h2 {
+      color: #00ffdd;
+      text-align: center;
+      margin-bottom: 1.5rem;
+    }
+    .project-item {
+      margin: 1rem 0;
+      background: #162447;
+      padding: 1rem;
+      border-radius: 10px;
+      transition: transform 0.3s;
+    }
+    .project-item:hover { transform: scale(1.05); }
+    footer {
+      text-align: center;
+      padding: 1rem;
+      background: #1a1a2e;
+      color: #aaa;
+    }
+    .chatbot {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      width: 300px;
+      max-width: 90vw;
+      background: #0f4c75;
+      border-radius: 15px;
+      padding: 1rem;
+      display: none;
+      flex-direction: column;
+      z-index: 999;
+    }
+    .chatbot-header {
+      font-weight: bold;
+      margin-bottom: 0.5rem;
+      text-align: center;
+    }
+    .chatbot-messages {
+      flex: 1;
+      max-height: 300px;
+      overflow-y: auto;
+      background: #1b262c;
+      border-radius: 10px;
+      padding: 0.5rem;
+      margin-bottom: 0.5rem;
+      color: #fff;
+    }
+    .chatbot input {
+      width: 100%;
+      padding: 0.5rem;
+      border-radius: 10px;
+      border: none;
+      outline: none;
+    }
+    .chatbot-btn {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      background: #3282b8;
+      color: white;
+      padding: 0.8rem 1.2rem;
+      border-radius: 50%;
+      border: none;
+      font-size: 1.5rem;
+      cursor: pointer;
+      z-index: 1000;
+    }
+    .toggle-mode {
+      position: fixed;
+      top: 20px;
+      right: 20px;
+      background: #00ffdd;
+      color: black;
+      padding: 0.6rem 1rem;
+      border-radius: 30px;
+      border: none;
+      cursor: pointer;
+      z-index: 1000;
+    }
+    @keyframes fadeIn { from {opacity:0;} to {opacity:1;} }
+    @keyframes slideIn { from {transform:translateY(50px);opacity:0;} to {transform:translateY(0);opacity:1;} }
+  </style>
+</head>
+<body>
+  <button class="toggle-mode" onclick="toggleMode()">🌙 Toggle Mode</button>
+  <header>
+    <h1>Welcome to T-Stephen's AI Portfolio</h1>
+    <p>B.Tech AI & Data Science Student | Aspiring Innovator | AI Projects & Solutions</p>
+  </header>
+
+  <section class="projects">
+    <h2>🚀 My Projects</h2>
+    <div class="project-item">
+      <h3>Ambulance Detection Traffic Signal</h3>
+      <p>Smart traffic system using YOLOv8 & OpenCV to prioritize emergency vehicles.</p>
+    </div>
+    <div class="project-item">
+      <h3>Candidate-Elimination Algorithm</h3>
+      <p>Implemented classic ML algorithm for hypothesis space in Python.</p>
+    </div>
+    <div class="project-item">
+      <h3>Decision Tree Classifier (ID3)</h3>
+      <p>Interactive decision tree with data visualization.</p>
+    </div>
+  </section>
+
+  <section class="feedback">
+    <h2>⭐ Rate My Website</h2>
+    <form id="feedback-form">
+      <input type="text" id="name" placeholder="Your name" required /><br/><br/>
+      <input type="number" id="rating" placeholder="Rating (1-5)" min="1" max="5" required /><br/><br/>
+      <textarea id="message" placeholder="Your feedback" required></textarea><br/><br/>
+      <button type="submit" style="background:#00ffdd;border:none;padding:0.6rem 1.5rem;border-radius:10px;cursor:pointer;">Submit Feedback</button>
+    </form>
+  </section>
+
+  <footer>
+    Visitors: <span id="visitor-count">Loading...</span> | &copy; 2025 T-Stephen
+  </footer>
+
+  <div class="chatbot" id="chatbot">
+    <div class="chatbot-header">🤖 AI Chatbot</div>
+    <div class="chatbot-messages" id="chatbot-messages"></div>
+    <input type="text" id="chatbot-input" placeholder="Type your question..." onkeydown="if(event.key==='Enter')sendChat()"/>
+  </div>
+  <button class="chatbot-btn" onclick="toggleChatbot()">💬</button>
+
+  <script src="https://www.gstatic.com/firebasejs/12.0.0/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/12.0.0/firebase-firestore.js"></script>
+  <script>
     const firebaseConfig = {
       apiKey: "AIzaSyDv2IZjs4dyC4w2Tne4jqFVCyHN-J6oFF0",
       authDomain: "t-stephen-ai-portfolio.firebaseapp.com",
       projectId: "t-stephen-ai-portfolio",
-      storageBucket: "t-stephen-ai-portfolio.appspot.com",
-      messagingSenderId: "493827826934",
-      appId: "1:493827826934:web:0f0e3a03fe56c25c5338d7",
-      measurementId: "G-X097JGBRF4",
-      databaseURL: "https://t-stephen-ai-portfolio-default-rtdb.firebaseio.com/"
     };
-    const app = initializeApp(firebaseConfig);
-    const db = getDatabase(app);
-    const visitRef = ref(db, 'visits');
-    onValue(visitRef, (snapshot) => {
-      let count = snapshot.val() || 0;
-      document.getElementById('visitorCount').innerText = `👀 Visitors: ${count}`;
-    });
-    window.addEventListener("load", () => {
-      onValue(visitRef, (snapshot) => {
-        let count = snapshot.val() || 0;
-        set(visitRef, count + 1);
-      }, { onlyOnce: true });
-    });
-  </script>
-  <style>
-    :root {
-      --bg-dark: linear-gradient(135deg, #1e1e2f, #3c1e25);
-      --highlight: #e53935;
-      --text-light: #f9f9f9;
-      --card-bg-dark: rgba(255, 255, 255, 0.05);
-    }
-    body {
-      margin: 0;
-      font-family: 'Segoe UI', sans-serif;
-      background: var(--bg-dark);
-      color: var(--text-light);
-    }
-    header, .section {
-      padding: 60px 20px;
-      text-align: center;
-    }
-    nav a {
-      color: var(--highlight);
-      margin: 0 10px;
-      text-decoration: none;
-      font-weight: bold;
-    }
-    .typed-text {
-      font-size: 1.5rem;
-      font-weight: bold;
-      color: var(--highlight);
-    }
-    .contact-form, .project-filters {
-      background: var(--card-bg-dark);
-      padding: 30px;
-      max-width: 600px;
-      margin: 20px auto;
-      border-radius: 12px;
-    }
-    .contact-form input,
-    .contact-form textarea {
-      width: 90%;
-      margin-bottom: 15px;
-      padding: 10px;
-      border-radius: 8px;
-      border: none;
-    }
-    .contact-form button {
-      padding: 12px 20px;
-      background-color: var(--highlight);
-      border: none;
-      color: white;
-      font-weight: bold;
-      border-radius: 8px;
-      cursor: pointer;
-    }
-    .project-card {
-      background: var(--card-bg-dark);
-      margin: 10px;
-      padding: 20px;
-      border-radius: 12px;
-      display: inline-block;
-      max-width: 280px;
-    }
-    .hidden { display: none; }
-    #chatbot-box {
-      position: fixed;
-      bottom: 10px;
-      right: 10px;
-      background: var(--card-bg-dark);
-      padding: 10px;
-      border-radius: 10px;
-      width: 280px;
-      z-index: 1000;
-    }
-    #chatbot-box input {
-      width: 80%;
-      padding: 8px;
-      border-radius: 8px;
-      border: none;
-    }
-    #chatbot-box button {
-      padding: 8px;
-      border: none;
-      background: var(--highlight);
-      color: white;
-      border-radius: 8px;
-      cursor: pointer;
-    }
-    #chat-response {
-      margin-top: 10px;
-      font-size: 0.9rem;
-    }
-    @media (max-width: 600px) {
-      #chatbot-box {
-        width: 95%;
-        left: 2.5%;
-        bottom: 0;
+    const app = firebase.initializeApp(firebaseConfig);
+    const db = firebase.firestore();
+    const visitorRef = db.collection("visitors").doc("count");
+    visitorRef.get().then(doc=>{
+      if(doc.exists){
+        let count = doc.data().count + 1;
+        document.getElementById('visitor-count').innerText = count;
+        visitorRef.update({count: count});
+      }else{
+        visitorRef.set({count:1});
+        document.getElementById('visitor-count').innerText = 1;
       }
-    }
-  </style>
-</head>
-<body>
-  <header>
-    <h1>Hi, I'm T-Stephen</h1>
-    <span class="typed-text"></span><br>
-    <div id="visitorCount">👀 Visitors: Loading...</div>
-    <nav>
-      <a href="#about">About</a>
-      <a href="#projects">Projects</a>
-      <a href="#contact">Contact</a>
-    </nav>
-  </header>
-
-  <section id="about" class="section">
-    <h2>About Me</h2>
-    <p>I’m a B.Tech AI and Data Science student, passionate about solving real-world problems using Machine Learning, AI, and Web Development. I strive to build meaningful solutions that inspire others.</p>
-  </section>
-
-  <section id="projects" class="section">
-    <h2>My Projects</h2>
-    <div class="project-filters">
-      <button onclick="filterProjects('all')">All</button>
-      <button onclick="filterProjects('AI')">AI</button>
-      <button onclick="filterProjects('ML')">ML</button>
-      <button onclick="filterProjects('Web')">Web</button>
-      <button onclick="filterProjects('Python')">Python</button>
-    </div>
-    <div id="projectList">
-      <div class="project-card AI">🚦 AI Traffic Signal System</div>
-      <div class="project-card Web">🌐 Portfolio Website</div>
-      <div class="project-card ML">📊 ML Salary Prediction</div>
-      <div class="project-card Python">🐍 Python Automation Tools</div>
-    </div>
-  </section>
-
-  <section id="contact" class="section">
-    <h2>📬 Contact Me</h2>
-    <form class="contact-form" action="https://formsubmit.co/tstephenraj001@gmail.com" method="POST">
-      <input type="text" name="name" placeholder="Your Name" required>
-      <input type="email" name="email" placeholder="Your Email" required>
-      <textarea name="message" placeholder="Your Message" rows="5" required></textarea>
-      <button type="submit">Send Message</button>
-      <input type="hidden" name="_captcha" value="false">
-    </form>
-  </section>
-
-  <div id="chatbot-box">
-    <input type="text" id="userInput" placeholder="Ask me anything...">
-    <button onclick="replyChat()">Send</button>
-    <div id="chat-response"></div>
-  </div>
-
-  <script>
-    const typed = new Typed('.typed-text', {
-      strings: ["AI Innovator", "ML Enthusiast", "Web Developer", "Chatbot Builder"],
-      typeSpeed: 70,
-      backSpeed: 40,
-      loop: true
     });
-    function filterProjects(category) {
-      const cards = document.querySelectorAll('.project-card');
-      cards.forEach(card => {
-        card.classList.remove('hidden');
-        if (category !== 'all' && !card.classList.contains(category)) {
-          card.classList.add('hidden');
-        }
-      });
+
+    document.getElementById('feedback-form').addEventListener('submit', e=>{
+      e.preventDefault();
+      db.collection("feedbacks").add({
+        name:document.getElementById('name').value,
+        rating:document.getElementById('rating').value,
+        message:document.getElementById('message').value,
+        timestamp: new Date()
+      }).then(()=>alert("Thank you for your feedback!"));
+      e.target.reset();
+    });
+
+    function toggleMode(){
+      document.body.classList.toggle('dark');
     }
-    function replyChat() {
-      const input = document.getElementById("userInput").value.trim();
-      document.getElementById("chat-response").innerText = chatbotReply(input);
+
+    function toggleChatbot(){
+      const bot=document.getElementById('chatbot');
+      bot.style.display=bot.style.display==='flex'?'none':'flex';
+    }
+
+    function sendChat(){
+      const input=document.getElementById('chatbot-input');
+      const msg=input.value.trim();
+      if(!msg)return;
+      const box=document.getElementById('chatbot-messages');
+      box.innerHTML+=`<div style="color:#00ffdd;">You: ${msg}</div>`;
+      let response="🤖 I'm not sure about that.";
+      const smartReplies={
+        "hi":"Hello! I'm your assistant.",
+        "your name":"I'm Stephen's smart chatbot!",
+        "projects":"Stephen's projects include AI models, ML algorithms, and innovative solutions.",
+        "skills":"Stephen is skilled in Python, AI/ML, Web Dev, and Data Science.",
+        "ai":"AI is revolutionizing industries and Stephen loves working with it!"
+      };
+      for(const key in smartReplies){
+        if(msg.toLowerCase().includes(key))response=smartReplies[key];
+      }
+      setTimeout(()=>{box.innerHTML+=`<div style="color:#fff;">${response}</div>`;box.scrollTop=box.scrollHeight;},500);
+      input.value="";
     }
   </script>
 </body>
