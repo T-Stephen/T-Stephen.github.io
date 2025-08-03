@@ -21,7 +21,7 @@
       animation: fadeIn 2s ease-in-out;
     }
     header img {
-      width: 100px;
+      width: 120px;
       height: auto;
       border-radius: 50%;
       margin-bottom: 1rem;
@@ -118,6 +118,24 @@
       cursor: pointer;
       z-index: 1000;
     }
+    form input, form textarea, form button {
+      width: 100%;
+      padding: 0.8rem;
+      border: none;
+      border-radius: 10px;
+      margin-bottom: 1rem;
+      font-size: 1rem;
+    }
+    form button {
+      background: #fddb3a;
+      color: #000;
+      font-weight: bold;
+      cursor: pointer;
+      transition: background 0.3s;
+    }
+    form button:hover {
+      background: #ffd700;
+    }
     @keyframes fadeIn {
       from { opacity: 0; }
       to { opacity: 1; }
@@ -156,19 +174,19 @@
   <section id="contact">
     <h2>Contact Me</h2>
     <form action="https://formsubmit.co/tstephenraj001@gmail.com" method="POST">
-      <input type="text" name="name" placeholder="Your name" required><br><br>
-      <input type="email" name="email" placeholder="Your email" required><br><br>
-      <textarea name="message" placeholder="Your message" required></textarea><br><br>
-      <button type="submit">Send</button>
+      <input type="text" name="name" placeholder="Your name" required>
+      <input type="email" name="email" placeholder="Your email" required>
+      <textarea name="message" placeholder="Your message" rows="5" required></textarea>
+      <button type="submit">Send Message</button>
     </form>
   </section>
 
   <section id="feedback">
-    <h2>Rate This Website</h2>
+    <h2>Inspire Me With Your Feedback ✨</h2>
     <form id="feedback-form">
-      <input type="text" id="name" placeholder="Your name" required><br><br>
-      <input type="number" id="rating" min="1" max="5" placeholder="Rating (1-5)" required><br><br>
-      <textarea id="message" placeholder="Your feedback" required></textarea><br><br>
+      <input type="text" id="name" placeholder="Your name" required>
+      <input type="number" id="rating" min="1" max="5" placeholder="Give a rating (1-5) ⭐" required>
+      <textarea id="message" placeholder="Your thoughts about my portfolio..." required></textarea>
       <button type="submit">Submit Feedback</button>
     </form>
     <p>Total Visitors: <span id="visitor-count">Loading...</span></p>
@@ -202,6 +220,8 @@
         "projects": "Stephen has worked on AI Traffic Systems, ML Algorithms, and more!",
         "skills": "Python, AI/ML, Web Dev, OpenCV, Firebase, YOLOv8",
         "ai": "Artificial Intelligence is the future, and Stephen is part of it!",
+        "contact": "You can reach Stephen using the contact form above.",
+        "college": "Stephen is a B.Tech AI & Data Science student in his 3rd year."
       };
       for (const key in replies) {
         if (msg.toLowerCase().includes(key)) {
