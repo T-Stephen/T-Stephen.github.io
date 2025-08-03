@@ -99,15 +99,32 @@
     }
 
     /* Chatbot */
-    .chat-container {
+    .chat-toggle-btn {
       position: fixed;
       bottom: 20px;
+      right: 20px;
+      background: red;
+      color: white;
+      border: none;
+      border-radius: 50%;
+      width: 50px;
+      height: 50px;
+      font-size: 24px;
+      cursor: pointer;
+      z-index: 999;
+    }
+
+    .chat-container {
+      position: fixed;
+      bottom: 80px;
       right: 20px;
       width: 300px;
       background: #2a0000;
       border-radius: 12px;
       box-shadow: 0 0 10px red;
       overflow: hidden;
+      display: none;
+      z-index: 998;
     }
 
     .chat-header {
@@ -161,6 +178,14 @@
       cursor: pointer;
     }
 
+    @media (max-width: 500px) {
+      .chat-container {
+        width: 90%;
+        right: 5%;
+        bottom: 80px;
+      }
+    }
+
     @keyframes fadeIn {
       from { opacity: 0; transform: scale(0.95); }
       to { opacity: 1; transform: scale(1); }
@@ -202,7 +227,8 @@
     </div>
   </section>
 
-  <div class="chat-container">
+  <button class="chat-toggle-btn" onclick="toggleChat()">💬</button>
+  <div class="chat-container" id="chatContainer">
     <div class="chat-header">💬 Ask StephenBot</div>
     <div class="chat-box" id="chatBox"></div>
     <div class="chat-input">
@@ -216,6 +242,52 @@
     <a href="https://github.com/T-Stephen" style="color:red;">GitHub</a> |
     <a href="mailto:stephenbugi@gmail.com" style="color:red;">Email</a>
   </footer>
+
+  <script>
+    const htmlTag = document.documentElement;
+    const toggleBtn = document.getElementById('themeToggle');
+
+    toggleBtn.addEventListener('click', () => {
+      const current = htmlTag.getAttribute("data-theme");
+      const next = current === "light" ? "dark" : "light";
+      htmlTag.setAttribute("data-theme", next);
+      toggleBtn.textContent = next === "light" ? "Dark Mode" : "Light Mode";
+    });
+
+    const chatBox = document.getElementById("chatBox");
+    const chatInput = document.getElementById("chatInput");
+    const chatContainer = document.getElementById("chatContainer");
+
+    function toggleChat() {
+      chatContainer.style.display = chatContainer.style.display === "block" ? "none" : "block";
+    }
+
+    function sendChat() {
+      const msg = chatInput.value.trim();
+      if (!msg) return;
+      appendMessage("user", msg);
+      const reply = getBotReply(msg);
+      setTimeout(() => appendMessage("bot", reply), 700);
+      chatInput.value = "";
+    }
+
+    function appendMessage(sender, text) {
+      const bubble = document.createElement("div");
+      bubble.className = `chat-bubble ${sender}`;
+      bubble.textContent = text;
+      chatBox.appendChild(bubble);
+      chatBox.scrollTop = chatBox.scrollHeight;
+    }
+
+    function getBotReply(msg) {
+      msg = msg.toLowerCase();
+      if (msg.includes("name")) return "I'm T-Stephen, an AI innovator and student.";
+      if (msg.includes("project")) return "I work on AI traffic control, YOLOv8 models, and chatbot integration.";
+      if (msg.includes("skills")) return "My skills include Python, Firebase, OpenCV, and AI development.";
+      if (msg.includes("contact")) return "Reach me at stephenbugi@gmail.com or GitHub: T-Stephen.";
+      return "I'm here to guide you about Stephen and his projects. Try asking about his skills or work!";
+    }
+  </script>
 
   <script type="module">
     import { initializeApp } from "https://www.gstatic.com/firebasejs/12.0.0/firebase-app.js";
@@ -247,47 +319,6 @@
         console.error("Error adding document: ", e);
         alert("Something went wrong. Try again later.");
       }
-    }
-  </script>
-
-  <script>
-    const htmlTag = document.documentElement;
-    const toggleBtn = document.getElementById('themeToggle');
-
-    toggleBtn.addEventListener('click', () => {
-      const current = htmlTag.getAttribute("data-theme");
-      const next = current === "light" ? "dark" : "light";
-      htmlTag.setAttribute("data-theme", next);
-      toggleBtn.textContent = next === "light" ? "Dark Mode" : "Light Mode";
-    });
-
-    const chatBox = document.getElementById("chatBox");
-    const chatInput = document.getElementById("chatInput");
-
-    function sendChat() {
-      const msg = chatInput.value.trim();
-      if (!msg) return;
-      appendMessage("user", msg);
-      const reply = getBotReply(msg);
-      setTimeout(() => appendMessage("bot", reply), 700);
-      chatInput.value = "";
-    }
-
-    function appendMessage(sender, text) {
-      const bubble = document.createElement("div");
-      bubble.className = `chat-bubble ${sender}`;
-      bubble.textContent = text;
-      chatBox.appendChild(bubble);
-      chatBox.scrollTop = chatBox.scrollHeight;
-    }
-
-    function getBotReply(msg) {
-      msg = msg.toLowerCase();
-      if (msg.includes("name")) return "I'm T-Stephen, an AI innovator and student.";
-      if (msg.includes("project")) return "I work on AI traffic control, YOLOv8 models, and chatbot integration.";
-      if (msg.includes("skills")) return "My skills include Python, Firebase, OpenCV, and AI development.";
-      if (msg.includes("contact")) return "Reach me at stephenbugi@gmail.com or GitHub: T-Stephen.";
-      return "I'm here to guide you about Stephen and his projects. Try asking about his skills or work!";
     }
   </script>
 </body>
