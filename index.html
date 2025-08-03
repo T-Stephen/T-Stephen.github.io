@@ -1,243 +1,225 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>T-Stephen | AI Innovator</title>
-  <style>
-    :root {
-      --bg-light: linear-gradient(135deg, #fdfbfb, #ebedee);
-      --bg-dark: linear-gradient(135deg, #1f1f1f, #3b3b3b);
-      --card-bg-light: rgba(0, 0, 0, 0.05);
-      --card-bg-dark: rgba(255, 255, 255, 0.05);
-      --text-dark: #111;
-      --text-light: #f3f4f6;
-      --highlight: #e63946;
-      --font-main: 'Segoe UI', sans-serif;
+  <meta name="google-site-verification" content="qo--v1Jv9NrZoN4QVfF12yJ35lewuIjF6WzxF8F_N4c" />
+  <script src="https://cdn.jsdelivr.net/npm/typed.js@2.0.12"></script>
+  <script>
+    const chatbotResponses = {
+      "hi": "Hello! I'm T-Stephen's AI assistant. How can I help you today?",
+      "hello": "Hi there! I'm here to guide you about Stephen and his projects.",
+      "who are you": "I'm a chatbot created by T-Stephen using JavaScript and Firebase.",
+      "what is your name": "I'm Stephen's smart chatbot assistant.",
+      "who built this website": "T-Stephen, a B.Tech AI and Data Science student, built this with HTML, Firebase, and AI tools.",
+      "tell me about your projects": "Stephen has built projects like AI Traffic Signal System, ML Salary Predictor, Portfolio Website, and more!",
+      "how to contact": "Use the contact form below to send a message directly to Stephen.",
+      "linkedin": "Visit: https://www.linkedin.com/in/stephen-raj-t-3b417528a/",
+      "github": "Check: https://github.com/T-Stephen",
+      "bye": "Thanks for visiting! Have a great day!",
+      "default": "Sorry, I didn’t understand that. Try asking about projects, LinkedIn, or contact."
+    };
+    function chatbotReply(input) {
+      input = input.toLowerCase();
+      return chatbotResponses[input] || chatbotResponses["default"];
     }
-    body {
-      margin: 0;
-      font-family: var(--font-main);
-      background: var(--bg-dark);
-      color: var(--text-light);
-      scroll-behavior: smooth;
-      transition: all 0.3s ease-in-out;
-    }
-    .light-mode {
-      background: var(--bg-light);
-      color: var(--text-dark);
-    }
-    header, section {
-      padding: 60px 20px;
-      text-align: center;
-    }
-    nav a {
-      margin: 0 15px;
-      color: var(--highlight);
-      text-decoration: none;
-      font-weight: bold;
-    }
-    .project-card, #feedbackForm, #statsBox, #adminPanel {
-      background: var(--card-bg-dark);
-      padding: 20px;
-      border-radius: 12px;
-      margin: 20px auto;
-      max-width: 600px;
-    }
-    .light-mode .project-card,
-    .light-mode #feedbackForm,
-    .light-mode #statsBox,
-    .light-mode #adminPanel {
-      background: var(--card-bg-light);
-    }
-    input, textarea {
-      width: 90%;
-      padding: 10px;
-      margin: 10px auto;
-      border-radius: 6px;
-      border: none;
-    }
-    button {
-      background-color: var(--highlight);
-      color: white;
-      border: none;
-      padding: 12px 20px;
-      border-radius: 8px;
-      cursor: pointer;
-    }
-    #chatbot {
-      position: fixed;
-      bottom: 20px;
-      right: 20px;
-      background: white;
-      color: black;
-      padding: 15px;
-      border-radius: 12px;
-      max-width: 300px;
-      z-index: 999;
-      box-shadow: 0 0 10px rgba(0,0,0,0.3);
-    }
-    #chatlog {
-      max-height: 200px;
-      overflow-y: auto;
-      font-size: 14px;
-      margin-bottom: 10px;
-    }
-    #chatbot input {
-      width: 80%;
-    }
-    .theme-toggle {
-      position: fixed;
-      top: 10px;
-      right: 20px;
-      background: var(--highlight);
-      color: white;
-      border: none;
-      padding: 10px 15px;
-      border-radius: 10px;
-      z-index: 1000;
-      cursor: pointer;
-    }
-  </style>
-</head>
-<body>
-  <button class="theme-toggle" onclick="toggleTheme()">🌙 Toggle Mode</button>
-  <header>
-    <h1>Welcome to T-Stephen's AI Portfolio</h1>
-    <nav>
-      <a href="#about">About</a>
-      <a href="#projects">Projects</a>
-      <a href="#feedbackForm">Feedback</a>
-      <a href="#adminPanel">Admin</a>
-    </nav>
-  </header>
-
-  <section id="about">
-    <h2>About Me</h2>
-    <p>I’m T-Stephen, a B.Tech AI & Data Science student passionate about building inspiring, real-time AI solutions. 🚀</p>
-  </section>
-
-  <section id="projects">
-    <h2>🚀 Projects</h2>
-    <div class="project-card">
-      <h3>AI Traffic Signal with Ambulance Detection</h3>
-      <p>Real-time YOLOv8-based model to detect ambulances, change lights and activate siren with GUI.</p>
-    </div>
-    <div class="project-card">
-      <h3>Voice-Controlled Smart Portfolio</h3>
-      <p>Built with Firebase, Web Speech API, and JavaScript to create an interactive portfolio site.</p>
-    </div>
-    <div class="project-card">
-      <h3>AI Chatbot with Smart Replies</h3>
-      <p>Free chatbot using HTML/JS answering personal and tech-related queries.</p>
-    </div>
-  </section>
-
-  <section>
-    <h2>📊 Live Stats</h2>
-    <div id="statsBox">
-      <p><strong>Total Feedback:</strong> <span id="totalFeedback">0</span></p>
-      <p><strong>Average Rating:</strong> ⭐ <span id="averageRating">0</span></p>
-    </div>
-  </section>
-
-  <section>
-    <h2>⭐ Rate My Work</h2>
-    <form id="feedbackForm">
-      <input type="text" placeholder="Your Name" required><br>
-      <textarea placeholder="Your Feedback" required></textarea><br>
-      <input type="number" min="1" max="5" placeholder="Rating (1-5)" required><br>
-      <button type="submit">Submit</button>
-    </form>
-  </section>
-
-  <section id="adminPanel">
-    <h2>🔐 Admin Panel</h2>
-    <div id="adminFeedbackList">Loading...</div>
-  </section>
-
-  <button onclick="startVoiceCommand()" style="position: fixed; bottom: 90px; left: 20px; background: var(--highlight); color: white; padding: 12px 20px; border-radius: 12px; cursor: pointer;">
-    🎙️ Speak
-  </button>
-
-  <div id="chatbot">
-    <div id="chatlog"></div>
-    <input type="text" id="userMsg" placeholder="Ask me anything...">
-    <button onclick="replyBot()">Send</button>
-  </div>
-
+  </script>
   <script type="module">
-    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
-    import { getDatabase, ref, onValue, remove } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-database.js";
-
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/12.0.0/firebase-app.js";
+    import { getDatabase, ref, onValue, set } from "https://www.gstatic.com/firebasejs/12.0.0/firebase-database.js";
     const firebaseConfig = {
       apiKey: "AIzaSyDv2IZjs4dyC4w2Tne4jqFVCyHN-J6oFF0",
       authDomain: "t-stephen-ai-portfolio.firebaseapp.com",
-      databaseURL: "https://t-stephen-ai-portfolio-default-rtdb.firebaseio.com",
       projectId: "t-stephen-ai-portfolio",
       storageBucket: "t-stephen-ai-portfolio.appspot.com",
       messagingSenderId: "493827826934",
       appId: "1:493827826934:web:0f0e3a03fe56c25c5338d7",
-      measurementId: "G-X097JGBRF4"
+      measurementId: "G-X097JGBRF4",
+      databaseURL: "https://t-stephen-ai-portfolio-default-rtdb.firebaseio.com/"
     };
-
     const app = initializeApp(firebaseConfig);
     const db = getDatabase(app);
-    const ratingRef = ref(db, 'ratings');
-
-    onValue(ratingRef, (snapshot) => {
-      let count = 0, total = 0, html = "";
-      snapshot.forEach(child => {
-        count++;
-        total += parseInt(child.val().rating);
-        html += `<div>⭐ ${child.val().rating} by <b>${child.val().name}</b> <button onclick="deleteFeedback('${child.key}')">❌ Delete</button></div>`;
-      });
-      document.getElementById("totalFeedback").innerText = count;
-      document.getElementById("averageRating").innerText = count ? (total / count).toFixed(1) : '0';
-      document.getElementById("adminFeedbackList").innerHTML = html;
+    const visitRef = ref(db, 'visits');
+    onValue(visitRef, (snapshot) => {
+      let count = snapshot.val() || 0;
+      document.getElementById('visitorCount').innerText = `👀 Visitors: ${count}`;
     });
-
-    window.deleteFeedback = function(key) {
-      if (confirm("Delete this feedback?")) {
-        remove(ref(db, 'ratings/' + key));
+    window.addEventListener("load", () => {
+      onValue(visitRef, (snapshot) => {
+        let count = snapshot.val() || 0;
+        set(visitRef, count + 1);
+      }, { onlyOnce: true });
+    });
+  </script>
+  <style>
+    :root {
+      --bg-dark: linear-gradient(135deg, #1e1e2f, #3c1e25);
+      --highlight: #e53935;
+      --text-light: #f9f9f9;
+      --card-bg-dark: rgba(255, 255, 255, 0.05);
+    }
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', sans-serif;
+      background: var(--bg-dark);
+      color: var(--text-light);
+    }
+    header, .section {
+      padding: 60px 20px;
+      text-align: center;
+    }
+    nav a {
+      color: var(--highlight);
+      margin: 0 10px;
+      text-decoration: none;
+      font-weight: bold;
+    }
+    .typed-text {
+      font-size: 1.5rem;
+      font-weight: bold;
+      color: var(--highlight);
+    }
+    .contact-form, .project-filters {
+      background: var(--card-bg-dark);
+      padding: 30px;
+      max-width: 600px;
+      margin: 20px auto;
+      border-radius: 12px;
+    }
+    .contact-form input,
+    .contact-form textarea {
+      width: 90%;
+      margin-bottom: 15px;
+      padding: 10px;
+      border-radius: 8px;
+      border: none;
+    }
+    .contact-form button {
+      padding: 12px 20px;
+      background-color: var(--highlight);
+      border: none;
+      color: white;
+      font-weight: bold;
+      border-radius: 8px;
+      cursor: pointer;
+    }
+    .project-card {
+      background: var(--card-bg-dark);
+      margin: 10px;
+      padding: 20px;
+      border-radius: 12px;
+      display: inline-block;
+      max-width: 280px;
+    }
+    .hidden { display: none; }
+    #chatbot-box {
+      position: fixed;
+      bottom: 10px;
+      right: 10px;
+      background: var(--card-bg-dark);
+      padding: 10px;
+      border-radius: 10px;
+      width: 280px;
+      z-index: 1000;
+    }
+    #chatbot-box input {
+      width: 80%;
+      padding: 8px;
+      border-radius: 8px;
+      border: none;
+    }
+    #chatbot-box button {
+      padding: 8px;
+      border: none;
+      background: var(--highlight);
+      color: white;
+      border-radius: 8px;
+      cursor: pointer;
+    }
+    #chat-response {
+      margin-top: 10px;
+      font-size: 0.9rem;
+    }
+    @media (max-width: 600px) {
+      #chatbot-box {
+        width: 95%;
+        left: 2.5%;
+        bottom: 0;
       }
     }
-  </script>
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Hi, I'm T-Stephen</h1>
+    <span class="typed-text"></span><br>
+    <div id="visitorCount">👀 Visitors: Loading...</div>
+    <nav>
+      <a href="#about">About</a>
+      <a href="#projects">Projects</a>
+      <a href="#contact">Contact</a>
+    </nav>
+  </header>
+
+  <section id="about" class="section">
+    <h2>About Me</h2>
+    <p>I’m a B.Tech AI and Data Science student, passionate about solving real-world problems using Machine Learning, AI, and Web Development. I strive to build meaningful solutions that inspire others.</p>
+  </section>
+
+  <section id="projects" class="section">
+    <h2>My Projects</h2>
+    <div class="project-filters">
+      <button onclick="filterProjects('all')">All</button>
+      <button onclick="filterProjects('AI')">AI</button>
+      <button onclick="filterProjects('ML')">ML</button>
+      <button onclick="filterProjects('Web')">Web</button>
+      <button onclick="filterProjects('Python')">Python</button>
+    </div>
+    <div id="projectList">
+      <div class="project-card AI">🚦 AI Traffic Signal System</div>
+      <div class="project-card Web">🌐 Portfolio Website</div>
+      <div class="project-card ML">📊 ML Salary Prediction</div>
+      <div class="project-card Python">🐍 Python Automation Tools</div>
+    </div>
+  </section>
+
+  <section id="contact" class="section">
+    <h2>📬 Contact Me</h2>
+    <form class="contact-form" action="https://formsubmit.co/tstephenraj001@gmail.com" method="POST">
+      <input type="text" name="name" placeholder="Your Name" required>
+      <input type="email" name="email" placeholder="Your Email" required>
+      <textarea name="message" placeholder="Your Message" rows="5" required></textarea>
+      <button type="submit">Send Message</button>
+      <input type="hidden" name="_captcha" value="false">
+    </form>
+  </section>
+
+  <div id="chatbot-box">
+    <input type="text" id="userInput" placeholder="Ask me anything...">
+    <button onclick="replyChat()">Send</button>
+    <div id="chat-response"></div>
+  </div>
 
   <script>
-    function startVoiceCommand() {
-      const recognition = new (window.SpeechRecognition || window.webkitSpeechRecognition)();
-      recognition.lang = 'en-US';
-      recognition.start();
-      recognition.onresult = function(event) {
-        const command = event.results[0][0].transcript.toLowerCase();
-        if (command.includes("project")) document.getElementById("projects").scrollIntoView({ behavior: 'smooth' });
-        else if (command.includes("feedback")) document.getElementById("feedbackForm").scrollIntoView({ behavior: 'smooth' });
-        else if (command.includes("admin")) document.getElementById("adminPanel").scrollIntoView({ behavior: 'smooth' });
-        else if (command.includes("about")) document.getElementById("about").scrollIntoView({ behavior: 'smooth' });
-        else alert("Sorry, I didn't get that. Try again!");
-      };
+    const typed = new Typed('.typed-text', {
+      strings: ["AI Innovator", "ML Enthusiast", "Web Developer", "Chatbot Builder"],
+      typeSpeed: 70,
+      backSpeed: 40,
+      loop: true
+    });
+    function filterProjects(category) {
+      const cards = document.querySelectorAll('.project-card');
+      cards.forEach(card => {
+        card.classList.remove('hidden');
+        if (category !== 'all' && !card.classList.contains(category)) {
+          card.classList.add('hidden');
+        }
+      });
     }
-
-    function replyBot() {
-      const input = document.getElementById("userMsg");
-      const msg = input.value.toLowerCase();
-      const log = document.getElementById("chatlog");
-      log.innerHTML += `<div><b>You:</b> ${msg}</div>`;
-
-      let response = "Ask me about my skills or projects!";
-      if (msg.includes("your name")) response = "I’m T-Stephen, passionate about AI and Data Science.";
-      else if (msg.includes("project")) response = "I built a smart traffic system, voice assistant, chatbot, and more.";
-      else if (msg.includes("skills")) response = "Python, ML, YOLOv8, Firebase, OpenCV, React, HTML/CSS, JS.";
-      else if (msg.includes("contact")) response = "Reach me via LinkedIn or use the feedback form!";
-
-      log.innerHTML += `<div><b>Bot:</b> ${response}</div>`;
-      input.value = "";
-      log.scrollTop = log.scrollHeight;
-    }
-
-    function toggleTheme() {
-      document.body.classList.toggle("light-mode");
+    function replyChat() {
+      const input = document.getElementById("userInput").value.trim();
+      document.getElementById("chat-response").innerText = chatbotReply(input);
     }
   </script>
 </body>
