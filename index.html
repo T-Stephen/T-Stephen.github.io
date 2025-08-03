@@ -5,45 +5,67 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>T-Stephen | AI Innovator</title>
   <style>
+    :root {
+      --bg-gradient: linear-gradient(135deg, #1f2937, #4b5563);
+      --card-bg: rgba(255, 255, 255, 0.05);
+      --highlight: #10b981;
+      --text-light: #f3f4f6;
+      --font-main: 'Segoe UI', sans-serif;
+    }
     body {
       margin: 0;
-      font-family: 'Segoe UI', sans-serif;
-      background: linear-gradient(135deg, #7f1d1d, #ff4b2b);
-      color: white;
+      font-family: var(--font-main);
+      background: var(--bg-gradient);
+      color: var(--text-light);
       scroll-behavior: smooth;
+      animation: fadeIn 1s ease-in;
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
     }
     header, section {
-      padding: 50px;
+      padding: 60px 20px;
       text-align: center;
     }
     nav a {
       margin: 0 15px;
-      color: white;
+      color: var(--highlight);
       text-decoration: none;
       font-weight: bold;
     }
     .projects, .about {
       min-height: 300px;
+      animation: fadeIn 2s ease;
     }
-    #feedbackForm {
-      background-color: rgba(255,255,255,0.1);
+    #feedbackForm, #statsBox, #adminPanel {
+      background-color: var(--card-bg);
       padding: 30px;
       border-radius: 12px;
       max-width: 500px;
-      margin: auto;
+      margin: 30px auto;
     }
-    #statsBox {
-      background-color: rgba(0,0,0,0.2);
-      padding: 20px;
-      border-radius: 10px;
-      margin: 20px auto;
-      max-width: 300px;
+    input, textarea {
+      width: 90%;
+      padding: 10px;
+      margin: 10px auto;
+      display: block;
+      border-radius: 6px;
+      border: none;
+    }
+    button {
+      background-color: var(--highlight);
+      color: white;
+      border: none;
+      padding: 12px 20px;
+      margin-top: 10px;
+      border-radius: 8px;
+      cursor: pointer;
     }
   </style>
-  <!-- Firebase SDK -->
   <script type="module">
     import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
-    import { getDatabase, ref, onValue } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-database.js";
+    import { getDatabase, ref, onValue, remove } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-database.js";
 
     const firebaseConfig = {
       apiKey: "AIzaSyDv2IZjs4dyC4w2Tne4jqFVCyHN-J6oFF0",
@@ -58,17 +80,27 @@
 
     const app = initializeApp(firebaseConfig);
     const db = getDatabase(app);
-
     const ratingRef = ref(db, 'ratings');
+
+    // Update stats
     onValue(ratingRef, (snapshot) => {
-      let count = 0, total = 0;
+      let count = 0, total = 0, html = "";
       snapshot.forEach(child => {
         count++;
         total += parseInt(child.val().rating);
+        html += `<div style='margin-bottom:10px'>⭐ ${child.val().rating} by <b>${child.val().name}</b>
+        <button onclick="deleteFeedback('${child.key}')">❌ Delete</button></div>`;
       });
       document.getElementById("totalFeedback").innerText = count;
       document.getElementById("averageRating").innerText = count ? (total / count).toFixed(1) : '0';
+      document.getElementById("adminFeedbackList").innerHTML = html;
     });
+
+    window.deleteFeedback = function(key) {
+      if (confirm("Delete this feedback?")) {
+        remove(ref(db, 'ratings/' + key));
+      }
+    }
   </script>
 </head>
 <body>
@@ -78,21 +110,18 @@
       <a href="#about">About</a>
       <a href="#projects">Projects</a>
       <a href="#feedbackForm">Feedback</a>
+      <a href="#adminPanel">Admin</a>
     </nav>
   </header>
 
   <section id="about" class="about">
     <h2>About Me</h2>
-    <p>I'm T-Stephen, a 3rd year student passionate about AI, innovation, and solving real-world problems.</p>
+    <p>I’m T-Stephen, a B.Tech AI & Data Science student building smart, real-time AI solutions for the world.</p>
   </section>
 
   <section id="projects" class="projects">
-    <h2>🚀 Live AI Demo</h2>
-    <p>Upload a video named <code>demo.mp4</code> to show your project here.</p>
-    <video width="100%" controls autoplay loop muted>
-      <source src="demo.mp4" type="video/mp4" />
-      Your browser does not support the video tag.
-    </video>
+    <h2>🚀 Projects</h2>
+    <p>Coming soon... Check back later for detailed project demos and case studies.</p>
   </section>
 
   <section>
@@ -106,18 +135,24 @@
   <section>
     <h2>⭐ Rate This Portfolio</h2>
     <form id="feedbackForm">
-      <input type="text" placeholder="Your Name" required><br><br>
-      <textarea placeholder="Your Feedback" required></textarea><br><br>
-      <input type="number" min="1" max="5" placeholder="Rating (1-5)" required><br><br>
+      <input type="text" placeholder="Your Name" required><br>
+      <textarea placeholder="Your Feedback" required></textarea><br>
+      <input type="number" min="1" max="5" placeholder="Rating (1-5)" required><br>
       <button type="submit">Submit</button>
     </form>
   </section>
 
+  <section id="adminPanel">
+    <h2>🔐 Admin Feedback Panel</h2>
+    <div id="adminFeedbackList">Loading...</div>
+  </section>
+
+  <!-- 🎙️ Voice Command Button -->
   <button onclick="startVoiceCommand()" style="
     position: fixed;
     bottom: 90px;
     left: 20px;
-    background: #ff4b2b;
+    background: var(--highlight);
     color: white;
     border: none;
     padding: 12px 20px;
@@ -134,18 +169,13 @@
       recognition.interimResults = false;
       recognition.maxAlternatives = 1;
       recognition.start();
-
       recognition.onresult = function(event) {
         const command = event.results[0][0].transcript.toLowerCase();
-        console.log("You said:", command);
         if (command.includes("project")) document.querySelector(".projects").scrollIntoView({behavior: 'smooth'});
-        else if (command.includes("feedback") || command.includes("rate")) document.getElementById("feedbackForm").scrollIntoView({behavior: 'smooth'});
-        else if (command.includes("about")) document.querySelector(".about").scrollIntoView({behavior: 'smooth'});
-        else if (command.includes("dark")) document.documentElement.setAttribute("data-theme", "dark");
-        else if (command.includes("light")) document.documentElement.setAttribute("data-theme", "light");
+        else if (command.includes("feedback")) document.getElementById("feedbackForm").scrollIntoView({behavior: 'smooth'});
+        else if (command.includes("admin")) document.getElementById("adminPanel").scrollIntoView({behavior: 'smooth'});
         else alert("Command not recognized.");
       };
-
       recognition.onerror = function(event) {
         alert("Voice input failed: " + event.error);
       };
