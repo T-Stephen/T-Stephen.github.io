@@ -6,47 +6,34 @@
   <title>T-Stephen | AI Innovator</title>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap">
   <style>
-    * {
-      box-sizing: border-box;
-    }
+    * { box-sizing: border-box; }
     body {
       margin: 0;
       font-family: 'Poppins', sans-serif;
-      background: linear-gradient(135deg, #2c003e, #390a5e);
+      background: linear-gradient(135deg, #1a1a2e, #16213e);
       color: #fff;
       overflow-x: hidden;
-      animation: backgroundGlow 10s infinite alternate;
-    }
-    @keyframes backgroundGlow {
-      from {
-        background: linear-gradient(135deg, #2c003e, #390a5e);
-      }
-      to {
-        background: linear-gradient(135deg, #5e0065, #2f0051);
-      }
     }
     header {
       text-align: center;
       padding: 2rem 1rem;
-      background: rgba(15, 52, 96, 0.8);
-      backdrop-filter: blur(10px);
-      border-bottom: 2px solid #ff4c94;
+      background: #0f3460;
+      animation: fadeIn 2s ease-in-out;
     }
     header img {
       width: 120px;
       height: auto;
       border-radius: 50%;
       margin-bottom: 1rem;
-      box-shadow: 0 0 20px #ff4c94;
     }
     header h1 {
-      font-size: 3rem;
+      font-size: 2.5rem;
       color: #fddb3a;
-      text-shadow: 0 0 10px #fddb3a;
+      margin-bottom: 0.5rem;
     }
     header p {
       font-size: 1.2rem;
-      color: #ddd;
+      color: #aaa;
     }
     nav {
       background: #1f4068;
@@ -54,32 +41,41 @@
       display: flex;
       justify-content: center;
       gap: 2rem;
-      border-bottom: 1px solid #444;
     }
     nav a {
       color: #00fff5;
       text-decoration: none;
       font-weight: 600;
-      transition: color 0.3s;
-    }
-    nav a:hover {
-      color: #fddb3a;
     }
     section {
       max-width: 1000px;
       margin: auto;
       padding: 2rem;
+      animation: slideUp 1.5s ease;
+    }
+    .filter-buttons {
+      text-align: center;
+      margin-bottom: 1rem;
+    }
+    .filter-buttons button {
+      background: #fddb3a;
+      border: none;
+      margin: 0.3rem;
+      padding: 0.6rem 1rem;
+      font-weight: bold;
+      border-radius: 10px;
+      cursor: pointer;
     }
     .project-card {
-      background: rgba(22, 36, 71, 0.8);
+      background: #162447;
       padding: 1rem;
       border-radius: 10px;
       margin: 1rem 0;
-      box-shadow: 0 0 20px #fddb3a;
-      transition: transform 0.3s;
+      transition: transform 0.3s, opacity 0.3s;
     }
     .project-card:hover {
-      transform: scale(1.03);
+      transform: scale(1.02);
+      box-shadow: 0 0 20px #00fff5;
     }
     footer {
       text-align: center;
@@ -87,26 +83,6 @@
       background: #1a1a2e;
       font-size: 0.9rem;
       color: #bbb;
-    }
-    form input,
-    form textarea,
-    form button {
-      width: 100%;
-      padding: 0.8rem;
-      border: none;
-      border-radius: 10px;
-      margin-bottom: 1rem;
-      font-size: 1rem;
-    }
-    form button {
-      background: #ff4c94;
-      color: #fff;
-      font-weight: bold;
-      cursor: pointer;
-      transition: background 0.3s;
-    }
-    form button:hover {
-      background: #ff2670;
     }
     .chatbot {
       position: fixed;
@@ -156,6 +132,32 @@
       cursor: pointer;
       z-index: 1000;
     }
+    form input, form textarea, form button {
+      width: 100%;
+      padding: 0.8rem;
+      border: none;
+      border-radius: 10px;
+      margin-bottom: 1rem;
+      font-size: 1rem;
+    }
+    form button {
+      background: #fddb3a;
+      color: #000;
+      font-weight: bold;
+      cursor: pointer;
+      transition: background 0.3s;
+    }
+    form button:hover {
+      background: #ffd700;
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+    @keyframes slideUp {
+      from { transform: translateY(50px); opacity: 0; }
+      to { transform: translateY(0); opacity: 1; }
+    }
   </style>
 </head>
 <body>
@@ -164,22 +166,35 @@
     <h1>T-Stephen</h1>
     <p>AI Innovator | B.Tech - AI & Data Science</p>
   </header>
+
   <nav>
     <a href="#projects">Projects</a>
     <a href="#contact">Contact</a>
     <a href="#feedback">Feedback</a>
   </nav>
+
   <section id="projects">
     <h2>My Projects</h2>
-    <div class="project-card">
+    <div class="filter-buttons">
+      <button onclick="filterProjects('all')">All</button>
+      <button onclick="filterProjects('ai')">AI</button>
+      <button onclick="filterProjects('ml')">ML</button>
+      <button onclick="filterProjects('web')">Web</button>
+    </div>
+    <div class="project-card ai">
       <h3>AI Smart Traffic Signal</h3>
       <p>Real-time ambulance detection using YOLOv8 and OpenCV.</p>
     </div>
-    <div class="project-card">
+    <div class="project-card ml">
       <h3>Machine Learning Algorithms</h3>
       <p>Projects on Candidate Elimination, Decision Tree, and more.</p>
     </div>
+    <div class="project-card web">
+      <h3>Personal Portfolio Website</h3>
+      <p>Live chatbot, feedback form, animations and Firebase integration.</p>
+    </div>
   </section>
+
   <section id="contact">
     <h2>Contact Me</h2>
     <form action="https://formsubmit.co/tstephenraj001@gmail.com" method="POST">
@@ -189,6 +204,7 @@
       <button type="submit">Send Message</button>
     </form>
   </section>
+
   <section id="feedback">
     <h2>Inspire Me With Your Feedback ✨</h2>
     <form id="feedback-form">
@@ -199,20 +215,24 @@
     </form>
     <p>Total Visitors: <span id="visitor-count">Loading...</span></p>
   </section>
+
   <footer>
     &copy; 2025 T-Stephen | All Rights Reserved
   </footer>
+
   <div class="chatbot" id="chatbot">
     <div class="chatbot-header">🤖 Ask Me Anything</div>
     <div class="chatbot-messages" id="chatbot-messages"></div>
     <input type="text" id="chatbot-input" placeholder="Type your question..." onkeydown="if(event.key==='Enter')sendChat()" />
   </div>
   <button class="chat-btn" onclick="toggleChatbot()">💬</button>
+
   <script>
     function toggleChatbot() {
       const bot = document.getElementById('chatbot');
       bot.style.display = bot.style.display === 'flex' ? 'none' : 'flex';
     }
+
     function sendChat() {
       const input = document.getElementById('chatbot-input');
       const msg = input.value.trim();
@@ -226,7 +246,9 @@
         "skills": "Python, AI/ML, Web Dev, OpenCV, Firebase, YOLOv8",
         "ai": "Artificial Intelligence is the future, and Stephen is part of it!",
         "contact": "You can reach Stephen using the contact form above.",
-        "college": "Stephen is a B.Tech AI & Data Science student in his 3rd year."
+        "college": "Stephen is a B.Tech AI & Data Science student in his 3rd year.",
+        "inspire": "Stephen believes in using AI to solve real-world problems!",
+        "website": "This site was built using HTML, CSS, JavaScript, and Firebase.",
       };
       for (const key in replies) {
         if (msg.toLowerCase().includes(key)) {
@@ -239,6 +261,17 @@
         messages.scrollTop = messages.scrollHeight;
       }, 500);
       input.value = '';
+    }
+
+    function filterProjects(type) {
+      const cards = document.querySelectorAll('.project-card');
+      cards.forEach(card => {
+        if (type === 'all') {
+          card.style.display = 'block';
+        } else {
+          card.style.display = card.classList.contains(type) ? 'block' : 'none';
+        }
+      });
     }
   </script>
 </body>
