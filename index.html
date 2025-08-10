@@ -1,169 +1,448 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Stephen's AI Portfolio</title>
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-<style>
-    body {
-        font-family: Arial, sans-serif;
-        background: #0b0b0b;
-        color: white;
-        margin: 0;
-        padding: 0;
-        text-align: center;
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>T-Stephen | AI Innovator</title>
+  <meta name="description" content="T-Stephen - B.Tech AI & Data Science portfolio. Projects, AI chatbot, feedback & contact." />
+
+  <!-- Typed.js for typing header -->
+  <script src="https://cdn.jsdelivr.net/npm/typed.js@2.0.12"></script>
+
+  <link rel="icon" href="assets/STEVE_GitHub_Logo.png" />
+
+  <style>
+    :root{
+      --bg:#070709;
+      --panel:#0f1720;
+      --muted:#aeb6c3;
+      --accent:#ff3466; /* inspiring accent (red/pink) */
+      --accent-2:#00f0ff; /* neon secondary if needed */
+      --glass: rgba(255,255,255,0.03);
     }
-    header {
-        padding: 20px;
-        background: linear-gradient(90deg, #ff004c, #ff7300);
-        font-size: 24px;
-        font-weight: bold;
-        letter-spacing: 1px;
+    body{
+      margin:0;
+      font-family: 'Poppins', system-ui, Arial;
+      background: radial-gradient(1200px 800px at 10% 10%, rgba(255,52,102,0.05), transparent),
+                  radial-gradient(1000px 700px at 90% 90%, rgba(0,240,255,0.03), transparent),
+                  var(--bg);
+      color:#eaf2f8;
+      -webkit-font-smoothing:antialiased;
+      -moz-osx-font-smoothing:grayscale;
+      transition: background .4s ease, color .3s ease;
     }
-    /* Visitor counter glowing effect */
-    #visitorCount {
-        font-size: 28px;
-        margin: 20px 0;
-        color: #fff;
-        font-weight: bold;
-        text-shadow: 0 0 10px #ff004c, 0 0 20px #ff004c, 0 0 30px #ff004c;
+
+    /* container + layout */
+    .wrap{max-width:1100px;margin:32px auto;padding:24px;}
+    header{display:flex;align-items:center;gap:18px;padding:26px;border-radius:14px;background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));backdrop-filter: blur(6px);box-shadow:0 6px 30px rgba(0,0,0,0.6);border:1px solid rgba(255,255,255,0.02)}
+    .logo{width:96px;height:96px;border-radius:14px;object-fit:cover;box-shadow:0 6px 30px rgba(255,52,102,0.12);border:1px solid rgba(255,52,102,0.08)}
+    h1{font-size:28px;margin:0;color:var(--accent);text-shadow:0 0 18px rgba(255,52,102,0.12)}
+    p.lead{margin:4px 0 0;color:var(--muted);font-size:14px}
+
+    /* top controls */
+    .top-controls{margin-left:auto;display:flex;gap:12px;align-items:center}
+    .badge {font-weight:700; color:#000; background:var(--accent); padding:8px 12px;border-radius:999px; box-shadow: 0 6px 18px rgba(255,52,102,0.12);}
+    #theme-toggle{background:transparent;border:1px solid rgba(255,255,255,0.06);padding:8px;border-radius:10px;cursor:pointer;color:var(--muted)}
+    /* typing */
+    .typed {display:block;font-weight:600;color:var(--accent-2);margin-top:6px}
+
+    /* nav */
+    nav{display:flex;gap:12px;justify-content:center;margin:18px 0}
+    nav a{color:var(--muted);text-decoration:none;padding:8px 12px;border-radius:10px;font-weight:600}
+    nav a:hover{color:var(--accent);box-shadow:0 6px 20px rgba(0,0,0,0.6)}
+
+    /* main sections */
+    section.card{background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));padding:20px;border-radius:12px;margin:18px 0;border:1px solid rgba(255,255,255,0.02);box-shadow:0 12px 60px rgba(0,0,0,0.6)}
+    .grid{display:grid;grid-template-columns:repeat(2,1fr);gap:16px}
+    @media(max-width:880px){.grid{grid-template-columns:1fr}}
+
+    /* project cards */
+    .project-card{padding:16px;border-radius:10px;background:linear-gradient(180deg, rgba(0,0,0,0.25), rgba(255,255,255,0.01));transform-style:preserve-3d;transition:transform .35s, box-shadow .35s; border:1px solid rgba(255,255,255,0.02)}
+    .project-card:hover{transform:translateY(-8px) rotateX(2deg);box-shadow:0 25px 50px rgba(0,0,0,0.6), 0 0 30px rgba(255,52,102,0.06)}
+    .project-card h3{margin:0;color:var(--accent)}
+    .project-meta{color:var(--muted);font-size:13px;margin-top:8px}
+
+    /* filters */
+    .filters{display:flex;gap:8px;flex-wrap:wrap}
+    .filters button{background:transparent;border:1px solid rgba(255,255,255,0.06);padding:8px 12px;border-radius:8px;color:var(--muted);cursor:pointer}
+    .filters button.active{background:linear-gradient(90deg,var(--accent), #ff7aa3); color:#000; font-weight:700; box-shadow: 0 8px 30px rgba(255,52,102,0.12)}
+
+    /* contact / form */
+    form .row{display:flex;gap:12px}
+    form input, form textarea{background:rgba(255,255,255,0.02);border:1px solid rgba(255,255,255,0.04);color:var(--muted);padding:12px;border-radius:10px}
+    form button[type="submit"]{background:var(--accent);color:#000;padding:12px 18px;border-radius:10px;border:none;font-weight:700;cursor:pointer;box-shadow:0 12px 30px rgba(255,52,102,0.12)}
+    .muted-small{font-size:13px;color:var(--muted)}
+
+    /* feedback list + rating */
+    .feedback-list{max-height:260px;overflow:auto;padding-right:8px}
+    .feedback-item{padding:10px;border-radius:8px;margin-bottom:10px;background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));border:1px solid rgba(255,255,255,0.02)}
+    .stars{color:var(--accent);font-weight:800}
+
+    /* chatbot floating */
+    .chat-btn{position:fixed;right:22px;bottom:22px;background:linear-gradient(90deg,var(--accent),#ff7aa3);border:none;color:#000;padding:14px;border-radius:50%;font-size:18px;cursor:pointer;box-shadow: 0 18px 40px rgba(255,52,102,0.18);z-index:1200}
+    .chatbox{position:fixed;right:22px;bottom:100px;width:340px;max-width:94vw;background:linear-gradient(180deg, rgba(0,0,0,0.65), rgba(255,255,255,0.02));border-radius:12px;padding:12px;box-shadow:0 30px 60px rgba(0,0,0,0.6);display:none;flex-direction:column;z-index:1200}
+    .chatbox .msgs{max-height:320px;overflow:auto;padding:8px;background:rgba(0,0,0,0.25);border-radius:8px;margin-bottom:8px}
+    .chatbox .row{display:flex;gap:8px}
+    .chatbox input{flex:1;padding:10px;border-radius:8px;border:1px solid rgba(255,255,255,0.04);background:transparent;color:#fff}
+
+    /* visitor counter */
+    .vis-count{display:inline-block;padding:6px 10px;background:rgba(255,255,255,0.02);border-radius:999px;border:1px solid rgba(255,255,255,0.03);color:var(--muted)}
+
+    /* voice button */
+    .voice-btn{background:transparent;border:1px solid rgba(255,255,255,0.06);padding:8px;border-radius:10px;color:var(--muted);cursor:pointer}
+
+    /* light mode tweaks */
+    body.light{
+      --bg: #f6f8fb;
+      --panel:#ffffff;
+      --muted:#334155;
+      --accent:#ff3466;
+      --accent-2:#005b66;
+      --glass: rgba(0,0,0,0.04);
+      color:#0b1220;
     }
-    /* Feedback section */
-    .feedback-section {
-        padding: 20px;
-        background: rgba(255, 255, 255, 0.05);
-        margin: 30px auto;
-        width: 90%;
-        border-radius: 10px;
-    }
-    .feedback-section h2 {
-        color: #ff004c;
-    }
-    .feedback-input {
-        width: 80%;
-        padding: 10px;
-        margin: 10px 0;
-        border-radius: 8px;
-        border: none;
-        font-size: 16px;
-    }
-    .feedback-button {
-        background: #ff004c;
-        color: white;
-        padding: 10px 20px;
-        border: none;
-        border-radius: 8px;
-        cursor: pointer;
-        font-size: 16px;
-        transition: 0.3s;
-    }
-    .feedback-button:hover {
-        background: #ff7300;
-    }
-    /* Contact form */
-    .contact-form {
-        padding: 20px;
-        background: rgba(255, 255, 255, 0.05);
-        margin: 30px auto;
-        width: 90%;
-        border-radius: 10px;
-    }
-    .contact-form input, .contact-form textarea {
-        width: 80%;
-        padding: 10px;
-        margin: 8px 0;
-        border-radius: 8px;
-        border: none;
-        font-size: 16px;
-    }
-    .contact-form button {
-        background: #ff004c;
-        color: white;
-        padding: 10px 20px;
-        border: none;
-        border-radius: 8px;
-        cursor: pointer;
-        font-size: 16px;
-    }
-    .contact-form button:hover {
-        background: #ff7300;
-    }
-</style>
+    body.light header{background:linear-gradient(180deg, rgba(0,0,0,0.02), rgba(0,0,0,0.01))}
+
+    footer{margin-top:24px;text-align:center;color:var(--muted);font-size:13px;padding:20px}
+  </style>
 </head>
 <body>
+  <div class="wrap">
+    <!-- header -->
+    <header>
+      <img class="logo" src="assets/STEVE_GitHub_Logo.png" alt="T-Stephen logo" />
+      <div>
+        <h1>T-Stephen</h1>
+        <div class="typed" id="typed"></div>
+        <p class="lead muted-small">B.Tech AI & Data Science • Building practical AI & ML solutions</p>
+      </div>
 
-<header>🚀 Stephen's AI Portfolio</header>
+      <div class="top-controls">
+        <div class="vis-count" id="visitorCount">👀 Visitors: —</div>
+        <button id="theme-toggle" title="Toggle theme">🌙</button>
+        <div style="width:10px"></div>
+      </div>
+    </header>
 
-<!-- Visitor Counter -->
-<h2>👀 Visitors</h2>
-<div id="visitorCount">Loading...</div>
+    <!-- nav -->
+    <nav>
+      <a href="#projects">Projects</a>
+      <a href="#contact">Contact</a>
+      <a href="#feedback">Feedback</a>
+    </nav>
 
-<!-- Feedback Section -->
-<div class="feedback-section">
-    <h2>💬 Share Your Feedback</h2>
-    <input type="text" id="feedbackName" class="feedback-input" placeholder="Your Name">
-    <textarea id="feedbackText" class="feedback-input" placeholder="Your inspiring feedback..." rows="3"></textarea><br>
-    <button class="feedback-button" onclick="submitFeedback()">Submit Feedback</button>
-</div>
+    <!-- Projects -->
+    <section id="projects" class="card">
+      <div style="display:flex;justify-content:space-between;align-items:center">
+        <h2 style="margin:0;color:var(--accent)">Projects</h2>
+        <div class="filters" id="filters">
+          <button class="active" data-filter="all" onclick="filterProjects('all')">All</button>
+          <button data-filter="ai" onclick="filterProjects('ai')">AI</button>
+          <button data-filter="ml" onclick="filterProjects('ml')">ML</button>
+          <button data-filter="web" onclick="filterProjects('web')">Web</button>
+        </div>
+      </div>
 
-<!-- Contact Form -->
-<div class="contact-form">
-    <h2>📩 Contact Me</h2>
-    <form action="https://formsubmit.co/tstephenraj001@gmail.com" method="POST">
-        <input type="text" name="name" placeholder="Your Name" required><br>
-        <input type="email" name="email" placeholder="Your Email" required><br>
-        <textarea name="message" placeholder="Your Message" rows="4" required></textarea><br>
+      <div class="grid" id="projectGrid" style="margin-top:16px">
+        <!-- example cards -->
+        <div class="project-card ai" data-tags="ai">
+          <h3>AI Smart Traffic Signal</h3>
+          <p class="project-meta">Real-time ambulance detection using YOLOv8 + OpenCV. Priority signalling system for emergency vehicles.</p>
+        </div>
+        <div class="project-card ml" data-tags="ml">
+          <h3>Candidate-Elimination & Decision Trees</h3>
+          <p class="project-meta">Implementations and demos for classic ML algorithms with visualizations.</p>
+        </div>
+        <div class="project-card web" data-tags="web">
+          <h3>Portfolio & Chatbot</h3>
+          <p class="project-meta">This portfolio, integrated with chatbot and Firebase for feedback & hosting.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- contact -->
+    <section id="contact" class="card">
+      <h2 style="color:var(--accent);margin:0 0 10px 0">Contact</h2>
+      <form id="contactForm" action="https://formsubmit.co/tstephenraj001@gmail.com" method="POST">
+        <div class="row">
+          <input name="name" placeholder="Your name" required />
+          <input name="email" placeholder="Your email" type="email" required />
+        </div>
+        <textarea name="message" rows="4" placeholder="Tell me about your idea or collaboration..." required></textarea>
+        <!-- disable captcha and redirect after submit (FormSubmit supports hidden fields) -->
+        <input type="hidden" name="_captcha" value="false">
         <button type="submit">Send Message</button>
-    </form>
-</div>
+      </form>
+      <p class="muted-small" style="margin-top:8px">Or reach me: <strong>stephenbugi525@gmail.com</strong> • LinkedIn: <a href="https://www.linkedin.com/in/stephen-raj-t-3b417528a/" target="_blank" style="color:var(--accent)">Profile</a></p>
+    </section>
 
-<!-- Firebase -->
-<script type="module">
-    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.3/firebase-app.js";
-    import { getDatabase, ref, get, set, increment, update } from "https://www.gstatic.com/firebasejs/10.12.3/firebase-database.js";
+    <!-- feedback -->
+    <section id="feedback" class="card">
+      <div style="display:flex;justify-content:space-between;align-items:center">
+        <h2 style="margin:0;color:var(--accent)">Feedback & Ratings</h2>
+        <div style="text-align:right">
+          <div class="muted-small">Average rating: <span id="avgRating">—</span></div>
+          <div class="muted-small">Total reviews: <span id="totalReviews">—</span></div>
+        </div>
+      </div>
+
+      <div style="display:grid;grid-template-columns:1fr 360px;gap:16px;margin-top:14px">
+        <div>
+          <form id="feedbackForm">
+            <input id="fbName" placeholder="Your name" required/>
+            <input id="fbRating" type="number" min="1" max="5" placeholder="Rating 1-5" required/>
+            <textarea id="fbMessage" rows="4" placeholder="What inspired you?" required></textarea>
+            <button type="submit">Submit Feedback</button>
+          </form>
+        </div>
+
+        <div style="background:rgba(255,255,255,0.02);padding:12px;border-radius:10px">
+          <h4 style="margin:0 0 8px 0;color:var(--accent)">Recent feedback</h4>
+          <div id="feedbackList" class="feedback-list">Loading…</div>
+        </div>
+      </div>
+    </section>
+
+    <footer>
+      &copy; 2025 T-Stephen • Built with ❤️ • <span id="buildInfo">Firebase Hosting</span>
+    </footer>
+  </div>
+
+  <!-- Chatbot -->
+  <button class="chat-btn" id="openChat">💬</button>
+  <div class="chatbox" id="chatbox" role="dialog" aria-hidden="true">
+    <div class="chatbox-header" style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px">
+      <strong style="color:var(--accent)">AI Assistant</strong>
+      <div>
+        <button id="voiceBtn" class="voice-btn" title="Start voice input">🎙️</button>
+        <button id="closeChat" class="voice-btn" title="Close">✖</button>
+      </div>
+    </div>
+    <div class="msgs" id="msgs"></div>
+    <div class="row" style="margin-top:8px">
+      <input id="chatInput" placeholder="Ask about projects, skills, or say 'help'..." />
+      <button id="sendChatBtn" class="voice-btn">→</button>
+    </div>
+  </div>
+
+  <!-- Firebase v12 (module) -->
+  <script type="module">
+    // Firebase setup (v12 modular)
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/12.0.0/firebase-app.js";
+    import { getFirestore, collection, addDoc, serverTimestamp, query, orderBy, onSnapshot, doc, runTransaction, getDoc, updateDoc } from "https://www.gstatic.com/firebasejs/12.0.0/firebase-firestore.js";
 
     const firebaseConfig = {
-        apiKey: "YOUR_FIREBASE_API_KEY",
-        authDomain: "t-stephen-ai-portfolio.firebaseapp.com",
-        databaseURL: "https://t-stephen-ai-portfolio-default-rtdb.firebaseio.com",
-        projectId: "t-stephen-ai-portfolio",
-        storageBucket: "t-stephen-ai-portfolio.appspot.com",
-        messagingSenderId: "YOUR_MESSAGING_ID",
-        appId: "YOUR_APP_ID"
+      apiKey: "AIzaSyDv2IZjs4dyC4w2Tne4jqFVCyHN-J6oFF0",
+      authDomain: "t-stephen-ai-portfolio.firebaseapp.com",
+      projectId: "t-stephen-ai-portfolio",
+      storageBucket: "t-stephen-ai-portfolio.appspot.com",
+      messagingSenderId: "493827826934",
+      appId: "1:493827826934:web:0f0e3a03fe56c25c5338d7",
+      measurementId: "G-X097JGBRF4"
     };
 
     const app = initializeApp(firebaseConfig);
-    const db = getDatabase(app);
+    const db = getFirestore(app);
 
-    // Visitor Counter
-    const visitorRef = ref(db, "visitors/count");
-    get(visitorRef).then(snapshot => {
-        if (snapshot.exists()) {
-            update(visitorRef, { ".sv": { "increment": 1 } });
-            document.getElementById("visitorCount").innerText = snapshot.val() + 1;
-        } else {
-            set(visitorRef, 1);
-            document.getElementById("visitorCount").innerText = 1;
-        }
+    // Visitor counter (document: stats/visitors)
+    async function incrementVisitor(){
+      try {
+        const docRef = doc(db, 'stats', 'visitors');
+        await runTransaction(db, async (t) => {
+          const snap = await t.get(docRef);
+          if (!snap.exists()) {
+            t.set(docRef, {count: 1});
+            document.getElementById('visitorCount').textContent = '👀 Visitors: 1';
+          } else {
+            const newCount = (snap.data().count || 0) + 1;
+            t.update(docRef, {count: newCount});
+            document.getElementById('visitorCount').textContent = `👀 Visitors: ${newCount}`;
+          }
+        });
+      } catch(err){
+        console.error('visitor increment error', err);
+      }
+    }
+    incrementVisitor();
+
+    // Feedback: listen & display realtime
+    const fbCol = collection(db, 'feedbacks');
+    const q = query(fbCol, orderBy('createdAt', 'desc'));
+    const feedbackListEl = document.getElementById('feedbackList');
+    const avgRatingEl = document.getElementById('avgRating');
+    const totalReviewsEl = document.getElementById('totalReviews');
+
+    onSnapshot(q, (snap) => {
+      feedbackListEl.innerHTML = '';
+      let total = 0, count = 0;
+      snap.forEach(docu => {
+        const d = docu.data();
+        count++;
+        total += (d.rating || 0);
+        const div = document.createElement('div');
+        div.className = 'feedback-item';
+        div.innerHTML = `<div style="display:flex;justify-content:space-between;align-items:center"><div><strong>${escapeHtml(d.name||'Anonymous')}</strong></div><div class="stars">${'★'.repeat(d.rating||0)}${'☆'.repeat(5-(d.rating||0))}</div></div><div style="margin-top:6px;color:var(--muted)">${escapeHtml(d.message||'')}</div>`;
+        feedbackListEl.appendChild(div);
+      });
+      avgRatingEl.textContent = count ? (total/count).toFixed(1) + ' / 5' : '—';
+      totalReviewsEl.textContent = count;
+      if(!count) feedbackListEl.innerHTML = '<div class="muted-small">No feedback yet — be the first to inspire!</div>';
     });
 
-    // Feedback Storage
-    function submitFeedback() {
-        const name = document.getElementById("feedbackName").value.trim();
-        const feedback = document.getElementById("feedbackText").value.trim();
-        if (name && feedback) {
-            const feedbackRef = ref(db, "feedback/" + Date.now());
-            set(feedbackRef, { name: name, feedback: feedback });
-            alert("🌟 Thank you for your inspiring feedback, " + name + "!");
-            document.getElementById("feedbackName").value = "";
-            document.getElementById("feedbackText").value = "";
-        } else {
-            alert("⚠ Please fill in both fields!");
-        }
-    }
-    window.submitFeedback = submitFeedback;
-</script>
+    // feedback form submit
+    document.getElementById('feedbackForm').addEventListener('submit', async (e)=>{
+      e.preventDefault();
+      const name = document.getElementById('fbName').value.trim();
+      const rating = Number(document.getElementById('fbRating').value);
+      const message = document.getElementById('fbMessage').value.trim();
+      if(!name || !rating || !message) { alert('Please fill all fields'); return; }
+      try{
+        await addDoc(fbCol, { name, rating, message, createdAt: serverTimestamp() });
+        alert('Thanks — your feedback was saved!');
+        document.getElementById('fbName').value=''; document.getElementById('fbRating').value=''; document.getElementById('fbMessage').value='';
+      }catch(err){
+        console.error('save feedback error', err);
+        alert('Could not save feedback. Check console.');
+      }
+    });
 
+    // helper to escape user input
+    function escapeHtml(str){ return String(str).replace(/[&<>"]/g, s => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[s])); }
+
+    // contact form uses FormSubmit (no firebase write) - already in markup
+  </script>
+
+  <!-- UI + Chatbot + Controls (non-module) -->
+  <script>
+    // Typed header
+    new Typed('#typed', { strings: ['AI Innovator', 'ML Enthusiast', 'Chatbot Builder', 'Data Science Student'], typeSpeed:60, backSpeed:40, loop:true });
+
+    // Theme toggle
+    const themeBtn = document.getElementById('theme-toggle');
+    function setTheme(isLight){
+      document.body.classList.toggle('light', !!isLight);
+      themeBtn.textContent = isLight ? '☀️' : '🌙';
+    }
+    // preserve user pref
+    const saved = localStorage.getItem('ts-theme');
+    setTheme(saved === 'light');
+    themeBtn.addEventListener('click', ()=>{
+      const isLight = !document.body.classList.contains('light');
+      setTheme(isLight);
+      localStorage.setItem('ts-theme', isLight ? 'light' : 'dark');
+    });
+
+    // Project filter
+    function filterProjects(type){
+      document.querySelectorAll('.filters button').forEach(b => b.classList.toggle('active', b.dataset.filter===type));
+      document.querySelectorAll('.project-card').forEach(card => {
+        if(type==='all') card.style.display = 'block';
+        else card.style.display = (card.classList.contains(type) ? 'block' : 'none');
+      });
+    }
+    // init default
+    filterProjects('all');
+
+    /* Chatbot logic (simple, local, no paid API):
+       - rule-based smart replies
+       - voice input & TTS
+    */
+    const chatBtn = document.getElementById('openChat');
+    const chatBox = document.getElementById('chatbox');
+    const closeChat = document.getElementById('closeChat');
+    const msgs = document.getElementById('msgs');
+    const chatInput = document.getElementById('chatInput');
+    const sendChatBtn = document.getElementById('sendChatBtn');
+    const voiceBtn = document.getElementById('voiceBtn');
+
+    function addMessage(who, txt){
+      const d = document.createElement('div');
+      d.style.margin = '8px 0';
+      d.innerHTML = `<div style="font-size:13px;color:${who==='bot'? 'var(--muted)' : '#fff'}"><strong style="color:${who==='bot'? 'var(--accent)' : 'var(--accent-2)'}">${who==='bot'?'Assistant':'You'}</strong></div><div style="margin-top:6px">${txt}</div>`;
+      msgs.appendChild(d);
+      msgs.scrollTop = msgs.scrollHeight;
+    }
+
+    function speakText(text){
+      if(!('speechSynthesis' in window)) return;
+      const u = new SpeechSynthesisUtterance(text);
+      u.lang = 'en-US';
+      u.rate = 1;
+      window.speechSynthesis.cancel(); // stop previous
+      window.speechSynthesis.speak(u);
+    }
+
+    // smarter replies
+    const smart = {
+      hello: "Hello! I'm Stephen's assistant. Ask about projects, skills, or say 'projects' to see them.",
+      projects: "Stephen has built an AI traffic signal system, candidate-elimination demos, decision tree visualizations, and this portfolio.",
+      skills: "Python • OpenCV • YOLO • Machine Learning • Data Science • Web (HTML/CSS/JS) • Firebase",
+      contact: "Use the contact form or email: stephenbugi525@gmail.com",
+      portfolio: "This portfolio showcases AI projects, ML demos and an interactive chatbot."
+    };
+
+    function botReply(text){
+      text = text.toLowerCase();
+      for(const k in smart){
+        if(text.includes(k)) return smart[k];
+      }
+      // fallback: helpful suggestions
+      if(text.includes('help') || text.includes('how')) return "Try asking 'projects', 'skills', 'contact' or 'inspire me'.";
+      return "That's interesting — tell me more or ask about projects, skills, or contact.";
+    }
+
+    function processChat(input){
+      if(!input) return;
+      addMessage('you', escapeHtml(input));
+      const reply = botReply(input);
+      setTimeout(()=>{ addMessage('bot', escapeHtml(reply)); speakText(reply); }, 400);
+    }
+
+    // open / close chat
+    chatBtn.addEventListener('click', ()=>{ chatBox.style.display='flex'; chatBox.setAttribute('aria-hidden','false'); chatInput.focus(); });
+    closeChat.addEventListener('click', ()=>{ chatBox.style.display='none'; chatBox.setAttribute('aria-hidden','true'); });
+
+    sendChatBtn.addEventListener('click', ()=>{ processChat(chatInput.value); chatInput.value=''; });
+    chatInput.addEventListener('keydown', (e)=>{ if(e.key==='Enter'){ processChat(chatInput.value); chatInput.value=''; } });
+
+    // voice recognition (optional)
+    let recognition=null;
+    if('webkitSpeechRecognition' in window || 'SpeechRecognition' in window){
+      const SR = window.SpeechRecognition || window.webkitSpeechRecognition;
+      recognition = new SR();
+      recognition.lang = 'en-IN';
+      recognition.interimResults = false;
+      recognition.onresult = (e)=>{ const txt = e.results[0][0].transcript; chatInput.value = txt; processChat(txt); }
+      recognition.onerror = (err)=>{ console.error('sr err', err); }
+    } else {
+      voiceBtn.style.display = 'none';
+    }
+    voiceBtn.addEventListener('click', ()=>{ if(recognition){ recognition.start(); } else { alert('Voice input not supported in this browser'); } });
+
+    // simple escape for chat display
+    function escapeHtml(str){ return String(str).replace(/[&<>"]/g, s => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[s])); }
+
+    // voice assistant on page (optional command)
+    // done
+
+    // visitorCount UI: we updated when increment ran (module script), but fallback read
+    // If the visitor count does not update immediately, you can load it via fetch; omitted to keep code short.
+
+    // Helper: Show build info (firebase)
+    document.getElementById('buildInfo').textContent = 'Hosted on Firebase • Live';
+
+    // small UX: clicking project card says more
+    document.querySelectorAll('.project-card').forEach(pc => {
+      pc.addEventListener('click', () => {
+        const title = pc.querySelector('h3').innerText;
+        addMessage('you', `Tell me more about ${title}`);
+        setTimeout(()=>{ addMessage('bot', `This project - ${title} - is described on the Projects section. Want to know tech stack? Ask 'stack ${title.split(' ')[0]}'`); }, 350);
+      });
+    });
+
+    // open chat with keyboard shortcut (c)
+    window.addEventListener('keydown', (e)=>{ if(e.key==='c'){ chatBox.style.display='flex'; chatInput.focus(); } });
+
+  </script>
 </body>
 </html>
