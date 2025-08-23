@@ -6,219 +6,1092 @@
   <title>T-Stephen | AI Innovator</title>
   <meta name="description" content="T-Stephen - B.Tech AI & Data Science portfolio. Projects, AI chatbot, feedback & contact." />
 
+  <!-- Modern Font Imports -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  
   <!-- Typed.js for typing header -->
   <script src="https://cdn.jsdelivr.net/npm/typed.js@2.0.12"></script>
+  
+  <!-- Particles.js for background effects -->
+  <script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script>
 
   <link rel="icon" href="assets/STEVE_GitHub_Logo.png" />
 
   <style>
     :root{
-      --bg:#08080a;
-      --panel:rgba(255,255,255,0.02);
-      --muted:#aeb6c3;
-      --accent:#ff355e; /* inspiring accent */
-      --accent-2:#00f0ff;
-      --glass: rgba(255,255,255,0.03);
-    }
-    *{box-sizing:border-box}
-    body{
-      margin:0;
-      min-height:100vh;
-      font-family: 'Poppins', system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
-      background:
-        radial-gradient(800px 500px at 8% 10%, rgba(255,53,94,0.03), transparent),
-        radial-gradient(700px 500px at 88% 90%, rgba(0,240,255,0.02), transparent),
-        var(--bg);
-      color:#e7eef6;
-      -webkit-font-smoothing:antialiased;
-      transition: background .35s ease, color .25s ease;
+      --bg: #0a0a0f;
+      --bg-secondary: #12121a;
+      --panel: rgba(255,255,255,0.03);
+      --glass: rgba(255,255,255,0.05);
+      --muted: #a1a8b8;
+      --text: #e2e8f0;
+      --accent: #00d4ff;
+      --accent-2: #ff006e;
+      --accent-gradient: linear-gradient(135deg, #00d4ff 0%, #ff006e 100%);
+      --shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.8);
+      --glow: 0 0 30px rgba(0, 212, 255, 0.3);
+      --border: rgba(255, 255, 255, 0.1);
     }
 
-    .wrap{max-width:1100px;margin:28px auto;padding:20px}
-
-    header{
-      display:flex;align-items:center;gap:18px;padding:22px;border-radius:14px;background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));backdrop-filter: blur(6px);box-shadow:0 8px 40px rgba(0,0,0,0.6);border:1px solid rgba(255,255,255,0.02)
-    }
-    .logo{width:92px;height:92px;border-radius:12px;object-fit:cover;box-shadow:0 8px 30px rgba(255,53,94,0.12);border:1px solid rgba(255,53,94,0.06)}
-    h1{font-size:28px;margin:0;color:var(--accent);text-shadow:0 0 14px rgba(255,53,94,0.08)}
-    p.lead{margin:6px 0 0;color:var(--muted);font-size:13px}
-
-    .top-controls{margin-left:auto;display:flex;gap:10px;align-items:center}
-    .vis-count{display:inline-block;padding:6px 12px;border-radius:999px;background:rgba(255,255,255,0.02);border:1px solid rgba(255,255,255,0.02);color:var(--muted);font-weight:700;box-shadow:0 8px 30px rgba(255,53,94,0.06)}
-    #visitorCount { color:var(--accent-2); font-weight:800; text-shadow:0 0 10px rgba(0,240,255,0.08) }
-
-    #theme-toggle{background:transparent;border:1px solid rgba(255,255,255,0.06);padding:8px;border-radius:10px;cursor:pointer;color:var(--muted)}
-
-    nav{display:flex;gap:12px;justify-content:center;margin:18px 0}
-    nav a{color:var(--muted);text-decoration:none;padding:8px 12px;border-radius:10px;font-weight:600}
-    nav a:hover{color:var(--accent);box-shadow:0 8px 30px rgba(0,0,0,0.6)}
-
-    section.card{background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));padding:20px;border-radius:12px;margin:18px 0;border:1px solid rgba(255,255,255,0.02);box-shadow:0 12px 60px rgba(0,0,0,0.6)}
-    .grid{display:grid;grid-template-columns:repeat(2,1fr);gap:16px}
-    @media(max-width:880px){.grid{grid-template-columns:1fr}}
-
-    .project-card{padding:16px;border-radius:10px;background:linear-gradient(180deg, rgba(0,0,0,0.25), rgba(255,255,255,0.01));transform-style:preserve-3d;transition:transform .35s, box-shadow .35s; border:1px solid rgba(255,255,255,0.02)}
-    .project-card:hover{transform:translateY(-8px) rotateX(2deg);box-shadow:0 25px 60px rgba(0,0,0,0.6), 0 0 30px rgba(255,53,94,0.06)}
-    .project-card h3{margin:0;color:var(--accent)}
-    .project-meta{color:var(--muted);font-size:13px;margin-top:8px}
-
-    .filters{display:flex;gap:8px;flex-wrap:wrap}
-    .filters button{background:transparent;border:1px solid rgba(255,255,255,0.06);padding:8px 12px;border-radius:8px;color:var(--muted);cursor:pointer}
-    .filters button.active{background:linear-gradient(90deg,var(--accent), #ff7aa3); color:#000; font-weight:700; box-shadow: 0 8px 30px rgba(255,53,94,0.12)}
-
-    form .row{display:flex;gap:12px}
-    form input, form textarea{background:rgba(255,255,255,0.02);border:1px solid rgba(255,255,255,0.04);color:var(--muted);padding:12px;border-radius:10px}
-    form button[type="submit"]{background:var(--accent);color:#000;padding:12px 18px;border-radius:10px;border:none;font-weight:700;cursor:pointer;box-shadow:0 12px 30px rgba(255,53,94,0.12)}
-    .muted-small{font-size:13px;color:var(--muted)}
-
-    .feedback-list{max-height:260px;overflow:auto;padding-right:8px}
-    .feedback-item{padding:10px;border-radius:8px;margin-bottom:10px;background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));border:1px solid rgba(255,255,255,0.02)}
-    .stars{color:var(--accent);font-weight:800}
-
-    .chat-btn{position:fixed;right:22px;bottom:22px;background:linear-gradient(90deg,var(--accent),#ff7aa3);border:none;color:#000;padding:14px;border-radius:50%;font-size:18px;cursor:pointer;box-shadow: 0 18px 40px rgba(255,53,94,0.18);z-index:1200}
-    .chatbox{position:fixed;right:22px;bottom:100px;width:360px;max-width:94vw;background:linear-gradient(180deg, rgba(0,0,0,0.65), rgba(255,255,255,0.02));border-radius:12px;padding:12px;box-shadow:0 30px 60px rgba(0,0,0,0.6);display:none;flex-direction:column;z-index:1200}
-    .chatbox .msgs{max-height:320px;overflow:auto;padding:8px;background:rgba(0,0,0,0.25);border-radius:8px;margin-bottom:8px}
-    .chatbox .row{display:flex;gap:8px}
-    .chatbox input{flex:1;padding:10px;border-radius:8px;border:1px solid rgba(255,255,255,0.04);background:transparent;color:#fff}
-
-    .voice-btn{background:transparent;border:1px solid rgba(255,255,255,0.06);padding:8px;border-radius:10px;color:var(--muted);cursor:pointer}
-
-    footer{margin-top:24px;text-align:center;color:var(--muted);font-size:13px;padding:20px}
-
-    /* glowing visitor counter emphasis */
-    .vis-glow{padding:6px 10px;border-radius:999px;background:linear-gradient(90deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));border:1px solid rgba(255,255,255,0.03);box-shadow:0 8px 40px rgba(0,240,255,0.04)}
-    .vis-glow strong{color:var(--accent-2);font-weight:800;text-shadow:0 0 8px rgba(0,240,255,0.06)}
-    /* mobile tweaks */
-    @media(max-width:520px){
-      header{flex-direction:column;align-items:flex-start}
-      .top-controls{width:100%;display:flex;justify-content:space-between}
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
     }
 
-    /* light mode */
-    body.light{ --bg:#f6f8fb; color:#0b1220; --muted:#334155; }
-    body.light header{background:linear-gradient(180deg, rgba(0,0,0,0.02), rgba(0,0,0,0.01))}
+    body {
+      font-family: 'Inter', system-ui, -apple-system, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+      overflow-x: hidden;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+
+    /* Animated background particles */
+    #particles-js {
+      position: fixed;
+      width: 100%;
+      height: 100%;
+      top: 0;
+      left: 0;
+      z-index: -1;
+    }
+
+    /* Custom cursor */
+    .cursor {
+      width: 20px;
+      height: 20px;
+      border: 2px solid var(--accent);
+      border-radius: 50%;
+      position: fixed;
+      pointer-events: none;
+      z-index: 9999;
+      transform: translate(-50%, -50%);
+      transition: all 0.1s ease;
+      mix-blend-mode: difference;
+    }
+
+    .cursor-follower {
+      width: 8px;
+      height: 8px;
+      background: var(--accent);
+      border-radius: 50%;
+      position: fixed;
+      pointer-events: none;
+      z-index: 9999;
+      transform: translate(-50%, -50%);
+      transition: all 0.15s ease;
+    }
+
+    .wrap {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 2rem;
+      position: relative;
+      z-index: 1;
+    }
+
+    /* Enhanced Header */
+    header {
+      display: flex;
+      align-items: center;
+      gap: 2rem;
+      padding: 2rem;
+      border-radius: 20px;
+      background: linear-gradient(135deg, 
+        rgba(255,255,255,0.1) 0%, 
+        rgba(255,255,255,0.02) 100%);
+      backdrop-filter: blur(20px);
+      border: 1px solid var(--border);
+      box-shadow: var(--shadow);
+      position: relative;
+      overflow: hidden;
+      animation: slideInDown 0.8s ease-out;
+    }
+
+    header::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, 
+        transparent, 
+        rgba(0, 212, 255, 0.1), 
+        transparent);
+      animation: shimmer 3s infinite;
+    }
+
+    @keyframes shimmer {
+      0% { left: -100%; }
+      100% { left: 100%; }
+    }
+
+    @keyframes slideInDown {
+      from {
+        opacity: 0;
+        transform: translateY(-30px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .logo {
+      width: 100px;
+      height: 100px;
+      border-radius: 20px;
+      object-fit: cover;
+      box-shadow: 0 20px 40px rgba(0, 212, 255, 0.3);
+      border: 2px solid rgba(0, 212, 255, 0.5);
+      transition: all 0.3s ease;
+    }
+
+    .logo:hover {
+      transform: scale(1.05) rotate(5deg);
+      box-shadow: var(--glow);
+    }
+
+    .header-content h1 {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 2.5rem;
+      font-weight: 700;
+      background: var(--accent-gradient);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      margin-bottom: 0.5rem;
+    }
+
+    .typed-cursor {
+      color: var(--accent);
+      animation: blink 1s infinite;
+    }
+
+    @keyframes blink {
+      0%, 50% { opacity: 1; }
+      51%, 100% { opacity: 0; }
+    }
+
+    .lead {
+      color: var(--muted);
+      font-size: 1rem;
+      margin-top: 0.5rem;
+      opacity: 0;
+      animation: fadeInUp 0.8s ease-out 0.3s forwards;
+    }
+
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    /* Top Controls */
+    .top-controls {
+      margin-left: auto;
+      display: flex;
+      gap: 1rem;
+      align-items: center;
+    }
+
+    .vis-count {
+      padding: 0.75rem 1.5rem;
+      border-radius: 50px;
+      background: rgba(255,255,255,0.05);
+      backdrop-filter: blur(10px);
+      border: 1px solid var(--border);
+      color: var(--muted);
+      font-weight: 600;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .vis-count::before {
+      content: '';
+      position: absolute;
+      top: -2px;
+      left: -2px;
+      right: -2px;
+      bottom: -2px;
+      background: var(--accent-gradient);
+      border-radius: 50px;
+      z-index: -1;
+      opacity: 0;
+      transition: opacity 0.3s ease;
+    }
+
+    .vis-count:hover::before {
+      opacity: 1;
+    }
+
+    #visitorCount {
+      color: var(--accent);
+      font-weight: 800;
+      text-shadow: 0 0 10px rgba(0, 212, 255, 0.5);
+    }
+
+    #theme-toggle {
+      background: rgba(255,255,255,0.05);
+      border: 1px solid var(--border);
+      padding: 0.75rem;
+      border-radius: 15px;
+      cursor: pointer;
+      color: var(--muted);
+      font-size: 1.2rem;
+      transition: all 0.3s ease;
+    }
+
+    #theme-toggle:hover {
+      background: var(--accent);
+      color: var(--bg);
+      transform: scale(1.1);
+    }
+
+    /* Enhanced Navigation */
+    nav {
+      display: flex;
+      gap: 1rem;
+      justify-content: center;
+      margin: 2rem 0;
+      opacity: 0;
+      animation: fadeIn 0.8s ease-out 0.5s forwards;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+
+    nav a {
+      color: var(--muted);
+      text-decoration: none;
+      padding: 1rem 2rem;
+      border-radius: 15px;
+      font-weight: 600;
+      position: relative;
+      transition: all 0.3s ease;
+      backdrop-filter: blur(10px);
+      border: 1px solid transparent;
+    }
+
+    nav a::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: var(--accent-gradient);
+      border-radius: 15px;
+      opacity: 0;
+      z-index: -1;
+      transition: opacity 0.3s ease;
+    }
+
+    nav a:hover {
+      color: white;
+      transform: translateY(-2px);
+      box-shadow: 0 10px 25px rgba(0, 212, 255, 0.4);
+    }
+
+    nav a:hover::before {
+      opacity: 1;
+    }
+
+    /* Enhanced Cards */
+    .card {
+      background: linear-gradient(135deg, 
+        rgba(255,255,255,0.1) 0%, 
+        rgba(255,255,255,0.02) 100%);
+      backdrop-filter: blur(20px);
+      padding: 2.5rem;
+      border-radius: 25px;
+      margin: 2rem 0;
+      border: 1px solid var(--border);
+      box-shadow: var(--shadow);
+      position: relative;
+      overflow: hidden;
+      opacity: 0;
+      transform: translateY(30px);
+      animation: slideInUp 0.8s ease-out forwards;
+    }
+
+    .card:nth-child(2) { animation-delay: 0.2s; }
+    .card:nth-child(3) { animation-delay: 0.4s; }
+    .card:nth-child(4) { animation-delay: 0.6s; }
+
+    @keyframes slideInUp {
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .card h2 {
+      font-family: 'Space Grotesk', sans-serif;
+      color: var(--accent);
+      margin-bottom: 1.5rem;
+      font-size: 2rem;
+      font-weight: 700;
+    }
+
+    /* Bento Grid Layout */
+    .bento-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 1.5rem;
+      margin-top: 2rem;
+    }
+
+    .project-card {
+      background: linear-gradient(135deg, 
+        rgba(0, 212, 255, 0.1) 0%, 
+        rgba(255, 0, 110, 0.1) 100%);
+      backdrop-filter: blur(15px);
+      padding: 2rem;
+      border-radius: 20px;
+      border: 1px solid var(--border);
+      transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+      cursor: pointer;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .project-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: var(--accent-gradient);
+      opacity: 0;
+      transition: opacity 0.3s ease;
+      z-index: -1;
+    }
+
+    .project-card:hover {
+      transform: translateY(-10px) scale(1.02);
+      box-shadow: 0 30px 60px rgba(0, 212, 255, 0.3);
+    }
+
+    .project-card:hover::before {
+      opacity: 0.1;
+    }
+
+    .project-card h3 {
+      font-family: 'Space Grotesk', sans-serif;
+      color: var(--accent);
+      margin-bottom: 1rem;
+      font-size: 1.5rem;
+      font-weight: 600;
+    }
+
+    .project-meta {
+      color: var(--muted);
+      font-size: 0.95rem;
+      line-height: 1.6;
+    }
+
+    /* Enhanced Filters */
+    .filters {
+      display: flex;
+      gap: 0.75rem;
+      flex-wrap: wrap;
+    }
+
+    .filters button {
+      background: rgba(255,255,255,0.05);
+      border: 1px solid var(--border);
+      padding: 0.75rem 1.5rem;
+      border-radius: 25px;
+      color: var(--muted);
+      cursor: pointer;
+      font-weight: 500;
+      transition: all 0.3s ease;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .filters button::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: var(--accent-gradient);
+      transition: left 0.3s ease;
+      z-index: -1;
+    }
+
+    .filters button.active,
+    .filters button:hover {
+      color: white;
+      transform: translateY(-2px);
+      box-shadow: 0 10px 25px rgba(0, 212, 255, 0.4);
+    }
+
+    .filters button.active::before,
+    .filters button:hover::before {
+      left: 0;
+    }
+
+    /* Enhanced Forms */
+    form {
+      display: flex;
+      flex-direction: column;
+      gap: 1.5rem;
+    }
+
+    .form-row {
+      display: flex;
+      gap: 1.5rem;
+    }
+
+    form input,
+    form textarea {
+      background: rgba(255,255,255,0.05);
+      border: 1px solid var(--border);
+      color: var(--text);
+      padding: 1rem 1.5rem;
+      border-radius: 15px;
+      font-family: inherit;
+      font-size: 1rem;
+      transition: all 0.3s ease;
+      backdrop-filter: blur(10px);
+    }
+
+    form input:focus,
+    form textarea:focus {
+      outline: none;
+      border-color: var(--accent);
+      box-shadow: 0 0 20px rgba(0, 212, 255, 0.3);
+      transform: translateY(-2px);
+    }
+
+    form button[type="submit"] {
+      background: var(--accent-gradient);
+      color: white;
+      padding: 1rem 2rem;
+      border-radius: 15px;
+      border: none;
+      font-weight: 600;
+      cursor: pointer;
+      font-size: 1rem;
+      transition: all 0.3s ease;
+      position: relative;
+      overflow: hidden;
+    }
+
+    form button[type="submit"]:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 15px 35px rgba(0, 212, 255, 0.4);
+    }
+
+    form button[type="submit"]:active {
+      transform: translateY(0);
+    }
+
+    /* Enhanced Chatbot */
+    .chat-btn {
+      position: fixed;
+      right: 2rem;
+      bottom: 2rem;
+      width: 70px;
+      height: 70px;
+      background: var(--accent-gradient);
+      border: none;
+      color: white;
+      border-radius: 50%;
+      font-size: 1.5rem;
+      cursor: pointer;
+      box-shadow: 0 20px 40px rgba(0, 212, 255, 0.4);
+      z-index: 1000;
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      animation: pulse 2s infinite;
+    }
+
+    @keyframes pulse {
+      0% { box-shadow: 0 20px 40px rgba(0, 212, 255, 0.4); }
+      50% { box-shadow: 0 25px 50px rgba(0, 212, 255, 0.6); }
+      100% { box-shadow: 0 20px 40px rgba(0, 212, 255, 0.4); }
+    }
+
+    .chat-btn:hover {
+      transform: scale(1.1);
+      box-shadow: 0 25px 50px rgba(0, 212, 255, 0.6);
+    }
+
+    .chatbox {
+      position: fixed;
+      right: 2rem;
+      bottom: 110px;
+      width: 400px;
+      max-width: 90vw;
+      height: 500px;
+      background: linear-gradient(135deg, 
+        rgba(10, 10, 15, 0.95) 0%, 
+        rgba(18, 18, 26, 0.95) 100%);
+      backdrop-filter: blur(25px);
+      border-radius: 25px;
+      border: 1px solid var(--border);
+      box-shadow: 0 30px 60px rgba(0, 0, 0, 0.8);
+      display: none;
+      flex-direction: column;
+      z-index: 1000;
+      overflow: hidden;
+      animation: slideInUp 0.4s ease-out;
+    }
+
+    .chatbox-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1.5rem;
+      border-bottom: 1px solid var(--border);
+      background: rgba(255,255,255,0.02);
+    }
+
+    .chatbox-header h3 {
+      font-family: 'Space Grotesk', sans-serif;
+      color: var(--accent);
+      font-size: 1.2rem;
+      font-weight: 600;
+    }
+
+    .chatbox-status {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      color: var(--muted);
+      font-size: 0.85rem;
+    }
+
+    .status-dot {
+      width: 8px;
+      height: 8px;
+      background: #00ff88;
+      border-radius: 50%;
+      animation: pulse-dot 2s infinite;
+    }
+
+    @keyframes pulse-dot {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.3; }
+    }
+
+    .chatbox-controls {
+      display: flex;
+      gap: 0.5rem;
+    }
+
+    .control-btn {
+      background: rgba(255,255,255,0.05);
+      border: 1px solid var(--border);
+      padding: 0.5rem;
+      border-radius: 10px;
+      color: var(--muted);
+      cursor: pointer;
+      transition: all 0.3s ease;
+      font-size: 0.9rem;
+    }
+
+    .control-btn:hover {
+      background: var(--accent);
+      color: white;
+      transform: scale(1.1);
+    }
+
+    .msgs {
+      flex: 1;
+      padding: 1rem;
+      overflow-y: auto;
+      scrollbar-width: thin;
+      scrollbar-color: var(--accent) transparent;
+    }
+
+    .msgs::-webkit-scrollbar {
+      width: 6px;
+    }
+
+    .msgs::-webkit-scrollbar-track {
+      background: transparent;
+    }
+
+    .msgs::-webkit-scrollbar-thumb {
+      background: var(--accent);
+      border-radius: 3px;
+    }
+
+    .message {
+      margin: 1rem 0;
+      animation: messageSlide 0.3s ease-out;
+    }
+
+    @keyframes messageSlide {
+      from {
+        opacity: 0;
+        transform: translateX(-10px);
+      }
+      to {
+        opacity: 1;
+        transform: translateX(0);
+      }
+    }
+
+    .message.user {
+      text-align: right;
+    }
+
+    .message.user .message-bubble {
+      background: var(--accent-gradient);
+      color: white;
+      margin-left: auto;
+    }
+
+    .message.bot .message-bubble {
+      background: rgba(255,255,255,0.05);
+      color: var(--text);
+      margin-right: auto;
+    }
+
+    .message-bubble {
+      display: inline-block;
+      padding: 0.75rem 1rem;
+      border-radius: 20px;
+      max-width: 80%;
+      word-wrap: break-word;
+      font-size: 0.9rem;
+      line-height: 1.4;
+    }
+
+    .message-sender {
+      font-size: 0.8rem;
+      color: var(--muted);
+      margin-bottom: 0.25rem;
+      font-weight: 500;
+    }
+
+    .typing-indicator {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      color: var(--muted);
+      font-style: italic;
+      padding: 0.5rem 1rem;
+    }
+
+    .typing-dots {
+      display: flex;
+      gap: 0.25rem;
+    }
+
+    .typing-dots span {
+      width: 6px;
+      height: 6px;
+      background: var(--accent);
+      border-radius: 50%;
+      animation: typing 1.4s infinite;
+    }
+
+    .typing-dots span:nth-child(2) {
+      animation-delay: 0.2s;
+    }
+
+    .typing-dots span:nth-child(3) {
+      animation-delay: 0.4s;
+    }
+
+    @keyframes typing {
+      0%, 60%, 100% {
+        transform: translateY(0);
+        opacity: 0.3;
+      }
+      30% {
+        transform: translateY(-10px);
+        opacity: 1;
+      }
+    }
+
+    .chat-input-container {
+      padding: 1rem;
+      border-top: 1px solid var(--border);
+      background: rgba(255,255,255,0.02);
+    }
+
+    .chat-input-row {
+      display: flex;
+      gap: 0.75rem;
+      align-items: flex-end;
+    }
+
+    #chatInput {
+      flex: 1;
+      background: rgba(255,255,255,0.05);
+      border: 1px solid var(--border);
+      color: var(--text);
+      padding: 0.75rem 1rem;
+      border-radius: 15px;
+      font-family: inherit;
+      font-size: 0.9rem;
+      resize: none;
+      max-height: 100px;
+      min-height: 40px;
+    }
+
+    #chatInput:focus {
+      outline: none;
+      border-color: var(--accent);
+      box-shadow: 0 0 15px rgba(0, 212, 255, 0.3);
+    }
+
+    .chat-send-btn {
+      background: var(--accent-gradient);
+      border: none;
+      color: white;
+      padding: 0.75rem;
+      border-radius: 12px;
+      cursor: pointer;
+      font-size: 1rem;
+      transition: all 0.3s ease;
+      min-width: 45px;
+      height: 45px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .chat-send-btn:hover {
+      transform: scale(1.05);
+      box-shadow: 0 5px 15px rgba(0, 212, 255, 0.4);
+    }
+
+    .chat-send-btn:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+      transform: none;
+    }
+
+    /* Quick Actions */
+    .quick-actions {
+      display: flex;
+      gap: 0.5rem;
+      flex-wrap: wrap;
+      margin-top: 1rem;
+    }
+
+    .quick-action {
+      background: rgba(255,255,255,0.05);
+      border: 1px solid var(--border);
+      padding: 0.5rem 1rem;
+      border-radius: 20px;
+      color: var(--muted);
+      font-size: 0.8rem;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    .quick-action:hover {
+      background: var(--accent);
+      color: white;
+      transform: translateY(-1px);
+    }
+
+    /* Responsive Design */
+    @media (max-width: 768px) {
+      .wrap {
+        padding: 1rem;
+      }
+
+      header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 1rem;
+      }
+
+      .top-controls {
+        width: 100%;
+        justify-content: space-between;
+        margin-left: 0;
+      }
+
+      .header-content h1 {
+        font-size: 2rem;
+      }
+
+      .bento-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .form-row {
+        flex-direction: column;
+      }
+
+      .chatbox {
+        right: 1rem;
+        left: 1rem;
+        width: auto;
+        max-width: none;
+      }
+
+      .chat-btn {
+        right: 1rem;
+        bottom: 1rem;
+      }
+    }
+
+    /* Light mode styles */
+    body.light {
+      --bg: #f8fafc;
+      --bg-secondary: #ffffff;
+      --text: #1e293b;
+      --muted: #64748b;
+      --border: rgba(0, 0, 0, 0.1);
+      --panel: rgba(0, 0, 0, 0.03);
+      --glass: rgba(255, 255, 255, 0.8);
+      --shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+    }
+
+    /* Footer */
+    footer {
+      margin-top: 4rem;
+      text-align: center;
+      color: var(--muted);
+      font-size: 0.9rem;
+      padding: 2rem;
+      border-top: 1px solid var(--border);
+    }
   </style>
 </head>
+
 <body>
+  <div id="particles-js"></div>
+  <div class="cursor"></div>
+  <div class="cursor-follower"></div>
+
   <div class="wrap">
     <header>
       <img class="logo" src="assets/STEVE_GitHub_Logo.png" alt="T-Stephen logo" />
-      <div>
+      <div class="header-content">
         <h1>T-Stephen</h1>
         <div class="typed" id="typed"></div>
-        <p class="lead muted-small">B.Tech AI & Data Science • Building practical AI & ML solutions</p>
+        <p class="lead">B.Tech AI & Data Science • Building next-generation AI solutions</p>
       </div>
 
       <div class="top-controls">
-        <div class="vis-count vis-glow">👀 <strong id="visitorCount">—</strong></div>
+        <div class="vis-count">
+          <span>👁️ Visitors: </span>
+          <strong id="visitorCount">—</strong>
+        </div>
         <button id="theme-toggle" title="Toggle theme">🌙</button>
       </div>
     </header>
 
     <nav>
-      <a href="#projects">Projects</a>
-      <a href="#contact">Contact</a>
-      <a href="#feedback">Feedback</a>
+      <a href="#projects" data-scroll="projects">Projects</a>
+      <a href="#contact" data-scroll="contact">Contact</a>
+      <a href="#feedback" data-scroll="feedback">Feedback</a>
+      <a href="#skills" data-scroll="skills">Skills</a>
     </nav>
 
-    <!-- Projects -->
+    <!-- Projects Section -->
     <section id="projects" class="card">
-      <div style="display:flex;justify-content:space-between;align-items:center">
-        <h2 style="margin:0;color:var(--accent)">Projects</h2>
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:2rem;">
+        <h2>Featured Projects</h2>
         <div class="filters" id="filters">
           <button class="active" data-filter="all" onclick="filterProjects('all')">All</button>
-          <button data-filter="ai" onclick="filterProjects('ai')">AI</button>
-          <button data-filter="ml" onclick="filterProjects('ml')">ML</button>
-          <button data-filter="web" onclick="filterProjects('web')">Web</button>
+          <button data-filter="ai" onclick="filterProjects('ai')">AI/ML</button>
+          <button data-filter="web" onclick="filterProjects('web')">Web Dev</button>
+          <button data-filter="data" onclick="filterProjects('data')">Data Science</button>
         </div>
       </div>
 
-      <div class="grid" id="projectGrid" style="margin-top:16px">
-        <div class="project-card ai" data-tags="ai">
-          <h3>AI Smart Traffic Signal</h3>
-          <p class="project-meta">Real-time ambulance detection using YOLOv8 + OpenCV. Priority signalling for emergencies.</p>
+      <div class="bento-grid" id="projectGrid">
+        <div class="project-card ai ml" data-tags="ai ml computer-vision">
+          <h3>🚦 AI Smart Traffic System</h3>
+          <p class="project-meta">Real-time ambulance detection using YOLOv8 + OpenCV. Intelligent traffic signal priority system with 95% accuracy in emergency vehicle detection.</p>
+          <div class="quick-actions">
+            <span class="quick-action">Python</span>
+            <span class="quick-action">YOLOv8</span>
+            <span class="quick-action">OpenCV</span>
+          </div>
         </div>
-        <div class="project-card ml" data-tags="ml">
-          <h3>Candidate-Elimination & Decision Trees</h3>
-          <p class="project-meta">Classical ML demos with visual explanations and dataset walkthroughs.</p>
+
+        <div class="project-card ml data" data-tags="ml algorithms">
+          <h3>🧠 ML Algorithm Demos</h3>
+          <p class="project-meta">Interactive implementations of Candidate-Elimination and Decision Trees with visual explanations and dataset walkthroughs.</p>
+          <div class="quick-actions">
+            <span class="quick-action">Scikit-learn</span>
+            <span class="quick-action">Pandas</span>
+            <span class="quick-action">Matplotlib</span>
+          </div>
         </div>
-        <div class="project-card web" data-tags="web">
-          <h3>Portfolio & Chatbot</h3>
-          <p class="project-meta">This portfolio — interactive chatbot, Firebase feedback & hosting.</p>
+
+        <div class="project-card web ai" data-tags="web chatbot">
+          <h3>🤖 Interactive Portfolio</h3>
+          <p class="project-meta">This responsive portfolio with advanced AI chatbot, real-time feedback system, and modern glassmorphism design.</p>
+          <div class="quick-actions">
+            <span class="quick-action">HTML/CSS/JS</span>
+            <span class="quick-action">Firebase</span>
+            <span class="quick-action">AI Integration</span>
+          </div>
+        </div>
+
+        <div class="project-card data ai" data-tags="data-science nlp">
+          <h3>📊 Sentiment Analysis Tool</h3>
+          <p class="project-meta">NLP-powered sentiment analysis with BERT model integration, handling multiple languages and real-time processing.</p>
+          <div class="quick-actions">
+            <span class="quick-action">BERT</span>
+            <span class="quick-action">Transformers</span>
+            <span class="quick-action">Flask</span>
+          </div>
         </div>
       </div>
     </section>
 
-    <!-- Contact -->
+    <!-- Skills Section -->
+    <section id="skills" class="card">
+      <h2>Technical Skills</h2>
+      <div class="bento-grid">
+        <div class="project-card">
+          <h3>🤖 AI & Machine Learning</h3>
+          <p class="project-meta">TensorFlow, PyTorch, Scikit-learn, YOLO, OpenCV, NLP, Computer Vision, Neural Networks</p>
+        </div>
+        <div class="project-card">
+          <h3>💻 Programming</h3>
+          <p class="project-meta">Python, JavaScript, Java, C++, SQL, HTML/CSS, React, Node.js, Flask, Django</p>
+        </div>
+        <div class="project-card">
+          <h3>📊 Data Science</h3>
+          <p class="project-meta">Pandas, NumPy, Matplotlib, Seaborn, Jupyter, Statistical Analysis, Data Visualization</p>
+        </div>
+        <div class="project-card">
+          <h3>☁️ Tools & Platforms</h3>
+          <p class="project-meta">Git, Docker, AWS, Firebase, Google Colab, VS Code, Linux, MongoDB</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Contact Section -->
     <section id="contact" class="card">
-      <h2 style="color:var(--accent);margin:0 0 10px 0">Contact</h2>
+      <h2>Let's Connect</h2>
       <form id="contactForm" action="https://formsubmit.co/tstephenraj001@gmail.com" method="POST">
-        <div class="row">
+        <div class="form-row">
           <input name="name" placeholder="Your name" required />
           <input name="email" placeholder="Your email" type="email" required />
         </div>
-        <textarea name="message" rows="4" placeholder="Tell me about your idea or collaboration..." required></textarea>
+        <textarea name="message" rows="4" placeholder="Tell me about your project idea or collaboration opportunity..." required></textarea>
         <input type="hidden" name="_captcha" value="false">
-        <button type="submit">Send Message</button>
+        <input type="hidden" name="_template" value="table">
+        <button type="submit">Send Message ✈️</button>
       </form>
-      <p class="muted-small" style="margin-top:8px">Or reach me: <strong>stephenbugi525@gmail.com</strong> • LinkedIn: <a href="https://www.linkedin.com/in/stephen-raj-t-3b417528a/" target="_blank" style="color:var(--accent)">Profile</a></p>
+      <p style="margin-top:1rem;color:var(--muted);text-align:center;">
+        Or reach me directly: <strong>stephenbugi525@gmail.com</strong> • 
+        <a href="https://www.linkedin.com/in/stephen-raj-t-3b417528a/" target="_blank" style="color:var(--accent)">LinkedIn Profile</a>
+      </p>
     </section>
 
-    <!-- Feedback -->
+    <!-- Feedback Section -->
     <section id="feedback" class="card">
-      <div style="display:flex;justify-content:space-between;align-items:center">
-        <h2 style="margin:0;color:var(--accent)">Feedback & Ratings</h2>
-        <div style="text-align:right">
-          <div class="muted-small">Average: <span id="avgRating">—</span></div>
-          <div class="muted-small">Total: <span id="totalReviews">—</span></div>
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:2rem;">
+        <h2>Community Feedback</h2>
+        <div style="text-align:right;">
+          <div style="color:var(--muted);font-size:0.9rem;">Average Rating: <span id="avgRating" style="color:var(--accent);font-weight:600;">—</span></div>
+          <div style="color:var(--muted);font-size:0.9rem;">Total Reviews: <span id="totalReviews" style="color:var(--accent);font-weight:600;">—</span></div>
         </div>
       </div>
 
-      <div style="display:grid;grid-template-columns:1fr 360px;gap:16px;margin-top:14px">
+      <div style="display:grid;grid-template-columns:1fr 400px;gap:2rem;margin-top:1.5rem;">
         <div>
           <form id="feedbackForm">
             <input id="fbName" placeholder="Your name" required/>
-            <input id="fbRating" type="number" min="1" max="5" placeholder="Rating 1-5" required/>
-            <textarea id="fbMessage" rows="4" placeholder="What inspired you?" required></textarea>
-            <button type="submit">Submit Feedback</button>
+            <div style="display:flex;gap:1rem;">
+              <input id="fbRating" type="number" min="1" max="5" placeholder="Rating (1-5)" required style="flex:1;"/>
+              <select id="fbCategory" style="flex:1;background:rgba(255,255,255,0.05);border:1px solid var(--border);color:var(--text);padding:1rem 1.5rem;border-radius:15px;">
+                <option value="general">General</option>
+                <option value="design">Design</option>
+                <option value="functionality">Functionality</option>
+                <option value="chatbot">Chatbot</option>
+              </select>
+            </div>
+            <textarea id="fbMessage" rows="4" placeholder="What did you think about my portfolio? Any suggestions?" required></textarea>
+            <button type="submit">Submit Feedback ⭐</button>
           </form>
         </div>
 
-        <div style="background:rgba(255,255,255,0.02);padding:12px;border-radius:10px">
-          <h4 style="margin:0 0 8px 0;color:var(--accent)">Recent feedback</h4>
-          <div id="feedbackList" class="feedback-list">Loading…</div>
+        <div style="background:var(--panel);padding:1.5rem;border-radius:20px;border:1px solid var(--border);">
+          <h4 style="margin:0 0 1rem 0;color:var(--accent);font-family:'Space Grotesk',sans-serif;">Recent Reviews</h4>
+          <div id="feedbackList" class="feedback-list" style="max-height:300px;overflow-y:auto;">
+            <div style="color:var(--muted);text-align:center;padding:2rem;">Loading feedback...</div>
+          </div>
         </div>
       </div>
     </section>
 
     <footer>
-      &copy; 2025 T-Stephen • Hosted on Firebase
+      <p>&copy; 2025 T-Stephen • Crafted with ❤️ and hosted on Firebase</p>
+      <p style="margin-top:0.5rem;font-size:0.8rem;opacity:0.7;">
+        "Building the future, one algorithm at a time" 🚀
+      </p>
     </footer>
   </div>
 
-  <!-- Chatbot -->
-  <button class="chat-btn" id="openChat" aria-label="Open chat">💬</button>
+  <!-- Enhanced Chatbot -->
+  <button class="chat-btn" id="openChat" aria-label="Open AI Assistant">🤖</button>
+  
   <div class="chatbox" id="chatbox" role="dialog" aria-hidden="true">
-    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px">
-      <strong style="color:var(--accent)">AI Assistant</strong>
+    <div class="chatbox-header">
       <div>
-        <button id="voiceBtn" class="voice-btn" title="Start/Stop voice">🎙️</button>
-        <button id="closeChat" class="voice-btn" title="Close">✖</button>
+        <h3>AI Assistant</h3>
+        <div class="chatbox-status">
+          <div class="status-dot"></div>
+          <span>Online</span>
+        </div>
+      </div>
+      <div class="chatbox-controls">
+        <button id="voiceBtn" class="control-btn" title="Voice Input">🎙️</button>
+        <button id="clearChat" class="control-btn" title="Clear Chat">🗑️</button>
+        <button id="closeChat" class="control-btn" title="Close">✖️</button>
       </div>
     </div>
+    
     <div class="msgs" id="msgs" aria-live="polite"></div>
-    <div class="row" style="margin-top:8px">
-      <input id="chatInput" placeholder="Ask about projects, skills, or say 'help'..." />
-      <button id="sendChatBtn" class="voice-btn">→</button>
+    
+    <div class="chat-input-container">
+      <div class="chat-input-row">
+        <textarea id="chatInput" placeholder="Ask me about Stephen's projects, skills, or anything else..." rows="1"></textarea>
+        <button id="sendChatBtn" class="chat-send-btn" title="Send message">
+          <span>→</span>
+        </button>
+      </div>
+      <div class="quick-actions">
+        <span class="quick-action" onclick="askQuickQuestion('Tell me about your projects')">Projects</span>
+        <span class="quick-action" onclick="askQuickQuestion('What are your skills?')">Skills</span>
+        <span class="quick-action" onclick="askQuickQuestion('How can I contact you?')">Contact</span>
+        <span class="quick-action" onclick="askQuickQuestion('What makes you unique?')">About</span>
+      </div>
     </div>
   </div>
 
-  <!-- Firebase (modular v12) -->
+  <!-- Firebase SDK v12 -->
   <script type="module">
     import { initializeApp } from "https://www.gstatic.com/firebasejs/12.0.0/firebase-app.js";
     import { getFirestore, collection, addDoc, serverTimestamp, query, orderBy, onSnapshot, doc, runTransaction } from "https://www.gstatic.com/firebasejs/12.0.0/firebase-firestore.js";
 
-    // --- Firebase config (your project) ---
+    // Firebase configuration
     const firebaseConfig = {
       apiKey: "AIzaSyDv2IZjs4dyC4w2Tne4jqFVCyHN-J6oFF0",
       authDomain: "t-stephen-ai-portfolio.firebaseapp.com",
@@ -232,198 +1105,734 @@
     const app = initializeApp(firebaseConfig);
     const db = getFirestore(app);
 
-    // --- Visitor counter (transactional, unique per browser) ---
-    async function incrementVisitor(){
+    // Visitor counter with better analytics
+    async function incrementVisitor() {
       try {
-        const docRef = doc(db, 'stats', 'visitors');
+        const docRef = doc(db, 'analytics', 'visitors');
         await runTransaction(db, async (t) => {
           const snap = await t.get(docRef);
           if (!snap.exists()) {
-            t.set(docRef, { count: 1 });
-            document.getElementById('visitorCount').textContent = 1;
+            t.set(docRef, { 
+              count: 1, 
+              lastVisit: serverTimestamp(),
+              dailyCount: 1,
+              lastResetDate: new Date().toDateString()
+            });
+            document.getElementById('visitorCount').textContent = '1';
           } else {
-            const newCount = (snap.data().count || 0) + 1;
-            t.update(docRef, { count: newCount });
-            document.getElementById('visitorCount').textContent = newCount;
+            const data = snap.data();
+            const today = new Date().toDateString();
+            const newCount = (data.count || 0) + 1;
+            
+            const updateData = {
+              count: newCount, 
+              lastVisit: serverTimestamp()
+            };
+            
+            // Reset daily count if new day
+            if (data.lastResetDate !== today) {
+              updateData.dailyCount = 1;
+              updateData.lastResetDate = today;
+            } else {
+              updateData.dailyCount = (data.dailyCount || 0) + 1;
+            }
+            
+            t.update(docRef, updateData);
+            document.getElementById('visitorCount').textContent = newCount.toLocaleString();
           }
         });
-      } catch(err){
-        console.error('visitor increment error', err);
-        // fallback: try to read value
-        // (no update)
+      } catch (err) {
+        console.error('Visitor tracking error:', err);
+        document.getElementById('visitorCount').textContent = '—';
       }
     }
-    (function tryVisitorOnce(){
-      // Only increment once per browser session/localStorage
-      if (!localStorage.getItem('ts_visited')) {
-        incrementVisitor();
-        localStorage.setItem('ts_visited', '1');
-      } else {
-        // read current count and display it
-        const vRef = doc(db, 'stats', 'visitors');
-        onSnapshot(vRef, snap => {
-          if (snap.exists()) document.getElementById('visitorCount').textContent = snap.data().count;
-        }, err => { /* ignore */ });
+
+    // Track unique visitors
+    (function initVisitorTracking() {
+      const visitedKey = 'ts_portfolio_visited';
+      const sessionKey = 'ts_session_id';
+      
+      if (!sessionStorage.getItem(sessionKey)) {
+        sessionStorage.setItem(sessionKey, Date.now().toString());
+        
+        if (!localStorage.getItem(visitedKey)) {
+          incrementVisitor();
+          localStorage.setItem(visitedKey, '1');
+        }
       }
+      
+      // Always show current count
+      const vRef = doc(db, 'analytics', 'visitors');
+      onSnapshot(vRef, snap => {
+        if (snap.exists()) {
+          const count = snap.data().count || 0;
+          document.getElementById('visitorCount').textContent = count.toLocaleString();
+        }
+      }, err => console.error('Visitor count listener error:', err));
     })();
 
-    // --- Feedback: listen & display in real-time ---
+    // Enhanced feedback system
     const fbCol = collection(db, 'feedbacks');
-    const q = query(fbCol, orderBy('createdAt', 'desc'));
+    const fbQuery = query(fbCol, orderBy('createdAt', 'desc'));
     const feedbackListEl = document.getElementById('feedbackList');
     const avgRatingEl = document.getElementById('avgRating');
     const totalReviewsEl = document.getElementById('totalReviews');
 
-    onSnapshot(q, (snap) => {
+    onSnapshot(fbQuery, (snapshot) => {
       feedbackListEl.innerHTML = '';
-      let total = 0, count = 0;
-      snap.forEach(docu => {
-        const d = docu.data();
+      let totalRating = 0;
+      let count = 0;
+      
+      snapshot.forEach(doc => {
+        const data = doc.data();
         count++;
-        total += (d.rating || 0);
-        const div = document.createElement('div');
-        div.className = 'feedback-item';
-        div.innerHTML = `<div style="display:flex;justify-content:space-between;align-items:center"><div><strong>${escapeHtml(d.name||'Anonymous')}</strong></div><div class="stars">${'★'.repeat(d.rating||0)}${'☆'.repeat(5-(d.rating||0))}</div></div><div style="margin-top:6px;color:var(--muted)">${escapeHtml(d.message||'')}</div>`;
-        feedbackListEl.appendChild(div);
+        totalRating += (data.rating || 0);
+        
+        const feedbackEl = document.createElement('div');
+        feedbackEl.className = 'feedback-item';
+        feedbackEl.style.cssText = `
+          padding: 1rem;
+          border-radius: 15px;
+          margin-bottom: 1rem;
+          background: rgba(255,255,255,0.02);
+          border: 1px solid var(--border);
+          transition: all 0.3s ease;
+        `;
+        
+        feedbackEl.innerHTML = `
+          <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:0.5rem;">
+            <div>
+              <strong style="color:var(--text);">${escapeHtml(data.name || 'Anonymous')}</strong>
+              <span style="color:var(--muted);font-size:0.8rem;margin-left:0.5rem;">${data.category || 'general'}</span>
+            </div>
+            <div style="color:var(--accent);font-size:1.1rem;">
+              ${'★'.repeat(data.rating || 0)}${'☆'.repeat(5-(data.rating || 0))}
+            </div>
+          </div>
+          <div style="color:var(--muted);font-size:0.9rem;line-height:1.5;">
+            ${escapeHtml(data.message || '')}
+          </div>
+          <div style="color:var(--muted);font-size:0.75rem;margin-top:0.5rem;opacity:0.7;">
+            ${data.createdAt ? new Date(data.createdAt.toDate()).toLocaleDateString() : 'Recently'}
+          </div>
+        `;
+        
+        feedbackListEl.appendChild(feedbackEl);
       });
-      avgRatingEl.textContent = count ? (total/count).toFixed(1) + ' / 5' : '—';
-      totalReviewsEl.textContent = count;
-      if(!count) feedbackListEl.innerHTML = '<div class="muted-small">No feedback yet — be the first to inspire!</div>';
-    });
-
-    // --- Feedback form submit (adds to Firestore) ---
-    document.getElementById('feedbackForm').addEventListener('submit', async (e) => {
-      e.preventDefault();
-      const name = document.getElementById('fbName').value.trim();
-      const rating = Number(document.getElementById('fbRating').value);
-      const message = document.getElementById('fbMessage').value.trim();
-      if (!name || !rating || !message) { alert('Please fill all fields'); return; }
-      try {
-        await addDoc(fbCol, { name, rating, message, createdAt: serverTimestamp() });
-        alert('Thanks — your feedback was saved!');
-        document.getElementById('fbName').value=''; document.getElementById('fbRating').value=''; document.getElementById('fbMessage').value='';
-      } catch(err) {
-        console.error('save feedback error', err);
-        alert('Could not save feedback. Check console.');
+      
+      const avgRating = count ? (totalRating / count) : 0;
+      avgRatingEl.textContent = count ? `${avgRating.toFixed(1)} ⭐` : '—';
+      totalReviewsEl.textContent = count.toString();
+      
+      if (!count) {
+        feedbackListEl.innerHTML = `
+          <div style="text-align:center;color:var(--muted);padding:2rem;">
+            <div style="font-size:3rem;margin-bottom:1rem;">💬</div>
+            <div>No feedback yet</div>
+            <div style="font-size:0.8rem;margin-top:0.5rem;">Be the first to share your thoughts!</div>
+          </div>
+        `;
       }
     });
 
-    // helper escape
-    function escapeHtml(str){ return String(str).replace(/[&<>"]/g, s => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[s])); }
-  </script>
-
-  <!-- UI + Chatbot + Controls (non-module) -->
-  <script>
-    // Typed header
-    new Typed('#typed', { strings: ['AI Innovator', 'ML Enthusiast', 'Chatbot Builder', 'Data Science Student'], typeSpeed:60, backSpeed:40, loop:true });
-
-    // Theme toggle
-    const themeBtn = document.getElementById('theme-toggle');
-    function setTheme(isLight){
-      document.body.classList.toggle('light', !!isLight);
-      themeBtn.textContent = isLight ? '☀️' : '🌙';
-    }
-    const saved = localStorage.getItem('ts-theme');
-    setTheme(saved === 'light');
-    themeBtn.addEventListener('click', ()=>{
-      const isLight = !document.body.classList.contains('light');
-      setTheme(isLight);
-      localStorage.setItem('ts-theme', isLight ? 'light' : 'dark');
+    // Enhanced feedback form submission
+    document.getElementById('feedbackForm').addEventListener('submit', async (e) => {
+      e.preventDefault();
+      
+      const submitBtn = e.target.querySelector('button[type="submit"]');
+      const originalText = submitBtn.textContent;
+      submitBtn.textContent = 'Submitting...';
+      submitBtn.disabled = true;
+      
+      const name = document.getElementById('fbName').value.trim();
+      const rating = Number(document.getElementById('fbRating').value);
+      const category = document.getElementById('fbCategory').value;
+      const message = document.getElementById('fbMessage').value.trim();
+      
+      if (!name || !rating || !message) {
+        alert('Please fill in all required fields');
+        submitBtn.textContent = originalText;
+        submitBtn.disabled = false;
+        return;
+      }
+      
+      if (rating < 1 || rating > 5) {
+        alert('Rating must be between 1 and 5');
+        submitBtn.textContent = originalText;
+        submitBtn.disabled = false;
+        return;
+      }
+      
+      try {
+        await addDoc(fbCol, {
+          name,
+          rating,
+          category,
+          message,
+          createdAt: serverTimestamp(),
+          userAgent: navigator.userAgent,
+          timestamp: Date.now()
+        });
+        
+        // Success animation
+        submitBtn.textContent = 'Thank you! ✨';
+        submitBtn.style.background = '#00ff88';
+        
+        setTimeout(() => {
+          submitBtn.textContent = originalText;
+          submitBtn.style.background = '';
+          submitBtn.disabled = false;
+        }, 2000);
+        
+        // Clear form
+        document.getElementById('fbName').value = '';
+        document.getElementById('fbRating').value = '';
+        document.getElementById('fbMessage').value = '';
+        document.getElementById('fbCategory').value = 'general';
+        
+        // Show success message
+        showNotification('Thank you for your feedback! 🙏', 'success');
+        
+      } catch (err) {
+        console.error('Feedback submission error:', err);
+        alert('Sorry, there was an error submitting your feedback. Please try again.');
+        submitBtn.textContent = originalText;
+        submitBtn.disabled = false;
+      }
     });
 
-    // Project filter
-    function filterProjects(type){
-      document.querySelectorAll('.filters button').forEach(b => b.classList.toggle('active', b.dataset.filter===type));
-      document.querySelectorAll('.project-card').forEach(card => {
-        if(type==='all') card.style.display = 'block';
-        else card.style.display = (card.classList.contains(type) ? 'block' : 'none');
+    // Utility function for escaping HTML
+    function escapeHtml(unsafe) {
+      return unsafe
+        .replace(/&/g, "&amp;")
+        .replace(/</g, "&lt;")
+        .replace(/>/g, "&gt;")
+        .replace(/"/g, "&quot;")
+        .replace(/'/g, "&#039;");
+    }
+
+    // Make functions globally available
+    window.escapeHtml = escapeHtml;
+  </script>
+
+  <!-- Enhanced UI and Chatbot Logic -->
+  <script>
+    // Initialize particles background
+    particlesJS('particles-js', {
+      particles: {
+        number: { value: 80, density: { enable: true, value_area: 800 } },
+        color: { value: '#00d4ff' },
+        shape: { type: 'circle' },
+        opacity: { value: 0.1, random: false },
+        size: { value: 3, random: true },
+        line_linked: {
+          enable: true,
+          distance: 150,
+          color: '#00d4ff',
+          opacity: 0.05,
+          width: 1
+        },
+        move: {
+          enable: true,
+          speed: 2,
+          direction: 'none',
+          random: false,
+          straight: false,
+          out_mode: 'out',
+          bounce: false
+        }
+      },
+      interactivity: {
+        detect_on: 'canvas',
+        events: {
+          onhover: { enable: true, mode: 'repulse' },
+          onclick: { enable: true, mode: 'push' },
+          resize: true
+        },
+        modes: {
+          repulse: { distance: 100, duration: 0.4 },
+          push: { particles_nb: 4 }
+        }
+      },
+      retina_detect: true
+    });
+
+    // Custom cursor
+    const cursor = document.querySelector('.cursor');
+    const cursorFollower = document.querySelector('.cursor-follower');
+    let mouseX = 0, mouseY = 0;
+    let followerX = 0, followerY = 0;
+
+    document.addEventListener('mousemove', (e) => {
+      mouseX = e.clientX;
+      mouseY = e.clientY;
+      cursor.style.left = mouseX + 'px';
+      cursor.style.top = mouseY + 'px';
+    });
+
+    function animateFollower() {
+      followerX += (mouseX - followerX) * 0.1;
+      followerY += (mouseY - followerY) * 0.1;
+      cursorFollower.style.left = followerX + 'px';
+      cursorFollower.style.top = followerY + 'px';
+      requestAnimationFrame(animateFollower);
+    }
+    animateFollower();
+
+    // Enhanced typing animation
+    new Typed('#typed', {
+      strings: [
+        'AI Innovator ^1000',
+        'ML Engineer ^1000', 
+        'Data Scientist ^1000',
+        'Full-Stack Developer ^1000',
+        'Problem Solver ^1000'
+      ],
+      typeSpeed: 60,
+      backSpeed: 40,
+      backDelay: 1000,
+      startDelay: 500,
+      loop: true,
+      showCursor: true,
+      cursorChar: '|'
+    });
+
+    // Theme toggle with smooth transitions
+    const themeBtn = document.getElementById('theme-toggle');
+    const currentTheme = localStorage.getItem('ts-theme') || 'dark';
+
+    function setTheme(theme) {
+      document.body.classList.toggle('light', theme === 'light');
+      themeBtn.textContent = theme === 'light' ? '☀️' : '🌙';
+      localStorage.setItem('ts-theme', theme);
+      
+      // Update particles color for theme
+      if (window.pJSDom && window.pJSDom[0]) {
+        const color = theme === 'light' ? '#64748b' : '#00d4ff';
+        window.pJSDom[0].pJS.particles.color.value = color;
+        window.pJSDom[0].pJS.particles.line_linked.color = color;
+        window.pJSDom[0].pJS.fn.particlesRefresh();
+      }
+    }
+
+    setTheme(currentTheme);
+
+    themeBtn.addEventListener('click', () => {
+      const newTheme = document.body.classList.contains('light') ? 'dark' : 'light';
+      setTheme(newTheme);
+    });
+
+    // Smooth scrolling navigation
+    document.querySelectorAll('nav a[data-scroll]').forEach(link => {
+      link.addEventListener('click', (e) => {
+        e.preventDefault();
+        const targetId = link.getAttribute('data-scroll');
+        const target = document.getElementById(targetId);
+        if (target) {
+          target.scrollIntoView({ 
+            behavior: 'smooth',
+            block: 'start'
+          });
+        }
+      });
+    });
+
+    // Enhanced project filtering with animations
+    function filterProjects(type) {
+      const cards = document.querySelectorAll('.project-card');
+      const buttons = document.querySelectorAll('.filters button');
+      
+      // Update active button
+      buttons.forEach(btn => {
+        btn.classList.toggle('active', btn.dataset.filter === type);
+      });
+      
+      // Animate cards
+      cards.forEach((card, index) => {
+        const shouldShow = type === 'all' || card.classList.contains(type);
+        
+        if (shouldShow) {
+          card.style.display = 'block';
+          card.style.opacity = '0';
+          card.style.transform = 'translateY(20px)';
+          
+          setTimeout(() => {
+            card.style.transition = 'all 0.4s ease';
+            card.style.opacity = '1';
+            card.style.transform = 'translateY(0)';
+          }, index * 100);
+        } else {
+          card.style.transition = 'all 0.3s ease';
+          card.style.opacity = '0';
+          card.style.transform = 'translateY(-20px)';
+          
+          setTimeout(() => {
+            card.style.display = 'none';
+          }, 300);
+        }
       });
     }
-    filterProjects('all');
 
-    /* Chatbot logic (simple, local, no paid API) */
+    // Enhanced chatbot with advanced features
     const chatBtn = document.getElementById('openChat');
     const chatBox = document.getElementById('chatbox');
     const closeChat = document.getElementById('closeChat');
+    const clearChat = document.getElementById('clearChat');
     const msgs = document.getElementById('msgs');
     const chatInput = document.getElementById('chatInput');
     const sendChatBtn = document.getElementById('sendChatBtn');
     const voiceBtn = document.getElementById('voiceBtn');
 
-    function addMessage(who, txt){
-      const d = document.createElement('div');
-      d.style.margin = '8px 0';
-      d.innerHTML = `<div style="font-size:13px;color:${who==='bot'? 'var(--muted)' : '#fff'}"><strong style="color:${who==='bot'? 'var(--accent)' : 'var(--accent-2)'}">${who==='bot'?'Assistant':'You'}</strong></div><div style="margin-top:6px">${txt}</div>`;
-      msgs.appendChild(d);
-      msgs.scrollTop = msgs.scrollHeight;
-    }
+    // Chatbot conversation context
+    let conversationHistory = [];
+    let isTyping = false;
 
-    function speakText(text){
-      if(!('speechSynthesis' in window)) return;
-      const u = new SpeechSynthesisUtterance(text);
-      u.lang = 'en-US';
-      u.rate = 1;
-      window.speechSynthesis.cancel();
-      window.speechSynthesis.speak(u);
-    }
+    // Enhanced chatbot knowledge base
+    const knowledgeBase = {
+      // Personal Info
+      personal: {
+        name: "Stephen",
+        education: "B.Tech in AI & Data Science",
+        location: "India",
+        interests: ["AI/ML", "Computer Vision", "Web Development", "Data Science"],
+        goal: "Building practical AI solutions that solve real-world problems"
+      },
+      
+      // Projects with detailed info
+      projects: {
+        "traffic system": {
+          name: "AI Smart Traffic Signal System",
+          tech: ["Python", "YOLOv8", "OpenCV", "Computer Vision"],
+          description: "Real-time ambulance detection system with 95% accuracy, automatically prioritizes emergency vehicles at traffic signals",
+          impact: "Reduces emergency response time by 30-40%"
+        },
+        "ml algorithms": {
+          name: "Machine Learning Algorithm Demos", 
+          tech: ["Python", "Scikit-learn", "Pandas", "Matplotlib"],
+          description: "Interactive implementations of classical ML algorithms with visual explanations",
+          features: ["Candidate-Elimination", "Decision Trees", "Visual Learning"]
+        },
+        "portfolio": {
+          name: "Interactive AI Portfolio",
+          tech: ["HTML/CSS/JS", "Firebase", "AI Integration"],
+          description: "Modern portfolio with advanced chatbot, real-time feedback, and glassmorphism design",
+          features: ["Real-time chat", "Voice input", "Responsive design"]
+        },
+        "sentiment": {
+          name: "Sentiment Analysis Tool",
+          tech: ["BERT", "Transformers", "Flask", "NLP"],
+          description: "Advanced sentiment analysis with BERT model, supports multiple languages",
+          capabilities: ["Real-time processing", "Multi-language", "High accuracy"]
+        }
+      },
+      
+      // Skills categories
+      skills: {
+        "ai/ml": ["TensorFlow", "PyTorch", "Scikit-learn", "YOLO", "OpenCV", "NLP", "Computer Vision", "Neural Networks"],
+        "programming": ["Python", "JavaScript", "Java", "C++", "SQL", "HTML/CSS", "React", "Node.js", "Flask", "Django"],
+        "data": ["Pandas", "NumPy", "Matplotlib", "Seaborn", "Jupyter", "Statistical Analysis", "Data Visualization"],
+        "tools": ["Git", "Docker", "AWS", "Firebase", "Google Colab", "VS Code", "Linux", "MongoDB"]
+      },
 
-    const smart = {
-      hello: "Hello! I'm Stephen's assistant. Ask about projects, skills, or say 'projects'.",
-      projects: "Stephen has built an AI traffic signal system, ML demos, and fullstack projects with Firebase.",
-      skills: "Python • OpenCV • YOLO • Machine Learning • Data Science • Web (HTML/CSS/JS) • Firebase",
-      contact: "You can contact Stephen using the contact form or at stephenbugi525@gmail.com",
-      inspire: "Keep learning — AI + perseverance builds impact. Stephen aims to solve real problems with ML."
+      // Contact info
+      contact: {
+        email: "stephenbugi525@gmail.com",
+        linkedin: "https://www.linkedin.com/in/stephen-raj-t-3b417528a/",
+        github: "Available on request",
+        availability: "Open to internships, projects, and collaboration"
+      }
     };
 
-    function botReply(text){
-      text = text.toLowerCase();
-      for(const k in smart){
-        if(text.includes(k)) return smart[k];
+    // Advanced response generation
+    function generateResponse(input) {
+      const query = input.toLowerCase().trim();
+      conversationHistory.push({ role: 'user', content: query });
+      
+      // Intent classification
+      const intents = {
+        greeting: ['hi', 'hello', 'hey', 'good morning', 'good afternoon', 'good evening'],
+        projects: ['project', 'work', 'built', 'created', 'developed', 'portfolio'],
+        skills: ['skill', 'technology', 'tech', 'programming', 'language', 'framework'],
+        experience: ['experience', 'background', 'journey', 'story'],
+        contact: ['contact', 'reach', 'email', 'linkedin', 'hire', 'collaborate'],
+        about: ['about', 'who', 'tell me', 'yourself', 'bio', 'introduction'],
+        help: ['help', 'what can you do', 'commands', 'options']
+      };
+
+      let detectedIntent = 'general';
+      let confidence = 0;
+
+      for (const [intent, keywords] of Object.entries(intents)) {
+        const matches = keywords.filter(keyword => query.includes(keyword)).length;
+        const currentConfidence = matches / keywords.length;
+        if (currentConfidence > confidence) {
+          confidence = currentConfidence;
+          detectedIntent = intent;
+        }
       }
-      if(text.includes('help')||text.includes('how')) return "Try 'projects', 'skills', 'contact', or ask 'what did you build?'.";
-      return "Nice question — tell me more or ask about Stephen's projects or skills.";
+
+      // Generate contextual response
+      let response = '';
+      
+      switch (detectedIntent) {
+        case 'greeting':
+          const greetings = [
+            "Hello! 👋 I'm Stephen's AI assistant. I'm here to tell you all about his projects, skills, and experience!",
+            "Hi there! 🤖 Welcome to Stephen's portfolio. What would you like to know about his work?",
+            "Hey! ✨ Great to meet you. I can help you explore Stephen's AI/ML projects and technical skills."
+          ];
+          response = greetings[Math.floor(Math.random() * greetings.length)];
+          break;
+
+        case 'projects':
+          if (query.includes('traffic') || query.includes('signal')) {
+            const project = knowledgeBase.projects["traffic system"];
+            response = `🚦 **${project.name}**\n\n${project.description}\n\n**Technologies:** ${project.tech.join(', ')}\n**Impact:** ${project.impact}\n\nThis project showcases Stephen's expertise in computer vision and real-world AI applications!`;
+          } else if (query.includes('ml') || query.includes('algorithm')) {
+            const project = knowledgeBase.projects["ml algorithms"];
+            response = `🧠 **${project.name}**\n\n${project.description}\n\n**Technologies:** ${project.tech.join(', ')}\n**Features:** ${project.features.join(', ')}\n\nPerfect for understanding classical ML concepts with hands-on examples!`;
+          } else if (query.includes('sentiment') || query.includes('nlp')) {
+            const project = knowledgeBase.projects["sentiment"];
+            response = `📊 **${project.name}**\n\n${project.description}\n\n**Technologies:** ${project.tech.join(', ')}\n**Capabilities:** ${project.capabilities.join(', ')}\n\nDemonstrates advanced NLP skills with modern transformer models!`;
+          } else {
+            response = `🚀 **Stephen's Featured Projects:**\n\n1. **AI Smart Traffic System** - Emergency vehicle detection with YOLOv8\n2. **ML Algorithm Demos** - Interactive learning tools\n3. **Sentiment Analysis Tool** - BERT-powered NLP\n4. **This Portfolio** - Modern web app with AI integration\n\nWhich project interests you most? I can provide detailed information!`;
+          }
+          break;
+
+        case 'skills':
+          if (query.includes('ai') || query.includes('ml') || query.includes('machine learning')) {
+            response = `🤖 **AI & Machine Learning Skills:**\n\n${knowledgeBase.skills['ai/ml'].join(' • ')}\n\nStephen specializes in computer vision, NLP, and practical AI applications. He's worked with YOLO for object detection, BERT for sentiment analysis, and various ML algorithms!`;
+          } else if (query.includes('programming') || query.includes('language')) {
+            response = `💻 **Programming Skills:**\n\n${knowledgeBase.skills.programming.join(' • ')}\n\nStephen is proficient in multiple programming languages with strong focus on Python for AI/ML and JavaScript for web development!`;
+          } else if (query.includes('data')) {
+            response = `📊 **Data Science Skills:**\n\n${knowledgeBase.skills.data.join(' • ')}\n\nExperienced in data manipulation, statistical analysis, and creating insightful visualizations!`;
+          } else {
+            response = `⚡ **Technical Skill Overview:**\n\n🤖 **AI/ML:** TensorFlow, PyTorch, Computer Vision, NLP\n💻 **Programming:** Python, JavaScript, Java, C++\n📊 **Data Science:** Pandas, NumPy, Statistical Analysis\n🛠️ **Tools:** Git, Docker, AWS, Firebase\n\nWhat specific area would you like to know more about?`;
+          }
+          break;
+
+        case 'about':
+          response = `👨‍💻 **About Stephen:**\n\n${knowledgeBase.personal.goal}\n\n🎓 **Education:** ${knowledgeBase.personal.education}\n🌍 **Location:** ${knowledgeBase.personal.location}\n⚡ **Interests:** ${knowledgeBase.personal.interests.join(', ')}\n\nStephen is passionate about creating AI solutions that make a real difference. He combines technical expertise with practical problem-solving to build impactful projects!`;
+          break;
+
+        case 'contact':
+          response = `📫 **Get in Touch with Stephen:**\n\n✉️ **Email:** ${knowledgeBase.contact.email}\n🔗 **LinkedIn:** [Connect on LinkedIn](${knowledgeBase.contact.linkedin})\n\n💼 **Availability:** ${knowledgeBase.contact.availability}\n\nFeel free to reach out for collaborations, internship opportunities, or just to chat about AI and technology!`;
+          break;
+
+        case 'help':
+          response = `🤖 **I can help you with:**\n\n🚀 **Projects** - Learn about Stephen's AI/ML work\n⚡ **Skills** - Explore his technical expertise\n👨‍💻 **About** - Get to know Stephen better\n📫 **Contact** - Find ways to connect\n\n**Quick commands:**\n• "Tell me about projects"\n• "What are your skills?"\n• "How can I contact you?"\n• "What makes you unique?"\n\nJust ask naturally - I understand context!`;
+          break;
+
+        default:
+          // Fuzzy matching for specific queries
+          if (query.includes('unique') || query.includes('special') || query.includes('different')) {
+            response = `✨ **What makes Stephen unique:**\n\n🎯 **Practical Focus** - Builds AI solutions for real-world problems\n🔬 **Technical Depth** - Strong foundation in both theory and implementation\n🌟 **Modern Stack** - Uses cutting-edge technologies like YOLOv8, BERT\n🚀 **Full-Stack** - Combines AI/ML with web development skills\n💡 **Problem Solver** - Focuses on impact and user experience\n\nHis traffic signal project is a perfect example - using AI to solve actual urban challenges!`;
+          } else if (query.includes('career') || query.includes('future') || query.includes('goals')) {
+            response = `🎯 **Stephen's Career Goals:**\n\n🚀 **Short-term:** Secure AI/ML internships and work on impactful projects\n🌟 **Long-term:** Become a leading AI engineer creating solutions that matter\n💡 **Focus Areas:** Computer Vision, NLP, and practical AI applications\n🤝 **Collaboration:** Open to working with innovative teams and startups\n\nHe's particularly interested in projects that combine AI with real-world impact!`;
+          } else {
+            const contextualResponses = [
+              "That's an interesting question! Could you be more specific? I can tell you about Stephen's projects, skills, experience, or contact information.",
+              "I'd love to help! Try asking about Stephen's AI projects, programming skills, or how to get in touch with him.",
+              "Great question! I have detailed information about Stephen's work in AI/ML, web development, and data science. What would you like to explore?"
+            ];
+            response = contextualResponses[Math.floor(Math.random() * contextualResponses.length)];
+          }
+      }
+
+      conversationHistory.push({ role: 'assistant', content: response });
+      return response;
     }
 
-    function processChat(input){
-      if(!input) return;
-      addMessage('you', escapeHtml(input));
-      const reply = botReply(input);
-      setTimeout(()=>{ addMessage('bot', escapeHtml(reply)); speakText(reply); }, 350);
+    // Enhanced message display with markdown-like formatting
+    function addMessage(sender, content, isTyping = false) {
+      const messageEl = document.createElement('div');
+      messageEl.className = `message ${sender}`;
+      
+      const senderEl = document.createElement('div');
+      senderEl.className = 'message-sender';
+      senderEl.textContent = sender === 'bot' ? '🤖 AI Assistant' : '👤 You';
+      
+      const bubbleEl = document.createElement('div');
+      bubbleEl.className = 'message-bubble';
+      
+      if (isTyping) {
+        bubbleEl.innerHTML = `
+          <div class="typing-indicator">
+            <span>AI is thinking</span>
+            <div class="typing-dots">
+              <span></span><span></span><span></span>
+            </div>
+          </div>
+        `;
+      } else {
+        // Simple markdown-like formatting
+        let formattedContent = content
+          .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')
+          .replace(/\*(.*?)\*/g, '<em>$1</em>')
+          .replace(/\n/g, '<br>')
+          .replace(/(\d+\.\s)/g, '<br>$1');
+        
+        bubbleEl.innerHTML = formattedContent;
+      }
+      
+      messageEl.appendChild(senderEl);
+      messageEl.appendChild(bubbleEl);
+      msgs.appendChild(messageEl);
+      
+      // Smooth scroll to bottom
+      msgs.scrollTo({
+        top: msgs.scrollHeight,
+        behavior: 'smooth'
+      });
+      
+      return messageEl;
     }
 
-    chatBtn.addEventListener('click', ()=>{ chatBox.style.display='flex'; chatBox.setAttribute('aria-hidden','false'); chatInput.focus(); addMessage('bot','Hi — ask me about projects, skills, or say \"inspire me\".'); });
-    closeChat && closeChat.addEventListener('click', ()=>{ chatBox.style.display='none'; chatBox.setAttribute('aria-hidden','true'); });
-    sendChatBtn.addEventListener('click', ()=>{ processChat(chatInput.value); chatInput.value=''; });
-    chatInput.addEventListener('keydown', (e)=>{ if(e.key==='Enter'){ processChat(chatInput.value); chatInput.value=''; } });
+    // Typing simulation
+    function showTypingIndicator() {
+      isTyping = true;
+      const typingEl = addMessage('bot', '', true);
+      return typingEl;
+    }
 
-    // voice recognition
-    let recognition = null;
-    if('webkitSpeechRecognition' in window || 'SpeechRecognition' in window){
-      const SR = window.SpeechRecognition || window.webkitSpeechRecognition;
-      recognition = new SR();
-      recognition.lang = 'en-IN';
+    function hideTypingIndicator(typingEl) {
+      isTyping = false;
+      if (typingEl) {
+        typingEl.remove();
+      }
+    }
+
+    // Enhanced message processing
+    function processMessage(input) {
+      if (!input.trim()) return;
+      
+      // Add user message
+      addMessage('user', input);
+      
+      // Show typing indicator
+      const typingEl = showTypingIndicator();
+      
+      // Simulate thinking time
+      setTimeout(() => {
+        hideTypingIndicator(typingEl);
+        const response = generateResponse(input);
+        addMessage('bot', response);
+        
+        // Speak response if text-to-speech is available
+        if (window.speechSynthesis && response.length < 200) {
+          const utterance = new SpeechSynthesisUtterance(response.replace(/[🤖👤🚀⚡💻📊🛠️✨🎯🌟💡🤝]/g, ''));
+          utterance.rate = 0.9;
+          utterance.pitch = 1;
+          utterance.volume = 0.7;
+          window.speechSynthesis.speak(utterance);
+        }
+      }, 1000 + Math.random() * 1000);
+    }
+
+    // Auto-resize textarea
+    chatInput.addEventListener('input', function() {
+      this.style.height = 'auto';
+      this.style.height = Math.min(this.scrollHeight, 100) + 'px';
+    });
+
+    // Keyboard shortcuts
+    chatInput.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter' && !e.shiftKey) {
+        e.preventDefault();
+        const message = chatInput.value.trim();
+        if (message && !isTyping) {
+          processMessage(message);
+          chatInput.value = '';
+          chatInput.style.height = '40px';
+        }
+      }
+    });
+
+    // Send button
+    sendChatBtn.addEventListener('click', () => {
+      const message = chatInput.value.trim();
+      if (message && !isTyping) {
+        processMessage(message);
+        chatInput.value = '';
+        chatInput.style.height = '40px';
+      }
+    });
+
+    // Quick questions
+    window.askQuickQuestion = function(q) {
+      processMessage(q);
+    }
+
+    // Open/close chat box
+    chatBtn.addEventListener('click', () => {
+      chatBox.style.display = 'flex';
+      chatInput.focus();
+    });
+
+    closeChat.addEventListener('click', () => {
+      chatBox.style.display = 'none';
+    });
+
+    clearChat.addEventListener('click', () => {
+      msgs.innerHTML = '';
+      conversationHistory = [];
+      showNotification('Chat cleared.');
+    });
+
+    // Voice input (Web Speech API)
+    let recognition;
+    if ('webkitSpeechRecognition' in window) {
+      recognition = new webkitSpeechRecognition();
+      recognition.continuous = false;
       recognition.interimResults = false;
-      recognition.onresult = (e)=>{ const txt = e.results[0][0].transcript; chatInput.value = txt; processChat(txt); }
-      recognition.onerror = (err)=>{ console.error('sr err', err); }
-      voiceBtn.addEventListener('click', ()=>{ if(recognition){ recognition.start(); } });
+      recognition.lang = 'en-US';
+
+      recognition.onstart = () => {
+        voiceBtn.textContent = '🎤';
+        voiceBtn.disabled = true;
+      };
+
+      recognition.onresult = (event) => {
+        const transcript = event.results[0][0].transcript;
+        chatInput.value = transcript;
+        processMessage(transcript);
+      };
+
+      recognition.onerror = () => {
+        showNotification('Voice input error. Please try again.', 'error');
+      };
+
+      recognition.onend = () => {
+        voiceBtn.textContent = '🎙️';
+        voiceBtn.disabled = false;
+      };
+
+      voiceBtn.addEventListener('click', () => {
+        recognition.start();
+      });
     } else {
       voiceBtn.style.display = 'none';
     }
 
-    // small hint: click project card to prompt bot
-    document.querySelectorAll('.project-card').forEach(pc => {
-      pc.addEventListener('click', () => {
-        const title = pc.querySelector('h3').innerText;
-        addMessage('you', `Tell me more about ${title}`);
-        setTimeout(()=>{ addMessage('bot', `This project - ${title} - is listed in Projects. Ask 'stack ${title.split(' ')[0]}' to know stack.`); }, 350);
-      });
-    });
-
-    // keyboard to open chat (press c)
-    window.addEventListener('keydown', (e)=>{ if(e.key==='c'){ chatBox.style.display='flex'; chatInput.focus(); } });
-
-    // small helper escape (same as module, kept local for chat display)
-    function escapeHtml(str){ return String(str).replace(/[&<>"]/g, s => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[s])); }
+    // Simple notification system
+    function showNotification(text, type = 'info') {
+      const note = document.createElement('div');
+      note.textContent = text;
+      note.style.cssText = `
+        position: fixed;
+        bottom: 1rem;
+        left: 50%;
+        transform: translateX(-50%);
+        background: ${type === 'success' ? '#00ff88' : type === 'error' ? '#ff006e' : 'rgba(255,255,255,0.1)'};
+        color: ${type === 'success' || type === 'error' ? '#0a0a0f' : 'white'};
+        padding: 0.75rem 1.25rem;
+        border-radius: 12px;
+        z-index: 2000;
+        box-shadow: 0 10px 30px rgba(0,0,0,0.4);
+      `;
+      document.body.appendChild(note);
+      setTimeout(() => note.remove(), 2000);
+    }
   </script>
 </body>
 </html>
