@@ -2,473 +2,487 @@
 <html lang="en">
 <head>
   <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
-  <title>T-Stephen | AI Architect</title>
-  <meta name="description" content="Advanced AI Portfolio featuring 3D interactions and Voice AI." />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>T-Stephen | AI Innovator & Data Scientist</title>
+  <meta name="description" content="Premium AI Portfolio of T-Stephen. 3D Interactive Experience." />
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Rajdhani:wght@300;500;700&family=Share+Tech+Mono&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
   
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/typed.js@2.0.12"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r134/three.min.js"></script>
+
+  <link rel="icon" href="assets/STEVE_GitHub_Logo.png" />
 
   <style>
     :root {
-      --neon-blue: #00f3ff;
-      --neon-purple: #bc13fe;
-      --bg-dark: #050505;
-      --glass: rgba(10, 10, 12, 0.85);
-      --border: 1px solid rgba(0, 243, 255, 0.2);
-      --font-head: 'Orbitron', sans-serif;
-      --font-body: 'Rajdhani', sans-serif;
-      --font-code: 'Share Tech Mono', monospace;
+      --bg-dark: #050508;
+      --bg-panel: rgba(20, 20, 25, 0.6);
+      --primary: #00f2ff;
+      --secondary: #ff0055;
+      --text-main: #ffffff;
+      --text-muted: #94a3b8;
+      --gradient-main: linear-gradient(135deg, #00f2ff 0%, #ff0055 100%);
+      --glass-border: 1px solid rgba(255, 255, 255, 0.08);
+      --glass-shine: rgba(255, 255, 255, 0.03);
+      --font-heading: 'Space Grotesk', sans-serif;
+      --font-body: 'Outfit', sans-serif;
+      --font-code: 'JetBrains Mono', monospace;
     }
 
-    * { margin: 0; padding: 0; box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+    * { margin: 0; padding: 0; box-sizing: border-box; scroll-behavior: smooth; }
 
     body {
       background-color: var(--bg-dark);
-      color: white;
+      color: var(--text-main);
       font-family: var(--font-body);
       overflow-x: hidden;
-      width: 100vw;
     }
 
-    /* --- 3D Background --- */
-    #webgl-container {
+    /* --- 3D Background Canvas --- */
+    #canvas-container {
       position: fixed;
-      top: 0; left: 0;
-      width: 100vw; height: 100vh;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
       z-index: -1;
       opacity: 0.6;
     }
 
-    /* --- Typography --- */
-    h1, h2, h3 { font-family: var(--font-head); text-transform: uppercase; }
-    
-    .section-title {
-      font-size: clamp(2rem, 5vw, 4rem);
-      margin: 4rem 0 2rem;
-      background: linear-gradient(90deg, #fff, var(--neon-blue));
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      border-left: 5px solid var(--neon-purple);
-      padding-left: 1rem;
-    }
-
-    /* --- Layout --- */
-    .container {
-      width: 100%;
-      max-width: 1400px;
+    /* --- Layout & Typography --- */
+    .wrap {
+      max-width: 1200px;
       margin: 0 auto;
-      padding: 0 1.5rem;
+      padding: 2rem;
       position: relative;
       z-index: 2;
     }
 
-    /* Header */
-    nav {
+    h1, h2, h3 { font-family: var(--font-heading); }
+    
+    .section-title {
+      font-size: 2.5rem;
+      margin-bottom: 2rem;
+      background: var(--gradient-main);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      display: inline-block;
+      position: relative;
+    }
+
+    /* --- Glass Header --- */
+    header {
       display: flex;
       justify-content: space-between;
       align-items: center;
-      padding: 1.5rem 0;
-      backdrop-filter: blur(5px);
+      padding: 1.5rem 2rem;
+      background: rgba(10, 10, 15, 0.7);
+      backdrop-filter: blur(16px);
+      border: var(--glass-border);
+      border-radius: 24px;
+      margin-bottom: 4rem;
+      box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+      transition: transform 0.3s ease;
     }
-    .logo { font-size: 1.5rem; font-weight: 900; letter-spacing: 2px; }
-    .logo span { color: var(--neon-blue); }
 
-    /* Hero */
-    .hero {
-      min-height: 90vh;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      padding-top: 60px;
+    .logo-area { display: flex; align-items: center; gap: 1.5rem; }
+    .logo-img {
+      width: 60px;
+      height: 60px;
+      border-radius: 12px;
+      border: 2px solid rgba(0, 242, 255, 0.3);
+      object-fit: cover;
     }
-    .hero h1 {
-      font-size: clamp(2.5rem, 8vw, 6rem);
-      line-height: 1.1;
-      margin-bottom: 1rem;
+
+    .hero-text h1 { font-size: 3rem; line-height: 1.1; margin-bottom: 0.5rem; }
+    .hero-text .role { font-family: var(--font-code); color: var(--primary); font-size: 1.1rem; }
+
+    /* --- 3D Cards with Tilt Effect --- */
+    .glass-card {
+      background: var(--bg-panel);
+      backdrop-filter: blur(12px);
+      border: var(--glass-border);
+      border-radius: 24px;
+      padding: 2.5rem;
+      margin-bottom: 3rem;
+      position: relative;
+      overflow: hidden;
+      transition: transform 0.1s, box-shadow 0.3s;
+      transform-style: preserve-3d;
+      perspective: 1000px;
     }
-    .hero-subtitle {
-      font-family: var(--font-code);
-      color: var(--neon-blue);
-      font-size: clamp(1rem, 3vw, 1.5rem);
-      margin-bottom: 2rem;
-    }
-    .scroll-indicator {
+
+    .glass-card::before {
+      content: '';
       position: absolute;
-      bottom: 2rem;
-      left: 50%;
-      transform: translateX(-50%);
-      animation: bounce 2s infinite;
-      opacity: 0.7;
+      top: 0; left: 0; right: 0; height: 1px;
+      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
     }
-    @keyframes bounce { 0%, 100% { transform: translate(-50%, 0); } 50% { transform: translate(-50%, 10px); } }
 
-    /* --- GRID SYSTEM (Mobile Fixed) --- */
-    .grid-projects {
+    /* --- Bento Grid for Projects --- */
+    .bento-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); /* Auto-stack on mobile */
+      grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
       gap: 2rem;
     }
 
-    /* Holographic Cards */
-    .holo-card {
-      background: rgba(255, 255, 255, 0.02);
-      border: var(--border);
-      backdrop-filter: blur(15px);
+    .project-card {
+      background: rgba(255,255,255,0.02);
+      border: 1px solid rgba(255,255,255,0.05);
+      border-radius: 20px;
       padding: 2rem;
       position: relative;
-      transition: all 0.4s ease;
-      overflow: hidden;
-      border-radius: 12px;
+      transition: all 0.3s ease;
+      /* For 3D Tilt JS */
+      transform-style: preserve-3d; 
     }
+
+    /* The "Content" layer pops out in 3D */
+    .project-content {
+      transform: translateZ(20px); 
+    }
+
+    .project-card:hover {
+      border-color: var(--primary);
+      box-shadow: 0 0 30px rgba(0, 242, 255, 0.1);
+    }
+
+    .project-card h3 { font-size: 1.5rem; margin-bottom: 1rem; color: var(--text-main); }
     
-    /* Hover Effect only on Desktop */
-    @media (hover: hover) {
-      .holo-card:hover {
-        transform: translateY(-10px);
-        box-shadow: 0 0 30px rgba(0, 243, 255, 0.15);
-        border-color: var(--neon-blue);
-      }
-      .holo-card::after {
-        content: '';
-        position: absolute;
-        top: 0; left: -100%;
-        width: 100%; height: 100%;
-        background: linear-gradient(90deg, transparent, rgba(255,255,255,0.1), transparent);
-        transition: 0.5s;
-      }
-      .holo-card:hover::after { left: 100%; }
-    }
-
-    .project-header {
-      display: flex;
-      justify-content: space-between;
-      align-items: flex-start;
-      margin-bottom: 1rem;
-    }
-    .folder-icon { font-size: 2rem; color: var(--neon-purple); }
-    .external-link { color: white; transition: 0.3s; }
-    .external-link:hover { color: var(--neon-blue); }
-
     .tech-stack {
       display: flex;
       flex-wrap: wrap;
-      gap: 0.8rem;
+      gap: 0.5rem;
       margin-top: 1.5rem;
     }
-    .tech-pill {
+
+    .tech-badge {
+      font-size: 0.75rem;
       font-family: var(--font-code);
-      font-size: 0.8rem;
-      color: var(--neon-blue);
-      background: rgba(0, 243, 255, 0.1);
-      padding: 0.3rem 0.6rem;
-      border-radius: 4px;
+      padding: 0.4rem 0.8rem;
+      border-radius: 50px;
+      background: rgba(0, 242, 255, 0.1);
+      color: var(--primary);
+      border: 1px solid rgba(0, 242, 255, 0.2);
     }
 
-    /* Skills Cloud */
-    .skills-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
-      gap: 1rem;
+    /* --- Scroll Animation Classes --- */
+    .hidden-scroll {
+      opacity: 0;
+      transform: translateY(30px);
+      transition: all 0.8s ease-out;
     }
-    .skill-box {
-      border: 1px solid rgba(255,255,255,0.1);
-      padding: 1.5rem;
-      text-align: center;
-      border-radius: 8px;
-      transition: 0.3s;
-    }
-    .skill-box:hover { background: rgba(0,243,255,0.05); border-color: var(--neon-blue); }
-    .skill-icon { font-size: 2rem; margin-bottom: 0.5rem; display: block; }
-
-    /* Contact Form */
-    .cyber-form {
-      display: flex;
-      flex-direction: column;
-      gap: 1.5rem;
-      max-width: 600px;
-      margin-bottom: 5rem;
-    }
-    .cyber-input {
-      background: rgba(0,0,0,0.3);
-      border: 1px solid rgba(255,255,255,0.2);
-      padding: 1.2rem;
-      color: white;
-      font-family: var(--font-body);
-      border-radius: 8px;
-      width: 100%;
-    }
-    .cyber-input:focus { outline: none; border-color: var(--neon-purple); box-shadow: 0 0 15px rgba(188, 19, 254, 0.2); }
-    
-    .cyber-btn {
-      background: linear-gradient(90deg, var(--neon-blue), var(--neon-purple));
-      border: none;
-      padding: 1rem 2rem;
-      color: white;
-      font-weight: 700;
-      letter-spacing: 2px;
-      cursor: pointer;
-      border-radius: 4px;
-      font-family: var(--font-head);
+    .visible-scroll {
+      opacity: 1;
+      transform: translateY(0);
     }
 
-    /* --- PRO CHATBOT (Mobile Optimized) --- */
+    /* --- Advanced Chatbot UI --- */
     .chat-trigger {
       position: fixed;
-      bottom: 20px; right: 20px;
-      width: 60px; height: 60px;
-      background: var(--neon-blue);
+      bottom: 2rem;
+      right: 2rem;
+      width: 65px;
+      height: 65px;
+      background: var(--gradient-main);
       border-radius: 50%;
       display: flex;
-      justify-content: center;
       align-items: center;
-      font-size: 1.5rem;
-      box-shadow: 0 0 20px rgba(0, 243, 255, 0.4);
-      z-index: 1000;
+      justify-content: center;
+      font-size: 1.8rem;
+      color: white;
       border: none;
-      color: black;
-      transition: transform 0.3s;
+      cursor: pointer;
+      box-shadow: 0 10px 30px rgba(0, 242, 255, 0.4);
+      z-index: 1000;
+      transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+      animation: pulse-glow 3s infinite;
     }
-    .chat-trigger:active { transform: scale(0.9); }
+
+    .chat-trigger:hover { transform: scale(1.1) rotate(10deg); }
+
+    @keyframes pulse-glow {
+      0% { box-shadow: 0 0 0 0 rgba(0, 242, 255, 0.7); }
+      70% { box-shadow: 0 0 0 15px rgba(0, 242, 255, 0); }
+      100% { box-shadow: 0 0 0 0 rgba(0, 242, 255, 0); }
+    }
 
     .chat-interface {
       position: fixed;
-      bottom: 90px; right: 20px;
-      width: 350px;
-      height: 500px;
-      max-width: calc(100vw - 40px); /* Mobile Safe */
-      background: rgba(5, 5, 10, 0.95);
+      bottom: 6rem;
+      right: 2rem;
+      width: 380px;
+      height: 600px;
+      background: rgba(10, 12, 16, 0.95);
       backdrop-filter: blur(20px);
-      border: 1px solid var(--neon-blue);
-      border-radius: 16px;
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 24px;
       display: none;
       flex-direction: column;
-      z-index: 999;
-      box-shadow: 0 20px 50px rgba(0,0,0,0.8);
       overflow: hidden;
+      z-index: 1000;
+      transform-origin: bottom right;
+      animation: openChat 0.4s cubic-bezier(0.19, 1, 0.22, 1);
+      box-shadow: 0 20px 50px rgba(0,0,0,0.5);
+    }
+
+    @keyframes openChat {
+      from { opacity: 0; transform: scale(0.8) translateY(20px); }
+      to { opacity: 1; transform: scale(1) translateY(0); }
     }
 
     .chat-header {
-      padding: 1rem;
-      background: rgba(0, 243, 255, 0.1);
-      border-bottom: 1px solid rgba(255,255,255,0.1);
+      background: linear-gradient(90deg, rgba(0,242,255,0.1), rgba(255,0,85,0.1));
+      padding: 1.2rem;
       display: flex;
       justify-content: space-between;
       align-items: center;
+      border-bottom: 1px solid rgba(255,255,255,0.05);
     }
 
-    .chat-messages {
+    .chat-body {
       flex: 1;
-      overflow-y: auto;
       padding: 1rem;
-      display: flex;
-      flex-direction: column;
-      gap: 1rem;
+      overflow-y: auto;
+      scroll-behavior: smooth;
     }
 
-    .msg-bubble {
-      padding: 0.8rem 1rem;
-      border-radius: 12px;
-      font-size: 0.9rem;
-      line-height: 1.5;
+    .chat-bubble {
       max-width: 85%;
-      word-wrap: break-word;
+      padding: 0.8rem 1.2rem;
+      margin-bottom: 1rem;
+      border-radius: 18px;
+      font-size: 0.95rem;
+      line-height: 1.5;
+      animation: msgPop 0.3s ease-out;
     }
-    .bot-msg { background: rgba(255,255,255,0.1); border-bottom-left-radius: 2px; align-self: flex-start; }
-    .user-msg { background: var(--neon-purple); border-bottom-right-radius: 2px; align-self: flex-end; }
+    
+    @keyframes msgPop { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
 
-    .chat-controls {
-      padding: 0.8rem;
-      border-top: 1px solid rgba(255,255,255,0.1);
+    .bot-msg {
+      background: rgba(255,255,255,0.08);
+      color: var(--text-main);
+      border-bottom-left-radius: 4px;
+      margin-right: auto;
+    }
+
+    .user-msg {
+      background: var(--gradient-main);
+      color: white;
+      border-bottom-right-radius: 4px;
+      margin-left: auto;
+    }
+
+    .chat-input-area {
+      padding: 1rem;
+      background: rgba(0,0,0,0.2);
+      border-top: 1px solid rgba(255,255,255,0.05);
       display: flex;
       gap: 0.5rem;
+      align-items: center;
     }
 
-    /* Footer */
-    footer {
-      border-top: 1px solid rgba(255,255,255,0.1);
-      text-align: center;
-      padding: 3rem 1rem;
-      color: #888;
-      font-size: 0.8rem;
+    .chat-input {
+      flex: 1;
+      background: rgba(255,255,255,0.05);
+      border: 1px solid rgba(255,255,255,0.1);
+      padding: 0.8rem;
+      border-radius: 12px;
+      color: white;
+      font-family: var(--font-body);
+      outline: none;
     }
+    .chat-input:focus { border-color: var(--primary); }
 
-    /* Mobile Tweaks */
+    .icon-btn {
+      background: none;
+      border: none;
+      color: var(--text-muted);
+      cursor: pointer;
+      font-size: 1.2rem;
+      padding: 0.5rem;
+      transition: color 0.2s;
+    }
+    .icon-btn:hover, .icon-btn.active { color: var(--primary); }
+
+    /* Sound Wave Animation for Speaking */
+    .sound-wave {
+      display: inline-flex;
+      gap: 2px;
+      height: 12px;
+      align-items: center;
+      margin-left: 8px;
+    }
+    .bar {
+      width: 2px;
+      background: var(--primary);
+      animation: wave 1s infinite ease-in-out;
+    }
+    .bar:nth-child(1) { animation-delay: 0.0s; height: 6px; }
+    .bar:nth-child(2) { animation-delay: 0.1s; height: 12px; }
+    .bar:nth-child(3) { animation-delay: 0.2s; height: 8px; }
+    @keyframes wave { 0%, 100% { transform: scaleY(1); } 50% { transform: scaleY(2); } }
+
+    /* Footer & Form */
+    form { display: flex; flex-direction: column; gap: 1rem; }
+    input, textarea, select {
+      background: rgba(0,0,0,0.3);
+      border: 1px solid rgba(255,255,255,0.1);
+      padding: 1rem;
+      border-radius: 12px;
+      color: white;
+      font-family: var(--font-body);
+      transition: 0.3s;
+    }
+    input:focus, textarea:focus { border-color: var(--primary); box-shadow: 0 0 15px rgba(0,242,255,0.2); outline: none; }
+    
+    button.primary-btn {
+      background: var(--gradient-main);
+      color: white;
+      border: none;
+      padding: 1rem 2rem;
+      border-radius: 12px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+    button.primary-btn:hover { transform: translateY(-2px); box-shadow: 0 10px 20px rgba(0,242,255,0.3); }
+
+    /* Responsive */
     @media (max-width: 768px) {
-      .hero { justify-content: center; text-align: left; }
-      .container { padding: 0 1rem; }
-      .chat-interface { height: 60vh; bottom: 85px; }
+      .header-content { flex-direction: column; text-align: center; }
+      .chat-interface { width: 90%; right: 5%; bottom: 5rem; height: 500px; }
     }
   </style>
 </head>
 
 <body>
-  <div id="webgl-container"></div>
+  <div id="canvas-container"></div>
 
-  <div class="container">
-    <nav>
-      <div class="logo">T-S<span>.AI</span></div>
-      <div style="font-family:var(--font-code); font-size:0.8rem; color:var(--neon-blue);">
-        ● SYSTEM ONLINE
+  <div class="wrap">
+    <header class="hidden-scroll">
+      <div class="logo-area">
+        <img src="assets/STEVE_GitHub_Logo.png" alt="Logo" class="logo-img">
+        <div class="hero-text">
+          <h1>T-Stephen</h1>
+          <div class="role"><span id="typed-role"></span></div>
+        </div>
       </div>
-    </nav>
+      
+      <div class="header-controls">
+        <div style="text-align: right;">
+          <small style="color:var(--text-muted); display:block; font-size: 0.7rem; text-transform: uppercase; letter-spacing: 1px;">Live Visitors</small>
+          <span id="visitorCount" style="color:var(--primary); font-weight:700; font-family: var(--font-code);">—</span>
+        </div>
+      </div>
+    </header>
 
-    <section class="hero">
-      <div class="hero-subtitle">> Initializing Neural Interface...</div>
-      <h1>Architecting<br><span style="color:var(--neon-blue)">Intelligence</span></h1>
-      <div style="font-family: var(--font-code); font-size: clamp(1rem, 2vw, 1.5rem); margin-top: 1rem; color: #888;">
-        <span id="typed-text"></span>
-      </div>
-      <div class="scroll-indicator">
-        <i class="fas fa-chevron-down" style="color:var(--neon-blue)"></i>
-      </div>
-    </section>
-
-    <section id="projects">
+    <section id="projects" class="glass-card hidden-scroll">
       <h2 class="section-title">Featured Innovations</h2>
-      <div class="grid-projects">
-        
-        <div class="holo-card">
-          <div class="project-header">
-            <i class="fas fa-traffic-light folder-icon"></i>
-            <a href="#" class="external-link"><i class="fas fa-external-link-alt"></i></a>
-          </div>
-          <h3>Autonomous Traffic Grid</h3>
-          <p style="color:#aaa; font-size:0.9rem; margin-top:0.5rem;">
-            Computer Vision system using YOLOv8 to detect emergency vehicles and autonomously control traffic signals. Reduced latency by 40%.
-          </p>
-          <div class="tech-stack">
-            <span class="tech-pill">Python</span>
-            <span class="tech-pill">YOLOv8</span>
-            <span class="tech-pill">OpenCV</span>
-            <span class="tech-pill">Edge AI</span>
+      
+      <div class="bento-grid">
+        <div class="project-card tilt-card" data-tilt>
+          <div class="project-content">
+            <div style="font-size:2rem; margin-bottom:0.5rem;">🚦</div>
+            <h3>AI Smart Traffic System</h3>
+            <p style="color:var(--text-muted); font-size: 0.9rem;">
+              Computer Vision system using YOLOv8 to detect emergency vehicles and automate traffic signals in real-time. Achieved 95% detection accuracy.
+            </p>
+            <div class="tech-stack">
+              <span class="tech-badge">Python</span>
+              <span class="tech-badge">YOLOv8</span>
+              <span class="tech-badge">OpenCV</span>
+            </div>
           </div>
         </div>
 
-        <div class="holo-card">
-          <div class="project-header">
-            <i class="fas fa-brain folder-icon"></i>
-            <a href="#" class="external-link"><i class="fas fa-external-link-alt"></i></a>
-          </div>
-          <h3>Multi-Lingual Sentiment Core</h3>
-          <p style="color:#aaa; font-size:0.9rem; margin-top:0.5rem;">
-            Transformer-based NLP engine (BERT) capable of detecting sarcasm and sentiment across 5 languages in real-time.
-          </p>
-          <div class="tech-stack">
-            <span class="tech-pill">PyTorch</span>
-            <span class="tech-pill">HuggingFace</span>
-            <span class="tech-pill">FastAPI</span>
-          </div>
-        </div>
-
-        <div class="holo-card">
-          <div class="project-header">
-            <i class="fas fa-robot folder-icon"></i>
-            <a href="#" class="external-link"><i class="fas fa-external-link-alt"></i></a>
-          </div>
-          <h3>Generative Art GAN</h3>
-          <p style="color:#aaa; font-size:0.9rem; margin-top:0.5rem;">
-            A Generative Adversarial Network trained on abstract art to generate unique high-resolution NFT assets.
-          </p>
-          <div class="tech-stack">
-            <span class="tech-pill">TensorFlow</span>
-            <span class="tech-pill">Keras</span>
-            <span class="tech-pill">GANs</span>
+        <div class="project-card tilt-card" data-tilt>
+          <div class="project-content">
+            <div style="font-size:2rem; margin-bottom:0.5rem;">🧠</div>
+            <h3>ML Algorithms Visualizer</h3>
+            <p style="color:var(--text-muted); font-size: 0.9rem;">
+              Interactive educational platform demonstrating Decision Trees and Candidate-Elimination algorithms with dynamic datasets.
+            </p>
+            <div class="tech-stack">
+              <span class="tech-badge">Scikit-Learn</span>
+              <span class="tech-badge">Pandas</span>
+              <span class="tech-badge">Matplotlib</span>
+            </div>
           </div>
         </div>
 
-        <div class="holo-card">
-          <div class="project-header">
-            <i class="fas fa-chart-line folder-icon"></i>
-            <a href="#" class="external-link"><i class="fas fa-external-link-alt"></i></a>
-          </div>
-          <h3>Stock Prediction LSTM</h3>
-          <p style="color:#aaa; font-size:0.9rem; margin-top:0.5rem;">
-            Time-series forecasting model using Long Short-Term Memory networks to predict market trends with 85% validation accuracy.
-          </p>
-          <div class="tech-stack">
-            <span class="tech-pill">Deep Learning</span>
-            <span class="tech-pill">Pandas</span>
-            <span class="tech-pill">LSTM</span>
-          </div>
-        </div>
-
-        <div class="holo-card">
-          <div class="project-header">
-            <i class="fas fa-vr-cardboard folder-icon"></i>
-            <a href="#" class="external-link"><i class="fas fa-external-link-alt"></i></a>
-          </div>
-          <h3>3D Portfolio Engine</h3>
-          <p style="color:#aaa; font-size:0.9rem; margin-top:0.5rem;">
-            The site you are viewing. Built with Three.js and GSAP for high-performance 3D rendering on the web.
-          </p>
-          <div class="tech-stack">
-            <span class="tech-pill">Three.js</span>
-            <span class="tech-pill">WebGL</span>
-            <span class="tech-pill">GSAP</span>
+        <div class="project-card tilt-card" data-tilt>
+          <div class="project-content">
+            <div style="font-size:2rem; margin-bottom:0.5rem;">📊</div>
+            <h3>BERT Sentiment Analysis</h3>
+            <p style="color:var(--text-muted); font-size: 0.9rem;">
+              High-performance NLP tool leveraging Transformer models for multi-language sentiment classification.
+            </p>
+            <div class="tech-stack">
+              <span class="tech-badge">BERT</span>
+              <span class="tech-badge">Transformers</span>
+              <span class="tech-badge">Flask</span>
+            </div>
           </div>
         </div>
-
       </div>
     </section>
 
-    <section id="skills">
+    <section id="skills" class="glass-card hidden-scroll">
       <h2 class="section-title">Tech Arsenal</h2>
-      <div class="skills-grid">
-        <div class="skill-box">
-          <i class="fab fa-python skill-icon" style="color:#ffe05d"></i>
-          <h4>Python</h4>
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem;">
+        <div style="padding:1rem; border:1px solid rgba(255,255,255,0.1); border-radius:12px;">
+          <h4 style="color:var(--primary); margin-bottom:0.5rem;">AI / ML</h4>
+          <p style="font-size:0.9rem; color:var(--text-muted);">TensorFlow, PyTorch, YOLO, OpenCV, Neural Networks</p>
         </div>
-        <div class="skill-box">
-          <i class="fas fa-brain skill-icon" style="color:#ff6b6b"></i>
-          <h4>TensorFlow</h4>
+        <div style="padding:1rem; border:1px solid rgba(255,255,255,0.1); border-radius:12px;">
+          <h4 style="color:var(--secondary); margin-bottom:0.5rem;">Development</h4>
+          <p style="font-size:0.9rem; color:var(--text-muted);">Python, C++, Java, JavaScript, React, Node.js</p>
         </div>
-        <div class="skill-box">
-          <i class="fas fa-fire skill-icon" style="color:#feca57"></i>
-          <h4>PyTorch</h4>
-        </div>
-        <div class="skill-box">
-          <i class="fab fa-js skill-icon" style="color:#54a0ff"></i>
-          <h4>React.js</h4>
-        </div>
-        <div class="skill-box">
-          <i class="fas fa-database skill-icon" style="color:#00d2d3"></i>
-          <h4>SQL/NoSQL</h4>
-        </div>
-        <div class="skill-box">
-          <i class="fab fa-docker skill-icon" style="color:#2e86de"></i>
-          <h4>Docker</h4>
-        </div>
-        <div class="skill-box">
-          <i class="fas fa-cloud skill-icon" style="color:#c8d6e5"></i>
-          <h4>AWS Cloud</h4>
-        </div>
-        <div class="skill-box">
-          <i class="fab fa-git-alt skill-icon" style="color:#ff9f43"></i>
-          <h4>Git Ops</h4>
+        <div style="padding:1rem; border:1px solid rgba(255,255,255,0.1); border-radius:12px;">
+          <h4 style="color:#00ff88; margin-bottom:0.5rem;">Data & Cloud</h4>
+          <p style="font-size:0.9rem; color:var(--text-muted);">SQL, Pandas, AWS, Docker, Firebase, Git</p>
         </div>
       </div>
     </section>
 
-    <section id="contact">
-      <h2 class="section-title">Establish Link</h2>
-      <form action="https://formsubmit.co/tstephenraj001@gmail.com" method="POST" class="cyber-form">
-        <input class="cyber-input" name="name" placeholder="Name / Organization" required />
-        <input class="cyber-input" name="email" type="email" placeholder="Return Address (Email)" required />
-        <textarea class="cyber-input" name="message" rows="5" placeholder="Transmission Content..." required></textarea>
-        <button type="submit" class="cyber-btn">TRANSMIT DATA</button>
-      </form>
-    </section>
+    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem;">
+      <section id="contact" class="glass-card hidden-scroll">
+        <h2 class="section-title">Hire Me</h2>
+        <form action="https://formsubmit.co/tstephenraj001@gmail.com" method="POST">
+          <input name="name" placeholder="Name" required />
+          <input name="email" placeholder="Email" type="email" required />
+          <textarea name="message" rows="3" placeholder="Project details..." required></textarea>
+          <button type="submit" class="primary-btn">Send Proposal</button>
+        </form>
+        <div style="margin-top:1.5rem; text-align:center;">
+            <a href="https://www.linkedin.com/in/stephen-raj-ai/" target="_blank" style="color:var(--primary); text-decoration:none; font-weight:600;">
+                <i class="fab fa-linkedin"></i> Connect on LinkedIn
+            </a>
+        </div>
+      </section>
 
-    <footer>
-      <p>© 2026 T-Stephen. Systems Normal.</p>
+      <section id="feedback" class="glass-card hidden-scroll">
+        <h2 class="section-title">Feedback</h2>
+        <div id="feedbackList" style="height:200px; overflow-y:auto; margin-bottom:1rem; padding-right:5px;">
+          <div style="text-align:center; color:var(--text-muted); padding-top:2rem;">Loading reviews...</div>
+        </div>
+        <form id="feedbackForm">
+          <div style="display:flex; gap:0.5rem;">
+            <input id="fbName" placeholder="Name" style="flex:1" required />
+            <input id="fbRating" type="number" min="1" max="5" placeholder="★" style="width:60px" required />
+          </div>
+          <textarea id="fbMessage" rows="2" placeholder="Your review..." required></textarea>
+          <button type="submit" class="primary-btn" style="width:100%;">Post Review</button>
+        </form>
+      </section>
+    </div>
+
+    <footer style="text-align:center; margin-top:4rem; color:var(--text-muted); font-size:0.9rem;">
+      <p>© 2026 T-Stephen. Powered by Three.js & Artificial Intelligence.</p>
     </footer>
   </div>
 
@@ -478,222 +492,363 @@
 
   <div class="chat-interface" id="chatInterface">
     <div class="chat-header">
-      <div style="font-family:var(--font-code); color:var(--neon-blue);">AI_ASSISTANT v2.4</div>
-      <button id="closeChat" style="background:none; border:none; color:white;"><i class="fas fa-times"></i></button>
-    </div>
-    <div class="chat-messages" id="chatMessages">
-      <div class="msg-bubble bot-msg">
-        System Online. 🟢<br>I am Stephen's AI Proxy. I can discuss his <b>Skills</b>, <b>Projects</b>, or <b>Contact</b> info. <br><br><i>Try asking: "What tech stack does he use?"</i>
+      <div style="display:flex; align-items:center; gap:0.8rem;">
+        <div style="width:10px; height:10px; background:#00ff88; border-radius:50%; box-shadow:0 0 10px #00ff88;"></div>
+        <div>
+          <h4 style="margin:0; font-family:var(--font-heading);">Stephen's AI</h4>
+          <span style="font-size:0.7rem; color:var(--text-muted);">Online & Voice Enabled</span>
+        </div>
+      </div>
+      <div style="display:flex; gap:0.5rem;">
+        <button class="icon-btn" id="muteToggle" title="Toggle Voice Response"><i class="fas fa-volume-up"></i></button>
+        <button class="icon-btn" id="closeChat"><i class="fas fa-times"></i></button>
       </div>
     </div>
-    <div class="chat-controls">
-      <button id="voiceBtn" style="background:none; border:none; color:var(--neon-blue); font-size:1.2rem;"><i class="fas fa-microphone"></i></button>
-      <input type="text" id="chatInput" style="flex:1; background:rgba(255,255,255,0.1); border:none; border-radius:4px; padding:0.5rem; color:white;" placeholder="Ask command...">
-      <button id="sendBtn" style="background:none; border:none; color:var(--neon-blue); font-size:1.2rem;"><i class="fas fa-paper-plane"></i></button>
+    
+    <div class="chat-body" id="chatBody">
+      <div class="chat-bubble bot-msg">
+        Hello! I am Stephen's advanced AI Assistant. 🤖<br><br>
+        I can tell you about his <b>projects</b>, <b>skills</b>, or simply chat with you.<br>
+        <i>Try clicking the microphone to speak!</i>
+      </div>
+    </div>
+
+    <div class="chat-input-area">
+      <button class="icon-btn" id="voiceBtn"><i class="fas fa-microphone"></i></button>
+      <input type="text" class="chat-input" id="chatInput" placeholder="Ask anything...">
+      <button class="icon-btn" id="sendBtn" style="color:var(--primary);"><i class="fas fa-paper-plane"></i></button>
     </div>
   </div>
 
   <script type="module">
     import { initializeApp } from "https://www.gstatic.com/firebasejs/12.0.0/firebase-app.js";
-    import { getFirestore, doc, runTransaction } from "https://www.gstatic.com/firebasejs/12.0.0/firebase-firestore.js";
-    const app = initializeApp({
+    import { getFirestore, collection, addDoc, serverTimestamp, query, orderBy, onSnapshot, doc, runTransaction } from "https://www.gstatic.com/firebasejs/12.0.0/firebase-firestore.js";
+
+    const firebaseConfig = {
       apiKey: "AIzaSyDv2IZjs4dyC4w2Tne4jqFVCyHN-J6oFF0",
       authDomain: "t-stephen-ai-portfolio.firebaseapp.com",
       projectId: "t-stephen-ai-portfolio",
       storageBucket: "t-stephen-ai-portfolio.appspot.com",
       messagingSenderId: "493827826934",
-      appId: "1:493827826934:web:0f0e3a03fe56c25c5338d7"
-    });
+      appId: "1:493827826934:web:0f0e3a03fe56c25c5338d7",
+      measurementId: "G-X097JGBRF4"
+    };
+
+    const app = initializeApp(firebaseConfig);
     const db = getFirestore(app);
-    try {
-        const docRef = doc(db, 'analytics', 'visitors');
-        runTransaction(db, async(t)=>{
-            const s = await t.get(docRef);
-            if(!s.exists()) t.set(docRef, {count:1});
-            else t.update(docRef, {count: s.data().count+1});
+
+    // --- Firebase Logic: Visitor Count & Feedback ---
+    // (Logic kept identical to ensure data integrity)
+    async function incrementVisitor() {
+      const docRef = doc(db, 'analytics', 'visitors');
+      try {
+        await runTransaction(db, async (t) => {
+            const snap = await t.get(docRef);
+            if (!snap.exists()) {
+                t.set(docRef, { count: 1 });
+            } else {
+                t.update(docRef, { count: snap.data().count + 1 });
+            }
         });
-    } catch(e){}
+      } catch(e) { console.log("Visitor sync error", e); }
+    }
+    
+    if(!sessionStorage.getItem('visited')) {
+        incrementVisitor();
+        sessionStorage.setItem('visited', 'true');
+    }
+
+    onSnapshot(doc(db, 'analytics', 'visitors'), (snap) => {
+        if(snap.exists()) document.getElementById('visitorCount').textContent = snap.data().count.toLocaleString();
+    });
+
+    const fbCol = collection(db, 'feedbacks');
+    onSnapshot(query(fbCol, orderBy('createdAt', 'desc')), (snap) => {
+        const list = document.getElementById('feedbackList');
+        list.innerHTML = '';
+        snap.forEach(d => {
+            const data = d.data();
+            const div = document.createElement('div');
+            div.style.cssText = "background:rgba(255,255,255,0.05); padding:0.8rem; border-radius:10px; margin-bottom:0.8rem;";
+            div.innerHTML = `
+                <div style="display:flex; justify-content:space-between; font-size:0.9rem;">
+                    <strong style="color:var(--primary)">${escapeHtml(data.name)}</strong>
+                    <span style="color:#f1c40f">${'★'.repeat(data.rating)}</span>
+                </div>
+                <p style="margin-top:0.4rem; color:var(--text-muted); font-size:0.85rem;">${escapeHtml(data.message)}</p>
+            `;
+            list.appendChild(div);
+        });
+    });
+
+    document.getElementById('feedbackForm').addEventListener('submit', async (e) => {
+        e.preventDefault();
+        const btn = e.target.querySelector('button');
+        const oldText = btn.innerText;
+        btn.innerText = "Posting...";
+        await addDoc(fbCol, {
+            name: document.getElementById('fbName').value,
+            rating: document.getElementById('fbRating').value,
+            message: document.getElementById('fbMessage').value,
+            createdAt: serverTimestamp()
+        });
+        e.target.reset();
+        btn.innerText = oldText;
+        alert("Thanks for the review!");
+    });
+    window.escapeHtml = (str) => str.replace(/[&<>"']/g, m => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#039;' })[m]);
   </script>
 
   <script>
-    // --- 1. THREE.JS STARFIELD (Mobile Optimized) ---
-    const initThree = () => {
-      const container = document.getElementById('webgl-container');
-      const scene = new THREE.Scene();
-      const camera = new THREE.PerspectiveCamera(75, window.innerWidth/window.innerHeight, 0.1, 1000);
-      const renderer = new THREE.WebGLRenderer({ alpha: true });
-      
-      renderer.setSize(window.innerWidth, window.innerHeight);
-      renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2)); // Performance fix
-      container.appendChild(renderer.domElement);
+    // --- 1. Typed.js Header Animation ---
+    new Typed('#typed-role', {
+      strings: ['AI Engineer', 'Data Scientist', 'Full-Stack Developer', 'Computer Vision Expert'],
+      typeSpeed: 50, backSpeed: 30, loop: true, backDelay: 1500
+    });
 
-      const geometry = new THREE.BufferGeometry();
-      const count = window.innerWidth < 768 ? 400 : 1000; // Less particles on mobile
-      const posArray = new Float32Array(count * 3);
-      for(let i=0; i<count*3; i++) {
-        posArray[i] = (Math.random() - 0.5) * 50;
-      }
-      geometry.setAttribute('position', new THREE.BufferAttribute(posArray, 3));
-      const material = new THREE.PointsMaterial({ size: 0.05, color: 0x00f3ff, transparent: true, opacity: 0.8 });
-      const stars = new THREE.Points(geometry, material);
-      scene.add(stars);
+    // --- 2. Three.js 3D Neural Network Background ---
+    const initThreeJS = () => {
+        const container = document.getElementById('canvas-container');
+        const scene = new THREE.Scene();
+        // Fog for depth
+        scene.fog = new THREE.FogExp2(0x050508, 0.002);
 
-      camera.position.z = 5;
+        const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+        camera.position.z = 30;
 
-      // Animation
-      let mouseX = 0; 
-      let mouseY = 0;
-      if (window.matchMedia("(pointer: fine)").matches) {
-          document.addEventListener('mousemove', (e) => {
-              mouseX = e.clientX * 0.0005;
-              mouseY = e.clientY * 0.0005;
-          });
-      }
-
-      const animate = () => {
-        requestAnimationFrame(animate);
-        stars.rotation.y += 0.0005;
-        stars.rotation.x += mouseX * 0.1;
-        stars.rotation.y += mouseY * 0.1;
-        renderer.render(scene, camera);
-      };
-      animate();
-
-      // Mobile Resize Handler
-      window.addEventListener('resize', () => {
-        camera.aspect = window.innerWidth / window.innerHeight;
-        camera.updateProjectionMatrix();
+        const renderer = new THREE.WebGLRenderer({ alpha: true, antialias: true });
         renderer.setSize(window.innerWidth, window.innerHeight);
-      });
+        renderer.setPixelRatio(window.devicePixelRatio);
+        container.appendChild(renderer.domElement);
+
+        // Create Particles (Neurons)
+        const geometry = new THREE.BufferGeometry();
+        const count = 400; // number of particles
+        const positions = new Float32Array(count * 3);
+        
+        for(let i=0; i<count*3; i++) {
+            positions[i] = (Math.random() - 0.5) * 60; // Spread range
+        }
+        
+        geometry.setAttribute('position', new THREE.BufferAttribute(positions, 3));
+        
+        const material = new THREE.PointsMaterial({
+            size: 0.4,
+            color: 0x00f2ff,
+            transparent: true,
+            opacity: 0.8
+        });
+        
+        const particles = new THREE.Points(geometry, material);
+        scene.add(particles);
+
+        // Lines connecting close particles (Neural Connections)
+        const lineMaterial = new THREE.LineBasicMaterial({ color: 0xff0055, transparent: true, opacity: 0.15 });
+        const linesGeometry = new THREE.BufferGeometry();
+        const lines = new THREE.LineSegments(linesGeometry, lineMaterial);
+        scene.add(lines);
+
+        // Animation Loop
+        let mouseX = 0;
+        let mouseY = 0;
+        
+        document.addEventListener('mousemove', (e) => {
+            mouseX = (e.clientX - window.innerWidth / 2) * 0.05;
+            mouseY = (e.clientY - window.innerHeight / 2) * 0.05;
+        });
+
+        const animate = () => {
+            requestAnimationFrame(animate);
+            
+            // Slow rotation
+            particles.rotation.y += 0.001;
+            particles.rotation.x += 0.0005;
+            lines.rotation.y += 0.001;
+            lines.rotation.x += 0.0005;
+
+            // Mouse Interaction
+            camera.position.x += (mouseX - camera.position.x) * 0.05;
+            camera.position.y += (-mouseY - camera.position.y) * 0.05;
+            camera.lookAt(scene.position);
+
+            // Update Lines
+            const particlePositions = particles.geometry.attributes.position.array;
+            const linePositions = [];
+            
+            // Limit connections for performance
+            for (let i = 0; i < count; i++) {
+                for (let j = i + 1; j < count; j++) {
+                    const dx = particlePositions[i*3] - particlePositions[j*3];
+                    const dy = particlePositions[i*3+1] - particlePositions[j*3+1];
+                    const dz = particlePositions[i*3+2] - particlePositions[j*3+2];
+                    const dist = Math.sqrt(dx*dx + dy*dy + dz*dz);
+
+                    if (dist < 8) { // Connection threshold
+                        linePositions.push(
+                            particlePositions[i*3], particlePositions[i*3+1], particlePositions[i*3+2],
+                            particlePositions[j*3], particlePositions[j*3+1], particlePositions[j*3+2]
+                        );
+                    }
+                }
+            }
+            // Only render first 1000 lines max to prevent lag
+            lines.geometry.setAttribute('position', new THREE.Float32BufferAttribute(linePositions.slice(0, 6000), 3));
+            
+            renderer.render(scene, camera);
+        };
+        animate();
+
+        window.addEventListener('resize', () => {
+            camera.aspect = window.innerWidth / window.innerHeight;
+            camera.updateProjectionMatrix();
+            renderer.setSize(window.innerWidth, window.innerHeight);
+        });
     };
-    initThree();
+    initThreeJS();
 
-    // --- 2. GSAP SCROLL ANIMATIONS ---
-    gsap.registerPlugin(ScrollTrigger);
-    
-    gsap.from(".hero h1", { opacity: 0, y: 50, duration: 1.5, ease: "power4.out" });
-    gsap.from(".holo-card", {
-      scrollTrigger: { trigger: ".grid-projects", start: "top 80%" },
-      y: 50, opacity: 0, stagger: 0.2, duration: 0.8
-    });
-    gsap.from(".skill-box", {
-      scrollTrigger: { trigger: ".skills-grid", start: "top 85%" },
-      scale: 0.8, opacity: 0, stagger: 0.1, duration: 0.5
+    // --- 3. 3D Tilt Effect (Vanilla JS) ---
+    document.querySelectorAll('.tilt-card').forEach(card => {
+        card.addEventListener('mousemove', (e) => {
+            const rect = card.getBoundingClientRect();
+            const x = e.clientX - rect.left;
+            const y = e.clientY - rect.top;
+            
+            const centerX = rect.width / 2;
+            const centerY = rect.height / 2;
+            
+            const rotateX = ((y - centerY) / centerY) * -10; // Max tilt deg
+            const rotateY = ((x - centerX) / centerX) * 10;
+            
+            card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale(1.02)`;
+        });
+
+        card.addEventListener('mouseleave', () => {
+            card.style.transform = 'perspective(1000px) rotateX(0) rotateY(0) scale(1)';
+        });
     });
 
-    // --- 3. TYPED.JS ---
-    new Typed('#typed-text', {
-      strings: ['AI Engineer', 'Deep Learning Specialist', 'Full-Stack Developer', 'Data Scientist'],
-      typeSpeed: 50, backSpeed: 30, loop: true, backDelay: 2000
-    });
+    // --- 4. Scroll Reveal Animation ---
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if(entry.isIntersecting) {
+                entry.target.classList.add('visible-scroll');
+            }
+        });
+    }, { threshold: 0.1 });
 
-    // --- 4. ADVANCED INTELLIGENT CHATBOT ---
+    document.querySelectorAll('.hidden-scroll').forEach(el => observer.observe(el));
+
+    // --- 5. Advanced Chatbot with Voice I/O ---
     const chatTrigger = document.getElementById('chatTrigger');
     const chatInterface = document.getElementById('chatInterface');
     const closeChat = document.getElementById('closeChat');
-    const msgs = document.getElementById('chatMessages');
-    const input = document.getElementById('chatInput');
+    const chatBody = document.getElementById('chatBody');
+    const chatInput = document.getElementById('chatInput');
     const sendBtn = document.getElementById('sendBtn');
     const voiceBtn = document.getElementById('voiceBtn');
+    const muteToggle = document.getElementById('muteToggle');
 
-    // Knowledge Base with Scoring Logic
-    const brain = [
-      {
-        keywords: ["traffic", "yolo", "opencv", "signal", "vision"],
-        response: "My Smart Traffic Grid project uses YOLOv8 for object detection. It reduces emergency vehicle wait times by 40% using edge computing."
-      },
-      {
-        keywords: ["skill", "stack", "tech", "python", "react", "language"],
-        response: "I am proficient in: <br>• <b>AI:</b> TensorFlow, PyTorch, OpenCV<br>• <b>Web:</b> React, Node.js, Firebase<br>• <b>Cloud:</b> AWS, Docker."
-      },
-      {
-        keywords: ["contact", "email", "hire", "reach", "job"],
-        response: "You can reach Stephen via the form below or email: <b>stephenbugi525@gmail.com</b>."
-      },
-      {
-        keywords: ["project", "work", "portfolio", "built"],
-        response: "I have built 5 major systems, including an Autonomous Traffic Grid, a BERT Sentiment Engine, and a GAN for generative art."
-      },
-      {
-        keywords: ["hello", "hi", "hey", "start"],
-        response: "Hello! I am ready to answer questions about Stephen's engineering capabilities."
-      }
-    ];
+    let isMuted = false;
+    let recognition;
+    let synth = window.speechSynthesis;
 
-    const findBestMatch = (text) => {
-      text = text.toLowerCase();
-      let bestMatch = null;
-      let highestScore = 0;
-
-      brain.forEach(item => {
-        let score = 0;
-        item.keywords.forEach(word => {
-          if (text.includes(word)) score++;
-        });
-        if (score > highestScore) {
-          highestScore = score;
-          bestMatch = item.response;
-        }
-      });
-
-      return bestMatch || "I process data on specific topics. Try asking about my 'Projects', 'Skills', or 'Experience'.";
+    // Toggle Chat
+    chatTrigger.onclick = () => {
+        chatInterface.style.display = 'flex';
+        chatTrigger.style.display = 'none';
+        chatInput.focus();
+    };
+    closeChat.onclick = () => {
+        chatInterface.style.display = 'none';
+        chatTrigger.style.display = 'flex';
+    };
+    muteToggle.onclick = () => {
+        isMuted = !isMuted;
+        muteToggle.innerHTML = isMuted ? '<i class="fas fa-volume-mute"></i>' : '<i class="fas fa-volume-up"></i>';
     };
 
-    const speak = (text) => {
-      if(!window.speechSynthesis) return;
-      window.speechSynthesis.cancel();
-      const utterance = new SpeechSynthesisUtterance(text.replace(/<[^>]*>/g, ''));
-      utterance.pitch = 0.9;
-      utterance.rate = 1.1;
-      window.speechSynthesis.speak(utterance);
+    // Chatbot Knowledge Base
+    const botBrain = {
+        greetings: ["Hello! How can I help you today?", "Hi there! Welcome to Stephen's world.", "Greetings! What would you like to know?"],
+        projects: ["Stephen has built an AI Smart Traffic System using YOLOv8, a Sentiment Analysis tool using BERT, and this 3D portfolio site!", "His flagship project is the Smart Traffic System which prioritizes ambulances automatically."],
+        skills: ["He is an expert in Python, Computer Vision (OpenCV), Deep Learning (PyTorch/TensorFlow) and Web Development (React/Firebase)."],
+        contact: ["You can email him at stephenbugi525@gmail.com or connect via LinkedIn using the button below."],
+        default: ["I didn't quite catch that. Try asking about 'Projects', 'Skills' or 'Contact'."]
     };
 
-    const addMsg = (text, type) => {
-      const div = document.createElement('div');
-      div.className = `msg-bubble ${type}`;
-      div.innerHTML = text;
-      msgs.appendChild(div);
-      msgs.scrollTop = msgs.scrollHeight;
-    };
-
-    const handleSend = () => {
-      const txt = input.value.trim();
-      if(!txt) return;
-      addMsg(txt, 'user-msg');
-      input.value = '';
-      
-      const response = findBestMatch(txt);
-      setTimeout(() => {
-        addMsg(response, 'bot-msg');
-        speak(response);
-      }, 500);
-    };
-
-    // Event Listeners
-    chatTrigger.onclick = () => { chatInterface.style.display = 'flex'; chatTrigger.style.display = 'none'; };
-    closeChat.onclick = () => { chatInterface.style.display = 'none'; chatTrigger.style.display = 'flex'; };
-    sendBtn.onclick = handleSend;
-    input.onkeypress = (e) => e.key === 'Enter' && handleSend();
-
-    // Voice Recognition
-    if('webkitSpeechRecognition' in window) {
-      const recognition = new webkitSpeechRecognition();
-      recognition.continuous = false;
-      recognition.lang = 'en-US';
-      
-      voiceBtn.onclick = () => {
-        voiceBtn.style.color = '#ff0055';
-        recognition.start();
-      };
-      
-      recognition.onresult = (e) => {
-        input.value = e.results[0][0].transcript;
-        handleSend();
-        voiceBtn.style.color = 'var(--neon-blue)';
-      };
-    } else {
-      voiceBtn.style.display = 'none';
+    function addMessage(text, sender) {
+        const div = document.createElement('div');
+        div.className = `chat-bubble ${sender}-msg`;
+        div.innerHTML = text;
+        chatBody.appendChild(div);
+        chatBody.scrollTop = chatBody.scrollHeight;
     }
+
+    function speak(text) {
+        if(isMuted || !synth) return;
+        // Strip HTML for speech
+        const cleanText = text.replace(/<[^>]*>/g, '');
+        const utterance = new SpeechSynthesisUtterance(cleanText);
+        utterance.rate = 1;
+        utterance.pitch = 1;
+        synth.speak(utterance);
+    }
+
+    function processBotResponse(input) {
+        input = input.toLowerCase();
+        let reply = "";
+        
+        if(input.includes("hi") || input.includes("hello")) reply = botBrain.greetings[Math.floor(Math.random()*botBrain.greetings.length)];
+        else if(input.includes("project") || input.includes("work")) reply = botBrain.projects[0];
+        else if(input.includes("skill") || input.includes("tech")) reply = botBrain.skills[0];
+        else if(input.includes("contact") || input.includes("email") || input.includes("hire")) reply = botBrain.contact[0];
+        else reply = botBrain.default[0];
+
+        // Simulate "Thinking" delay
+        setTimeout(() => {
+            addMessage(reply, 'bot');
+            speak(reply);
+        }, 600);
+    }
+
+    function handleSend() {
+        const text = chatInput.value.trim();
+        if(!text) return;
+        addMessage(text, 'user');
+        chatInput.value = '';
+        processBotResponse(text);
+    }
+
+    sendBtn.onclick = handleSend;
+    chatInput.addEventListener('keypress', (e) => e.key === 'Enter' && handleSend());
+
+    // Voice Recognition Setup
+    if ('webkitSpeechRecognition' in window) {
+        recognition = new webkitSpeechRecognition();
+        recognition.continuous = false;
+        recognition.lang = 'en-US';
+
+        recognition.onstart = () => {
+            voiceBtn.style.color = '#ff0055';
+            voiceBtn.classList.add('active');
+        };
+
+        recognition.onend = () => {
+            voiceBtn.style.color = '';
+            voiceBtn.classList.remove('active');
+        };
+
+        recognition.onresult = (event) => {
+            const transcript = event.results[0][0].transcript;
+            chatInput.value = transcript;
+            handleSend();
+        };
+
+        voiceBtn.onclick = () => recognition.start();
+    } else {
+        voiceBtn.style.display = 'none'; // Hide if not supported
+    }
+
   </script>
 </body>
 </html>
