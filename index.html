@@ -3,472 +3,526 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>T-Stephen | AI Architect & Visionary</title>
-  <meta name="description" content="Next-Gen AI Portfolio featuring 3D interactions and Voice AI." />
+  <title>T-Stephen | AI Innovator & Data Scientist</title>
+  <meta name="description" content="Premium AI Portfolio of T-Stephen. 3D Interactive Experience." />
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@300;400;500;600;700&family=Syncopate:wght@400;700&family=JetBrains+Mono:wght@400;800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
   
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/typed.js@2.0.12"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r134/three.min.js"></script>
+
+  <link rel="icon" href="assets/STEVE_GitHub_Logo.png" />
 
   <style>
     :root {
-      --neon-cyan: #00f3ff;
-      --neon-pink: #bc13fe;
-      --neon-purple: #5e1ce8;
-      --bg-dark: #030305;
-      --glass: rgba(10, 10, 12, 0.7);
+      --bg-dark: #050508;
+      --bg-panel: rgba(20, 20, 25, 0.6);
+      --primary: #00f2ff;
+      --secondary: #ff0055;
+      --text-main: #ffffff;
+      --text-muted: #94a3b8;
+      --gradient-main: linear-gradient(135deg, #00f2ff 0%, #ff0055 100%);
       --glass-border: 1px solid rgba(255, 255, 255, 0.08);
-      --font-display: 'Syncopate', sans-serif;
-      --font-body: 'Rajdhani', sans-serif;
+      --glass-shine: rgba(255, 255, 255, 0.03);
+      --font-heading: 'Space Grotesk', sans-serif;
+      --font-body: 'Outfit', sans-serif;
       --font-code: 'JetBrains Mono', monospace;
     }
 
-    * { margin: 0; padding: 0; box-sizing: border-box; cursor: none; /* Custom cursor handling */ }
+    * { margin: 0; padding: 0; box-sizing: border-box; scroll-behavior: smooth; }
 
     body {
       background-color: var(--bg-dark);
-      color: white;
+      color: var(--text-main);
       font-family: var(--font-body);
       overflow-x: hidden;
     }
 
-    /* --- Custom Cursor --- */
-    #cursor {
+    /* --- 3D Background Canvas --- */
+    #canvas-container {
       position: fixed;
-      top: 0; left: 0;
-      width: 20px; height: 20px;
-      border: 1px solid var(--neon-cyan);
-      border-radius: 50%;
-      pointer-events: none;
-      z-index: 9999;
-      transform: translate(-50%, -50%);
-      transition: width 0.3s, height 0.3s, background 0.3s;
-      mix-blend-mode: difference;
-    }
-    #cursor.hovered {
-      background: var(--neon-cyan);
-      width: 50px; height: 50px;
-      opacity: 0.5;
-      border: none;
-    }
-
-    /* --- 3D Canvas --- */
-    #webgl-container {
-      position: fixed;
-      top: 0; left: 0;
-      width: 100%; height: 100%;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
       z-index: -1;
-      opacity: 0.8;
+      opacity: 0.6;
     }
 
-    /* --- UI Components --- */
-    .container {
-      max-width: 1400px;
+    /* --- Layout & Typography --- */
+    .wrap {
+      max-width: 1200px;
       margin: 0 auto;
-      padding: 0 2rem;
+      padding: 2rem;
       position: relative;
       z-index: 2;
     }
 
-    /* Header */
-    nav {
+    h1, h2, h3 { font-family: var(--font-heading); }
+    
+    .section-title {
+      font-size: 2.5rem;
+      margin-bottom: 2rem;
+      background: var(--gradient-main);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      display: inline-block;
+      position: relative;
+    }
+
+    /* --- Glass Header --- */
+    header {
       display: flex;
       justify-content: space-between;
       align-items: center;
-      padding: 2rem 0;
-      mix-blend-mode: exclusion;
-    }
-    .brand {
-      font-family: var(--font-display);
-      font-weight: 700;
-      font-size: 1.5rem;
-      letter-spacing: 2px;
-      color: white;
-      text-transform: uppercase;
-    }
-    .status-badge {
-      border: 1px solid var(--neon-cyan);
-      padding: 0.5rem 1rem;
-      border-radius: 50px;
-      font-family: var(--font-code);
-      font-size: 0.8rem;
-      color: var(--neon-cyan);
-      text-transform: uppercase;
-      letter-spacing: 1px;
+      padding: 1.5rem 2rem;
+      background: rgba(10, 10, 15, 0.7);
+      backdrop-filter: blur(16px);
+      border: var(--glass-border);
+      border-radius: 24px;
+      margin-bottom: 4rem;
+      box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+      transition: transform 0.3s ease;
     }
 
-    /* Hero Section */
-    .hero {
-      height: 90vh;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-    }
-    .hero h1 {
-      font-family: var(--font-display);
-      font-size: clamp(3rem, 8vw, 7rem);
-      line-height: 0.9;
-      text-transform: uppercase;
-      margin-bottom: 1rem;
-      background: linear-gradient(to right, #fff, #aaa);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-    }
-    .hero-subtitle {
-      font-family: var(--font-code);
-      font-size: 1.2rem;
-      color: var(--neon-cyan);
-      margin-bottom: 2rem;
+    .logo-area { display: flex; align-items: center; gap: 1.5rem; }
+    .logo-img {
+      width: 60px;
+      height: 60px;
+      border-radius: 12px;
+      border: 2px solid rgba(0, 242, 255, 0.3);
+      object-fit: cover;
     }
 
-    /* Holographic Cards */
-    .section-title {
-      font-family: var(--font-display);
-      font-size: 3rem;
-      margin: 4rem 0 2rem;
-      text-transform: uppercase;
-      -webkit-text-stroke: 1px rgba(255,255,255,0.3);
-      color: transparent;
+    .hero-text h1 { font-size: 3rem; line-height: 1.1; margin-bottom: 0.5rem; }
+    .hero-text .role { font-family: var(--font-code); color: var(--primary); font-size: 1.1rem; }
+
+    /* --- 3D Cards with Tilt Effect --- */
+    .glass-card {
+      background: var(--bg-panel);
+      backdrop-filter: blur(12px);
+      border: var(--glass-border);
+      border-radius: 24px;
+      padding: 2.5rem;
+      margin-bottom: 3rem;
+      position: relative;
+      overflow: hidden;
+      transition: transform 0.1s, box-shadow 0.3s;
+      transform-style: preserve-3d;
+      perspective: 1000px;
     }
 
-    .grid-projects {
+    .glass-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0; height: 1px;
+      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+    }
+
+    /* --- Bento Grid for Projects --- */
+    .bento-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+      grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
       gap: 2rem;
     }
 
-    .holo-card {
-      background: rgba(255, 255, 255, 0.03);
-      border: 1px solid rgba(255, 255, 255, 0.05);
-      backdrop-filter: blur(10px);
-      padding: 2.5rem;
-      border-radius: 0; /* Cyberpunk style square edges */
+    .project-card {
+      background: rgba(255,255,255,0.02);
+      border: 1px solid rgba(255,255,255,0.05);
+      border-radius: 20px;
+      padding: 2rem;
       position: relative;
-      transition: 0.4s;
-      overflow: hidden;
-    }
-    .holo-card::before {
-      content: '';
-      position: absolute;
-      top: 0; left: -100%;
-      width: 100%; height: 100%;
-      background: linear-gradient(90deg, transparent, rgba(0, 243, 255, 0.1), transparent);
-      transition: 0.5s;
-    }
-    .holo-card:hover::before { left: 100%; }
-    .holo-card:hover {
-      border-color: var(--neon-cyan);
-      box-shadow: 0 0 30px rgba(0, 243, 255, 0.1);
-      transform: translateY(-5px);
-    }
-    
-    .card-num {
-      font-family: var(--font-display);
-      font-size: 4rem;
-      color: rgba(255,255,255,0.05);
-      position: absolute;
-      top: 1rem; right: 1rem;
-      line-height: 1;
+      transition: all 0.3s ease;
+      /* For 3D Tilt JS */
+      transform-style: preserve-3d; 
     }
 
-    .tags {
+    /* The "Content" layer pops out in 3D */
+    .project-content {
+      transform: translateZ(20px); 
+    }
+
+    .project-card:hover {
+      border-color: var(--primary);
+      box-shadow: 0 0 30px rgba(0, 242, 255, 0.1);
+    }
+
+    .project-card h3 { font-size: 1.5rem; margin-bottom: 1rem; color: var(--text-main); }
+    
+    .tech-stack {
       display: flex;
+      flex-wrap: wrap;
       gap: 0.5rem;
       margin-top: 1.5rem;
     }
-    .tag {
+
+    .tech-badge {
+      font-size: 0.75rem;
       font-family: var(--font-code);
-      font-size: 0.7rem;
-      padding: 0.3rem 0.6rem;
-      border: 1px solid var(--neon-purple);
-      color: var(--neon-pink);
-      text-transform: uppercase;
+      padding: 0.4rem 0.8rem;
+      border-radius: 50px;
+      background: rgba(0, 242, 255, 0.1);
+      color: var(--primary);
+      border: 1px solid rgba(0, 242, 255, 0.2);
     }
 
-    /* --- Advanced AI Chat Interface --- */
-    .ai-orb-trigger {
+    /* --- Scroll Animation Classes --- */
+    .hidden-scroll {
+      opacity: 0;
+      transform: translateY(30px);
+      transition: all 0.8s ease-out;
+    }
+    .visible-scroll {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* --- Advanced Chatbot UI --- */
+    .chat-trigger {
       position: fixed;
-      bottom: 3rem; right: 3rem;
-      width: 80px; height: 80px;
+      bottom: 2rem;
+      right: 2rem;
+      width: 65px;
+      height: 65px;
+      background: var(--gradient-main);
       border-radius: 50%;
-      background: black;
-      border: 1px solid var(--neon-cyan);
-      box-shadow: 0 0 20px var(--neon-cyan), inset 0 0 20px var(--neon-cyan);
-      z-index: 100;
       display: flex;
-      justify-content: center;
       align-items: center;
-      cursor: none; /* Uses custom cursor */
-      transition: 0.3s;
-    }
-    .ai-orb-trigger:hover { transform: scale(1.1); box-shadow: 0 0 40px var(--neon-cyan); }
-    .orb-core {
-      width: 40px; height: 40px;
-      background: var(--neon-cyan);
-      border-radius: 50%;
-      animation: pulse-core 2s infinite;
-      filter: blur(5px);
-    }
-    @keyframes pulse-core {
-      0% { transform: scale(0.8); opacity: 0.5; }
-      50% { transform: scale(1.1); opacity: 1; }
-      100% { transform: scale(0.8); opacity: 0.5; }
+      justify-content: center;
+      font-size: 1.8rem;
+      color: white;
+      border: none;
+      cursor: pointer;
+      box-shadow: 0 10px 30px rgba(0, 242, 255, 0.4);
+      z-index: 1000;
+      transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+      animation: pulse-glow 3s infinite;
     }
 
-    .chat-modal {
+    .chat-trigger:hover { transform: scale(1.1) rotate(10deg); }
+
+    @keyframes pulse-glow {
+      0% { box-shadow: 0 0 0 0 rgba(0, 242, 255, 0.7); }
+      70% { box-shadow: 0 0 0 15px rgba(0, 242, 255, 0); }
+      100% { box-shadow: 0 0 0 0 rgba(0, 242, 255, 0); }
+    }
+
+    .chat-interface {
       position: fixed;
-      bottom: 8rem; right: 3rem;
-      width: 400px;
+      bottom: 6rem;
+      right: 2rem;
+      width: 380px;
       height: 600px;
-      background: rgba(5, 5, 8, 0.95);
-      border: 1px solid var(--neon-cyan);
+      background: rgba(10, 12, 16, 0.95);
       backdrop-filter: blur(20px);
-      z-index: 99;
-      display: none; /* Hidden by default */
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 24px;
+      display: none;
       flex-direction: column;
-      clip-path: polygon(10% 0, 100% 0, 100% 90%, 90% 100%, 0 100%, 0 10%); /* Sci-fi Shape */
+      overflow: hidden;
+      z-index: 1000;
+      transform-origin: bottom right;
+      animation: openChat 0.4s cubic-bezier(0.19, 1, 0.22, 1);
+      box-shadow: 0 20px 50px rgba(0,0,0,0.5);
+    }
+
+    @keyframes openChat {
+      from { opacity: 0; transform: scale(0.8) translateY(20px); }
+      to { opacity: 1; transform: scale(1) translateY(0); }
     }
 
     .chat-header {
-      padding: 1.5rem;
-      border-bottom: 1px solid rgba(255,255,255,0.1);
+      background: linear-gradient(90deg, rgba(0,242,255,0.1), rgba(255,0,85,0.1));
+      padding: 1.2rem;
       display: flex;
       justify-content: space-between;
       align-items: center;
-      background: linear-gradient(90deg, rgba(0,243,255,0.1), transparent);
+      border-bottom: 1px solid rgba(255,255,255,0.05);
     }
 
-    .chat-display {
+    .chat-body {
       flex: 1;
-      overflow-y: auto;
-      padding: 1.5rem;
-      display: flex;
-      flex-direction: column;
-      gap: 1rem;
-    }
-
-    .msg {
       padding: 1rem;
-      border-radius: 4px;
-      font-size: 0.9rem;
+      overflow-y: auto;
+      scroll-behavior: smooth;
+    }
+
+    .chat-bubble {
       max-width: 85%;
+      padding: 0.8rem 1.2rem;
+      margin-bottom: 1rem;
+      border-radius: 18px;
+      font-size: 0.95rem;
       line-height: 1.5;
+      animation: msgPop 0.3s ease-out;
     }
-    .bot {
-      background: rgba(0, 243, 255, 0.1);
-      border-left: 2px solid var(--neon-cyan);
-      align-self: flex-start;
-      color: #ccfaff;
-    }
-    .user {
-      background: rgba(188, 19, 254, 0.1);
-      border-right: 2px solid var(--neon-pink);
-      align-self: flex-end;
-      text-align: right;
+    
+    @keyframes msgPop { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+
+    .bot-msg {
+      background: rgba(255,255,255,0.08);
+      color: var(--text-main);
+      border-bottom-left-radius: 4px;
+      margin-right: auto;
     }
 
-    .chat-input-zone {
-      padding: 1.5rem;
-      border-top: 1px solid rgba(255,255,255,0.1);
-      display: flex;
-      gap: 1rem;
-    }
-
-    .cyber-input {
-      flex: 1;
-      background: transparent;
-      border: 1px solid rgba(255,255,255,0.2);
-      padding: 0.8rem;
+    .user-msg {
+      background: var(--gradient-main);
       color: white;
-      font-family: var(--font-code);
-      transition: 0.3s;
+      border-bottom-right-radius: 4px;
+      margin-left: auto;
     }
-    .cyber-input:focus { outline: none; border-color: var(--neon-cyan); box-shadow: 0 0 10px rgba(0,243,255,0.2); }
 
-    .cyber-btn {
-      background: var(--neon-cyan);
-      color: black;
+    .chat-input-area {
+      padding: 1rem;
+      background: rgba(0,0,0,0.2);
+      border-top: 1px solid rgba(255,255,255,0.05);
+      display: flex;
+      gap: 0.5rem;
+      align-items: center;
+    }
+
+    .chat-input {
+      flex: 1;
+      background: rgba(255,255,255,0.05);
+      border: 1px solid rgba(255,255,255,0.1);
+      padding: 0.8rem;
+      border-radius: 12px;
+      color: white;
+      font-family: var(--font-body);
+      outline: none;
+    }
+    .chat-input:focus { border-color: var(--primary); }
+
+    .icon-btn {
+      background: none;
       border: none;
-      padding: 0 1.2rem;
-      font-weight: 700;
-      clip-path: polygon(10% 0, 100% 0, 100% 100%, 0 100%, 0 25%);
+      color: var(--text-muted);
+      cursor: pointer;
+      font-size: 1.2rem;
+      padding: 0.5rem;
+      transition: color 0.2s;
+    }
+    .icon-btn:hover, .icon-btn.active { color: var(--primary); }
+
+    /* Sound Wave Animation for Speaking */
+    .sound-wave {
+      display: inline-flex;
+      gap: 2px;
+      height: 12px;
+      align-items: center;
+      margin-left: 8px;
+    }
+    .bar {
+      width: 2px;
+      background: var(--primary);
+      animation: wave 1s infinite ease-in-out;
+    }
+    .bar:nth-child(1) { animation-delay: 0.0s; height: 6px; }
+    .bar:nth-child(2) { animation-delay: 0.1s; height: 12px; }
+    .bar:nth-child(3) { animation-delay: 0.2s; height: 8px; }
+    @keyframes wave { 0%, 100% { transform: scaleY(1); } 50% { transform: scaleY(2); } }
+
+    /* Footer & Form */
+    form { display: flex; flex-direction: column; gap: 1rem; }
+    input, textarea, select {
+      background: rgba(0,0,0,0.3);
+      border: 1px solid rgba(255,255,255,0.1);
+      padding: 1rem;
+      border-radius: 12px;
+      color: white;
+      font-family: var(--font-body);
       transition: 0.3s;
     }
-    .cyber-btn:hover { background: white; }
+    input:focus, textarea:focus { border-color: var(--primary); box-shadow: 0 0 15px rgba(0,242,255,0.2); outline: none; }
+    
+    button.primary-btn {
+      background: var(--gradient-main);
+      color: white;
+      border: none;
+      padding: 1rem 2rem;
+      border-radius: 12px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+    button.primary-btn:hover { transform: translateY(-2px); box-shadow: 0 10px 20px rgba(0,242,255,0.3); }
 
-    .voice-waves {
-      position: absolute;
-      top: 50%; left: 50%;
-      transform: translate(-50%, -50%);
-      width: 200px; height: 200px;
-      border: 1px solid var(--neon-cyan);
-      border-radius: 50%;
-      opacity: 0;
-      pointer-events: none;
-    }
-    .voice-active .voice-waves {
-      animation: ripple 1.5s infinite;
-      opacity: 1;
-    }
-    @keyframes ripple {
-      0% { width: 80px; height: 80px; opacity: 1; border-width: 3px; }
-      100% { width: 300px; height: 300px; opacity: 0; border-width: 0px; }
-    }
-
-    /* Footer */
-    footer {
-      border-top: 1px solid rgba(255,255,255,0.1);
-      margin-top: 5rem;
-      padding: 3rem 0;
-      text-align: center;
-      color: #666;
-      font-family: var(--font-code);
-      font-size: 0.8rem;
-    }
-
+    /* Responsive */
     @media (max-width: 768px) {
-      .hero h1 { font-size: 3rem; }
-      .chat-modal { width: 90%; right: 5%; height: 500px; }
-      #cursor { display: none; } /* Disable custom cursor on touch */
+      .header-content { flex-direction: column; text-align: center; }
+      .chat-interface { width: 90%; right: 5%; bottom: 5rem; height: 500px; }
     }
   </style>
 </head>
 
 <body>
-  <div id="cursor"></div>
-  <div id="webgl-container"></div>
+  <div id="canvas-container"></div>
 
-  <div class="container">
-    <nav>
-      <div class="brand">T-Stephen<span style="color:var(--neon-pink)">.AI</span></div>
-      <div class="status-badge">
-        <span style="color:white">Visitors:</span> <span id="visitorCount">...</span>
+  <div class="wrap">
+    <header class="hidden-scroll">
+      <div class="logo-area">
+        <img src="assets/STEVE_GitHub_Logo.png" alt="Logo" class="logo-img">
+        <div class="hero-text">
+          <h1>T-Stephen</h1>
+          <div class="role"><span id="typed-role"></span></div>
+        </div>
       </div>
-    </nav>
-
-    <section class="hero">
-      <div class="hero-subtitle">> Initializing Portfolio_v2.0...</div>
-      <h1>Architecting<br>Intelligence</h1>
-      <div style="font-family: var(--font-code); color: var(--neon-purple); font-size: 1.5rem; margin-top: 1rem;">
-        <span id="typed-text"></span>
+      
+      <div class="header-controls">
+        <div style="text-align: right;">
+          <small style="color:var(--text-muted); display:block; font-size: 0.7rem; text-transform: uppercase; letter-spacing: 1px;">Live Visitors</small>
+          <span id="visitorCount" style="color:var(--primary); font-weight:700; font-family: var(--font-code);">—</span>
+        </div>
       </div>
-    </section>
+    </header>
 
-    <section id="projects">
-      <h2 class="section-title">Innovations</h2>
-      <div class="grid-projects">
-        
-        <div class="holo-card hover-trigger">
-          <div class="card-num">01</div>
-          <h3 style="font-family:var(--font-display); font-size:1.5rem;">Smart Traffic Grid</h3>
-          <p style="margin-top:1rem; color:#aaa; line-height:1.6;">
-            A Computer Vision solution utilizing YOLOv8 to autonomously manage traffic signals. Prioritizes emergency vehicles in real-time with 95% accuracy.
-          </p>
-          <div class="tags">
-            <span class="tag">Python</span>
-            <span class="tag">YOLOv8</span>
-            <span class="tag">OpenCV</span>
+    <section id="projects" class="glass-card hidden-scroll">
+      <h2 class="section-title">Featured Innovations</h2>
+      
+      <div class="bento-grid">
+        <div class="project-card tilt-card" data-tilt>
+          <div class="project-content">
+            <div style="font-size:2rem; margin-bottom:0.5rem;">🚦</div>
+            <h3>AI Smart Traffic System</h3>
+            <p style="color:var(--text-muted); font-size: 0.9rem;">
+              Computer Vision system using YOLOv8 to detect emergency vehicles and automate traffic signals in real-time. Achieved 95% detection accuracy.
+            </p>
+            <div class="tech-stack">
+              <span class="tech-badge">Python</span>
+              <span class="tech-badge">YOLOv8</span>
+              <span class="tech-badge">OpenCV</span>
+            </div>
           </div>
         </div>
 
-        <div class="holo-card hover-trigger">
-          <div class="card-num">02</div>
-          <h3 style="font-family:var(--font-display); font-size:1.5rem;">BERT Sentiment Core</h3>
-          <p style="margin-top:1rem; color:#aaa; line-height:1.6;">
-            Advanced NLP engine capable of understanding context, sarcasm, and multi-lingual sentiment using Transformer architecture.
-          </p>
-          <div class="tags">
-            <span class="tag">BERT</span>
-            <span class="tag">PyTorch</span>
-            <span class="tag">Flask</span>
+        <div class="project-card tilt-card" data-tilt>
+          <div class="project-content">
+            <div style="font-size:2rem; margin-bottom:0.5rem;">🧠</div>
+            <h3>ML Algorithms Visualizer</h3>
+            <p style="color:var(--text-muted); font-size: 0.9rem;">
+              Interactive educational platform demonstrating Decision Trees and Candidate-Elimination algorithms with dynamic datasets.
+            </p>
+            <div class="tech-stack">
+              <span class="tech-badge">Scikit-Learn</span>
+              <span class="tech-badge">Pandas</span>
+              <span class="tech-badge">Matplotlib</span>
+            </div>
           </div>
         </div>
 
-        <div class="holo-card hover-trigger">
-          <div class="card-num">03</div>
-          <h3 style="font-family:var(--font-display); font-size:1.5rem;">ML Visualizer</h3>
-          <p style="margin-top:1rem; color:#aaa; line-height:1.6;">
-            Interactive educational platform for visualizing Decision Trees and Candidate-Elimination algorithms dynamically.
-          </p>
-          <div class="tags">
-            <span class="tag">Scikit-Learn</span>
-            <span class="tag">React</span>
-            <span class="tag">D3.js</span>
+        <div class="project-card tilt-card" data-tilt>
+          <div class="project-content">
+            <div style="font-size:2rem; margin-bottom:0.5rem;">📊</div>
+            <h3>BERT Sentiment Analysis</h3>
+            <p style="color:var(--text-muted); font-size: 0.9rem;">
+              High-performance NLP tool leveraging Transformer models for multi-language sentiment classification.
+            </p>
+            <div class="tech-stack">
+              <span class="tech-badge">BERT</span>
+              <span class="tech-badge">Transformers</span>
+              <span class="tech-badge">Flask</span>
+            </div>
           </div>
-        </div>
-
-      </div>
-    </section>
-
-    <section id="skills" style="margin-top: 5rem;">
-      <h2 class="section-title">Neural Stack</h2>
-      <div style="display:flex; flex-wrap:wrap; gap:1rem;">
-        <div class="holo-card" style="flex:1; min-width:300px;">
-          <h4 style="color:var(--neon-cyan); margin-bottom:1rem; font-family:var(--font-code);">AI & DEEP LEARNING</h4>
-          <p style="color:#ddd;">TensorFlow • PyTorch • OpenCV • YOLO • NLP • Transformers</p>
-        </div>
-        <div class="holo-card" style="flex:1; min-width:300px;">
-          <h4 style="color:var(--neon-pink); margin-bottom:1rem; font-family:var(--font-code);">FULL STACK</h4>
-          <p style="color:#ddd;">React • Node.js • Python • C++ • Firebase • AWS • Docker</p>
         </div>
       </div>
     </section>
 
-    <section id="contact" style="margin-top: 5rem; max-width: 600px;">
-      <h2 class="section-title">Transmission</h2>
-      <div class="holo-card">
-        <form action="https://formsubmit.co/tstephenraj001@gmail.com" method="POST" style="display:flex; flex-direction:column; gap:1rem;">
-          <input class="cyber-input" name="name" placeholder="IDENTIFIER (NAME)" required />
-          <input class="cyber-input" name="email" type="email" placeholder="CONTACT FREQUENCY (EMAIL)" required />
-          <textarea class="cyber-input" name="message" rows="4" placeholder="TRANSMISSION CONTENT..." required></textarea>
-          <button type="submit" class="cyber-btn" style="padding: 1rem;">INITIATE SEND >></button>
+    <section id="skills" class="glass-card hidden-scroll">
+      <h2 class="section-title">Tech Arsenal</h2>
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem;">
+        <div style="padding:1rem; border:1px solid rgba(255,255,255,0.1); border-radius:12px;">
+          <h4 style="color:var(--primary); margin-bottom:0.5rem;">AI / ML</h4>
+          <p style="font-size:0.9rem; color:var(--text-muted);">TensorFlow, PyTorch, YOLO, OpenCV, Neural Networks</p>
+        </div>
+        <div style="padding:1rem; border:1px solid rgba(255,255,255,0.1); border-radius:12px;">
+          <h4 style="color:var(--secondary); margin-bottom:0.5rem;">Development</h4>
+          <p style="font-size:0.9rem; color:var(--text-muted);">Python, C++, Java, JavaScript, React, Node.js</p>
+        </div>
+        <div style="padding:1rem; border:1px solid rgba(255,255,255,0.1); border-radius:12px;">
+          <h4 style="color:#00ff88; margin-bottom:0.5rem;">Data & Cloud</h4>
+          <p style="font-size:0.9rem; color:var(--text-muted);">SQL, Pandas, AWS, Docker, Firebase, Git</p>
+        </div>
+      </div>
+    </section>
+
+    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem;">
+      <section id="contact" class="glass-card hidden-scroll">
+        <h2 class="section-title">Hire Me</h2>
+        <form action="https://formsubmit.co/tstephenraj001@gmail.com" method="POST">
+          <input name="name" placeholder="Name" required />
+          <input name="email" placeholder="Email" type="email" required />
+          <textarea name="message" rows="3" placeholder="Project details..." required></textarea>
+          <button type="submit" class="primary-btn">Send Proposal</button>
         </form>
         <div style="margin-top:1.5rem; text-align:center;">
-            <a href="https://www.linkedin.com/in/stephen-raj-ai/" target="_blank" style="color:var(--neon-cyan); text-decoration:none; font-family:var(--font-code);">
-                [ ACCESS LINKEDIN DATALINK ]
+            <a href="https://www.linkedin.com/in/stephen-raj-ai/" target="_blank" style="color:var(--primary); text-decoration:none; font-weight:600;">
+                <i class="fab fa-linkedin"></i> Connect on LinkedIn
             </a>
         </div>
-      </div>
-    </section>
+      </section>
 
-    <footer>
-      SYSTEM ONLINE • COPYRIGHT 2026 T-STEPHEN
+      <section id="feedback" class="glass-card hidden-scroll">
+        <h2 class="section-title">Feedback</h2>
+        <div id="feedbackList" style="height:200px; overflow-y:auto; margin-bottom:1rem; padding-right:5px;">
+          <div style="text-align:center; color:var(--text-muted); padding-top:2rem;">Loading reviews...</div>
+        </div>
+        <form id="feedbackForm">
+          <div style="display:flex; gap:0.5rem;">
+            <input id="fbName" placeholder="Name" style="flex:1" required />
+            <input id="fbRating" type="number" min="1" max="5" placeholder="★" style="width:60px" required />
+          </div>
+          <textarea id="fbMessage" rows="2" placeholder="Your review..." required></textarea>
+          <button type="submit" class="primary-btn" style="width:100%;">Post Review</button>
+        </form>
+      </section>
+    </div>
+
+    <footer style="text-align:center; margin-top:4rem; color:var(--text-muted); font-size:0.9rem;">
+      <p>© 2026 T-Stephen. Powered by Three.js & Artificial Intelligence.</p>
     </footer>
   </div>
 
-  <div class="ai-orb-trigger hover-trigger" id="aiTrigger">
-    <div class="voice-waves"></div>
-    <div class="orb-core"></div>
-  </div>
+  <button class="chat-trigger" id="chatTrigger">
+    <i class="fas fa-robot"></i>
+  </button>
 
-  <div class="chat-modal" id="chatModal">
+  <div class="chat-interface" id="chatInterface">
     <div class="chat-header">
-      <span style="font-family:var(--font-code); color:var(--neon-cyan);">AI_ASSISTANT_V2</span>
-      <button id="closeChat" style="background:none; border:none; color:white; font-size:1.2rem;">×</button>
-    </div>
-    <div class="chat-display" id="chatDisplay">
-      <div class="msg bot">
-        Greetings. I am Stephen's AI Proxy. 🦾<br><br>
-        I have full access to his project database. You can <b>speak</b> to me or type commands like "Skills", "Traffic Project", or "Contact".
+      <div style="display:flex; align-items:center; gap:0.8rem;">
+        <div style="width:10px; height:10px; background:#00ff88; border-radius:50%; box-shadow:0 0 10px #00ff88;"></div>
+        <div>
+          <h4 style="margin:0; font-family:var(--font-heading);">Stephen's AI</h4>
+          <span style="font-size:0.7rem; color:var(--text-muted);">Online & Voice Enabled</span>
+        </div>
+      </div>
+      <div style="display:flex; gap:0.5rem;">
+        <button class="icon-btn" id="muteToggle" title="Toggle Voice Response"><i class="fas fa-volume-up"></i></button>
+        <button class="icon-btn" id="closeChat"><i class="fas fa-times"></i></button>
       </div>
     </div>
-    <div class="chat-input-zone">
-      <button class="cyber-btn hover-trigger" id="voiceBtn" title="Voice Input">🎤</button>
-      <input type="text" class="cyber-input" id="chatInput" placeholder="Command...">
-      <button class="cyber-btn hover-trigger" id="sendBtn">></button>
+    
+    <div class="chat-body" id="chatBody">
+      <div class="chat-bubble bot-msg">
+        Hello! I am Stephen's advanced AI Assistant. 🤖<br><br>
+        I can tell you about his <b>projects</b>, <b>skills</b>, or simply chat with you.<br>
+        <i>Try clicking the microphone to speak!</i>
+      </div>
+    </div>
+
+    <div class="chat-input-area">
+      <button class="icon-btn" id="voiceBtn"><i class="fas fa-microphone"></i></button>
+      <input type="text" class="chat-input" id="chatInput" placeholder="Ask anything...">
+      <button class="icon-btn" id="sendBtn" style="color:var(--primary);"><i class="fas fa-paper-plane"></i></button>
     </div>
   </div>
 
   <script type="module">
-    // Firebase Imports (Preserving your backend connection)
     import { initializeApp } from "https://www.gstatic.com/firebasejs/12.0.0/firebase-app.js";
-    import { getFirestore, doc, runTransaction, onSnapshot } from "https://www.gstatic.com/firebasejs/12.0.0/firebase-firestore.js";
+    import { getFirestore, collection, addDoc, serverTimestamp, query, orderBy, onSnapshot, doc, runTransaction } from "https://www.gstatic.com/firebasejs/12.0.0/firebase-firestore.js";
 
     const firebaseConfig = {
       apiKey: "AIzaSyDv2IZjs4dyC4w2Tne4jqFVCyHN-J6oFF0",
@@ -483,211 +537,316 @@
     const app = initializeApp(firebaseConfig);
     const db = getFirestore(app);
 
-    // Visitor Logic
+    // --- Firebase Logic: Visitor Count & Feedback ---
+    // (Logic kept identical to ensure data integrity)
     async function incrementVisitor() {
+      const docRef = doc(db, 'analytics', 'visitors');
       try {
-        const docRef = doc(db, 'analytics', 'visitors');
         await runTransaction(db, async (t) => {
             const snap = await t.get(docRef);
-            if (!snap.exists()) t.set(docRef, { count: 1 });
-            else t.update(docRef, { count: snap.data().count + 1 });
+            if (!snap.exists()) {
+                t.set(docRef, { count: 1 });
+            } else {
+                t.update(docRef, { count: snap.data().count + 1 });
+            }
         });
-      } catch(e){console.log(e)}
+      } catch(e) { console.log("Visitor sync error", e); }
     }
-    if(!sessionStorage.getItem('v2_visit')) { incrementVisitor(); sessionStorage.setItem('v2_visit','true'); }
-    onSnapshot(doc(db, 'analytics', 'visitors'), (s) => {
-        if(s.exists()) document.getElementById('visitorCount').innerText = s.data().count.toLocaleString();
+    
+    if(!sessionStorage.getItem('visited')) {
+        incrementVisitor();
+        sessionStorage.setItem('visited', 'true');
+    }
+
+    onSnapshot(doc(db, 'analytics', 'visitors'), (snap) => {
+        if(snap.exists()) document.getElementById('visitorCount').textContent = snap.data().count.toLocaleString();
     });
+
+    const fbCol = collection(db, 'feedbacks');
+    onSnapshot(query(fbCol, orderBy('createdAt', 'desc')), (snap) => {
+        const list = document.getElementById('feedbackList');
+        list.innerHTML = '';
+        snap.forEach(d => {
+            const data = d.data();
+            const div = document.createElement('div');
+            div.style.cssText = "background:rgba(255,255,255,0.05); padding:0.8rem; border-radius:10px; margin-bottom:0.8rem;";
+            div.innerHTML = `
+                <div style="display:flex; justify-content:space-between; font-size:0.9rem;">
+                    <strong style="color:var(--primary)">${escapeHtml(data.name)}</strong>
+                    <span style="color:#f1c40f">${'★'.repeat(data.rating)}</span>
+                </div>
+                <p style="margin-top:0.4rem; color:var(--text-muted); font-size:0.85rem;">${escapeHtml(data.message)}</p>
+            `;
+            list.appendChild(div);
+        });
+    });
+
+    document.getElementById('feedbackForm').addEventListener('submit', async (e) => {
+        e.preventDefault();
+        const btn = e.target.querySelector('button');
+        const oldText = btn.innerText;
+        btn.innerText = "Posting...";
+        await addDoc(fbCol, {
+            name: document.getElementById('fbName').value,
+            rating: document.getElementById('fbRating').value,
+            message: document.getElementById('fbMessage').value,
+            createdAt: serverTimestamp()
+        });
+        e.target.reset();
+        btn.innerText = oldText;
+        alert("Thanks for the review!");
+    });
+    window.escapeHtml = (str) => str.replace(/[&<>"']/g, m => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#039;' })[m]);
   </script>
 
   <script>
-    // --- 1. PRO 3D SCENE (Three.js) ---
-    const initThree = () => {
-      const scene = new THREE.Scene();
-      const camera = new THREE.PerspectiveCamera(75, window.innerWidth/window.innerHeight, 0.1, 1000);
-      const renderer = new THREE.WebGLRenderer({ alpha: true, antialias: true });
-      renderer.setSize(window.innerWidth, window.innerHeight);
-      document.getElementById('webgl-container').appendChild(renderer.domElement);
+    // --- 1. Typed.js Header Animation ---
+    new Typed('#typed-role', {
+      strings: ['AI Engineer', 'Data Scientist', 'Full-Stack Developer', 'Computer Vision Expert'],
+      typeSpeed: 50, backSpeed: 30, loop: true, backDelay: 1500
+    });
 
-      // Create "Neural Network" Particles
-      const particlesGeometry = new THREE.BufferGeometry();
-      const count = 700;
-      const posArray = new Float32Array(count * 3);
-      
-      for(let i=0; i<count*3; i++) {
-        posArray[i] = (Math.random() - 0.5) * 20; // Spread
-      }
-      particlesGeometry.setAttribute('position', new THREE.BufferAttribute(posArray, 3));
-      
-      const material = new THREE.PointsMaterial({
-        size: 0.03,
-        color: 0x00f3ff,
-        transparent: true,
-        opacity: 0.8
-      });
-      
-      const particlesMesh = new THREE.Points(particlesGeometry, material);
-      scene.add(particlesMesh);
+    // --- 2. Three.js 3D Neural Network Background ---
+    const initThreeJS = () => {
+        const container = document.getElementById('canvas-container');
+        const scene = new THREE.Scene();
+        // Fog for depth
+        scene.fog = new THREE.FogExp2(0x050508, 0.002);
 
-      // Mouse Interaction
-      camera.position.z = 5;
-      let mouseX = 0, mouseY = 0;
+        const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+        camera.position.z = 30;
 
-      document.addEventListener('mousemove', (event) => {
-        mouseX = event.clientX;
-        mouseY = event.clientY;
-      });
-
-      const animate = () => {
-        requestAnimationFrame(animate);
-        particlesMesh.rotation.y += 0.001;
-        particlesMesh.rotation.x += 0.001;
-        
-        // Parallax effect
-        particlesMesh.rotation.y += 0.0005 * (mouseX * 0.001);
-        particlesMesh.rotation.x += 0.0005 * (mouseY * 0.001);
-
-        renderer.render(scene, camera);
-      };
-      animate();
-
-      window.addEventListener('resize', () => {
-        camera.aspect = window.innerWidth/window.innerHeight;
-        camera.updateProjectionMatrix();
+        const renderer = new THREE.WebGLRenderer({ alpha: true, antialias: true });
         renderer.setSize(window.innerWidth, window.innerHeight);
-      });
-    }
-    initThree();
+        renderer.setPixelRatio(window.devicePixelRatio);
+        container.appendChild(renderer.domElement);
 
-    // --- 2. GSAP SCROLL ANIMATIONS ---
-    gsap.registerPlugin(ScrollTrigger);
+        // Create Particles (Neurons)
+        const geometry = new THREE.BufferGeometry();
+        const count = 400; // number of particles
+        const positions = new Float32Array(count * 3);
+        
+        for(let i=0; i<count*3; i++) {
+            positions[i] = (Math.random() - 0.5) * 60; // Spread range
+        }
+        
+        geometry.setAttribute('position', new THREE.BufferAttribute(positions, 3));
+        
+        const material = new THREE.PointsMaterial({
+            size: 0.4,
+            color: 0x00f2ff,
+            transparent: true,
+            opacity: 0.8
+        });
+        
+        const particles = new THREE.Points(geometry, material);
+        scene.add(particles);
 
-    gsap.from(".hero h1", {
-      duration: 1.5,
-      y: 100,
-      opacity: 0,
-      ease: "power4.out",
-      delay: 0.5
+        // Lines connecting close particles (Neural Connections)
+        const lineMaterial = new THREE.LineBasicMaterial({ color: 0xff0055, transparent: true, opacity: 0.15 });
+        const linesGeometry = new THREE.BufferGeometry();
+        const lines = new THREE.LineSegments(linesGeometry, lineMaterial);
+        scene.add(lines);
+
+        // Animation Loop
+        let mouseX = 0;
+        let mouseY = 0;
+        
+        document.addEventListener('mousemove', (e) => {
+            mouseX = (e.clientX - window.innerWidth / 2) * 0.05;
+            mouseY = (e.clientY - window.innerHeight / 2) * 0.05;
+        });
+
+        const animate = () => {
+            requestAnimationFrame(animate);
+            
+            // Slow rotation
+            particles.rotation.y += 0.001;
+            particles.rotation.x += 0.0005;
+            lines.rotation.y += 0.001;
+            lines.rotation.x += 0.0005;
+
+            // Mouse Interaction
+            camera.position.x += (mouseX - camera.position.x) * 0.05;
+            camera.position.y += (-mouseY - camera.position.y) * 0.05;
+            camera.lookAt(scene.position);
+
+            // Update Lines
+            const particlePositions = particles.geometry.attributes.position.array;
+            const linePositions = [];
+            
+            // Limit connections for performance
+            for (let i = 0; i < count; i++) {
+                for (let j = i + 1; j < count; j++) {
+                    const dx = particlePositions[i*3] - particlePositions[j*3];
+                    const dy = particlePositions[i*3+1] - particlePositions[j*3+1];
+                    const dz = particlePositions[i*3+2] - particlePositions[j*3+2];
+                    const dist = Math.sqrt(dx*dx + dy*dy + dz*dz);
+
+                    if (dist < 8) { // Connection threshold
+                        linePositions.push(
+                            particlePositions[i*3], particlePositions[i*3+1], particlePositions[i*3+2],
+                            particlePositions[j*3], particlePositions[j*3+1], particlePositions[j*3+2]
+                        );
+                    }
+                }
+            }
+            // Only render first 1000 lines max to prevent lag
+            lines.geometry.setAttribute('position', new THREE.Float32BufferAttribute(linePositions.slice(0, 6000), 3));
+            
+            renderer.render(scene, camera);
+        };
+        animate();
+
+        window.addEventListener('resize', () => {
+            camera.aspect = window.innerWidth / window.innerHeight;
+            camera.updateProjectionMatrix();
+            renderer.setSize(window.innerWidth, window.innerHeight);
+        });
+    };
+    initThreeJS();
+
+    // --- 3. 3D Tilt Effect (Vanilla JS) ---
+    document.querySelectorAll('.tilt-card').forEach(card => {
+        card.addEventListener('mousemove', (e) => {
+            const rect = card.getBoundingClientRect();
+            const x = e.clientX - rect.left;
+            const y = e.clientY - rect.top;
+            
+            const centerX = rect.width / 2;
+            const centerY = rect.height / 2;
+            
+            const rotateX = ((y - centerY) / centerY) * -10; // Max tilt deg
+            const rotateY = ((x - centerX) / centerX) * 10;
+            
+            card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale(1.02)`;
+        });
+
+        card.addEventListener('mouseleave', () => {
+            card.style.transform = 'perspective(1000px) rotateX(0) rotateY(0) scale(1)';
+        });
     });
 
-    gsap.utils.toArray(".holo-card").forEach(card => {
-      gsap.from(card, {
-        scrollTrigger: {
-          trigger: card,
-          start: "top 85%",
-        },
-        y: 50,
-        opacity: 0,
-        duration: 1,
-        ease: "power2.out"
-      });
-    });
+    // --- 4. Scroll Reveal Animation ---
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if(entry.isIntersecting) {
+                entry.target.classList.add('visible-scroll');
+            }
+        });
+    }, { threshold: 0.1 });
 
-    // --- 3. CUSTOM CURSOR LOGIC ---
-    const cursor = document.getElementById('cursor');
-    document.addEventListener('mousemove', (e) => {
-      cursor.style.left = e.clientX + 'px';
-      cursor.style.top = e.clientY + 'px';
-    });
+    document.querySelectorAll('.hidden-scroll').forEach(el => observer.observe(el));
 
-    document.querySelectorAll('.hover-trigger, a, button, input, textarea').forEach(el => {
-      el.addEventListener('mouseenter', () => cursor.classList.add('hovered'));
-      el.addEventListener('mouseleave', () => cursor.classList.remove('hovered'));
-    });
-
-    // --- 4. TYPED.JS ---
-    new Typed('#typed-text', {
-      strings: ['AI Engineer', 'Deep Learning Specialist', 'Computer Vision Expert', 'Future Builder'],
-      typeSpeed: 50,
-      backSpeed: 30,
-      loop: true,
-      backDelay: 2000
-    });
-
-    // --- 5. ADVANCED AI CHATBOT (VOICE ENABLED) ---
-    const aiTrigger = document.getElementById('aiTrigger');
-    const chatModal = document.getElementById('chatModal');
+    // --- 5. Advanced Chatbot with Voice I/O ---
+    const chatTrigger = document.getElementById('chatTrigger');
+    const chatInterface = document.getElementById('chatInterface');
     const closeChat = document.getElementById('closeChat');
-    const sendBtn = document.getElementById('sendBtn');
+    const chatBody = document.getElementById('chatBody');
     const chatInput = document.getElementById('chatInput');
-    const display = document.getElementById('chatDisplay');
+    const sendBtn = document.getElementById('sendBtn');
     const voiceBtn = document.getElementById('voiceBtn');
+    const muteToggle = document.getElementById('muteToggle');
+
+    let isMuted = false;
+    let recognition;
+    let synth = window.speechSynthesis;
 
     // Toggle Chat
-    aiTrigger.addEventListener('click', () => {
-      chatModal.style.display = 'flex';
-      gsap.from(".chat-modal", {duration: 0.5, scale: 0.8, opacity: 0, ease: "back.out(1.7)"});
-    });
-    closeChat.addEventListener('click', () => chatModal.style.display = 'none');
-
-    // Bot Brain
-    const botResponses = {
-      default: "Processing... I didn't understand. Ask about 'Projects', 'Skills' or 'Contact'.",
-      greetings: ["Systems Online. How can I assist you?", "Hello user. I am Stephen's Digital Twin."],
-      projects: ["Stephen's primary innovation is the Smart Traffic Grid using YOLOv8. He also built a BERT Sentiment Engine and this 3D interface."],
-      skills: ["Core capacities: Python, TensorFlow, PyTorch, C++, and Full-Stack Web Architecture."],
-      contact: ["Transmission channels open. Email: stephenbugi525@gmail.com or via the form below."]
+    chatTrigger.onclick = () => {
+        chatInterface.style.display = 'flex';
+        chatTrigger.style.display = 'none';
+        chatInput.focus();
+    };
+    closeChat.onclick = () => {
+        chatInterface.style.display = 'none';
+        chatTrigger.style.display = 'flex';
+    };
+    muteToggle.onclick = () => {
+        isMuted = !isMuted;
+        muteToggle.innerHTML = isMuted ? '<i class="fas fa-volume-mute"></i>' : '<i class="fas fa-volume-up"></i>';
     };
 
-    const speak = (text) => {
-      const synth = window.speechSynthesis;
-      const utterance = new SpeechSynthesisUtterance(text);
-      utterance.rate = 1;
-      utterance.pitch = 0.8; // Lower pitch for robot feel
-      synth.speak(utterance);
+    // Chatbot Knowledge Base
+    const botBrain = {
+        greetings: ["Hello! How can I help you today?", "Hi there! Welcome to Stephen's world.", "Greetings! What would you like to know?"],
+        projects: ["Stephen has built an AI Smart Traffic System using YOLOv8, a Sentiment Analysis tool using BERT, and this 3D portfolio site!", "His flagship project is the Smart Traffic System which prioritizes ambulances automatically."],
+        skills: ["He is an expert in Python, Computer Vision (OpenCV), Deep Learning (PyTorch/TensorFlow) and Web Development (React/Firebase)."],
+        contact: ["You can email him at stephenbugi525@gmail.com or connect via LinkedIn using the button below."],
+        default: ["I didn't quite catch that. Try asking about 'Projects', 'Skills' or 'Contact'."]
     };
 
-    const addMsg = (text, type) => {
-      const div = document.createElement('div');
-      div.className = `msg ${type}`;
-      div.innerHTML = text;
-      display.appendChild(div);
-      display.scrollTop = display.scrollHeight;
-    };
+    function addMessage(text, sender) {
+        const div = document.createElement('div');
+        div.className = `chat-bubble ${sender}-msg`;
+        div.innerHTML = text;
+        chatBody.appendChild(div);
+        chatBody.scrollTop = chatBody.scrollHeight;
+    }
 
-    const handleInput = () => {
-      const txt = chatInput.value.toLowerCase();
-      if(!txt) return;
-      
-      addMsg(chatInput.value, 'user');
-      chatInput.value = '';
+    function speak(text) {
+        if(isMuted || !synth) return;
+        // Strip HTML for speech
+        const cleanText = text.replace(/<[^>]*>/g, '');
+        const utterance = new SpeechSynthesisUtterance(cleanText);
+        utterance.rate = 1;
+        utterance.pitch = 1;
+        synth.speak(utterance);
+    }
 
-      let reply = botResponses.default;
-      if(txt.includes('hi') || txt.includes('hello')) reply = botResponses.greetings[Math.floor(Math.random()*2)];
-      else if(txt.includes('project')) reply = botResponses.projects[0];
-      else if(txt.includes('skill') || txt.includes('tech')) reply = botResponses.skills[0];
-      else if(txt.includes('contact') || txt.includes('email')) reply = botResponses.contact[0];
+    function processBotResponse(input) {
+        input = input.toLowerCase();
+        let reply = "";
+        
+        if(input.includes("hi") || input.includes("hello")) reply = botBrain.greetings[Math.floor(Math.random()*botBrain.greetings.length)];
+        else if(input.includes("project") || input.includes("work")) reply = botBrain.projects[0];
+        else if(input.includes("skill") || input.includes("tech")) reply = botBrain.skills[0];
+        else if(input.includes("contact") || input.includes("email") || input.includes("hire")) reply = botBrain.contact[0];
+        else reply = botBrain.default[0];
 
-      setTimeout(() => {
-        addMsg(reply, 'bot');
-        speak(reply);
-      }, 500);
-    };
+        // Simulate "Thinking" delay
+        setTimeout(() => {
+            addMessage(reply, 'bot');
+            speak(reply);
+        }, 600);
+    }
 
-    sendBtn.addEventListener('click', handleInput);
-    chatInput.addEventListener('keypress', (e) => e.key === 'Enter' && handleInput());
+    function handleSend() {
+        const text = chatInput.value.trim();
+        if(!text) return;
+        addMessage(text, 'user');
+        chatInput.value = '';
+        processBotResponse(text);
+    }
 
-    // Voice Recognition
-    if('webkitSpeechRecognition' in window) {
-      const recognition = new webkitSpeechRecognition();
-      recognition.continuous = false;
-      recognition.lang = 'en-US';
+    sendBtn.onclick = handleSend;
+    chatInput.addEventListener('keypress', (e) => e.key === 'Enter' && handleSend());
 
-      voiceBtn.addEventListener('click', () => {
-        recognition.start();
-        aiTrigger.classList.add('voice-active'); // Visual feedback
-      });
+    // Voice Recognition Setup
+    if ('webkitSpeechRecognition' in window) {
+        recognition = new webkitSpeechRecognition();
+        recognition.continuous = false;
+        recognition.lang = 'en-US';
 
-      recognition.onresult = (e) => {
-        const transcript = e.results[0][0].transcript;
-        chatInput.value = transcript;
-        handleInput();
-        aiTrigger.classList.remove('voice-active');
-      };
-      
-      recognition.onend = () => aiTrigger.classList.remove('voice-active');
+        recognition.onstart = () => {
+            voiceBtn.style.color = '#ff0055';
+            voiceBtn.classList.add('active');
+        };
+
+        recognition.onend = () => {
+            voiceBtn.style.color = '';
+            voiceBtn.classList.remove('active');
+        };
+
+        recognition.onresult = (event) => {
+            const transcript = event.results[0][0].transcript;
+            chatInput.value = transcript;
+            handleSend();
+        };
+
+        voiceBtn.onclick = () => recognition.start();
     } else {
-      voiceBtn.style.display = 'none';
+        voiceBtn.style.display = 'none'; // Hide if not supported
     }
 
   </script>
