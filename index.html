@@ -6,15 +6,12 @@
   <title>T-Stephen | AI Innovator</title>
   <meta name="description" content="T-Stephen - B.Tech AI & Data Science portfolio. Projects, AI chatbot, feedback & contact." />
 
-  <!-- Modern Font Imports -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
-  
-  <!-- Typed.js for typing header -->
+   
   <script src="https://cdn.jsdelivr.net/npm/typed.js@2.0.12"></script>
-  
-  <!-- Particles.js for background effects -->
+   
   <script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script>
 
   <link rel="icon" href="assets/STEVE_GitHub_Logo.png" />
@@ -907,7 +904,6 @@
       <a href="#skills" data-scroll="skills">Skills</a>
     </nav>
 
-    <!-- Projects Section -->
     <section id="projects" class="card">
       <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:2rem;">
         <h2>Featured Projects</h2>
@@ -962,7 +958,6 @@
       </div>
     </section>
 
-    <!-- Skills Section -->
     <section id="skills" class="card">
       <h2>Technical Skills</h2>
       <div class="bento-grid">
@@ -985,7 +980,6 @@
       </div>
     </section>
 
-    <!-- Contact Section -->
     <section id="contact" class="card">
       <h2>Let's Connect</h2>
       <form id="contactForm" action="https://formsubmit.co/tstephenraj001@gmail.com" method="POST">
@@ -1000,11 +994,10 @@
       </form>
       <p style="margin-top:1rem;color:var(--muted);text-align:center;">
         Or reach me directly: <strong>stephenbugi525@gmail.com</strong> • 
-        <a href="https://www.linkedin.com/in/stephen-raj-t-3b417528a/" target="_blank" style="color:var(--accent)">LinkedIn Profile</a>
+        <a href="https://www.linkedin.com/in/stephen-raj-ai/" target="_blank" style="color:var(--accent)">LinkedIn Profile</a>
       </p>
     </section>
 
-    <!-- Feedback Section -->
     <section id="feedback" class="card">
       <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:2rem;">
         <h2>Community Feedback</h2>
@@ -1049,9 +1042,8 @@
     </footer>
   </div>
 
-  <!-- Enhanced Chatbot -->
   <button class="chat-btn" id="openChat" aria-label="Open AI Assistant">🤖</button>
-  
+   
   <div class="chatbox" id="chatbox" role="dialog" aria-hidden="true">
     <div class="chatbox-header">
       <div>
@@ -1067,9 +1059,9 @@
         <button id="closeChat" class="control-btn" title="Close">✖️</button>
       </div>
     </div>
-    
+     
     <div class="msgs" id="msgs" aria-live="polite"></div>
-    
+     
     <div class="chat-input-container">
       <div class="chat-input-row">
         <textarea id="chatInput" placeholder="Ask me about Stephen's projects, skills, or anything else..." rows="1"></textarea>
@@ -1086,7 +1078,6 @@
     </div>
   </div>
 
-  <!-- Firebase SDK v12 -->
   <script type="module">
     import { initializeApp } from "https://www.gstatic.com/firebasejs/12.0.0/firebase-app.js";
     import { getFirestore, collection, addDoc, serverTimestamp, query, orderBy, onSnapshot, doc, runTransaction } from "https://www.gstatic.com/firebasejs/12.0.0/firebase-firestore.js";
@@ -1123,12 +1114,12 @@
             const data = snap.data();
             const today = new Date().toDateString();
             const newCount = (data.count || 0) + 1;
-            
+             
             const updateData = {
               count: newCount, 
               lastVisit: serverTimestamp()
             };
-            
+             
             // Reset daily count if new day
             if (data.lastResetDate !== today) {
               updateData.dailyCount = 1;
@@ -1136,7 +1127,7 @@
             } else {
               updateData.dailyCount = (data.dailyCount || 0) + 1;
             }
-            
+             
             t.update(docRef, updateData);
             document.getElementById('visitorCount').textContent = newCount.toLocaleString();
           }
@@ -1151,16 +1142,16 @@
     (function initVisitorTracking() {
       const visitedKey = 'ts_portfolio_visited';
       const sessionKey = 'ts_session_id';
-      
+       
       if (!sessionStorage.getItem(sessionKey)) {
         sessionStorage.setItem(sessionKey, Date.now().toString());
-        
+         
         if (!localStorage.getItem(visitedKey)) {
           incrementVisitor();
           localStorage.setItem(visitedKey, '1');
         }
       }
-      
+       
       // Always show current count
       const vRef = doc(db, 'analytics', 'visitors');
       onSnapshot(vRef, snap => {
@@ -1182,12 +1173,12 @@
       feedbackListEl.innerHTML = '';
       let totalRating = 0;
       let count = 0;
-      
+       
       snapshot.forEach(doc => {
         const data = doc.data();
         count++;
         totalRating += (data.rating || 0);
-        
+         
         const feedbackEl = document.createElement('div');
         feedbackEl.className = 'feedback-item';
         feedbackEl.style.cssText = `
@@ -1198,7 +1189,7 @@
           border: 1px solid var(--border);
           transition: all 0.3s ease;
         `;
-        
+         
         feedbackEl.innerHTML = `
           <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:0.5rem;">
             <div>
@@ -1216,14 +1207,14 @@
             ${data.createdAt ? new Date(data.createdAt.toDate()).toLocaleDateString() : 'Recently'}
           </div>
         `;
-        
+         
         feedbackListEl.appendChild(feedbackEl);
       });
-      
+       
       const avgRating = count ? (totalRating / count) : 0;
       avgRatingEl.textContent = count ? `${avgRating.toFixed(1)} ⭐` : '—';
       totalReviewsEl.textContent = count.toString();
-      
+       
       if (!count) {
         feedbackListEl.innerHTML = `
           <div style="text-align:center;color:var(--muted);padding:2rem;">
@@ -1238,31 +1229,31 @@
     // Enhanced feedback form submission
     document.getElementById('feedbackForm').addEventListener('submit', async (e) => {
       e.preventDefault();
-      
+       
       const submitBtn = e.target.querySelector('button[type="submit"]');
       const originalText = submitBtn.textContent;
       submitBtn.textContent = 'Submitting...';
       submitBtn.disabled = true;
-      
+       
       const name = document.getElementById('fbName').value.trim();
       const rating = Number(document.getElementById('fbRating').value);
       const category = document.getElementById('fbCategory').value;
       const message = document.getElementById('fbMessage').value.trim();
-      
+       
       if (!name || !rating || !message) {
         alert('Please fill in all required fields');
         submitBtn.textContent = originalText;
         submitBtn.disabled = false;
         return;
       }
-      
+       
       if (rating < 1 || rating > 5) {
         alert('Rating must be between 1 and 5');
         submitBtn.textContent = originalText;
         submitBtn.disabled = false;
         return;
       }
-      
+       
       try {
         await addDoc(fbCol, {
           name,
@@ -1273,26 +1264,26 @@
           userAgent: navigator.userAgent,
           timestamp: Date.now()
         });
-        
+         
         // Success animation
         submitBtn.textContent = 'Thank you! ✨';
         submitBtn.style.background = '#00ff88';
-        
+         
         setTimeout(() => {
           submitBtn.textContent = originalText;
           submitBtn.style.background = '';
           submitBtn.disabled = false;
         }, 2000);
-        
+         
         // Clear form
         document.getElementById('fbName').value = '';
         document.getElementById('fbRating').value = '';
         document.getElementById('fbMessage').value = '';
         document.getElementById('fbCategory').value = 'general';
-        
+         
         // Show success message
         showNotification('Thank you for your feedback! 🙏', 'success');
-        
+         
       } catch (err) {
         console.error('Feedback submission error:', err);
         alert('Sorry, there was an error submitting your feedback. Please try again.');
@@ -1315,7 +1306,6 @@
     window.escapeHtml = escapeHtml;
   </script>
 
-  <!-- Enhanced UI and Chatbot Logic -->
   <script>
     // Initialize particles background
     particlesJS('particles-js', {
@@ -1405,7 +1395,7 @@
       document.body.classList.toggle('light', theme === 'light');
       themeBtn.textContent = theme === 'light' ? '☀️' : '🌙';
       localStorage.setItem('ts-theme', theme);
-      
+       
       // Update particles color for theme
       if (window.pJSDom && window.pJSDom[0]) {
         const color = theme === 'light' ? '#64748b' : '#00d4ff';
@@ -1441,21 +1431,21 @@
     function filterProjects(type) {
       const cards = document.querySelectorAll('.project-card');
       const buttons = document.querySelectorAll('.filters button');
-      
+       
       // Update active button
       buttons.forEach(btn => {
         btn.classList.toggle('active', btn.dataset.filter === type);
       });
-      
+       
       // Animate cards
       cards.forEach((card, index) => {
         const shouldShow = type === 'all' || card.classList.contains(type);
-        
+         
         if (shouldShow) {
           card.style.display = 'block';
           card.style.opacity = '0';
           card.style.transform = 'translateY(20px)';
-          
+           
           setTimeout(() => {
             card.style.transition = 'all 0.4s ease';
             card.style.opacity = '1';
@@ -1465,7 +1455,7 @@
           card.style.transition = 'all 0.3s ease';
           card.style.opacity = '0';
           card.style.transform = 'translateY(-20px)';
-          
+           
           setTimeout(() => {
             card.style.display = 'none';
           }, 300);
@@ -1497,7 +1487,7 @@
         interests: ["AI/ML", "Computer Vision", "Web Development", "Data Science"],
         goal: "Building practical AI solutions that solve real-world problems"
       },
-      
+       
       // Projects with detailed info
       projects: {
         "traffic system": {
@@ -1525,7 +1515,7 @@
           capabilities: ["Real-time processing", "Multi-language", "High accuracy"]
         }
       },
-      
+       
       // Skills categories
       skills: {
         "ai/ml": ["TensorFlow", "PyTorch", "Scikit-learn", "YOLO", "OpenCV", "NLP", "Computer Vision", "Neural Networks"],
@@ -1547,7 +1537,7 @@
     function generateResponse(input) {
       const query = input.toLowerCase().trim();
       conversationHistory.push({ role: 'user', content: query });
-      
+       
       // Intent classification
       const intents = {
         greeting: ['hi', 'hello', 'hey', 'good morning', 'good afternoon', 'good evening'],
@@ -1573,7 +1563,7 @@
 
       // Generate contextual response
       let response = '';
-      
+       
       switch (detectedIntent) {
         case 'greeting':
           const greetings = [
@@ -1647,14 +1637,14 @@
     function addMessage(sender, content, isTyping = false) {
       const messageEl = document.createElement('div');
       messageEl.className = `message ${sender}`;
-      
+       
       const senderEl = document.createElement('div');
       senderEl.className = 'message-sender';
       senderEl.textContent = sender === 'bot' ? '🤖 AI Assistant' : '👤 You';
-      
+       
       const bubbleEl = document.createElement('div');
       bubbleEl.className = 'message-bubble';
-      
+       
       if (isTyping) {
         bubbleEl.innerHTML = `
           <div class="typing-indicator">
@@ -1671,20 +1661,20 @@
           .replace(/\*(.*?)\*/g, '<em>$1</em>')
           .replace(/\n/g, '<br>')
           .replace(/(\d+\.\s)/g, '<br>$1');
-        
+         
         bubbleEl.innerHTML = formattedContent;
       }
-      
+       
       messageEl.appendChild(senderEl);
       messageEl.appendChild(bubbleEl);
       msgs.appendChild(messageEl);
-      
+       
       // Smooth scroll to bottom
       msgs.scrollTo({
         top: msgs.scrollHeight,
         behavior: 'smooth'
       });
-      
+       
       return messageEl;
     }
 
@@ -1705,19 +1695,19 @@
     // Enhanced message processing
     function processMessage(input) {
       if (!input.trim()) return;
-      
+       
       // Add user message
       addMessage('user', input);
-      
+       
       // Show typing indicator
       const typingEl = showTypingIndicator();
-      
+       
       // Simulate thinking time
       setTimeout(() => {
         hideTypingIndicator(typingEl);
         const response = generateResponse(input);
         addMessage('bot', response);
-        
+         
         // Speak response if text-to-speech is available
         if (window.speechSynthesis && response.length < 200) {
           const utterance = new SpeechSynthesisUtterance(response.replace(/[🤖👤🚀⚡💻📊🛠️✨🎯🌟💡🤝]/g, ''));
