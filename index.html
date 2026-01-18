@@ -45,7 +45,7 @@
     #canvas-container {
       position: fixed;
       top: 0; left: 0; width: 100%; height: 100%;
-      z-index: -1; opacity: 0.8; /* Increased opacity for better 3D visibility */
+      z-index: -1; opacity: 0.8;
     }
 
     .wrap {
@@ -87,7 +87,7 @@
     .hero-text h1 { font-size: clamp(1.8rem, 5vw, 3rem); line-height: 1.1; margin-bottom: 0.5rem; }
     .hero-text .role { font-family: var(--font-code); color: var(--primary); font-size: 1.1rem; }
 
-    /* CARDS */
+    /* GENERAL CARDS */
     .glass-card {
       background: var(--bg-panel);
       backdrop-filter: blur(12px);
@@ -106,93 +106,166 @@
       background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
     }
 
-    .bento-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-      gap: 1.5rem;
+    /* --- SECTION 1: TIMELINE (NEURAL JOURNEY) --- */
+    .timeline {
+      position: relative;
+      border-left: 2px solid rgba(0, 242, 255, 0.2);
+      margin-left: 1rem;
+      padding-left: 2rem;
+    }
+    .timeline-item {
+      position: relative;
+      margin-bottom: 2.5rem;
+    }
+    .timeline-item::before {
+      content: '';
+      position: absolute;
+      left: -2.6rem;
+      top: 0.5rem;
+      width: 1rem;
+      height: 1rem;
+      background: var(--bg-dark);
+      border: 2px solid var(--primary);
+      border-radius: 50%;
+      box-shadow: 0 0 10px var(--primary);
+    }
+    .timeline-date {
+      font-family: var(--font-code);
+      color: var(--secondary);
+      font-size: 0.9rem;
+      margin-bottom: 0.5rem;
     }
 
-    .project-card {
-      background: rgba(255,255,255,0.02);
-      border: 1px solid rgba(255,255,255,0.05);
-      border-radius: 20px;
-      padding: 1.5rem;
-      position: relative;
-      transition: all 0.3s ease;
-      transform-style: preserve-3d;
+    /* --- SECTION 3: GITHUB COMMAND CENTER --- */
+    .github-grid {
+      display: grid;
+      grid-template-columns: 1fr 1.5fr;
+      gap: 2rem;
+    }
+    .stat-box {
+      background: rgba(0,0,0,0.3);
+      padding: 1rem;
+      border-radius: 12px;
+      margin-bottom: 1rem;
       display: flex;
-      flex-direction: column;
       justify-content: space-between;
-      height: 100%;
+      align-items: center;
+      border-left: 3px solid var(--primary);
+    }
+    .contribution-graph {
+      display: grid;
+      grid-template-columns: repeat(20, 1fr);
+      gap: 4px;
+    }
+    .graph-pixel {
+      width: 100%;
+      aspect-ratio: 1;
+      border-radius: 2px;
+      background: rgba(255,255,255,0.05);
+    }
+    .pixel-low { background: #0e4429; }
+    .pixel-med { background: #006d32; }
+    .pixel-high { background: #39d353; box-shadow: 0 0 5px #39d353; }
+
+    /* --- SECTION 4: RESUME TRANSMISSION --- */
+    .resume-container {
+      text-align: center;
+      padding: 2rem;
+      background: radial-gradient(circle at center, rgba(0, 242, 255, 0.05) 0%, transparent 70%);
+    }
+    .download-btn {
+      position: relative;
+      padding: 1.2rem 3rem;
+      background: transparent;
+      border: 1px solid var(--primary);
+      color: var(--primary);
+      font-family: var(--font-code);
+      font-size: 1.1rem;
+      cursor: pointer;
+      overflow: hidden;
+      transition: 0.3s;
+      border-radius: 4px;
+    }
+    .download-btn:hover {
+      background: rgba(0, 242, 255, 0.1);
+      box-shadow: 0 0 20px rgba(0, 242, 255, 0.3);
+      letter-spacing: 2px;
+    }
+    .btn-progress {
+      position: absolute;
+      left: 0; top: 0; height: 100%; width: 0%;
+      background: var(--primary);
+      z-index: -1;
+      transition: width 2s ease-in-out;
+    }
+
+    /* --- SECTION 5: RESEARCH LAB (TERMINAL) --- */
+    .terminal-window {
+      background: #0d0d0d;
+      border: 1px solid #333;
+      border-radius: 8px;
+      font-family: var(--font-code);
+      padding: 0;
+      overflow: hidden;
+    }
+    .terminal-header {
+      background: #1a1a1a;
+      padding: 0.5rem 1rem;
+      display: flex;
+      gap: 0.5rem;
+      border-bottom: 1px solid #333;
+    }
+    .dot { width: 10px; height: 10px; border-radius: 50%; }
+    .terminal-body {
+      padding: 1.5rem;
+      height: 250px;
+      overflow-y: auto;
+      color: #00ff00;
+      font-size: 0.9rem;
+    }
+    .log-entry { margin-bottom: 1rem; border-left: 2px solid #00ff00; padding-left: 1rem; opacity: 0.8; }
+    .log-entry:hover { opacity: 1; background: rgba(0, 255, 0, 0.05); }
+
+    /* --- EXISTING STYLES (Projects, Skills, Chat, Forms) --- */
+    .bento-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 1.5rem; }
+    .project-card {
+      background: rgba(255,255,255,0.02); border: 1px solid rgba(255,255,255,0.05); border-radius: 20px; padding: 1.5rem;
+      position: relative; transition: all 0.3s ease; transform-style: preserve-3d; display: flex; flex-direction: column; justify-content: space-between; height: 100%;
     }
     .project-content { transform: translateZ(20px); }
     .project-card:hover { border-color: var(--primary); box-shadow: 0 0 30px rgba(0, 242, 255, 0.1); }
-    .project-card h3 { font-size: 1.3rem; margin-bottom: 0.5rem; color: var(--text-main); margin-top: 1rem; }
+    .tech-badge { font-size: 0.7rem; font-family: var(--font-code); padding: 0.3rem 0.6rem; border-radius: 50px; background: rgba(0, 242, 255, 0.1); color: var(--primary); border: 1px solid rgba(0, 242, 255, 0.2); margin-right: 0.5rem; }
     
-    .tech-stack { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-top: 1rem; }
-    .tech-badge {
-      font-size: 0.7rem; font-family: var(--font-code); padding: 0.3rem 0.6rem;
-      border-radius: 50px; background: rgba(0, 242, 255, 0.1); color: var(--primary);
-      border: 1px solid rgba(0, 242, 255, 0.2);
-    }
-
     .skills-wrapper { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 1rem; }
-    .skill-box {
-      padding: 1.5rem; border: 1px solid rgba(255,255,255,0.1); border-radius: 16px; transition: 0.3s;
-      background: rgba(255,255,255,0.01);
-    }
+    .skill-box { padding: 1.5rem; border: 1px solid rgba(255,255,255,0.1); border-radius: 16px; transition: 0.3s; background: rgba(255,255,255,0.01); }
     .skill-box:hover { background: rgba(255,255,255,0.03); border-color: var(--primary); transform: translateY(-5px); }
-    .skill-title { color: var(--text-main); font-weight: 700; margin-bottom: 0.5rem; display: flex; align-items: center; gap: 0.5rem; }
 
     .hidden-scroll { opacity: 0; transform: translateY(30px); transition: all 0.8s ease-out; }
     .visible-scroll { opacity: 1; transform: translateY(0); }
 
-    /* CHATBOT */
-    .chat-trigger {
-      position: fixed; bottom: 2rem; right: 2rem; width: 65px; height: 65px;
-      background: var(--gradient-main); border-radius: 50%; display: flex; align-items: center; justify-content: center;
-      font-size: 1.8rem; color: white; border: none; cursor: pointer;
-      box-shadow: 0 10px 30px rgba(0, 242, 255, 0.4); z-index: 1000;
-      transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-      animation: pulse-glow 3s infinite;
-    }
-    .chat-trigger:hover { transform: scale(1.1) rotate(10deg); }
-    @keyframes pulse-glow { 0% { box-shadow: 0 0 0 0 rgba(0, 242, 255, 0.7); } 70% { box-shadow: 0 0 0 15px rgba(0, 242, 255, 0); } 100% { box-shadow: 0 0 0 0 rgba(0, 242, 255, 0); } }
-
-    .chat-interface {
-      position: fixed; bottom: 6rem; right: 2rem; width: 380px; height: 600px;
-      background: rgba(10, 12, 16, 0.95); backdrop-filter: blur(20px);
-      border: 1px solid rgba(255,255,255,0.1); border-radius: 24px; display: none;
-      flex-direction: column; overflow: hidden; z-index: 1000;
-      box-shadow: 0 20px 50px rgba(0,0,0,0.5);
-    }
-    .chat-header {
-      background: linear-gradient(90deg, rgba(0,242,255,0.1), rgba(255,0,85,0.1)); padding: 1.2rem;
-      display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid rgba(255,255,255,0.05);
-    }
+    /* CHATBOT & FORMS */
+    .chat-trigger { position: fixed; bottom: 2rem; right: 2rem; width: 65px; height: 65px; background: var(--gradient-main); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 1.8rem; color: white; border: none; cursor: pointer; box-shadow: 0 10px 30px rgba(0, 242, 255, 0.4); z-index: 1000; animation: pulse-glow 3s infinite; }
+    .chat-interface { position: fixed; bottom: 6rem; right: 2rem; width: 380px; height: 600px; background: rgba(10, 12, 16, 0.95); backdrop-filter: blur(20px); border: 1px solid rgba(255,255,255,0.1); border-radius: 24px; display: none; flex-direction: column; overflow: hidden; z-index: 1000; box-shadow: 0 20px 50px rgba(0,0,0,0.5); }
+    .chat-header { background: linear-gradient(90deg, rgba(0,242,255,0.1), rgba(255,0,85,0.1)); padding: 1.2rem; display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid rgba(255,255,255,0.05); }
     .chat-body { flex: 1; padding: 1rem; overflow-y: auto; scroll-behavior: smooth; }
     .chat-bubble { max-width: 85%; padding: 0.8rem 1.2rem; margin-bottom: 1rem; border-radius: 18px; font-size: 0.9rem; line-height: 1.5; }
     .bot-msg { background: rgba(255,255,255,0.08); color: var(--text-main); border-bottom-left-radius: 4px; margin-right: auto; }
     .user-msg { background: var(--gradient-main); color: white; border-bottom-right-radius: 4px; margin-left: auto; }
     .chat-input-area { padding: 1rem; background: rgba(0,0,0,0.2); border-top: 1px solid rgba(255,255,255,0.05); display: flex; gap: 0.5rem; align-items: center; }
     .chat-input { flex: 1; background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); padding: 0.8rem; border-radius: 12px; color: white; outline: none; }
-    .icon-btn { background: none; border: none; color: var(--text-muted); cursor: pointer; font-size: 1.2rem; padding: 0.5rem; transition: color 0.2s; }
+    .icon-btn { background: none; border: none; color: var(--text-muted); cursor: pointer; font-size: 1.2rem; }
 
-    /* FORMS */
     form { display: flex; flex-direction: column; gap: 1rem; }
     input, textarea { background: rgba(0,0,0,0.3); border: 1px solid rgba(255,255,255,0.1); padding: 1rem; border-radius: 12px; color: white; font-family: var(--font-body); width: 100%; }
     button.primary-btn { background: var(--gradient-main); color: white; border: none; padding: 1rem 2rem; border-radius: 12px; font-weight: 600; cursor: pointer; transition: 0.3s; width: 100%; }
     
-    .status-msg { font-size: 0.9rem; margin-top: 0.5rem; text-align: center; display: none; }
-    .status-success { color: #00ff88; }
-    .status-error { color: #ff0055; }
-
     @media (max-width: 768px) {
       .wrap { padding: 1rem; }
       header { flex-direction: column; gap: 1.5rem; padding: 1.5rem; text-align: center; }
       .logo-area { flex-direction: column; }
-      .chat-interface { width: 90%; right: 5%; left: 5%; bottom: 5.5rem; height: 60vh; }
+      .github-grid { grid-template-columns: 1fr; }
       .bento-grid, .skills-wrapper { grid-template-columns: 1fr; }
+      .chat-interface { width: 90%; right: 5%; left: 5%; bottom: 5.5rem; height: 60vh; }
     }
   </style>
 </head>
@@ -217,98 +290,190 @@
       </div>
     </header>
 
+    <section id="experience" class="glass-card hidden-scroll">
+      <h2 class="section-title">Neural Journey</h2>
+      <div class="timeline">
+        <div class="timeline-item">
+          <div class="timeline-date">2026 - Present</div>
+          <h3 style="color:var(--primary)">AI Solutions Architect</h3>
+          <p style="color:#ccc; font-size:0.9rem;">Building enterprise-grade Computer Vision systems and scalable LLM architectures.</p>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-date">2024 - 2025</div>
+          <h3 style="color:white">Data Science Intern</h3>
+          <p style="color:#ccc; font-size:0.9rem;">Optimized ML pipelines and deployed 5+ predictive models for financial analysis.</p>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-date">2022 - 2026</div>
+          <h3 style="color:white">B.Tech in AI & Data Science</h3>
+          <p style="color:#ccc; font-size:0.9rem;">Specialized in Deep Learning, Edge Computing, and Neural Network Design.</p>
+        </div>
+      </div>
+    </section>
+
+    <section id="certifications" class="glass-card hidden-scroll">
+      <h2 class="section-title">Holographic Certs</h2>
+      <div class="bento-grid">
+        <div class="project-card tilt-card" style="border-left:4px solid #f1c40f" data-tilt>
+          <div class="project-content">
+            <i class="fab fa-google fa-2x" style="color:white; margin-bottom:1rem;"></i>
+            <h3>TensorFlow Developer</h3>
+            <p style="color:#999; font-size:0.8rem;">Professional Google Certification</p>
+          </div>
+        </div>
+        <div class="project-card tilt-card" style="border-left:4px solid #e67e22" data-tilt>
+          <div class="project-content">
+            <i class="fab fa-aws fa-2x" style="color:white; margin-bottom:1rem;"></i>
+            <h3>AWS Machine Learning</h3>
+            <p style="color:#999; font-size:0.8rem;">Specialty Certification</p>
+          </div>
+        </div>
+        <div class="project-card tilt-card" style="border-left:4px solid #3498db" data-tilt>
+          <div class="project-content">
+            <i class="fas fa-certificate fa-2x" style="color:white; margin-bottom:1rem;"></i>
+            <h3>Deep Learning Specialization</h3>
+            <p style="color:#999; font-size:0.8rem;">Coursera / Andrew Ng</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="github" class="glass-card hidden-scroll">
+      <h2 class="section-title">GitHub Command Center</h2>
+      <div class="github-grid">
+        <div class="stats-col">
+          <div class="stat-box">
+            <span>Total Commits</span>
+            <span style="font-family:var(--font-code); color:var(--primary); font-weight:700;">1,248</span>
+          </div>
+          <div class="stat-box">
+            <span>Repositories</span>
+            <span style="font-family:var(--font-code); color:var(--primary); font-weight:700;">45</span>
+          </div>
+          <div class="stat-box">
+            <span>Pull Requests</span>
+            <span style="font-family:var(--font-code); color:var(--primary); font-weight:700;">112</span>
+          </div>
+        </div>
+        <div class="graph-col">
+          <p style="font-family:var(--font-code); color:#888; margin-bottom:0.5rem;">Contribution Activity</p>
+          <div class="contribution-graph" id="contribGraph">
+            </div>
+        </div>
+      </div>
+    </section>
+
     <section id="projects" class="glass-card hidden-scroll">
       <h2 class="section-title">Featured Innovations</h2>
-      
       <div class="bento-grid">
         <div class="project-card tilt-card" data-tilt>
           <div class="project-content">
             <div style="font-size:2rem;">🚦</div>
             <h3>Autonomous Traffic Grid</h3>
-            <p style="color:var(--text-muted); font-size: 0.85rem;">Edge-AI system controlling traffic signals based on real-time vehicle density and ambulance detection.</p>
+            <p style="color:var(--text-muted); font-size: 0.85rem;">Edge-AI system controlling traffic signals based on real-time vehicle density.</p>
             <div class="tech-stack"><span class="tech-badge">YOLOv8</span><span class="tech-badge">Edge AI</span></div>
           </div>
         </div>
-
         <div class="project-card tilt-card" data-tilt>
           <div class="project-content">
             <div style="font-size:2rem;">🧠</div>
             <h3>Neuro-Symbolic Logic Core</h3>
-            <p style="color:var(--text-muted); font-size: 0.85rem;">Hybrid AI combining neural networks with symbolic reasoning for transparent decision making.</p>
+            <p style="color:var(--text-muted); font-size: 0.85rem;">Hybrid AI combining neural networks with symbolic reasoning.</p>
             <div class="tech-stack"><span class="tech-badge">PyTorch</span><span class="tech-badge">Logic</span></div>
           </div>
         </div>
-
         <div class="project-card tilt-card" data-tilt>
           <div class="project-content">
             <div style="font-size:2rem;">💬</div>
             <h3>BERT Sentiment Engine</h3>
-            <p style="color:var(--text-muted); font-size: 0.85rem;">Transformer model analyzing social sentiment across 15 languages with 92% accuracy.</p>
+            <p style="color:var(--text-muted); font-size: 0.85rem;">Transformer model analyzing social sentiment across 15 languages.</p>
             <div class="tech-stack"><span class="tech-badge">HuggingFace</span><span class="tech-badge">NLP</span></div>
           </div>
         </div>
-
         <div class="project-card tilt-card" data-tilt>
           <div class="project-content">
             <div style="font-size:2rem;">🎨</div>
             <h3>DeepFake GAN Detector</h3>
-            <p style="color:var(--text-muted); font-size: 0.85rem;">Adversarial network trained to detect synthetic media and deepfakes in video streams.</p>
+            <p style="color:var(--text-muted); font-size: 0.85rem;">Adversarial network trained to detect synthetic media and deepfakes.</p>
             <div class="tech-stack"><span class="tech-badge">GANs</span><span class="tech-badge">Keras</span></div>
           </div>
         </div>
-
         <div class="project-card tilt-card" data-tilt>
           <div class="project-content">
             <div style="font-size:2rem;">📈</div>
             <h3>Quantum FinTech Predictor</h3>
-            <p style="color:var(--text-muted); font-size: 0.85rem;">LSTM network enhanced with quantum-inspired algorithms for stock volatility forecasting.</p>
+            <p style="color:var(--text-muted); font-size: 0.85rem;">LSTM network enhanced with quantum-inspired algorithms for stock.</p>
             <div class="tech-stack"><span class="tech-badge">LSTM</span><span class="tech-badge">Finance</span></div>
           </div>
         </div>
-
         <div class="project-card tilt-card" data-tilt>
           <div class="project-content">
             <div style="font-size:2rem;">🏥</div>
             <h3>MedVision Diagnosis</h3>
-            <p style="color:var(--text-muted); font-size: 0.85rem;">CNN architecture for early detection of retinal diseases from optical coherence tomography.</p>
+            <p style="color:var(--text-muted); font-size: 0.85rem;">CNN architecture for early detection of retinal diseases.</p>
             <div class="tech-stack"><span class="tech-badge">Medical AI</span><span class="tech-badge">CNN</span></div>
           </div>
         </div>
-
         <div class="project-card tilt-card" data-tilt>
           <div class="project-content">
             <div style="font-size:2rem;">🔒</div>
             <h3>Voice Biometric Auth</h3>
-            <p style="color:var(--text-muted); font-size: 0.85rem;">Secure authentication system using unique vocal print analysis and liveness detection.</p>
+            <p style="color:var(--text-muted); font-size: 0.85rem;">Secure authentication using unique vocal print analysis.</p>
             <div class="tech-stack"><span class="tech-badge">Audio</span><span class="tech-badge">Security</span></div>
           </div>
         </div>
-
         <div class="project-card tilt-card" data-tilt>
           <div class="project-content">
             <div style="font-size:2rem;">🤖</div>
             <h3>Swarm Drone Protocol</h3>
-            <p style="color:var(--text-muted); font-size: 0.85rem;">Reinforcement Learning algorithms for coordinating autonomous drone swarms in search & rescue.</p>
+            <p style="color:var(--text-muted); font-size: 0.85rem;">RL algorithms for coordinating autonomous drone swarms.</p>
             <div class="tech-stack"><span class="tech-badge">RL</span><span class="tech-badge">Robotics</span></div>
           </div>
         </div>
-
         <div class="project-card tilt-card" data-tilt>
           <div class="project-content">
             <div style="font-size:2rem;">🌐</div>
             <h3>3D WebGL Portfolio</h3>
-            <p style="color:var(--text-muted); font-size: 0.85rem;">High-performance interactive 3D web experience built with raw Three.js and GLSL shaders.</p>
+            <p style="color:var(--text-muted); font-size: 0.85rem;">Interactive 3D web experience built with raw Three.js.</p>
             <div class="tech-stack"><span class="tech-badge">Three.js</span><span class="tech-badge">WebGL</span></div>
           </div>
         </div>
-
         <div class="project-card tilt-card" data-tilt>
           <div class="project-content">
             <div style="font-size:2rem;">🏙️</div>
             <h3>Smart City IoT Nexus</h3>
-            <p style="color:var(--text-muted); font-size: 0.85rem;">Centralized dashboard integrating 500+ IoT sensors for urban energy optimization.</p>
+            <p style="color:var(--text-muted); font-size: 0.85rem;">Dashboard integrating 500+ IoT sensors for urban energy.</p>
             <div class="tech-stack"><span class="tech-badge">IoT</span><span class="tech-badge">Cloud</span></div>
           </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="resume" class="glass-card hidden-scroll">
+      <h2 class="section-title" style="text-align:center; display:block;">Secure Data Transmission</h2>
+      <div class="resume-container">
+        <p style="margin-bottom:2rem; color:#aaa;">Download encrypted personnel file (CV/Resume)</p>
+        <button class="download-btn" id="resumeBtn">
+          <span style="position:relative; z-index:2;">INITIATE DOWNLOAD</span>
+          <div class="btn-progress" id="btnProgress"></div>
+        </button>
+      </div>
+    </section>
+
+    <section id="blog" class="glass-card hidden-scroll">
+      <h2 class="section-title">Research Lab Logs</h2>
+      <div class="terminal-window">
+        <div class="terminal-header">
+          <div class="dot" style="background:#ff5f56"></div>
+          <div class="dot" style="background:#ffbd2e"></div>
+          <div class="dot" style="background:#27c93f"></div>
+          <span style="margin-left:1rem; color:#888; font-size:0.8rem;">stephen@lab:~</span>
+        </div>
+        <div class="terminal-body">
+          <div class="log-entry">[2026-01-15] Deploying YOLOv9 on Edge Devices: Quantization reduces latency by 30%.</div>
+          <div class="log-entry">[2026-01-10] Exploring transformer attention maps for explainable AI in healthcare.</div>
+          <div class="log-entry">[2025-12-28] Optimized Docker containers for microservices architecture.</div>
+          <div class="log-entry">[2025-12-15] The future of Generative AI lies in multimodal inputs (Text+Image+Audio).</div>
         </div>
       </div>
     </section>
@@ -316,46 +481,16 @@
     <section id="skills" class="glass-card hidden-scroll">
       <h2 class="section-title">Tech Arsenal</h2>
       <div class="skills-wrapper">
-        <div class="skill-box">
-          <div class="skill-title"><i class="fas fa-brain" style="color:var(--primary)"></i> Deep Learning</div>
-          <p style="font-size:0.8rem; color:#aaa;">TensorFlow, PyTorch, Keras, Neural Architecture Search</p>
-        </div>
-        <div class="skill-box">
-          <div class="skill-title"><i class="fas fa-eye" style="color:var(--secondary)"></i> Computer Vision</div>
-          <p style="font-size:0.8rem; color:#aaa;">YOLOv8, OpenCV, Image Segmentation, Object Tracking</p>
-        </div>
-        <div class="skill-box">
-          <div class="skill-title"><i class="fas fa-comments" style="color:#00ff88"></i> NLP Engineering</div>
-          <p style="font-size:0.8rem; color:#aaa;">Transformers, BERT, LLMs, LangChain, NLTK</p>
-        </div>
-        <div class="skill-box">
-          <div class="skill-title"><i class="fas fa-code" style="color:#ffa502"></i> Full Stack</div>
-          <p style="font-size:0.8rem; color:#aaa;">React.js, Node.js, Next.js, FastAPI, Django</p>
-        </div>
-        <div class="skill-box">
-          <div class="skill-title"><i class="fas fa-cloud" style="color:#3742fa"></i> Cloud Ops</div>
-          <p style="font-size:0.8rem; color:#aaa;">AWS (EC2/S3/Lambda), Google Cloud, Azure</p>
-        </div>
-        <div class="skill-box">
-          <div class="skill-title"><i class="fas fa-database" style="color:#ff4757"></i> Big Data</div>
-          <p style="font-size:0.8rem; color:#aaa;">MongoDB, PostgreSQL, Apache Spark, Hadoop</p>
-        </div>
-        <div class="skill-box">
-          <div class="skill-title"><i class="fas fa-container-storage" style="color:#2ed573"></i> Containerization</div>
-          <p style="font-size:0.8rem; color:#aaa;">Docker, Kubernetes, CI/CD Pipelines</p>
-        </div>
-        <div class="skill-box">
-          <div class="skill-title"><i class="fas fa-terminal" style="color:#5352ed"></i> System Admin</div>
-          <p style="font-size:0.8rem; color:#aaa;">Linux, Bash Scripting, Nginx, Security Protocols</p>
-        </div>
-        <div class="skill-box">
-          <div class="skill-title"><i class="fas fa-microchip" style="color:#ff6348"></i> Edge AI</div>
-          <p style="font-size:0.8rem; color:#aaa;">Raspberry Pi, NVIDIA Jetson, TensorRT Optimization</p>
-        </div>
-        <div class="skill-box">
-          <div class="skill-title"><i class="fas fa-project-diagram" style="color:#eccc68"></i> Architecture</div>
-          <p style="font-size:0.8rem; color:#aaa;">Microservices, REST APIs, GraphQL, System Design</p>
-        </div>
+        <div class="skill-box"><div class="skill-title"><i class="fas fa-brain" style="color:var(--primary)"></i> Deep Learning</div><p style="font-size:0.8rem; color:#aaa;">TensorFlow, PyTorch, Keras, Neural Architecture Search</p></div>
+        <div class="skill-box"><div class="skill-title"><i class="fas fa-eye" style="color:var(--secondary)"></i> Computer Vision</div><p style="font-size:0.8rem; color:#aaa;">YOLOv8, OpenCV, Image Segmentation, Object Tracking</p></div>
+        <div class="skill-box"><div class="skill-title"><i class="fas fa-comments" style="color:#00ff88"></i> NLP Engineering</div><p style="font-size:0.8rem; color:#aaa;">Transformers, BERT, LLMs, LangChain, NLTK</p></div>
+        <div class="skill-box"><div class="skill-title"><i class="fas fa-code" style="color:#ffa502"></i> Full Stack</div><p style="font-size:0.8rem; color:#aaa;">React.js, Node.js, Next.js, FastAPI, Django</p></div>
+        <div class="skill-box"><div class="skill-title"><i class="fas fa-cloud" style="color:#3742fa"></i> Cloud Ops</div><p style="font-size:0.8rem; color:#aaa;">AWS (EC2/S3/Lambda), Google Cloud, Azure</p></div>
+        <div class="skill-box"><div class="skill-title"><i class="fas fa-database" style="color:#ff4757"></i> Big Data</div><p style="font-size:0.8rem; color:#aaa;">MongoDB, PostgreSQL, Apache Spark, Hadoop</p></div>
+        <div class="skill-box"><div class="skill-title"><i class="fas fa-container-storage" style="color:#2ed573"></i> Containerization</div><p style="font-size:0.8rem; color:#aaa;">Docker, Kubernetes, CI/CD Pipelines</p></div>
+        <div class="skill-box"><div class="skill-title"><i class="fas fa-terminal" style="color:#5352ed"></i> System Admin</div><p style="font-size:0.8rem; color:#aaa;">Linux, Bash Scripting, Nginx, Security Protocols</p></div>
+        <div class="skill-box"><div class="skill-title"><i class="fas fa-microchip" style="color:#ff6348"></i> Edge AI</div><p style="font-size:0.8rem; color:#aaa;">Raspberry Pi, NVIDIA Jetson, TensorRT Optimization</p></div>
+        <div class="skill-box"><div class="skill-title"><i class="fas fa-project-diagram" style="color:#eccc68"></i> Architecture</div><p style="font-size:0.8rem; color:#aaa;">Microservices, REST APIs, GraphQL, System Design</p></div>
       </div>
     </section>
 
@@ -364,8 +499,8 @@
         <h2 class="section-title">Hire Me</h2>
         <form action="https://formsubmit.co/tstephenraj001@gmail.com" method="POST">
           <input type="hidden" name="_captcha" value="false">
-          <input type="hidden" name="_template" value="table">
-          <input type="hidden" name="_next" value="https://T-Stephen.github.io"> <input name="name" placeholder="Your Name" required />
+          <input type="hidden" name="_next" value="https://T-Stephen.github.io">
+          <input name="name" placeholder="Your Name" required />
           <input name="email" type="email" placeholder="Your Email" required />
           <textarea name="message" rows="3" placeholder="Project Details..." required></textarea>
           <button type="submit" class="primary-btn">Send Proposal</button>
@@ -394,14 +529,13 @@
   </div>
 
   <button class="chat-trigger" id="chatTrigger"><i class="fas fa-robot"></i></button>
-
   <div class="chat-interface" id="chatInterface">
     <div class="chat-header">
-      <div><h4 style="margin:0;">Stephen's AI</h4><span style="font-size:0.7rem; color:var(--text-muted);">Neural Core v3.0</span></div>
+      <div><h4 style="margin:0;">Stephen's AI</h4><span style="font-size:0.7rem; color:var(--text-muted);">Neural Core v3.5</span></div>
       <button class="icon-btn" id="closeChat"><i class="fas fa-times"></i></button>
     </div>
     <div class="chat-body" id="chatBody">
-      <div class="chat-bubble bot-msg">System Online. 🟢<br>I have access to Stephen's <b>10 Innovations</b> and <b>Tech Arsenal</b>. Ask me anything!</div>
+      <div class="chat-bubble bot-msg">System Online. 🟢<br>I have access to Stephen's <b>10 Innovations</b>, <b>Neural Journey</b>, and <b>GitHub Stats</b>.</div>
     </div>
     <div class="chat-input-area">
       <input type="text" class="chat-input" id="chatInput" placeholder="Ask command...">
@@ -454,11 +588,8 @@
     document.getElementById('feedbackForm').addEventListener('submit', async (e) => {
         e.preventDefault();
         const btn = e.target.querySelector('button');
-        const oldText = btn.innerText;
         btn.innerText = "Posting...";
-        
         try {
-            // Attempt to save to Firebase with a timeout
             await Promise.race([
                 addDoc(fbCol, {
                     name: document.getElementById('fbName').value,
@@ -471,59 +602,50 @@
             alert("Review Posted Successfully!");
             e.target.reset();
         } catch (err) {
-            // Fallback: Show locally if Firebase is slow/blocked
+            // Offline fallback
             const list = document.getElementById('feedbackList');
             const div = document.createElement('div');
             div.style.cssText = "background:rgba(255,255,255,0.05); padding:0.8rem; border-radius:10px; margin-bottom:0.8rem; border:1px solid orange;";
             div.innerHTML = `<div><strong style="color:var(--primary)">${document.getElementById('fbName').value}</strong> <span>${'★'.repeat(document.getElementById('fbRating').value)}</span></div><p style="margin-top:0.4rem; font-size:0.85rem;">${document.getElementById('fbMessage').value}</p>`;
             list.prepend(div);
             e.target.reset();
-            alert("Thanks! Review added (Offline Mode)");
+            alert("Saved (Offline Mode)");
         }
-        btn.innerText = oldText;
+        btn.innerText = "Post Review";
     });
 
     window.escapeHtml = (str) => str.replace(/[&<>"']/g, m => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#039;' })[m]);
   </script>
 
   <script>
-    // 1. Header Typewriter
+    // 1. Typed.js
     new Typed('#typed-role', {
       strings: ['AI Architect', 'Deep Learning Specialist', 'Full-Stack Visionary'],
       typeSpeed: 50, backSpeed: 30, loop: true, backDelay: 1500
     });
 
-    // 2. 3D Neural Network (Advanced Nodes & Connections)
+    // 2. 3D Neural Network
     const initThree = () => {
         const container = document.getElementById('canvas-container');
         const scene = new THREE.Scene();
-        scene.fog = new THREE.FogExp2(0x050508, 0.0025); // Dark fog
-
+        scene.fog = new THREE.FogExp2(0x050508, 0.0025);
         const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
         camera.position.z = 50;
-
         const renderer = new THREE.WebGLRenderer({ alpha: true });
         renderer.setSize(window.innerWidth, window.innerHeight);
         container.appendChild(renderer.domElement);
 
-        // Nodes (Neurons)
-        const geometry = new THREE.BufferGeometry();
-        const count = 500;
-        const positions = new Float32Array(count * 3);
-        
-        for(let i=0; i<count*3; i++) {
-            positions[i] = (Math.random() - 0.5) * 80;
-        }
-        geometry.setAttribute('position', new THREE.BufferAttribute(positions, 3));
-        
-        const material = new THREE.PointsMaterial({ size: 0.5, color: 0x00f2ff, transparent: true, opacity: 0.9 });
-        const particles = new THREE.Points(geometry, material);
+        const geo = new THREE.BufferGeometry();
+        const pos = new Float32Array(500 * 3);
+        for(let i=0; i<1500; i++) pos[i] = (Math.random()-0.5)*80;
+        geo.setAttribute('position', new THREE.BufferAttribute(pos, 3));
+        const mat = new THREE.PointsMaterial({ size: 0.5, color: 0x00f2ff, transparent: true, opacity: 0.9 });
+        const particles = new THREE.Points(geo, mat);
         scene.add(particles);
 
-        // Connections (Synapses)
-        const lineMaterial = new THREE.LineBasicMaterial({ color: 0xff0055, transparent: true, opacity: 0.15 });
-        const linesGeometry = new THREE.BufferGeometry();
-        const lines = new THREE.LineSegments(linesGeometry, lineMaterial);
+        const lineMat = new THREE.LineBasicMaterial({ color: 0xff0055, transparent: true, opacity: 0.15 });
+        const lineGeo = new THREE.BufferGeometry();
+        const lines = new THREE.LineSegments(lineGeo, lineMat);
         scene.add(lines);
 
         let mouseX = 0, mouseY = 0;
@@ -534,41 +656,27 @@
 
         const animate = () => {
             requestAnimationFrame(animate);
-            particles.rotation.y += 0.001;
-            lines.rotation.y += 0.001;
-            
-            // Mouse Parallax
+            particles.rotation.y += 0.001; lines.rotation.y += 0.001;
             camera.position.x += (mouseX - camera.position.x) * 0.05;
             camera.position.y += (-mouseY - camera.position.y) * 0.05;
             camera.lookAt(scene.position);
 
-            // Dynamic Connections
-            const particlePositions = particles.geometry.attributes.position.array;
-            const linePositions = [];
-            
-            for (let i = 0; i < count; i++) {
-                // Connect only nearby particles
-                if (i % 2 !== 0) continue; // Optimization
-                for (let j = i + 1; j < count; j++) {
-                    const dx = particlePositions[i*3] - particlePositions[j*3];
-                    const dy = particlePositions[i*3+1] - particlePositions[j*3+1];
-                    const dz = particlePositions[i*3+2] - particlePositions[j*3+2];
-                    const dist = Math.sqrt(dx*dx + dy*dy + dz*dz);
-
-                    if (dist < 9) { 
-                        linePositions.push(
-                            particlePositions[i*3], particlePositions[i*3+1], particlePositions[i*3+2],
-                            particlePositions[j*3], particlePositions[j*3+1], particlePositions[j*3+2]
-                        );
+            const pos = particles.geometry.attributes.position.array;
+            const linePos = [];
+            for (let i = 0; i < 500; i+=2) {
+                for (let j = i + 1; j < 500; j++) {
+                    const dx = pos[i*3] - pos[j*3];
+                    const dy = pos[i*3+1] - pos[j*3+1];
+                    const dz = pos[i*3+2] - pos[j*3+2];
+                    if (Math.sqrt(dx*dx+dy*dy+dz*dz) < 9) {
+                        linePos.push(pos[i*3], pos[i*3+1], pos[i*3+2], pos[j*3], pos[j*3+1], pos[j*3+2]);
                     }
                 }
             }
-            lines.geometry.setAttribute('position', new THREE.Float32BufferAttribute(linePositions.slice(0, 9000), 3)); // Limit lines
-            
+            lines.geometry.setAttribute('position', new THREE.Float32BufferAttribute(linePos.slice(0, 9000), 3));
             renderer.render(scene, camera);
         };
         animate();
-
         window.addEventListener('resize', () => {
             camera.aspect = window.innerWidth / window.innerHeight;
             camera.updateProjectionMatrix();
@@ -577,13 +685,44 @@
     };
     initThree();
 
-    // 3. Scroll Animations
+    // 3. GitHub Graph Gen
+    const graph = document.getElementById('contribGraph');
+    for(let i=0; i<400; i++){
+        const d = document.createElement('div');
+        d.className = 'graph-pixel ' + (Math.random() > 0.8 ? 'pixel-high' : Math.random() > 0.5 ? 'pixel-med' : 'pixel-low');
+        graph.appendChild(d);
+    }
+
+    // 4. Resume Button Logic
+    document.getElementById('resumeBtn').addEventListener('click', function() {
+        const text = this.querySelector('span');
+        const prog = document.getElementById('btnProgress');
+        text.innerText = "ACCESSING SECURE SERVER...";
+        prog.style.width = "30%";
+        setTimeout(() => { text.innerText = "DOWNLOADING ENCRYPTED DATA..."; prog.style.width = "70%"; }, 1000);
+        setTimeout(() => { 
+            text.innerText = "DOWNLOAD COMPLETE"; 
+            prog.style.width = "100%"; 
+            // In real usage, verify a file exists here: window.location.href = 'assets/resume.pdf';
+            alert("Resume Download Simulation Complete (Add real PDF path to code)");
+        }, 2500);
+    });
+
+    // 5. Scroll & Tilt
     const observer = new IntersectionObserver((entries) => {
         entries.forEach(entry => { if(entry.isIntersecting) entry.target.classList.add('visible-scroll'); });
     }, { threshold: 0.1 });
     document.querySelectorAll('.hidden-scroll').forEach(el => observer.observe(el));
 
-    // 4. Advanced Chatbot Logic (Fuzzy Matching)
+    document.querySelectorAll('.tilt-card').forEach(c => {
+        c.addEventListener('mousemove', e => {
+            const r = c.getBoundingClientRect();
+            c.style.transform = `perspective(1000px) rotateX(${((e.clientY-r.top)/r.height-0.5)*-10}deg) rotateY(${((e.clientX-r.left)/r.width-0.5)*10}deg)`;
+        });
+        c.addEventListener('mouseleave', () => c.style.transform = 'none');
+    });
+
+    // 6. Advanced Chatbot Logic (Fuzzy Logic)
     const chatTrigger = document.getElementById('chatTrigger');
     const chatInterface = document.getElementById('chatInterface');
     const closeChat = document.getElementById('closeChat');
@@ -594,35 +733,31 @@
     chatTrigger.onclick = () => { chatInterface.style.display = 'flex'; chatTrigger.style.display = 'none'; };
     closeChat.onclick = () => { chatInterface.style.display = 'none'; chatTrigger.style.display = 'flex'; };
 
-    // Fuzzy Logic Brain
     const brain = [
-      { key: ["hi", "hello", "hey", "start", "greetings"], msg: "Hello! I am trained on Stephen's Portfolio data. Ask about **Skills**, **Projects**, or **Contact**." },
-      { key: ["innovations", "project", "work", "built", "creation", "traffic"], msg: "Stephen has 10 Innovations. Notable ones: <br>• **Autonomous Traffic Grid** (YOLO)<br>• **BERT Sentiment Engine**<br>• **DeepFake Detector**<br>• **Quantum FinTech Predictor**" },
-      { key: ["skill", "tech", "stack", "tools", "language", "coding"], msg: "His Tech Arsenal includes: <br>• **Deep Learning:** PyTorch, TensorFlow<br>• **Web:** React, Node.js<br>• **Cloud:** AWS, Docker<br>• **Languages:** Python, C++, Java" },
-      { key: ["contact", "email", "hire", "reach", "message"], msg: "You can send a proposal using the form below or email directly at **stephenbugi525@gmail.com**" },
-      { key: ["who", "author", "about", "stephen"], msg: "T-Stephen is an AI Architect specializing in Computer Vision, NLP, and Full-Stack Engineering." }
+      { key: ["hi", "hello", "hey", "greeting"], msg: "Hello! I am trained on Stephen's data. I know about his **10 Innovations**, **Certifications**, and **Neural Journey**." },
+      { key: ["project", "work", "innovation", "traffic", "deepfake"], msg: "Top Innovations: <br>1. **Traffic Grid** (Edge AI)<br>2. **DeepFake Detector** (GANs)<br>3. **Quantum FinTech**<br>Scroll to 'Featured Innovations' to see all 10." },
+      { key: ["skill", "tech", "stack", "python", "aws"], msg: "Tech Arsenal: <br>• **AI:** TensorFlow, PyTorch<br>• **Cloud:** AWS, Docker<br>• **Languages:** Python, C++, Java" },
+      { key: ["contact", "email", "hire"], msg: "Contact him via the form below or email: **stephenbugi525@gmail.com**" },
+      { key: ["cert", "google", "aws"], msg: "He holds certifications from **Google (TensorFlow)**, **AWS (ML Specialty)**, and **Coursera (Deep Learning)**." }
     ];
 
     function getBotResponse(input) {
         input = input.toLowerCase();
         for(let item of brain) {
-            // Check if ANY keyword matches
             if(item.key.some(k => input.includes(k))) return item.msg;
         }
-        return "I didn't quite catch that. Try keywords like **Projects**, **Skills**, or **Contact**.";
+        return "I didn't quite understand. Try asking about **Innovations**, **Skills**, or **Experience**.";
     }
 
     function sendMessage() {
         const text = chatInput.value.trim();
         if(!text) return;
-        
         const userDiv = document.createElement('div');
         userDiv.className = 'chat-bubble user-msg';
         userDiv.innerHTML = text;
         chatBody.appendChild(userDiv);
         chatInput.value = '';
         chatBody.scrollTop = chatBody.scrollHeight;
-
         setTimeout(() => {
             const botDiv = document.createElement('div');
             botDiv.className = 'chat-bubble bot-msg';
@@ -631,18 +766,9 @@
             chatBody.scrollTop = chatBody.scrollHeight;
         }, 500);
     }
-
     sendBtn.onclick = sendMessage;
     chatInput.addEventListener('keypress', (e) => e.key === 'Enter' && sendMessage());
 
-    // 5. 3D Tilt Cards
-    document.querySelectorAll('.tilt-card').forEach(c => {
-        c.addEventListener('mousemove', e => {
-            const r = c.getBoundingClientRect();
-            c.style.transform = `perspective(1000px) rotateX(${((e.clientY-r.top)/r.height-0.5)*-10}deg) rotateY(${((e.clientX-r.left)/r.width-0.5)*10}deg)`;
-        });
-        c.addEventListener('mouseleave', () => c.style.transform = 'none');
-    });
   </script>
 </body>
 </html>
