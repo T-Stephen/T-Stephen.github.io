@@ -32,6 +32,11 @@
     }
 
     * { margin: 0; padding: 0; box-sizing: border-box; scroll-behavior: smooth; }
+    
+    /* --- NEW FEATURE: HIDE DEFAULT CURSOR ON DESKTOP --- */
+    @media (min-width: 768px) {
+      * { cursor: none !important; }
+    }
 
     body {
       background-color: var(--bg-dark);
@@ -40,6 +45,26 @@
       overflow-x: hidden;
       width: 100%;
     }
+
+    /* --- NEW FEATURE: SCI-FI CURSOR --- */
+    .cursor-dot, .cursor-outline {
+      position: fixed; top: 0; left: 0; transform: translate(-50%, -50%); border-radius: 50%; z-index: 9999; pointer-events: none;
+    }
+    .cursor-dot { width: 8px; height: 8px; background-color: var(--primary); box-shadow: 0 0 10px var(--primary); }
+    .cursor-outline { width: 40px; height: 40px; border: 1px solid rgba(0, 242, 255, 0.5); transition: width 0.2s, height 0.2s, background-color 0.2s; }
+    
+    body.hovering .cursor-outline { width: 60px; height: 60px; background-color: rgba(0, 242, 255, 0.1); border-color: var(--secondary); border-width: 2px; }
+
+    /* --- NEW FEATURE: LIVE TELEMETRY BAR --- */
+    .telemetry-bar {
+      position: fixed; bottom: 0; left: 0; width: 100%; height: 25px;
+      background: rgba(5, 5, 8, 0.9); border-top: 1px solid rgba(255,255,255,0.1);
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 0 2rem; font-family: var(--font-code); font-size: 0.65rem; color: #555;
+      z-index: 900; backdrop-filter: blur(5px); pointer-events: none;
+    }
+    .stat-group { display: flex; gap: 1.5rem; }
+    .stat-item span { color: var(--primary); font-weight: bold; margin-left: 5px; }
 
     #canvas-container {
       position: fixed;
@@ -53,6 +78,7 @@
       padding: 2rem;
       position: relative;
       z-index: 2;
+      padding-bottom: 3rem; /* Space for telemetry */
     }
 
     h1, h2, h3 { font-family: var(--font-heading); }
@@ -185,7 +211,7 @@
 
     /* CHATBOT */
     .chat-trigger {
-      position: fixed; bottom: 2rem; right: 2rem; width: 65px; height: 65px;
+      position: fixed; bottom: 3rem; right: 2rem; width: 65px; height: 65px;
       background: var(--gradient-main); border-radius: 50%; display: flex; align-items: center; justify-content: center;
       font-size: 1.8rem; color: white; border: none; cursor: pointer;
       box-shadow: 0 10px 30px rgba(0, 242, 255, 0.4); z-index: 1000;
@@ -225,11 +251,19 @@
       .logo-area { flex-direction: column; }
       .bento-grid, .skills-wrapper, .github-grid { grid-template-columns: 1fr; }
       .chat-interface { width: 90%; right: 5%; left: 5%; bottom: 5.5rem; height: 60vh; }
+      
+      /* Disable custom cursor on mobile */
+      .cursor-dot, .cursor-outline { display: none; }
+      * { cursor: auto !important; }
+      .telemetry-bar { display: none; }
     }
   </style>
 </head>
 
 <body>
+  <div class="cursor-dot" data-cursor-dot></div>
+  <div class="cursor-outline" data-cursor-outline></div>
+
   <div id="canvas-container"></div>
 
   <div class="wrap">
@@ -490,10 +524,20 @@
     </footer>
   </div>
 
+  <div class="telemetry-bar">
+    <div class="stat-group">
+      <div class="stat-item">SYS.STATUS: <span style="color:#00ff88">ONLINE</span></div>
+      <div class="stat-item">CPU: <span id="cpuVal">12%</span></div>
+      <div class="stat-item">MEM: <span id="memVal">4.2GB</span></div>
+      <div class="stat-item">LATENCY: <span id="pingVal">24ms</span></div>
+    </div>
+    <div class="stat-item">LOC: <span style="color:var(--secondary)">SECURE_NODE_IN</span></div>
+  </div>
+
   <button class="chat-trigger" id="chatTrigger"><i class="fas fa-robot"></i></button>
   <div class="chat-interface" id="chatInterface">
     <div class="chat-header">
-      <div><h4 style="margin:0;">Stephen's AI</h4><span style="font-size:0.7rem; color:var(--text-muted);">Neural Core v3.6</span></div>
+      <div><h4 style="margin:0;">Stephen's AI</h4><span style="font-size:0.7rem; color:var(--text-muted);">Neural Core v3.6 (Voice Active)</span></div>
       <button class="icon-btn" id="closeChat"><i class="fas fa-times"></i></button>
     </div>
     <div class="chat-body" id="chatBody">
@@ -683,7 +727,7 @@
     }, { threshold: 0.1 });
     document.querySelectorAll('.hidden-scroll').forEach(el => observer.observe(el));
 
-    // 6. Advanced Chatbot Logic (Fuzzy Logic)
+    // 6. Advanced Chatbot Logic (Fuzzy Logic + VOICE)
     const chatTrigger = document.getElementById('chatTrigger');
     const chatInterface = document.getElementById('chatInterface');
     const closeChat = document.getElementById('closeChat');
@@ -710,6 +754,22 @@
         return "I didn't quite understand. Try asking about **Innovations**, **Skills**, or **Experience**.";
     }
 
+    // --- NEW: VOICE ENGINE ---
+    function speak(text) {
+        if('speechSynthesis' in window) {
+            const cleanText = text.replace(/\*\*/g, '').replace(/<br>/g, '. '); // Remove markdown for speech
+            const utterance = new SpeechSynthesisUtterance(cleanText);
+            utterance.pitch = 1;
+            utterance.rate = 1;
+            utterance.volume = 1;
+            // Try to find a good voice
+            const voices = window.speechSynthesis.getVoices();
+            const techVoice = voices.find(v => v.name.includes('Google US English') || v.name.includes('Samantha'));
+            if(techVoice) utterance.voice = techVoice;
+            window.speechSynthesis.speak(utterance);
+        }
+    }
+
     function sendMessage() {
         const text = chatInput.value.trim();
         if(!text) return;
@@ -720,11 +780,13 @@
         chatInput.value = '';
         chatBody.scrollTop = chatBody.scrollHeight;
         setTimeout(() => {
+            const botResponse = getBotResponse(text);
             const botDiv = document.createElement('div');
             botDiv.className = 'chat-bubble bot-msg';
-            botDiv.innerHTML = getBotResponse(text);
+            botDiv.innerHTML = botResponse;
             chatBody.appendChild(botDiv);
             chatBody.scrollTop = chatBody.scrollHeight;
+            speak(botResponse); // TRIGGERS VOICE
         }, 500);
     }
     sendBtn.onclick = sendMessage;
@@ -738,6 +800,36 @@
         });
         c.addEventListener('mouseleave', () => c.style.transform = 'none');
     });
+
+    // 8. NEW: CUSTOM CURSOR LOGIC
+    const cursorDot = document.querySelector('[data-cursor-dot]');
+    const cursorOutline = document.querySelector('[data-cursor-outline]');
+    
+    // Only run cursor logic on desktop to save performance
+    if (window.matchMedia("(min-width: 768px)").matches) {
+        window.addEventListener("mousemove", function (e) {
+            const posX = e.clientX;
+            const posY = e.clientY;
+            cursorDot.style.left = `${posX}px`;
+            cursorDot.style.top = `${posY}px`;
+            cursorOutline.animate({ left: `${posX}px`, top: `${posY}px` }, { duration: 500, fill: "forwards" });
+        });
+
+        // Hover expand effect
+        document.querySelectorAll('a, button, input, textarea, .project-card').forEach(el => {
+            el.addEventListener('mouseenter', () => document.body.classList.add('hovering'));
+            el.addEventListener('mouseleave', () => document.body.classList.remove('hovering'));
+        });
+    }
+
+    // 9. NEW: LIVE TELEMETRY SIMULATION
+    setInterval(() => {
+        if(document.getElementById('cpuVal')) {
+            document.getElementById('cpuVal').innerText = Math.floor(Math.random() * 15 + 10) + "%";
+            document.getElementById('memVal').innerText = (Math.random() * 2 + 3).toFixed(1) + "GB";
+            document.getElementById('pingVal').innerText = Math.floor(Math.random() * 40 + 10) + "ms";
+        }
+    }, 2000);
   </script>
 </body>
 </html>
