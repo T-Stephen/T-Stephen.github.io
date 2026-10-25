@@ -566,17 +566,39 @@
     const app = initializeApp(firebaseConfig);
     const db = getFirestore(app);
 
+    
+const docRef = doc(db, 'analytics', 'visitors');
+
+// Display visitor count on every page load and real-time update
+try {
+    onSnapshot(docRef, (s) => {
+        if (s.exists()) {
+            const countEl = document.getElementById('visitorCount');
+            if (countEl) countEl.textContent = s.data().count.toLocaleString();
+        }
+    });
+} catch (e) {}
+
+// Increment count only once per browser tab session
+try {
+    let hasVisited = false;
     try {
-        const docRef = doc(db, 'analytics', 'visitors');
+        hasVisited = Boolean(sessionStorage.getItem('visited'));
+    } catch (e) {}
+
+    if (!hasVisited) {
+        try {
+            sessionStorage.setItem('visited', '1');
+        } catch (e) {}
+
         runTransaction(db, async (t) => {
             const snap = await t.get(docRef);
             if (!snap.exists()) t.set(docRef, { count: 1 });
             else t.update(docRef, { count: snap.data().count + 1 });
         });
-        onSnapshot(docRef, (s) => {
-            if(s.exists()) document.getElementById('visitorCount').textContent = s.data().count.toLocaleString();
-        });
-    } catch(e) {}
+    }
+} catch (e) {}
+
 
     const fbCol = collection(db, 'feedbacks');
     onSnapshot(query(fbCol, orderBy('createdAt', 'desc')), (snap) => {
